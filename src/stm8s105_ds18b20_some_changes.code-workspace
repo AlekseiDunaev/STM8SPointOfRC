@@ -1,0 +1,15 @@
+{
+	"folders": [
+		{
+			"name": "stm8s105_ds18b20_some_changes",
+			"path": ".."
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"hardwareserial.h": "c",
+			"stm8s.h": "c",
+			"stm8s_i2c.h": "c"
+		}
+	}
+}
