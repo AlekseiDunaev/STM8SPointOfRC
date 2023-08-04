@@ -1,0 +1,1607 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 4.2.0 #13081 (Mac OS X x86_64)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module stm8s_uart2
+                                      6 	.optsdcc -mstm8
+                                      7 	
+                                      8 ;--------------------------------------------------------
+                                      9 ; Public variables in this module
+                                     10 ;--------------------------------------------------------
+                                     11 	.globl _assert_failed
+                                     12 	.globl _CLK_GetClockFreq
+                                     13 	.globl _UART2_DeInit
+                                     14 	.globl _UART2_Init
+                                     15 	.globl _UART2_Cmd
+                                     16 	.globl _UART2_ITConfig
+                                     17 	.globl _UART2_IrDAConfig
+                                     18 	.globl _UART2_IrDACmd
+                                     19 	.globl _UART2_LINBreakDetectionConfig
+                                     20 	.globl _UART2_LINConfig
+                                     21 	.globl _UART2_LINCmd
+                                     22 	.globl _UART2_SmartCardCmd
+                                     23 	.globl _UART2_SmartCardNACKCmd
+                                     24 	.globl _UART2_WakeUpConfig
+                                     25 	.globl _UART2_ReceiverWakeUpCmd
+                                     26 	.globl _UART2_ReceiveData8
+                                     27 	.globl _UART2_ReceiveData9
+                                     28 	.globl _UART2_SendData8
+                                     29 	.globl _UART2_SendData9
+                                     30 	.globl _UART2_SendBreak
+                                     31 	.globl _UART2_SetAddress
+                                     32 	.globl _UART2_SetGuardTime
+                                     33 	.globl _UART2_SetPrescaler
+                                     34 	.globl _UART2_GetFlagStatus
+                                     35 	.globl _UART2_ClearFlag
+                                     36 	.globl _UART2_GetITStatus
+                                     37 	.globl _UART2_ClearITPendingBit
+                                     38 ;--------------------------------------------------------
+                                     39 ; ram data
+                                     40 ;--------------------------------------------------------
+                                     41 	.area DATA
+                                     42 ;--------------------------------------------------------
+                                     43 ; ram data
+                                     44 ;--------------------------------------------------------
+                                     45 	.area INITIALIZED
+                                     46 ;--------------------------------------------------------
+                                     47 ; absolute external ram data
+                                     48 ;--------------------------------------------------------
+                                     49 	.area DABS (ABS)
+                                     50 
+                                     51 ; default segment ordering for linker
+                                     52 	.area HOME
+                                     53 	.area GSINIT
+                                     54 	.area GSFINAL
+                                     55 	.area CONST
+                                     56 	.area INITIALIZER
+                                     57 	.area CODE
+                                     58 
+                                     59 ;--------------------------------------------------------
+                                     60 ; global & static initialisations
+                                     61 ;--------------------------------------------------------
+                                     62 	.area HOME
+                                     63 	.area GSINIT
+                                     64 	.area GSFINAL
+                                     65 	.area GSINIT
+                                     66 ;--------------------------------------------------------
+                                     67 ; Home
+                                     68 ;--------------------------------------------------------
+                                     69 	.area HOME
+                                     70 	.area HOME
+                                     71 ;--------------------------------------------------------
+                                     72 ; code
+                                     73 ;--------------------------------------------------------
+                                     74 	.area CODE
+                                     75 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 53: void UART2_DeInit(void)
+                                     76 ;	-----------------------------------------
+                                     77 ;	 function UART2_DeInit
+                                     78 ;	-----------------------------------------
+      000000                         79 _UART2_DeInit:
+                                     80 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 57: (void) UART2->SR;
+      000000 C6 52 40         [ 1]   81 	ld	a, 0x5240
+                                     82 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 58: (void)UART2->DR;
+      000003 C6 52 41         [ 1]   83 	ld	a, 0x5241
+                                     84 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 60: UART2->BRR2 = UART2_BRR2_RESET_VALUE;  /*  Set UART2_BRR2 to reset value 0x00 */
+      000006 35 00 52 43      [ 1]   85 	mov	0x5243+0, #0x00
+                                     86 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 61: UART2->BRR1 = UART2_BRR1_RESET_VALUE;  /*  Set UART2_BRR1 to reset value 0x00 */
+      00000A 35 00 52 42      [ 1]   87 	mov	0x5242+0, #0x00
+                                     88 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 63: UART2->CR1 = UART2_CR1_RESET_VALUE; /*  Set UART2_CR1 to reset value 0x00  */
+      00000E 35 00 52 44      [ 1]   89 	mov	0x5244+0, #0x00
+                                     90 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 64: UART2->CR2 = UART2_CR2_RESET_VALUE; /*  Set UART2_CR2 to reset value 0x00  */
+      000012 35 00 52 45      [ 1]   91 	mov	0x5245+0, #0x00
+                                     92 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 65: UART2->CR3 = UART2_CR3_RESET_VALUE; /*  Set UART2_CR3 to reset value 0x00  */
+      000016 35 00 52 46      [ 1]   93 	mov	0x5246+0, #0x00
+                                     94 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 66: UART2->CR4 = UART2_CR4_RESET_VALUE; /*  Set UART2_CR4 to reset value 0x00  */
+      00001A 35 00 52 47      [ 1]   95 	mov	0x5247+0, #0x00
+                                     96 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 67: UART2->CR5 = UART2_CR5_RESET_VALUE; /*  Set UART2_CR5 to reset value 0x00  */
+      00001E 35 00 52 48      [ 1]   97 	mov	0x5248+0, #0x00
+                                     98 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 68: UART2->CR6 = UART2_CR6_RESET_VALUE; /*  Set UART2_CR6 to reset value 0x00  */
+      000022 35 00 52 49      [ 1]   99 	mov	0x5249+0, #0x00
+                                    100 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 69: }
+      000026 81               [ 4]  101 	ret
+                                    102 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 85: void UART2_Init(uint32_t BaudRate, UART2_WordLength_TypeDef WordLength, UART2_StopBits_TypeDef StopBits, UART2_Parity_TypeDef Parity, UART2_SyncMode_TypeDef SyncMode, UART2_Mode_TypeDef Mode)
+                                    103 ;	-----------------------------------------
+                                    104 ;	 function UART2_Init
+                                    105 ;	-----------------------------------------
+      000027                        106 _UART2_Init:
+      000027 52 0C            [ 2]  107 	sub	sp, #12
+                                    108 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 91: assert_param(IS_UART2_BAUDRATE_OK(BaudRate));
+      000029 AE 89 68         [ 2]  109 	ldw	x, #0x8968
+      00002C 13 11            [ 2]  110 	cpw	x, (0x11, sp)
+      00002E A6 09            [ 1]  111 	ld	a, #0x09
+      000030 12 10            [ 1]  112 	sbc	a, (0x10, sp)
+      000032 4F               [ 1]  113 	clr	a
+      000033 12 0F            [ 1]  114 	sbc	a, (0x0f, sp)
+      000035 24 0C            [ 1]  115 	jrnc	00113$
+      000037 4B 5B            [ 1]  116 	push	#0x5b
+      000039 5F               [ 1]  117 	clrw	x
+      00003A 89               [ 2]  118 	pushw	x
+      00003B 4B 00            [ 1]  119 	push	#0x00
+      00003D AEr00r00         [ 2]  120 	ldw	x, #(___str_0+0)
+      000040 CDr00r00         [ 4]  121 	call	_assert_failed
+      000043                        122 00113$:
+                                    123 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 92: assert_param(IS_UART2_WORDLENGTH_OK(WordLength));
+      000043 0D 13            [ 1]  124 	tnz	(0x13, sp)
+      000045 27 12            [ 1]  125 	jreq	00115$
+      000047 7B 13            [ 1]  126 	ld	a, (0x13, sp)
+      000049 A1 10            [ 1]  127 	cp	a, #0x10
+      00004B 27 0C            [ 1]  128 	jreq	00115$
+      00004D 4B 5C            [ 1]  129 	push	#0x5c
+      00004F 5F               [ 1]  130 	clrw	x
+      000050 89               [ 2]  131 	pushw	x
+      000051 4B 00            [ 1]  132 	push	#0x00
+      000053 AEr00r00         [ 2]  133 	ldw	x, #(___str_0+0)
+      000056 CDr00r00         [ 4]  134 	call	_assert_failed
+      000059                        135 00115$:
+                                    136 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 93: assert_param(IS_UART2_STOPBITS_OK(StopBits));
+      000059 0D 14            [ 1]  137 	tnz	(0x14, sp)
+      00005B 27 1E            [ 1]  138 	jreq	00120$
+      00005D 7B 14            [ 1]  139 	ld	a, (0x14, sp)
+      00005F A1 10            [ 1]  140 	cp	a, #0x10
+      000061 27 18            [ 1]  141 	jreq	00120$
+      000063 7B 14            [ 1]  142 	ld	a, (0x14, sp)
+      000065 A1 20            [ 1]  143 	cp	a, #0x20
+      000067 27 12            [ 1]  144 	jreq	00120$
+      000069 7B 14            [ 1]  145 	ld	a, (0x14, sp)
+      00006B A1 30            [ 1]  146 	cp	a, #0x30
+      00006D 27 0C            [ 1]  147 	jreq	00120$
+      00006F 4B 5D            [ 1]  148 	push	#0x5d
+      000071 5F               [ 1]  149 	clrw	x
+      000072 89               [ 2]  150 	pushw	x
+      000073 4B 00            [ 1]  151 	push	#0x00
+      000075 AEr00r00         [ 2]  152 	ldw	x, #(___str_0+0)
+      000078 CDr00r00         [ 4]  153 	call	_assert_failed
+      00007B                        154 00120$:
+                                    155 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 94: assert_param(IS_UART2_PARITY_OK(Parity));
+      00007B 0D 15            [ 1]  156 	tnz	(0x15, sp)
+      00007D 27 18            [ 1]  157 	jreq	00131$
+      00007F 7B 15            [ 1]  158 	ld	a, (0x15, sp)
+      000081 A1 04            [ 1]  159 	cp	a, #0x04
+      000083 27 12            [ 1]  160 	jreq	00131$
+      000085 7B 15            [ 1]  161 	ld	a, (0x15, sp)
+      000087 A1 06            [ 1]  162 	cp	a, #0x06
+      000089 27 0C            [ 1]  163 	jreq	00131$
+      00008B 4B 5E            [ 1]  164 	push	#0x5e
+      00008D 5F               [ 1]  165 	clrw	x
+      00008E 89               [ 2]  166 	pushw	x
+      00008F 4B 00            [ 1]  167 	push	#0x00
+      000091 AEr00r00         [ 2]  168 	ldw	x, #(___str_0+0)
+      000094 CDr00r00         [ 4]  169 	call	_assert_failed
+      000097                        170 00131$:
+                                    171 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 95: assert_param(IS_UART2_MODE_OK((uint8_t)Mode));
+      000097 7B 17            [ 1]  172 	ld	a, (0x17, sp)
+      000099 A1 08            [ 1]  173 	cp	a, #0x08
+      00009B 27 3F            [ 1]  174 	jreq	00139$
+      00009D 7B 17            [ 1]  175 	ld	a, (0x17, sp)
+      00009F A1 40            [ 1]  176 	cp	a, #0x40
+      0000A1 27 39            [ 1]  177 	jreq	00139$
+      0000A3 7B 17            [ 1]  178 	ld	a, (0x17, sp)
+      0000A5 A1 04            [ 1]  179 	cp	a, #0x04
+      0000A7 27 33            [ 1]  180 	jreq	00139$
+      0000A9 7B 17            [ 1]  181 	ld	a, (0x17, sp)
+      0000AB A1 80            [ 1]  182 	cp	a, #0x80
+      0000AD 27 2D            [ 1]  183 	jreq	00139$
+      0000AF 7B 17            [ 1]  184 	ld	a, (0x17, sp)
+      0000B1 A0 0C            [ 1]  185 	sub	a, #0x0c
+      0000B3 26 02            [ 1]  186 	jrne	00339$
+      0000B5 4C               [ 1]  187 	inc	a
+      0000B6 21                     188 	.byte 0x21
+      0000B7                        189 00339$:
+      0000B7 4F               [ 1]  190 	clr	a
+      0000B8                        191 00340$:
+      0000B8 4D               [ 1]  192 	tnz	a
+      0000B9 26 21            [ 1]  193 	jrne	00139$
+      0000BB 4D               [ 1]  194 	tnz	a
+      0000BC 26 1E            [ 1]  195 	jrne	00139$
+      0000BE 7B 17            [ 1]  196 	ld	a, (0x17, sp)
+      0000C0 A1 44            [ 1]  197 	cp	a, #0x44
+      0000C2 27 18            [ 1]  198 	jreq	00139$
+      0000C4 7B 17            [ 1]  199 	ld	a, (0x17, sp)
+      0000C6 A1 C0            [ 1]  200 	cp	a, #0xc0
+      0000C8 27 12            [ 1]  201 	jreq	00139$
+      0000CA 7B 17            [ 1]  202 	ld	a, (0x17, sp)
+      0000CC A1 88            [ 1]  203 	cp	a, #0x88
+      0000CE 27 0C            [ 1]  204 	jreq	00139$
+      0000D0 4B 5F            [ 1]  205 	push	#0x5f
+      0000D2 5F               [ 1]  206 	clrw	x
+      0000D3 89               [ 2]  207 	pushw	x
+      0000D4 4B 00            [ 1]  208 	push	#0x00
+      0000D6 AEr00r00         [ 2]  209 	ldw	x, #(___str_0+0)
+      0000D9 CDr00r00         [ 4]  210 	call	_assert_failed
+      0000DC                        211 00139$:
+                                    212 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 96: assert_param(IS_UART2_SYNCMODE_OK((uint8_t)SyncMode));
+      0000DC 7B 16            [ 1]  213 	ld	a, (0x16, sp)
+      0000DE 43               [ 1]  214 	cpl	a
+      0000DF A5 88            [ 1]  215 	bcp	a, #0x88
+      0000E1 27 15            [ 1]  216 	jreq	00167$
+      0000E3 7B 16            [ 1]  217 	ld	a, (0x16, sp)
+      0000E5 43               [ 1]  218 	cpl	a
+      0000E6 A5 44            [ 1]  219 	bcp	a, #0x44
+      0000E8 27 0E            [ 1]  220 	jreq	00167$
+      0000EA 7B 16            [ 1]  221 	ld	a, (0x16, sp)
+      0000EC 43               [ 1]  222 	cpl	a
+      0000ED A5 22            [ 1]  223 	bcp	a, #0x22
+      0000EF 27 07            [ 1]  224 	jreq	00167$
+      0000F1 7B 16            [ 1]  225 	ld	a, (0x16, sp)
+      0000F3 43               [ 1]  226 	cpl	a
+      0000F4 A5 11            [ 1]  227 	bcp	a, #0x11
+      0000F6 26 0C            [ 1]  228 	jrne	00165$
+      0000F8                        229 00167$:
+      0000F8 4B 60            [ 1]  230 	push	#0x60
+      0000FA 5F               [ 1]  231 	clrw	x
+      0000FB 89               [ 2]  232 	pushw	x
+      0000FC 4B 00            [ 1]  233 	push	#0x00
+      0000FE AEr00r00         [ 2]  234 	ldw	x, #(___str_0+0)
+      000101 CDr00r00         [ 4]  235 	call	_assert_failed
+      000104                        236 00165$:
+                                    237 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 99: UART2->CR1 &= (uint8_t)(~UART2_CR1_M);
+      000104 72 19 52 44      [ 1]  238 	bres	0x5244, #4
+                                    239 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 101: UART2->CR1 |= (uint8_t)WordLength; 
+      000108 C6 52 44         [ 1]  240 	ld	a, 0x5244
+      00010B 1A 13            [ 1]  241 	or	a, (0x13, sp)
+      00010D C7 52 44         [ 1]  242 	ld	0x5244, a
+                                    243 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 104: UART2->CR3 &= (uint8_t)(~UART2_CR3_STOP);
+      000110 C6 52 46         [ 1]  244 	ld	a, 0x5246
+      000113 A4 CF            [ 1]  245 	and	a, #0xcf
+      000115 C7 52 46         [ 1]  246 	ld	0x5246, a
+                                    247 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 106: UART2->CR3 |= (uint8_t)StopBits; 
+      000118 C6 52 46         [ 1]  248 	ld	a, 0x5246
+      00011B 1A 14            [ 1]  249 	or	a, (0x14, sp)
+      00011D C7 52 46         [ 1]  250 	ld	0x5246, a
+                                    251 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 109: UART2->CR1 &= (uint8_t)(~(UART2_CR1_PCEN | UART2_CR1_PS  ));
+      000120 C6 52 44         [ 1]  252 	ld	a, 0x5244
+      000123 A4 F9            [ 1]  253 	and	a, #0xf9
+      000125 C7 52 44         [ 1]  254 	ld	0x5244, a
+                                    255 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 111: UART2->CR1 |= (uint8_t)Parity;
+      000128 C6 52 44         [ 1]  256 	ld	a, 0x5244
+      00012B 1A 15            [ 1]  257 	or	a, (0x15, sp)
+      00012D C7 52 44         [ 1]  258 	ld	0x5244, a
+                                    259 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 114: UART2->BRR1 &= (uint8_t)(~UART2_BRR1_DIVM);
+      000130 C6 52 42         [ 1]  260 	ld	a, 0x5242
+      000133 35 00 52 42      [ 1]  261 	mov	0x5242+0, #0x00
+                                    262 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 116: UART2->BRR2 &= (uint8_t)(~UART2_BRR2_DIVM);
+      000137 C6 52 43         [ 1]  263 	ld	a, 0x5243
+      00013A A4 0F            [ 1]  264 	and	a, #0x0f
+      00013C C7 52 43         [ 1]  265 	ld	0x5243, a
+                                    266 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 118: UART2->BRR2 &= (uint8_t)(~UART2_BRR2_DIVF);
+      00013F C6 52 43         [ 1]  267 	ld	a, 0x5243
+      000142 A4 F0            [ 1]  268 	and	a, #0xf0
+      000144 C7 52 43         [ 1]  269 	ld	0x5243, a
+                                    270 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 121: BaudRate_Mantissa    = ((uint32_t)CLK_GetClockFreq() / (BaudRate << 4));
+      000147 CDr00r00         [ 4]  271 	call	_CLK_GetClockFreq
+      00014A 1F 0B            [ 2]  272 	ldw	(0x0b, sp), x
+      00014C 1E 0F            [ 2]  273 	ldw	x, (0x0f, sp)
+      00014E 1F 05            [ 2]  274 	ldw	(0x05, sp), x
+      000150 1E 11            [ 2]  275 	ldw	x, (0x11, sp)
+      000152 A6 04            [ 1]  276 	ld	a, #0x04
+      000154                        277 00364$:
+      000154 58               [ 2]  278 	sllw	x
+      000155 09 06            [ 1]  279 	rlc	(0x06, sp)
+      000157 09 05            [ 1]  280 	rlc	(0x05, sp)
+      000159 4A               [ 1]  281 	dec	a
+      00015A 26 F8            [ 1]  282 	jrne	00364$
+      00015C 1F 07            [ 2]  283 	ldw	(0x07, sp), x
+      00015E 89               [ 2]  284 	pushw	x
+      00015F 1E 07            [ 2]  285 	ldw	x, (0x07, sp)
+      000161 89               [ 2]  286 	pushw	x
+      000162 1E 0F            [ 2]  287 	ldw	x, (0x0f, sp)
+      000164 89               [ 2]  288 	pushw	x
+      000165 90 89            [ 2]  289 	pushw	y
+      000167 CDr00r00         [ 4]  290 	call	__divulong
+      00016A 5B 08            [ 2]  291 	addw	sp, #8
+      00016C 1F 03            [ 2]  292 	ldw	(0x03, sp), x
+      00016E 17 01            [ 2]  293 	ldw	(0x01, sp), y
+                                    294 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 122: BaudRate_Mantissa100 = (((uint32_t)CLK_GetClockFreq() * 100) / (BaudRate << 4));
+      000170 CDr00r00         [ 4]  295 	call	_CLK_GetClockFreq
+      000173 89               [ 2]  296 	pushw	x
+      000174 90 89            [ 2]  297 	pushw	y
+      000176 4B 64            [ 1]  298 	push	#0x64
+      000178 5F               [ 1]  299 	clrw	x
+      000179 89               [ 2]  300 	pushw	x
+      00017A 4B 00            [ 1]  301 	push	#0x00
+      00017C CDr00r00         [ 4]  302 	call	__mullong
+      00017F 5B 08            [ 2]  303 	addw	sp, #8
+      000181 1F 0B            [ 2]  304 	ldw	(0x0b, sp), x
+      000183 1E 07            [ 2]  305 	ldw	x, (0x07, sp)
+      000185 89               [ 2]  306 	pushw	x
+      000186 1E 07            [ 2]  307 	ldw	x, (0x07, sp)
+      000188 89               [ 2]  308 	pushw	x
+      000189 1E 0F            [ 2]  309 	ldw	x, (0x0f, sp)
+      00018B 89               [ 2]  310 	pushw	x
+      00018C 90 89            [ 2]  311 	pushw	y
+      00018E CDr00r00         [ 4]  312 	call	__divulong
+      000191 5B 08            [ 2]  313 	addw	sp, #8
+      000193 90 9E            [ 1]  314 	ld	a, yh
+      000195 1F 07            [ 2]  315 	ldw	(0x07, sp), x
+      000197 6B 05            [ 1]  316 	ld	(0x05, sp), a
+      000199 90 9F            [ 1]  317 	ld	a, yl
+                                    318 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 126: BRR2_1 = (uint8_t)((uint8_t)(((BaudRate_Mantissa100 - (BaudRate_Mantissa * 100))
+      00019B 88               [ 1]  319 	push	a
+      00019C 1E 04            [ 2]  320 	ldw	x, (0x04, sp)
+      00019E 89               [ 2]  321 	pushw	x
+      00019F 1E 04            [ 2]  322 	ldw	x, (0x04, sp)
+      0001A1 89               [ 2]  323 	pushw	x
+      0001A2 4B 64            [ 1]  324 	push	#0x64
+      0001A4 5F               [ 1]  325 	clrw	x
+      0001A5 89               [ 2]  326 	pushw	x
+      0001A6 4B 00            [ 1]  327 	push	#0x00
+      0001A8 CDr00r00         [ 4]  328 	call	__mullong
+      0001AB 5B 08            [ 2]  329 	addw	sp, #8
+      0001AD 1F 0C            [ 2]  330 	ldw	(0x0c, sp), x
+      0001AF 17 0A            [ 2]  331 	ldw	(0x0a, sp), y
+      0001B1 84               [ 1]  332 	pop	a
+      0001B2 16 07            [ 2]  333 	ldw	y, (0x07, sp)
+      0001B4 72 F2 0B         [ 2]  334 	subw	y, (0x0b, sp)
+      0001B7 12 0A            [ 1]  335 	sbc	a, (0x0a, sp)
+      0001B9 97               [ 1]  336 	ld	xl, a
+      0001BA 7B 05            [ 1]  337 	ld	a, (0x05, sp)
+      0001BC 12 09            [ 1]  338 	sbc	a, (0x09, sp)
+      0001BE 95               [ 1]  339 	ld	xh, a
+      0001BF A6 04            [ 1]  340 	ld	a, #0x04
+      0001C1                        341 00366$:
+      0001C1 90 58            [ 2]  342 	sllw	y
+      0001C3 59               [ 2]  343 	rlcw	x
+      0001C4 4A               [ 1]  344 	dec	a
+      0001C5 26 FA            [ 1]  345 	jrne	00366$
+      0001C7 4B 64            [ 1]  346 	push	#0x64
+      0001C9 4B 00            [ 1]  347 	push	#0x00
+      0001CB 4B 00            [ 1]  348 	push	#0x00
+      0001CD 4B 00            [ 1]  349 	push	#0x00
+      0001CF 90 89            [ 2]  350 	pushw	y
+      0001D1 89               [ 2]  351 	pushw	x
+      0001D2 CDr00r00         [ 4]  352 	call	__divulong
+      0001D5 5B 08            [ 2]  353 	addw	sp, #8
+      0001D7 9F               [ 1]  354 	ld	a, xl
+      0001D8 A4 0F            [ 1]  355 	and	a, #0x0f
+      0001DA 6B 0C            [ 1]  356 	ld	(0x0c, sp), a
+                                    357 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 128: BRR2_2 = (uint8_t)((BaudRate_Mantissa >> 4) & (uint8_t)0xF0);
+      0001DC 1E 03            [ 2]  358 	ldw	x, (0x03, sp)
+      0001DE A6 10            [ 1]  359 	ld	a, #0x10
+      0001E0 62               [ 2]  360 	div	x, a
+      0001E1 90 93            [ 1]  361 	ldw	y, x
+      0001E3 9F               [ 1]  362 	ld	a, xl
+      0001E4 A4 F0            [ 1]  363 	and	a, #0xf0
+                                    364 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 130: UART2->BRR2 = (uint8_t)(BRR2_1 | BRR2_2);
+      0001E6 1A 0C            [ 1]  365 	or	a, (0x0c, sp)
+      0001E8 C7 52 43         [ 1]  366 	ld	0x5243, a
+                                    367 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 132: UART2->BRR1 = (uint8_t)BaudRate_Mantissa;           
+      0001EB 7B 04            [ 1]  368 	ld	a, (0x04, sp)
+      0001ED C7 52 42         [ 1]  369 	ld	0x5242, a
+                                    370 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 135: UART2->CR2 &= (uint8_t)~(UART2_CR2_TEN | UART2_CR2_REN);
+      0001F0 C6 52 45         [ 1]  371 	ld	a, 0x5245
+      0001F3 A4 F3            [ 1]  372 	and	a, #0xf3
+      0001F5 C7 52 45         [ 1]  373 	ld	0x5245, a
+                                    374 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 137: UART2->CR3 &= (uint8_t)~(UART2_CR3_CPOL | UART2_CR3_CPHA | UART2_CR3_LBCL);
+      0001F8 C6 52 46         [ 1]  375 	ld	a, 0x5246
+      0001FB A4 F8            [ 1]  376 	and	a, #0xf8
+      0001FD C7 52 46         [ 1]  377 	ld	0x5246, a
+                                    378 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 139: UART2->CR3 |= (uint8_t)((uint8_t)SyncMode & (uint8_t)(UART2_CR3_CPOL | \
+      000200 C6 52 46         [ 1]  379 	ld	a, 0x5246
+      000203 6B 0C            [ 1]  380 	ld	(0x0c, sp), a
+      000205 7B 16            [ 1]  381 	ld	a, (0x16, sp)
+      000207 A4 07            [ 1]  382 	and	a, #0x07
+      000209 1A 0C            [ 1]  383 	or	a, (0x0c, sp)
+      00020B C7 52 46         [ 1]  384 	ld	0x5246, a
+                                    385 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 135: UART2->CR2 &= (uint8_t)~(UART2_CR2_TEN | UART2_CR2_REN);
+      00020E C6 52 45         [ 1]  386 	ld	a, 0x5245
+                                    387 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 142: if ((uint8_t)(Mode & UART2_MODE_TX_ENABLE))
+      000211 88               [ 1]  388 	push	a
+      000212 7B 18            [ 1]  389 	ld	a, (0x18, sp)
+      000214 A5 04            [ 1]  390 	bcp	a, #0x04
+      000216 84               [ 1]  391 	pop	a
+      000217 27 07            [ 1]  392 	jreq	00102$
+                                    393 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 145: UART2->CR2 |= (uint8_t)UART2_CR2_TEN;
+      000219 AA 08            [ 1]  394 	or	a, #0x08
+      00021B C7 52 45         [ 1]  395 	ld	0x5245, a
+      00021E 20 05            [ 2]  396 	jra	00103$
+      000220                        397 00102$:
+                                    398 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 150: UART2->CR2 &= (uint8_t)(~UART2_CR2_TEN);
+      000220 A4 F7            [ 1]  399 	and	a, #0xf7
+      000222 C7 52 45         [ 1]  400 	ld	0x5245, a
+      000225                        401 00103$:
+                                    402 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 135: UART2->CR2 &= (uint8_t)~(UART2_CR2_TEN | UART2_CR2_REN);
+      000225 C6 52 45         [ 1]  403 	ld	a, 0x5245
+                                    404 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 152: if ((uint8_t)(Mode & UART2_MODE_RX_ENABLE))
+      000228 88               [ 1]  405 	push	a
+      000229 7B 18            [ 1]  406 	ld	a, (0x18, sp)
+      00022B A5 08            [ 1]  407 	bcp	a, #0x08
+      00022D 84               [ 1]  408 	pop	a
+      00022E 27 07            [ 1]  409 	jreq	00105$
+                                    410 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 155: UART2->CR2 |= (uint8_t)UART2_CR2_REN;
+      000230 AA 04            [ 1]  411 	or	a, #0x04
+      000232 C7 52 45         [ 1]  412 	ld	0x5245, a
+      000235 20 05            [ 2]  413 	jra	00106$
+      000237                        414 00105$:
+                                    415 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 160: UART2->CR2 &= (uint8_t)(~UART2_CR2_REN);
+      000237 A4 FB            [ 1]  416 	and	a, #0xfb
+      000239 C7 52 45         [ 1]  417 	ld	0x5245, a
+      00023C                        418 00106$:
+                                    419 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 104: UART2->CR3 &= (uint8_t)(~UART2_CR3_STOP);
+      00023C C6 52 46         [ 1]  420 	ld	a, 0x5246
+                                    421 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 164: if ((uint8_t)(SyncMode & UART2_SYNCMODE_CLOCK_DISABLE))
+      00023F 0D 16            [ 1]  422 	tnz	(0x16, sp)
+      000241 2A 07            [ 1]  423 	jrpl	00108$
+                                    424 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 167: UART2->CR3 &= (uint8_t)(~UART2_CR3_CKEN); 
+      000243 A4 F7            [ 1]  425 	and	a, #0xf7
+      000245 C7 52 46         [ 1]  426 	ld	0x5246, a
+      000248 20 0D            [ 2]  427 	jra	00110$
+      00024A                        428 00108$:
+                                    429 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 171: UART2->CR3 |= (uint8_t)((uint8_t)SyncMode & UART2_CR3_CKEN);
+      00024A 88               [ 1]  430 	push	a
+      00024B 7B 17            [ 1]  431 	ld	a, (0x17, sp)
+      00024D A4 08            [ 1]  432 	and	a, #0x08
+      00024F 6B 0D            [ 1]  433 	ld	(0x0d, sp), a
+      000251 84               [ 1]  434 	pop	a
+      000252 1A 0C            [ 1]  435 	or	a, (0x0c, sp)
+      000254 C7 52 46         [ 1]  436 	ld	0x5246, a
+      000257                        437 00110$:
+                                    438 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 173: }
+      000257 1E 0D            [ 2]  439 	ldw	x, (13, sp)
+      000259 5B 17            [ 2]  440 	addw	sp, #23
+      00025B FC               [ 2]  441 	jp	(x)
+                                    442 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 181: void UART2_Cmd(FunctionalState NewState)
+                                    443 ;	-----------------------------------------
+                                    444 ;	 function UART2_Cmd
+                                    445 ;	-----------------------------------------
+      00025C                        446 _UART2_Cmd:
+      00025C 88               [ 1]  447 	push	a
+      00025D 6B 01            [ 1]  448 	ld	(0x01, sp), a
+                                    449 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 186: UART2->CR1 &= (uint8_t)(~UART2_CR1_UARTD);
+      00025F C6 52 44         [ 1]  450 	ld	a, 0x5244
+                                    451 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 183: if (NewState != DISABLE)
+      000262 0D 01            [ 1]  452 	tnz	(0x01, sp)
+      000264 27 07            [ 1]  453 	jreq	00102$
+                                    454 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 186: UART2->CR1 &= (uint8_t)(~UART2_CR1_UARTD);
+      000266 A4 DF            [ 1]  455 	and	a, #0xdf
+      000268 C7 52 44         [ 1]  456 	ld	0x5244, a
+      00026B 20 05            [ 2]  457 	jra	00104$
+      00026D                        458 00102$:
+                                    459 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 191: UART2->CR1 |= UART2_CR1_UARTD; 
+      00026D AA 20            [ 1]  460 	or	a, #0x20
+      00026F C7 52 44         [ 1]  461 	ld	0x5244, a
+      000272                        462 00104$:
+                                    463 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 193: }
+      000272 84               [ 1]  464 	pop	a
+      000273 81               [ 4]  465 	ret
+                                    466 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 210: void UART2_ITConfig(UART2_IT_TypeDef UART2_IT, FunctionalState NewState)
+                                    467 ;	-----------------------------------------
+                                    468 ;	 function UART2_ITConfig
+                                    469 ;	-----------------------------------------
+      000274                        470 _UART2_ITConfig:
+      000274 52 07            [ 2]  471 	sub	sp, #7
+      000276 1F 06            [ 2]  472 	ldw	(0x06, sp), x
+      000278 6B 05            [ 1]  473 	ld	(0x05, sp), a
+                                    474 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 215: assert_param(IS_UART2_CONFIG_IT_OK(UART2_IT));
+      00027A 1E 06            [ 2]  475 	ldw	x, (0x06, sp)
+      00027C A3 01 00         [ 2]  476 	cpw	x, #0x0100
+      00027F 27 2E            [ 1]  477 	jreq	00125$
+      000281 A3 02 77         [ 2]  478 	cpw	x, #0x0277
+      000284 27 29            [ 1]  479 	jreq	00125$
+      000286 A3 02 66         [ 2]  480 	cpw	x, #0x0266
+      000289 27 24            [ 1]  481 	jreq	00125$
+      00028B A3 02 05         [ 2]  482 	cpw	x, #0x0205
+      00028E 27 1F            [ 1]  483 	jreq	00125$
+      000290 A3 02 44         [ 2]  484 	cpw	x, #0x0244
+      000293 27 1A            [ 1]  485 	jreq	00125$
+      000295 A3 04 12         [ 2]  486 	cpw	x, #0x0412
+      000298 27 15            [ 1]  487 	jreq	00125$
+      00029A A3 03 46         [ 2]  488 	cpw	x, #0x0346
+      00029D 27 10            [ 1]  489 	jreq	00125$
+      00029F 89               [ 2]  490 	pushw	x
+      0002A0 4B D7            [ 1]  491 	push	#0xd7
+      0002A2 4B 00            [ 1]  492 	push	#0x00
+      0002A4 4B 00            [ 1]  493 	push	#0x00
+      0002A6 4B 00            [ 1]  494 	push	#0x00
+      0002A8 AEr00r00         [ 2]  495 	ldw	x, #(___str_0+0)
+      0002AB CDr00r00         [ 4]  496 	call	_assert_failed
+      0002AE 85               [ 2]  497 	popw	x
+      0002AF                        498 00125$:
+                                    499 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 216: assert_param(IS_FUNCTIONALSTATE_OK(NewState));
+      0002AF 0D 05            [ 1]  500 	tnz	(0x05, sp)
+      0002B1 27 15            [ 1]  501 	jreq	00145$
+      0002B3 7B 05            [ 1]  502 	ld	a, (0x05, sp)
+      0002B5 4A               [ 1]  503 	dec	a
+      0002B6 27 10            [ 1]  504 	jreq	00145$
+      0002B8 89               [ 2]  505 	pushw	x
+      0002B9 4B D8            [ 1]  506 	push	#0xd8
+      0002BB 4B 00            [ 1]  507 	push	#0x00
+      0002BD 4B 00            [ 1]  508 	push	#0x00
+      0002BF 4B 00            [ 1]  509 	push	#0x00
+      0002C1 AEr00r00         [ 2]  510 	ldw	x, #(___str_0+0)
+      0002C4 CDr00r00         [ 4]  511 	call	_assert_failed
+      0002C7 85               [ 2]  512 	popw	x
+      0002C8                        513 00145$:
+                                    514 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 219: uartreg = (uint8_t)((uint16_t)UART2_IT >> 0x08);
+                                    515 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 222: itpos = (uint8_t)((uint8_t)1 << (uint8_t)((uint8_t)UART2_IT & (uint8_t)0x0F));
+      0002C8 7B 07            [ 1]  516 	ld	a, (0x07, sp)
+      0002CA A4 0F            [ 1]  517 	and	a, #0x0f
+      0002CC 88               [ 1]  518 	push	a
+      0002CD A6 01            [ 1]  519 	ld	a, #0x01
+      0002CF 6B 05            [ 1]  520 	ld	(0x05, sp), a
+      0002D1 84               [ 1]  521 	pop	a
+      0002D2 4D               [ 1]  522 	tnz	a
+      0002D3 27 05            [ 1]  523 	jreq	00255$
+      0002D5                        524 00254$:
+      0002D5 08 04            [ 1]  525 	sll	(0x04, sp)
+      0002D7 4A               [ 1]  526 	dec	a
+      0002D8 26 FB            [ 1]  527 	jrne	00254$
+      0002DA                        528 00255$:
+                                    529 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 227: if (uartreg == 0x01)
+      0002DA 9E               [ 1]  530 	ld	a, xh
+      0002DB 4A               [ 1]  531 	dec	a
+      0002DC 26 05            [ 1]  532 	jrne	00257$
+      0002DE A6 01            [ 1]  533 	ld	a, #0x01
+      0002E0 6B 01            [ 1]  534 	ld	(0x01, sp), a
+      0002E2 C5                     535 	.byte 0xc5
+      0002E3                        536 00257$:
+      0002E3 0F 01            [ 1]  537 	clr	(0x01, sp)
+      0002E5                        538 00258$:
+                                    539 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 231: else if (uartreg == 0x02)
+      0002E5 9E               [ 1]  540 	ld	a, xh
+      0002E6 A0 02            [ 1]  541 	sub	a, #0x02
+      0002E8 26 04            [ 1]  542 	jrne	00260$
+      0002EA 4C               [ 1]  543 	inc	a
+      0002EB 6B 02            [ 1]  544 	ld	(0x02, sp), a
+      0002ED C5                     545 	.byte 0xc5
+      0002EE                        546 00260$:
+      0002EE 0F 02            [ 1]  547 	clr	(0x02, sp)
+      0002F0                        548 00261$:
+                                    549 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 235: else if (uartreg == 0x03)
+      0002F0 9E               [ 1]  550 	ld	a, xh
+      0002F1 A0 03            [ 1]  551 	sub	a, #0x03
+      0002F3 26 04            [ 1]  552 	jrne	00263$
+      0002F5 4C               [ 1]  553 	inc	a
+      0002F6 6B 03            [ 1]  554 	ld	(0x03, sp), a
+      0002F8 C5                     555 	.byte 0xc5
+      0002F9                        556 00263$:
+      0002F9 0F 03            [ 1]  557 	clr	(0x03, sp)
+      0002FB                        558 00264$:
+                                    559 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 224: if (NewState != DISABLE)
+      0002FB 0D 05            [ 1]  560 	tnz	(0x05, sp)
+      0002FD 27 34            [ 1]  561 	jreq	00120$
+                                    562 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 227: if (uartreg == 0x01)
+      0002FF 0D 01            [ 1]  563 	tnz	(0x01, sp)
+      000301 27 0A            [ 1]  564 	jreq	00108$
+                                    565 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 229: UART2->CR1 |= itpos;
+      000303 C6 52 44         [ 1]  566 	ld	a, 0x5244
+      000306 1A 04            [ 1]  567 	or	a, (0x04, sp)
+      000308 C7 52 44         [ 1]  568 	ld	0x5244, a
+      00030B 20 5C            [ 2]  569 	jra	00122$
+      00030D                        570 00108$:
+                                    571 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 231: else if (uartreg == 0x02)
+      00030D 0D 02            [ 1]  572 	tnz	(0x02, sp)
+      00030F 27 0A            [ 1]  573 	jreq	00105$
+                                    574 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 233: UART2->CR2 |= itpos;
+      000311 C6 52 45         [ 1]  575 	ld	a, 0x5245
+      000314 1A 04            [ 1]  576 	or	a, (0x04, sp)
+      000316 C7 52 45         [ 1]  577 	ld	0x5245, a
+      000319 20 4E            [ 2]  578 	jra	00122$
+      00031B                        579 00105$:
+                                    580 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 235: else if (uartreg == 0x03)
+      00031B 0D 03            [ 1]  581 	tnz	(0x03, sp)
+      00031D 27 0A            [ 1]  582 	jreq	00102$
+                                    583 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 237: UART2->CR4 |= itpos;
+      00031F C6 52 47         [ 1]  584 	ld	a, 0x5247
+      000322 1A 04            [ 1]  585 	or	a, (0x04, sp)
+      000324 C7 52 47         [ 1]  586 	ld	0x5247, a
+      000327 20 40            [ 2]  587 	jra	00122$
+      000329                        588 00102$:
+                                    589 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 241: UART2->CR6 |= itpos;
+      000329 C6 52 49         [ 1]  590 	ld	a, 0x5249
+      00032C 1A 04            [ 1]  591 	or	a, (0x04, sp)
+      00032E C7 52 49         [ 1]  592 	ld	0x5249, a
+      000331 20 36            [ 2]  593 	jra	00122$
+      000333                        594 00120$:
+                                    595 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 249: UART2->CR1 &= (uint8_t)(~itpos);
+      000333 03 04            [ 1]  596 	cpl	(0x04, sp)
+                                    597 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 247: if (uartreg == 0x01)
+      000335 0D 01            [ 1]  598 	tnz	(0x01, sp)
+      000337 27 0C            [ 1]  599 	jreq	00117$
+                                    600 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 249: UART2->CR1 &= (uint8_t)(~itpos);
+      000339 C6 52 44         [ 1]  601 	ld	a, 0x5244
+      00033C 6B 03            [ 1]  602 	ld	(0x03, sp), a
+      00033E 14 04            [ 1]  603 	and	a, (0x04, sp)
+      000340 C7 52 44         [ 1]  604 	ld	0x5244, a
+      000343 20 24            [ 2]  605 	jra	00122$
+      000345                        606 00117$:
+                                    607 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 251: else if (uartreg == 0x02)
+      000345 0D 02            [ 1]  608 	tnz	(0x02, sp)
+      000347 27 0A            [ 1]  609 	jreq	00114$
+                                    610 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 253: UART2->CR2 &= (uint8_t)(~itpos);
+      000349 C6 52 45         [ 1]  611 	ld	a, 0x5245
+      00034C 14 04            [ 1]  612 	and	a, (0x04, sp)
+      00034E C7 52 45         [ 1]  613 	ld	0x5245, a
+      000351 20 16            [ 2]  614 	jra	00122$
+      000353                        615 00114$:
+                                    616 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 255: else if (uartreg == 0x03)
+      000353 0D 03            [ 1]  617 	tnz	(0x03, sp)
+      000355 27 0A            [ 1]  618 	jreq	00111$
+                                    619 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 257: UART2->CR4 &= (uint8_t)(~itpos);
+      000357 C6 52 47         [ 1]  620 	ld	a, 0x5247
+      00035A 14 04            [ 1]  621 	and	a, (0x04, sp)
+      00035C C7 52 47         [ 1]  622 	ld	0x5247, a
+      00035F 20 08            [ 2]  623 	jra	00122$
+      000361                        624 00111$:
+                                    625 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 261: UART2->CR6 &= (uint8_t)(~itpos);
+      000361 C6 52 49         [ 1]  626 	ld	a, 0x5249
+      000364 14 04            [ 1]  627 	and	a, (0x04, sp)
+      000366 C7 52 49         [ 1]  628 	ld	0x5249, a
+      000369                        629 00122$:
+                                    630 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 264: }
+      000369 5B 07            [ 2]  631 	addw	sp, #7
+      00036B 81               [ 4]  632 	ret
+                                    633 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 272: void UART2_IrDAConfig(UART2_IrDAMode_TypeDef UART2_IrDAMode)
+                                    634 ;	-----------------------------------------
+                                    635 ;	 function UART2_IrDAConfig
+                                    636 ;	-----------------------------------------
+      00036C                        637 _UART2_IrDAConfig:
+      00036C 88               [ 1]  638 	push	a
+                                    639 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 274: assert_param(IS_UART2_IRDAMODE_OK(UART2_IrDAMode));
+      00036D 6B 01            [ 1]  640 	ld	(0x01, sp), a
+      00036F 4A               [ 1]  641 	dec	a
+      000370 27 10            [ 1]  642 	jreq	00107$
+      000372 0D 01            [ 1]  643 	tnz	(0x01, sp)
+      000374 27 0C            [ 1]  644 	jreq	00107$
+      000376 4B 12            [ 1]  645 	push	#0x12
+      000378 4B 01            [ 1]  646 	push	#0x01
+      00037A 5F               [ 1]  647 	clrw	x
+      00037B 89               [ 2]  648 	pushw	x
+      00037C AEr00r00         [ 2]  649 	ldw	x, #(___str_0+0)
+      00037F CDr00r00         [ 4]  650 	call	_assert_failed
+      000382                        651 00107$:
+                                    652 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 278: UART2->CR5 |= UART2_CR5_IRLP;
+      000382 C6 52 48         [ 1]  653 	ld	a, 0x5248
+                                    654 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 276: if (UART2_IrDAMode != UART2_IRDAMODE_NORMAL)
+      000385 0D 01            [ 1]  655 	tnz	(0x01, sp)
+      000387 27 07            [ 1]  656 	jreq	00102$
+                                    657 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 278: UART2->CR5 |= UART2_CR5_IRLP;
+      000389 AA 04            [ 1]  658 	or	a, #0x04
+      00038B C7 52 48         [ 1]  659 	ld	0x5248, a
+      00038E 20 05            [ 2]  660 	jra	00104$
+      000390                        661 00102$:
+                                    662 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 282: UART2->CR5 &= ((uint8_t)~UART2_CR5_IRLP);
+      000390 A4 FB            [ 1]  663 	and	a, #0xfb
+      000392 C7 52 48         [ 1]  664 	ld	0x5248, a
+      000395                        665 00104$:
+                                    666 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 284: }
+      000395 84               [ 1]  667 	pop	a
+      000396 81               [ 4]  668 	ret
+                                    669 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 292: void UART2_IrDACmd(FunctionalState NewState)
+                                    670 ;	-----------------------------------------
+                                    671 ;	 function UART2_IrDACmd
+                                    672 ;	-----------------------------------------
+      000397                        673 _UART2_IrDACmd:
+      000397 88               [ 1]  674 	push	a
+                                    675 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 295: assert_param(IS_FUNCTIONALSTATE_OK(NewState));
+      000398 6B 01            [ 1]  676 	ld	(0x01, sp), a
+      00039A 27 11            [ 1]  677 	jreq	00107$
+      00039C 7B 01            [ 1]  678 	ld	a, (0x01, sp)
+      00039E 4A               [ 1]  679 	dec	a
+      00039F 27 0C            [ 1]  680 	jreq	00107$
+      0003A1 4B 27            [ 1]  681 	push	#0x27
+      0003A3 4B 01            [ 1]  682 	push	#0x01
+      0003A5 5F               [ 1]  683 	clrw	x
+      0003A6 89               [ 2]  684 	pushw	x
+      0003A7 AEr00r00         [ 2]  685 	ldw	x, #(___str_0+0)
+      0003AA CDr00r00         [ 4]  686 	call	_assert_failed
+      0003AD                        687 00107$:
+                                    688 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 300: UART2->CR5 |= UART2_CR5_IREN;
+      0003AD C6 52 48         [ 1]  689 	ld	a, 0x5248
+                                    690 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 297: if (NewState != DISABLE)
+      0003B0 0D 01            [ 1]  691 	tnz	(0x01, sp)
+      0003B2 27 07            [ 1]  692 	jreq	00102$
+                                    693 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 300: UART2->CR5 |= UART2_CR5_IREN;
+      0003B4 AA 02            [ 1]  694 	or	a, #0x02
+      0003B6 C7 52 48         [ 1]  695 	ld	0x5248, a
+      0003B9 20 05            [ 2]  696 	jra	00104$
+      0003BB                        697 00102$:
+                                    698 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 305: UART2->CR5 &= ((uint8_t)~UART2_CR5_IREN);
+      0003BB A4 FD            [ 1]  699 	and	a, #0xfd
+      0003BD C7 52 48         [ 1]  700 	ld	0x5248, a
+      0003C0                        701 00104$:
+                                    702 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 307: }
+      0003C0 84               [ 1]  703 	pop	a
+      0003C1 81               [ 4]  704 	ret
+                                    705 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 316: void UART2_LINBreakDetectionConfig(UART2_LINBreakDetectionLength_TypeDef UART2_LINBreakDetectionLength)
+                                    706 ;	-----------------------------------------
+                                    707 ;	 function UART2_LINBreakDetectionConfig
+                                    708 ;	-----------------------------------------
+      0003C2                        709 _UART2_LINBreakDetectionConfig:
+      0003C2 88               [ 1]  710 	push	a
+                                    711 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 319: assert_param(IS_UART2_LINBREAKDETECTIONLENGTH_OK(UART2_LINBreakDetectionLength));
+      0003C3 6B 01            [ 1]  712 	ld	(0x01, sp), a
+      0003C5 27 11            [ 1]  713 	jreq	00107$
+      0003C7 7B 01            [ 1]  714 	ld	a, (0x01, sp)
+      0003C9 4A               [ 1]  715 	dec	a
+      0003CA 27 0C            [ 1]  716 	jreq	00107$
+      0003CC 4B 3F            [ 1]  717 	push	#0x3f
+      0003CE 4B 01            [ 1]  718 	push	#0x01
+      0003D0 5F               [ 1]  719 	clrw	x
+      0003D1 89               [ 2]  720 	pushw	x
+      0003D2 AEr00r00         [ 2]  721 	ldw	x, #(___str_0+0)
+      0003D5 CDr00r00         [ 4]  722 	call	_assert_failed
+      0003D8                        723 00107$:
+                                    724 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 323: UART2->CR4 |= UART2_CR4_LBDL;
+      0003D8 C6 52 47         [ 1]  725 	ld	a, 0x5247
+                                    726 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 321: if (UART2_LINBreakDetectionLength != UART2_LINBREAKDETECTIONLENGTH_10BITS)
+      0003DB 0D 01            [ 1]  727 	tnz	(0x01, sp)
+      0003DD 27 07            [ 1]  728 	jreq	00102$
+                                    729 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 323: UART2->CR4 |= UART2_CR4_LBDL;
+      0003DF AA 20            [ 1]  730 	or	a, #0x20
+      0003E1 C7 52 47         [ 1]  731 	ld	0x5247, a
+      0003E4 20 05            [ 2]  732 	jra	00104$
+      0003E6                        733 00102$:
+                                    734 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 327: UART2->CR4 &= ((uint8_t)~UART2_CR4_LBDL);
+      0003E6 A4 DF            [ 1]  735 	and	a, #0xdf
+      0003E8 C7 52 47         [ 1]  736 	ld	0x5247, a
+      0003EB                        737 00104$:
+                                    738 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 329: }
+      0003EB 84               [ 1]  739 	pop	a
+      0003EC 81               [ 4]  740 	ret
+                                    741 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 341: void UART2_LINConfig(UART2_LinMode_TypeDef UART2_Mode, 
+                                    742 ;	-----------------------------------------
+                                    743 ;	 function UART2_LINConfig
+                                    744 ;	-----------------------------------------
+      0003ED                        745 _UART2_LINConfig:
+      0003ED 88               [ 1]  746 	push	a
+                                    747 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 346: assert_param(IS_UART2_SLAVE_OK(UART2_Mode));
+      0003EE 6B 01            [ 1]  748 	ld	(0x01, sp), a
+      0003F0 27 11            [ 1]  749 	jreq	00113$
+      0003F2 7B 01            [ 1]  750 	ld	a, (0x01, sp)
+      0003F4 4A               [ 1]  751 	dec	a
+      0003F5 27 0C            [ 1]  752 	jreq	00113$
+      0003F7 4B 5A            [ 1]  753 	push	#0x5a
+      0003F9 4B 01            [ 1]  754 	push	#0x01
+      0003FB 5F               [ 1]  755 	clrw	x
+      0003FC 89               [ 2]  756 	pushw	x
+      0003FD AEr00r00         [ 2]  757 	ldw	x, #(___str_0+0)
+      000400 CDr00r00         [ 4]  758 	call	_assert_failed
+      000403                        759 00113$:
+                                    760 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 347: assert_param(IS_UART2_AUTOSYNC_OK(UART2_Autosync));
+      000403 7B 04            [ 1]  761 	ld	a, (0x04, sp)
+      000405 4A               [ 1]  762 	dec	a
+      000406 27 10            [ 1]  763 	jreq	00118$
+      000408 0D 04            [ 1]  764 	tnz	(0x04, sp)
+      00040A 27 0C            [ 1]  765 	jreq	00118$
+      00040C 4B 5B            [ 1]  766 	push	#0x5b
+      00040E 4B 01            [ 1]  767 	push	#0x01
+      000410 5F               [ 1]  768 	clrw	x
+      000411 89               [ 2]  769 	pushw	x
+      000412 AEr00r00         [ 2]  770 	ldw	x, #(___str_0+0)
+      000415 CDr00r00         [ 4]  771 	call	_assert_failed
+      000418                        772 00118$:
+                                    773 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 348: assert_param(IS_UART2_DIVUP_OK(UART2_DivUp));
+      000418 0D 05            [ 1]  774 	tnz	(0x05, sp)
+      00041A 27 11            [ 1]  775 	jreq	00123$
+      00041C 7B 05            [ 1]  776 	ld	a, (0x05, sp)
+      00041E 4A               [ 1]  777 	dec	a
+      00041F 27 0C            [ 1]  778 	jreq	00123$
+      000421 4B 5C            [ 1]  779 	push	#0x5c
+      000423 4B 01            [ 1]  780 	push	#0x01
+      000425 5F               [ 1]  781 	clrw	x
+      000426 89               [ 2]  782 	pushw	x
+      000427 AEr00r00         [ 2]  783 	ldw	x, #(___str_0+0)
+      00042A CDr00r00         [ 4]  784 	call	_assert_failed
+      00042D                        785 00123$:
+                                    786 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 352: UART2->CR6 |=  UART2_CR6_LSLV;
+      00042D C6 52 49         [ 1]  787 	ld	a, 0x5249
+                                    788 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 350: if (UART2_Mode != UART2_LIN_MODE_MASTER)
+      000430 0D 01            [ 1]  789 	tnz	(0x01, sp)
+      000432 27 07            [ 1]  790 	jreq	00102$
+                                    791 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 352: UART2->CR6 |=  UART2_CR6_LSLV;
+      000434 AA 20            [ 1]  792 	or	a, #0x20
+      000436 C7 52 49         [ 1]  793 	ld	0x5249, a
+      000439 20 05            [ 2]  794 	jra	00103$
+      00043B                        795 00102$:
+                                    796 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 356: UART2->CR6 &= ((uint8_t)~UART2_CR6_LSLV);
+      00043B A4 DF            [ 1]  797 	and	a, #0xdf
+      00043D C7 52 49         [ 1]  798 	ld	0x5249, a
+      000440                        799 00103$:
+                                    800 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 352: UART2->CR6 |=  UART2_CR6_LSLV;
+      000440 C6 52 49         [ 1]  801 	ld	a, 0x5249
+                                    802 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 359: if (UART2_Autosync != UART2_LIN_AUTOSYNC_DISABLE)
+      000443 0D 04            [ 1]  803 	tnz	(0x04, sp)
+      000445 27 07            [ 1]  804 	jreq	00105$
+                                    805 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 361: UART2->CR6 |=  UART2_CR6_LASE ;
+      000447 AA 10            [ 1]  806 	or	a, #0x10
+      000449 C7 52 49         [ 1]  807 	ld	0x5249, a
+      00044C 20 05            [ 2]  808 	jra	00106$
+      00044E                        809 00105$:
+                                    810 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 365: UART2->CR6 &= ((uint8_t)~ UART2_CR6_LASE );
+      00044E A4 EF            [ 1]  811 	and	a, #0xef
+      000450 C7 52 49         [ 1]  812 	ld	0x5249, a
+      000453                        813 00106$:
+                                    814 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 352: UART2->CR6 |=  UART2_CR6_LSLV;
+      000453 C6 52 49         [ 1]  815 	ld	a, 0x5249
+                                    816 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 368: if (UART2_DivUp != UART2_LIN_DIVUP_LBRR1)
+      000456 0D 05            [ 1]  817 	tnz	(0x05, sp)
+      000458 27 07            [ 1]  818 	jreq	00108$
+                                    819 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 370: UART2->CR6 |=  UART2_CR6_LDUM;
+      00045A AA 80            [ 1]  820 	or	a, #0x80
+      00045C C7 52 49         [ 1]  821 	ld	0x5249, a
+      00045F 20 05            [ 2]  822 	jra	00110$
+      000461                        823 00108$:
+                                    824 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 374: UART2->CR6 &= ((uint8_t)~ UART2_CR6_LDUM);
+      000461 A4 7F            [ 1]  825 	and	a, #0x7f
+      000463 C7 52 49         [ 1]  826 	ld	0x5249, a
+      000466                        827 00110$:
+                                    828 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 376: }
+      000466 1E 02            [ 2]  829 	ldw	x, (2, sp)
+      000468 5B 05            [ 2]  830 	addw	sp, #5
+      00046A FC               [ 2]  831 	jp	(x)
+                                    832 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 384: void UART2_LINCmd(FunctionalState NewState)
+                                    833 ;	-----------------------------------------
+                                    834 ;	 function UART2_LINCmd
+                                    835 ;	-----------------------------------------
+      00046B                        836 _UART2_LINCmd:
+      00046B 88               [ 1]  837 	push	a
+                                    838 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 386: assert_param(IS_FUNCTIONALSTATE_OK(NewState));
+      00046C 6B 01            [ 1]  839 	ld	(0x01, sp), a
+      00046E 27 11            [ 1]  840 	jreq	00107$
+      000470 7B 01            [ 1]  841 	ld	a, (0x01, sp)
+      000472 4A               [ 1]  842 	dec	a
+      000473 27 0C            [ 1]  843 	jreq	00107$
+      000475 4B 82            [ 1]  844 	push	#0x82
+      000477 4B 01            [ 1]  845 	push	#0x01
+      000479 5F               [ 1]  846 	clrw	x
+      00047A 89               [ 2]  847 	pushw	x
+      00047B AEr00r00         [ 2]  848 	ldw	x, #(___str_0+0)
+      00047E CDr00r00         [ 4]  849 	call	_assert_failed
+      000481                        850 00107$:
+                                    851 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 391: UART2->CR3 |= UART2_CR3_LINEN;
+      000481 C6 52 46         [ 1]  852 	ld	a, 0x5246
+                                    853 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 388: if (NewState != DISABLE)
+      000484 0D 01            [ 1]  854 	tnz	(0x01, sp)
+      000486 27 07            [ 1]  855 	jreq	00102$
+                                    856 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 391: UART2->CR3 |= UART2_CR3_LINEN;
+      000488 AA 40            [ 1]  857 	or	a, #0x40
+      00048A C7 52 46         [ 1]  858 	ld	0x5246, a
+      00048D 20 05            [ 2]  859 	jra	00104$
+      00048F                        860 00102$:
+                                    861 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 396: UART2->CR3 &= ((uint8_t)~UART2_CR3_LINEN);
+      00048F A4 BF            [ 1]  862 	and	a, #0xbf
+      000491 C7 52 46         [ 1]  863 	ld	0x5246, a
+      000494                        864 00104$:
+                                    865 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 398: }
+      000494 84               [ 1]  866 	pop	a
+      000495 81               [ 4]  867 	ret
+                                    868 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 406: void UART2_SmartCardCmd(FunctionalState NewState)
+                                    869 ;	-----------------------------------------
+                                    870 ;	 function UART2_SmartCardCmd
+                                    871 ;	-----------------------------------------
+      000496                        872 _UART2_SmartCardCmd:
+      000496 88               [ 1]  873 	push	a
+                                    874 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 409: assert_param(IS_FUNCTIONALSTATE_OK(NewState));
+      000497 6B 01            [ 1]  875 	ld	(0x01, sp), a
+      000499 27 11            [ 1]  876 	jreq	00107$
+      00049B 7B 01            [ 1]  877 	ld	a, (0x01, sp)
+      00049D 4A               [ 1]  878 	dec	a
+      00049E 27 0C            [ 1]  879 	jreq	00107$
+      0004A0 4B 99            [ 1]  880 	push	#0x99
+      0004A2 4B 01            [ 1]  881 	push	#0x01
+      0004A4 5F               [ 1]  882 	clrw	x
+      0004A5 89               [ 2]  883 	pushw	x
+      0004A6 AEr00r00         [ 2]  884 	ldw	x, #(___str_0+0)
+      0004A9 CDr00r00         [ 4]  885 	call	_assert_failed
+      0004AC                        886 00107$:
+                                    887 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 414: UART2->CR5 |= UART2_CR5_SCEN;
+      0004AC C6 52 48         [ 1]  888 	ld	a, 0x5248
+                                    889 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 411: if (NewState != DISABLE)
+      0004AF 0D 01            [ 1]  890 	tnz	(0x01, sp)
+      0004B1 27 07            [ 1]  891 	jreq	00102$
+                                    892 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 414: UART2->CR5 |= UART2_CR5_SCEN;
+      0004B3 AA 20            [ 1]  893 	or	a, #0x20
+      0004B5 C7 52 48         [ 1]  894 	ld	0x5248, a
+      0004B8 20 05            [ 2]  895 	jra	00104$
+      0004BA                        896 00102$:
+                                    897 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 419: UART2->CR5 &= ((uint8_t)(~UART2_CR5_SCEN));
+      0004BA A4 DF            [ 1]  898 	and	a, #0xdf
+      0004BC C7 52 48         [ 1]  899 	ld	0x5248, a
+      0004BF                        900 00104$:
+                                    901 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 421: }
+      0004BF 84               [ 1]  902 	pop	a
+      0004C0 81               [ 4]  903 	ret
+                                    904 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 429: void UART2_SmartCardNACKCmd(FunctionalState NewState)
+                                    905 ;	-----------------------------------------
+                                    906 ;	 function UART2_SmartCardNACKCmd
+                                    907 ;	-----------------------------------------
+      0004C1                        908 _UART2_SmartCardNACKCmd:
+      0004C1 88               [ 1]  909 	push	a
+                                    910 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 432: assert_param(IS_FUNCTIONALSTATE_OK(NewState));
+      0004C2 6B 01            [ 1]  911 	ld	(0x01, sp), a
+      0004C4 27 11            [ 1]  912 	jreq	00107$
+      0004C6 7B 01            [ 1]  913 	ld	a, (0x01, sp)
+      0004C8 4A               [ 1]  914 	dec	a
+      0004C9 27 0C            [ 1]  915 	jreq	00107$
+      0004CB 4B B0            [ 1]  916 	push	#0xb0
+      0004CD 4B 01            [ 1]  917 	push	#0x01
+      0004CF 5F               [ 1]  918 	clrw	x
+      0004D0 89               [ 2]  919 	pushw	x
+      0004D1 AEr00r00         [ 2]  920 	ldw	x, #(___str_0+0)
+      0004D4 CDr00r00         [ 4]  921 	call	_assert_failed
+      0004D7                        922 00107$:
+                                    923 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 437: UART2->CR5 |= UART2_CR5_NACK;
+      0004D7 C6 52 48         [ 1]  924 	ld	a, 0x5248
+                                    925 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 434: if (NewState != DISABLE)
+      0004DA 0D 01            [ 1]  926 	tnz	(0x01, sp)
+      0004DC 27 07            [ 1]  927 	jreq	00102$
+                                    928 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 437: UART2->CR5 |= UART2_CR5_NACK;
+      0004DE AA 10            [ 1]  929 	or	a, #0x10
+      0004E0 C7 52 48         [ 1]  930 	ld	0x5248, a
+      0004E3 20 05            [ 2]  931 	jra	00104$
+      0004E5                        932 00102$:
+                                    933 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 442: UART2->CR5 &= ((uint8_t)~(UART2_CR5_NACK));
+      0004E5 A4 EF            [ 1]  934 	and	a, #0xef
+      0004E7 C7 52 48         [ 1]  935 	ld	0x5248, a
+      0004EA                        936 00104$:
+                                    937 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 444: }
+      0004EA 84               [ 1]  938 	pop	a
+      0004EB 81               [ 4]  939 	ret
+                                    940 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 452: void UART2_WakeUpConfig(UART2_WakeUp_TypeDef UART2_WakeUp)
+                                    941 ;	-----------------------------------------
+                                    942 ;	 function UART2_WakeUpConfig
+                                    943 ;	-----------------------------------------
+      0004EC                        944 _UART2_WakeUpConfig:
+      0004EC 88               [ 1]  945 	push	a
+                                    946 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 454: assert_param(IS_UART2_WAKEUP_OK(UART2_WakeUp));
+      0004ED 6B 01            [ 1]  947 	ld	(0x01, sp), a
+      0004EF 27 12            [ 1]  948 	jreq	00104$
+      0004F1 7B 01            [ 1]  949 	ld	a, (0x01, sp)
+      0004F3 A1 08            [ 1]  950 	cp	a, #0x08
+      0004F5 27 0C            [ 1]  951 	jreq	00104$
+      0004F7 4B C6            [ 1]  952 	push	#0xc6
+      0004F9 4B 01            [ 1]  953 	push	#0x01
+      0004FB 5F               [ 1]  954 	clrw	x
+      0004FC 89               [ 2]  955 	pushw	x
+      0004FD AEr00r00         [ 2]  956 	ldw	x, #(___str_0+0)
+      000500 CDr00r00         [ 4]  957 	call	_assert_failed
+      000503                        958 00104$:
+                                    959 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 456: UART2->CR1 &= ((uint8_t)~UART2_CR1_WAKE);
+      000503 72 17 52 44      [ 1]  960 	bres	0x5244, #3
+                                    961 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 457: UART2->CR1 |= (uint8_t)UART2_WakeUp;
+      000507 C6 52 44         [ 1]  962 	ld	a, 0x5244
+      00050A 1A 01            [ 1]  963 	or	a, (0x01, sp)
+      00050C C7 52 44         [ 1]  964 	ld	0x5244, a
+                                    965 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 458: }
+      00050F 84               [ 1]  966 	pop	a
+      000510 81               [ 4]  967 	ret
+                                    968 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 466: void UART2_ReceiverWakeUpCmd(FunctionalState NewState)
+                                    969 ;	-----------------------------------------
+                                    970 ;	 function UART2_ReceiverWakeUpCmd
+                                    971 ;	-----------------------------------------
+      000511                        972 _UART2_ReceiverWakeUpCmd:
+      000511 88               [ 1]  973 	push	a
+                                    974 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 468: assert_param(IS_FUNCTIONALSTATE_OK(NewState));
+      000512 6B 01            [ 1]  975 	ld	(0x01, sp), a
+      000514 27 11            [ 1]  976 	jreq	00107$
+      000516 7B 01            [ 1]  977 	ld	a, (0x01, sp)
+      000518 4A               [ 1]  978 	dec	a
+      000519 27 0C            [ 1]  979 	jreq	00107$
+      00051B 4B D4            [ 1]  980 	push	#0xd4
+      00051D 4B 01            [ 1]  981 	push	#0x01
+      00051F 5F               [ 1]  982 	clrw	x
+      000520 89               [ 2]  983 	pushw	x
+      000521 AEr00r00         [ 2]  984 	ldw	x, #(___str_0+0)
+      000524 CDr00r00         [ 4]  985 	call	_assert_failed
+      000527                        986 00107$:
+                                    987 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 473: UART2->CR2 |= UART2_CR2_RWU;
+      000527 C6 52 45         [ 1]  988 	ld	a, 0x5245
+                                    989 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 470: if (NewState != DISABLE)
+      00052A 0D 01            [ 1]  990 	tnz	(0x01, sp)
+      00052C 27 07            [ 1]  991 	jreq	00102$
+                                    992 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 473: UART2->CR2 |= UART2_CR2_RWU;
+      00052E AA 02            [ 1]  993 	or	a, #0x02
+      000530 C7 52 45         [ 1]  994 	ld	0x5245, a
+      000533 20 05            [ 2]  995 	jra	00104$
+      000535                        996 00102$:
+                                    997 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 478: UART2->CR2 &= ((uint8_t)~UART2_CR2_RWU);
+      000535 A4 FD            [ 1]  998 	and	a, #0xfd
+      000537 C7 52 45         [ 1]  999 	ld	0x5245, a
+      00053A                       1000 00104$:
+                                   1001 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 480: }
+      00053A 84               [ 1] 1002 	pop	a
+      00053B 81               [ 4] 1003 	ret
+                                   1004 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 487: uint8_t UART2_ReceiveData8(void)
+                                   1005 ;	-----------------------------------------
+                                   1006 ;	 function UART2_ReceiveData8
+                                   1007 ;	-----------------------------------------
+      00053C                       1008 _UART2_ReceiveData8:
+                                   1009 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 489: return ((uint8_t)UART2->DR);
+      00053C C6 52 41         [ 1] 1010 	ld	a, 0x5241
+                                   1011 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 490: }
+      00053F 81               [ 4] 1012 	ret
+                                   1013 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 497: uint16_t UART2_ReceiveData9(void)
+                                   1014 ;	-----------------------------------------
+                                   1015 ;	 function UART2_ReceiveData9
+                                   1016 ;	-----------------------------------------
+      000540                       1017 _UART2_ReceiveData9:
+      000540 89               [ 2] 1018 	pushw	x
+                                   1019 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 501: temp = ((uint16_t)(((uint16_t)((uint16_t)UART2->CR1 & (uint16_t)UART2_CR1_R8)) << 1));
+      000541 C6 52 44         [ 1] 1020 	ld	a, 0x5244
+      000544 A4 80            [ 1] 1021 	and	a, #0x80
+      000546 97               [ 1] 1022 	ld	xl, a
+      000547 4F               [ 1] 1023 	clr	a
+      000548 95               [ 1] 1024 	ld	xh, a
+      000549 58               [ 2] 1025 	sllw	x
+      00054A 1F 01            [ 2] 1026 	ldw	(0x01, sp), x
+                                   1027 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 503: return (uint16_t)((((uint16_t)UART2->DR) | temp) & ((uint16_t)0x01FF));
+      00054C C6 52 41         [ 1] 1028 	ld	a, 0x5241
+      00054F 5F               [ 1] 1029 	clrw	x
+      000550 1A 02            [ 1] 1030 	or	a, (0x02, sp)
+      000552 02               [ 1] 1031 	rlwa	x
+      000553 1A 01            [ 1] 1032 	or	a, (0x01, sp)
+      000555 A4 01            [ 1] 1033 	and	a, #0x01
+      000557 95               [ 1] 1034 	ld	xh, a
+                                   1035 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 504: }
+      000558 5B 02            [ 2] 1036 	addw	sp, #2
+      00055A 81               [ 4] 1037 	ret
+                                   1038 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 511: void UART2_SendData8(uint8_t Data)
+                                   1039 ;	-----------------------------------------
+                                   1040 ;	 function UART2_SendData8
+                                   1041 ;	-----------------------------------------
+      00055B                       1042 _UART2_SendData8:
+                                   1043 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 514: UART2->DR = Data;
+      00055B C7 52 41         [ 1] 1044 	ld	0x5241, a
+                                   1045 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 515: }
+      00055E 81               [ 4] 1046 	ret
+                                   1047 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 522: void UART2_SendData9(uint16_t Data)
+                                   1048 ;	-----------------------------------------
+                                   1049 ;	 function UART2_SendData9
+                                   1050 ;	-----------------------------------------
+      00055F                       1051 _UART2_SendData9:
+      00055F 88               [ 1] 1052 	push	a
+      000560 51               [ 1] 1053 	exgw	x, y
+                                   1054 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 525: UART2->CR1 &= ((uint8_t)~UART2_CR1_T8);                  
+      000561 72 1D 52 44      [ 1] 1055 	bres	0x5244, #6
+                                   1056 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 528: UART2->CR1 |= (uint8_t)(((uint8_t)(Data >> 2)) & UART2_CR1_T8); 
+      000565 C6 52 44         [ 1] 1057 	ld	a, 0x5244
+      000568 6B 01            [ 1] 1058 	ld	(0x01, sp), a
+      00056A 93               [ 1] 1059 	ldw	x, y
+      00056B 54               [ 2] 1060 	srlw	x
+      00056C 54               [ 2] 1061 	srlw	x
+      00056D 9F               [ 1] 1062 	ld	a, xl
+      00056E A4 40            [ 1] 1063 	and	a, #0x40
+      000570 1A 01            [ 1] 1064 	or	a, (0x01, sp)
+      000572 C7 52 44         [ 1] 1065 	ld	0x5244, a
+                                   1066 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 531: UART2->DR   = (uint8_t)(Data);                    
+      000575 90 9F            [ 1] 1067 	ld	a, yl
+      000577 C7 52 41         [ 1] 1068 	ld	0x5241, a
+                                   1069 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 532: }
+      00057A 84               [ 1] 1070 	pop	a
+      00057B 81               [ 4] 1071 	ret
+                                   1072 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 539: void UART2_SendBreak(void)
+                                   1073 ;	-----------------------------------------
+                                   1074 ;	 function UART2_SendBreak
+                                   1075 ;	-----------------------------------------
+      00057C                       1076 _UART2_SendBreak:
+                                   1077 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 541: UART2->CR2 |= UART2_CR2_SBK;
+      00057C 72 10 52 45      [ 1] 1078 	bset	0x5245, #0
+                                   1079 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 542: }
+      000580 81               [ 4] 1080 	ret
+                                   1081 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 549: void UART2_SetAddress(uint8_t UART2_Address)
+                                   1082 ;	-----------------------------------------
+                                   1083 ;	 function UART2_SetAddress
+                                   1084 ;	-----------------------------------------
+      000581                       1085 _UART2_SetAddress:
+      000581 88               [ 1] 1086 	push	a
+                                   1087 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 552: assert_param(IS_UART2_ADDRESS_OK(UART2_Address));
+      000582 6B 01            [ 1] 1088 	ld	(0x01, sp), a
+      000584 A1 10            [ 1] 1089 	cp	a, #0x10
+      000586 25 0C            [ 1] 1090 	jrc	00104$
+      000588 4B 28            [ 1] 1091 	push	#0x28
+      00058A 4B 02            [ 1] 1092 	push	#0x02
+      00058C 5F               [ 1] 1093 	clrw	x
+      00058D 89               [ 2] 1094 	pushw	x
+      00058E AEr00r00         [ 2] 1095 	ldw	x, #(___str_0+0)
+      000591 CDr00r00         [ 4] 1096 	call	_assert_failed
+      000594                       1097 00104$:
+                                   1098 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 555: UART2->CR4 &= ((uint8_t)~UART2_CR4_ADD);
+      000594 C6 52 47         [ 1] 1099 	ld	a, 0x5247
+      000597 A4 F0            [ 1] 1100 	and	a, #0xf0
+      000599 C7 52 47         [ 1] 1101 	ld	0x5247, a
+                                   1102 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 557: UART2->CR4 |= UART2_Address;
+      00059C C6 52 47         [ 1] 1103 	ld	a, 0x5247
+      00059F 1A 01            [ 1] 1104 	or	a, (0x01, sp)
+      0005A1 C7 52 47         [ 1] 1105 	ld	0x5247, a
+                                   1106 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 558: }
+      0005A4 84               [ 1] 1107 	pop	a
+      0005A5 81               [ 4] 1108 	ret
+                                   1109 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 566: void UART2_SetGuardTime(uint8_t UART2_GuardTime)
+                                   1110 ;	-----------------------------------------
+                                   1111 ;	 function UART2_SetGuardTime
+                                   1112 ;	-----------------------------------------
+      0005A6                       1113 _UART2_SetGuardTime:
+                                   1114 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 569: UART2->GTR = UART2_GuardTime;
+      0005A6 C7 52 4A         [ 1] 1115 	ld	0x524a, a
+                                   1116 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 570: }
+      0005A9 81               [ 4] 1117 	ret
+                                   1118 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 594: void UART2_SetPrescaler(uint8_t UART2_Prescaler)
+                                   1119 ;	-----------------------------------------
+                                   1120 ;	 function UART2_SetPrescaler
+                                   1121 ;	-----------------------------------------
+      0005AA                       1122 _UART2_SetPrescaler:
+                                   1123 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 597: UART2->PSCR = UART2_Prescaler;
+      0005AA C7 52 4B         [ 1] 1124 	ld	0x524b, a
+                                   1125 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 598: }
+      0005AD 81               [ 4] 1126 	ret
+                                   1127 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 606: FlagStatus UART2_GetFlagStatus(UART2_Flag_TypeDef UART2_FLAG)
+                                   1128 ;	-----------------------------------------
+                                   1129 ;	 function UART2_GetFlagStatus
+                                   1130 ;	-----------------------------------------
+      0005AE                       1131 _UART2_GetFlagStatus:
+      0005AE 52 04            [ 2] 1132 	sub	sp, #4
+                                   1133 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 611: assert_param(IS_UART2_FLAG_OK(UART2_FLAG));
+      0005B0 90 93            [ 1] 1134 	ldw	y, x
+      0005B2 A3 01 01         [ 2] 1135 	cpw	x, #0x0101
+      0005B5 26 05            [ 1] 1136 	jrne	00256$
+      0005B7 A6 01            [ 1] 1137 	ld	a, #0x01
+      0005B9 6B 01            [ 1] 1138 	ld	(0x01, sp), a
+      0005BB C5                    1139 	.byte 0xc5
+      0005BC                       1140 00256$:
+      0005BC 0F 01            [ 1] 1141 	clr	(0x01, sp)
+      0005BE                       1142 00257$:
+      0005BE A3 03 01         [ 2] 1143 	cpw	x, #0x0301
+      0005C1 26 05            [ 1] 1144 	jrne	00259$
+      0005C3 A6 01            [ 1] 1145 	ld	a, #0x01
+      0005C5 6B 02            [ 1] 1146 	ld	(0x02, sp), a
+      0005C7 C5                    1147 	.byte 0xc5
+      0005C8                       1148 00259$:
+      0005C8 0F 02            [ 1] 1149 	clr	(0x02, sp)
+      0005CA                       1150 00260$:
+      0005CA A3 03 02         [ 2] 1151 	cpw	x, #0x0302
+      0005CD 26 05            [ 1] 1152 	jrne	00262$
+      0005CF A6 01            [ 1] 1153 	ld	a, #0x01
+      0005D1 6B 03            [ 1] 1154 	ld	(0x03, sp), a
+      0005D3 C5                    1155 	.byte 0xc5
+      0005D4                       1156 00262$:
+      0005D4 0F 03            [ 1] 1157 	clr	(0x03, sp)
+      0005D6                       1158 00263$:
+      0005D6 A3 02 10         [ 2] 1159 	cpw	x, #0x0210
+      0005D9 26 03            [ 1] 1160 	jrne	00265$
+      0005DB A6 01            [ 1] 1161 	ld	a, #0x01
+      0005DD 21                    1162 	.byte 0x21
+      0005DE                       1163 00265$:
+      0005DE 4F               [ 1] 1164 	clr	a
+      0005DF                       1165 00266$:
+      0005DF A3 00 80         [ 2] 1166 	cpw	x, #0x0080
+      0005E2 27 42            [ 1] 1167 	jreq	00126$
+      0005E4 A3 00 40         [ 2] 1168 	cpw	x, #0x0040
+      0005E7 27 3D            [ 1] 1169 	jreq	00126$
+      0005E9 A3 00 20         [ 2] 1170 	cpw	x, #0x0020
+      0005EC 27 38            [ 1] 1171 	jreq	00126$
+      0005EE A3 00 10         [ 2] 1172 	cpw	x, #0x0010
+      0005F1 27 33            [ 1] 1173 	jreq	00126$
+      0005F3 A3 00 08         [ 2] 1174 	cpw	x, #0x0008
+      0005F6 27 2E            [ 1] 1175 	jreq	00126$
+      0005F8 A3 00 04         [ 2] 1176 	cpw	x, #0x0004
+      0005FB 27 29            [ 1] 1177 	jreq	00126$
+      0005FD A3 00 02         [ 2] 1178 	cpw	x, #0x0002
+      000600 27 24            [ 1] 1179 	jreq	00126$
+      000602 5A               [ 2] 1180 	decw	x
+      000603 27 21            [ 1] 1181 	jreq	00126$
+      000605 0D 01            [ 1] 1182 	tnz	(0x01, sp)
+      000607 26 1D            [ 1] 1183 	jrne	00126$
+      000609 0D 02            [ 1] 1184 	tnz	(0x02, sp)
+      00060B 26 19            [ 1] 1185 	jrne	00126$
+      00060D 0D 03            [ 1] 1186 	tnz	(0x03, sp)
+      00060F 26 15            [ 1] 1187 	jrne	00126$
+      000611 4D               [ 1] 1188 	tnz	a
+      000612 26 12            [ 1] 1189 	jrne	00126$
+      000614 88               [ 1] 1190 	push	a
+      000615 90 89            [ 2] 1191 	pushw	y
+      000617 4B 63            [ 1] 1192 	push	#0x63
+      000619 4B 02            [ 1] 1193 	push	#0x02
+      00061B 5F               [ 1] 1194 	clrw	x
+      00061C 89               [ 2] 1195 	pushw	x
+      00061D AEr00r00         [ 2] 1196 	ldw	x, #(___str_0+0)
+      000620 CDr00r00         [ 4] 1197 	call	_assert_failed
+      000623 90 85            [ 2] 1198 	popw	y
+      000625 84               [ 1] 1199 	pop	a
+      000626                       1200 00126$:
+                                   1201 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 616: if ((UART2->CR4 & (uint8_t)UART2_FLAG) != (uint8_t)0x00)
+      000626 61               [ 1] 1202 	exg	a, yl
+      000627 6B 04            [ 1] 1203 	ld	(0x04, sp), a
+      000629 61               [ 1] 1204 	exg	a, yl
+                                   1205 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 614: if (UART2_FLAG == UART2_FLAG_LBDF)
+      00062A 4D               [ 1] 1206 	tnz	a
+      00062B 27 0E            [ 1] 1207 	jreq	00121$
+                                   1208 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 616: if ((UART2->CR4 & (uint8_t)UART2_FLAG) != (uint8_t)0x00)
+      00062D C6 52 47         [ 1] 1209 	ld	a, 0x5247
+      000630 14 04            [ 1] 1210 	and	a, (0x04, sp)
+      000632 27 04            [ 1] 1211 	jreq	00102$
+                                   1212 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 619: status = SET;
+      000634 A6 01            [ 1] 1213 	ld	a, #0x01
+      000636 20 36            [ 2] 1214 	jra	00122$
+      000638                       1215 00102$:
+                                   1216 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 624: status = RESET;
+      000638 4F               [ 1] 1217 	clr	a
+      000639 20 33            [ 2] 1218 	jra	00122$
+      00063B                       1219 00121$:
+                                   1220 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 627: else if (UART2_FLAG == UART2_FLAG_SBK)
+      00063B 7B 01            [ 1] 1221 	ld	a, (0x01, sp)
+      00063D 27 0E            [ 1] 1222 	jreq	00118$
+                                   1223 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 629: if ((UART2->CR2 & (uint8_t)UART2_FLAG) != (uint8_t)0x00)
+      00063F C6 52 45         [ 1] 1224 	ld	a, 0x5245
+      000642 14 04            [ 1] 1225 	and	a, (0x04, sp)
+      000644 27 04            [ 1] 1226 	jreq	00105$
+                                   1227 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 632: status = SET;
+      000646 A6 01            [ 1] 1228 	ld	a, #0x01
+      000648 20 24            [ 2] 1229 	jra	00122$
+      00064A                       1230 00105$:
+                                   1231 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 637: status = RESET;
+      00064A 4F               [ 1] 1232 	clr	a
+      00064B 20 21            [ 2] 1233 	jra	00122$
+      00064D                       1234 00118$:
+                                   1235 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 640: else if ((UART2_FLAG == UART2_FLAG_LHDF) || (UART2_FLAG == UART2_FLAG_LSF))
+      00064D 7B 03            [ 1] 1236 	ld	a, (0x03, sp)
+      00064F 26 04            [ 1] 1237 	jrne	00113$
+      000651 7B 02            [ 1] 1238 	ld	a, (0x02, sp)
+      000653 27 0E            [ 1] 1239 	jreq	00114$
+      000655                       1240 00113$:
+                                   1241 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 642: if ((UART2->CR6 & (uint8_t)UART2_FLAG) != (uint8_t)0x00)
+      000655 C6 52 49         [ 1] 1242 	ld	a, 0x5249
+      000658 14 04            [ 1] 1243 	and	a, (0x04, sp)
+      00065A 27 04            [ 1] 1244 	jreq	00108$
+                                   1245 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 645: status = SET;
+      00065C A6 01            [ 1] 1246 	ld	a, #0x01
+      00065E 20 0E            [ 2] 1247 	jra	00122$
+      000660                       1248 00108$:
+                                   1249 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 650: status = RESET;
+      000660 4F               [ 1] 1250 	clr	a
+      000661 20 0B            [ 2] 1251 	jra	00122$
+      000663                       1252 00114$:
+                                   1253 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 655: if ((UART2->SR & (uint8_t)UART2_FLAG) != (uint8_t)0x00)
+      000663 C6 52 40         [ 1] 1254 	ld	a, 0x5240
+      000666 14 04            [ 1] 1255 	and	a, (0x04, sp)
+      000668 27 03            [ 1] 1256 	jreq	00111$
+                                   1257 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 658: status = SET;
+      00066A A6 01            [ 1] 1258 	ld	a, #0x01
+                                   1259 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 663: status = RESET;
+      00066C 21                    1260 	.byte 0x21
+      00066D                       1261 00111$:
+      00066D 4F               [ 1] 1262 	clr	a
+      00066E                       1263 00122$:
+                                   1264 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 668: return  status;
+                                   1265 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 669: }
+      00066E 5B 04            [ 2] 1266 	addw	sp, #4
+      000670 81               [ 4] 1267 	ret
+                                   1268 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 699: void UART2_ClearFlag(UART2_Flag_TypeDef UART2_FLAG)
+                                   1269 ;	-----------------------------------------
+                                   1270 ;	 function UART2_ClearFlag
+                                   1271 ;	-----------------------------------------
+      000671                       1272 _UART2_ClearFlag:
+      000671 52 03            [ 2] 1273 	sub	sp, #3
+                                   1274 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 701: assert_param(IS_UART2_CLEAR_FLAG_OK(UART2_FLAG));
+      000673 A3 00 20         [ 2] 1275 	cpw	x, #0x0020
+      000676 26 05            [ 1] 1276 	jrne	00159$
+      000678 A6 01            [ 1] 1277 	ld	a, #0x01
+      00067A 6B 01            [ 1] 1278 	ld	(0x01, sp), a
+      00067C C5                    1279 	.byte 0xc5
+      00067D                       1280 00159$:
+      00067D 0F 01            [ 1] 1281 	clr	(0x01, sp)
+      00067F                       1282 00160$:
+      00067F A3 03 02         [ 2] 1283 	cpw	x, #0x0302
+      000682 26 05            [ 1] 1284 	jrne	00162$
+      000684 A6 01            [ 1] 1285 	ld	a, #0x01
+      000686 6B 02            [ 1] 1286 	ld	(0x02, sp), a
+      000688 C5                    1287 	.byte 0xc5
+      000689                       1288 00162$:
+      000689 0F 02            [ 1] 1289 	clr	(0x02, sp)
+      00068B                       1290 00163$:
+      00068B A3 02 10         [ 2] 1291 	cpw	x, #0x0210
+      00068E 26 05            [ 1] 1292 	jrne	00165$
+      000690 A6 01            [ 1] 1293 	ld	a, #0x01
+      000692 6B 03            [ 1] 1294 	ld	(0x03, sp), a
+      000694 C5                    1295 	.byte 0xc5
+      000695                       1296 00165$:
+      000695 0F 03            [ 1] 1297 	clr	(0x03, sp)
+      000697                       1298 00166$:
+      000697 0D 01            [ 1] 1299 	tnz	(0x01, sp)
+      000699 26 19            [ 1] 1300 	jrne	00113$
+      00069B 0D 02            [ 1] 1301 	tnz	(0x02, sp)
+      00069D 26 15            [ 1] 1302 	jrne	00113$
+      00069F A3 03 01         [ 2] 1303 	cpw	x, #0x0301
+      0006A2 27 10            [ 1] 1304 	jreq	00113$
+      0006A4 0D 03            [ 1] 1305 	tnz	(0x03, sp)
+      0006A6 26 0C            [ 1] 1306 	jrne	00113$
+      0006A8 4B BD            [ 1] 1307 	push	#0xbd
+      0006AA 4B 02            [ 1] 1308 	push	#0x02
+      0006AC 5F               [ 1] 1309 	clrw	x
+      0006AD 89               [ 2] 1310 	pushw	x
+      0006AE AEr00r00         [ 2] 1311 	ldw	x, #(___str_0+0)
+      0006B1 CDr00r00         [ 4] 1312 	call	_assert_failed
+      0006B4                       1313 00113$:
+                                   1314 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 704: if (UART2_FLAG == UART2_FLAG_RXNE)
+      0006B4 7B 01            [ 1] 1315 	ld	a, (0x01, sp)
+      0006B6 27 06            [ 1] 1316 	jreq	00108$
+                                   1317 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 706: UART2->SR = (uint8_t)~(UART2_SR_RXNE);
+      0006B8 35 DF 52 40      [ 1] 1318 	mov	0x5240+0, #0xdf
+      0006BC 20 20            [ 2] 1319 	jra	00110$
+      0006BE                       1320 00108$:
+                                   1321 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 709: else if (UART2_FLAG == UART2_FLAG_LBDF)
+      0006BE 7B 03            [ 1] 1322 	ld	a, (0x03, sp)
+      0006C0 27 06            [ 1] 1323 	jreq	00105$
+                                   1324 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 711: UART2->CR4 &= (uint8_t)(~UART2_CR4_LBDF);
+      0006C2 72 19 52 47      [ 1] 1325 	bres	0x5247, #4
+      0006C6 20 16            [ 2] 1326 	jra	00110$
+      0006C8                       1327 00105$:
+                                   1328 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 716: UART2->CR6 &= (uint8_t)(~UART2_CR6_LHDF);
+      0006C8 C6 52 49         [ 1] 1329 	ld	a, 0x5249
+      0006CB 97               [ 1] 1330 	ld	xl, a
+                                   1331 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 714: else if (UART2_FLAG == UART2_FLAG_LHDF)
+      0006CC 7B 02            [ 1] 1332 	ld	a, (0x02, sp)
+      0006CE 27 08            [ 1] 1333 	jreq	00102$
+                                   1334 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 716: UART2->CR6 &= (uint8_t)(~UART2_CR6_LHDF);
+      0006D0 9F               [ 1] 1335 	ld	a, xl
+      0006D1 A4 FD            [ 1] 1336 	and	a, #0xfd
+      0006D3 C7 52 49         [ 1] 1337 	ld	0x5249, a
+      0006D6 20 06            [ 2] 1338 	jra	00110$
+      0006D8                       1339 00102$:
+                                   1340 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 721: UART2->CR6 &= (uint8_t)(~UART2_CR6_LSF);
+      0006D8 9F               [ 1] 1341 	ld	a, xl
+      0006D9 A4 FE            [ 1] 1342 	and	a, #0xfe
+      0006DB C7 52 49         [ 1] 1343 	ld	0x5249, a
+      0006DE                       1344 00110$:
+                                   1345 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 723: }
+      0006DE 5B 03            [ 2] 1346 	addw	sp, #3
+      0006E0 81               [ 4] 1347 	ret
+                                   1348 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 738: ITStatus UART2_GetITStatus(UART2_IT_TypeDef UART2_IT)
+                                   1349 ;	-----------------------------------------
+                                   1350 ;	 function UART2_GetITStatus
+                                   1351 ;	-----------------------------------------
+      0006E1                       1352 _UART2_GetITStatus:
+      0006E1 52 05            [ 2] 1353 	sub	sp, #5
+                                   1354 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 747: assert_param(IS_UART2_GET_IT_OK(UART2_IT));
+      0006E3 90 93            [ 1] 1355 	ldw	y, x
+      0006E5 A3 03 46         [ 2] 1356 	cpw	x, #0x0346
+      0006E8 26 05            [ 1] 1357 	jrne	00247$
+      0006EA A6 01            [ 1] 1358 	ld	a, #0x01
+      0006EC 6B 01            [ 1] 1359 	ld	(0x01, sp), a
+      0006EE C5                    1360 	.byte 0xc5
+      0006EF                       1361 00247$:
+      0006EF 0F 01            [ 1] 1362 	clr	(0x01, sp)
+      0006F1                       1363 00248$:
+      0006F1 A3 04 12         [ 2] 1364 	cpw	x, #0x0412
+      0006F4 26 05            [ 1] 1365 	jrne	00250$
+      0006F6 A6 01            [ 1] 1366 	ld	a, #0x01
+      0006F8 6B 02            [ 1] 1367 	ld	(0x02, sp), a
+      0006FA C5                    1368 	.byte 0xc5
+      0006FB                       1369 00250$:
+      0006FB 0F 02            [ 1] 1370 	clr	(0x02, sp)
+      0006FD                       1371 00251$:
+      0006FD A3 01 00         [ 2] 1372 	cpw	x, #0x0100
+      000700 26 05            [ 1] 1373 	jrne	00253$
+      000702 A6 01            [ 1] 1374 	ld	a, #0x01
+      000704 6B 03            [ 1] 1375 	ld	(0x03, sp), a
+      000706 C5                    1376 	.byte 0xc5
+      000707                       1377 00253$:
+      000707 0F 03            [ 1] 1378 	clr	(0x03, sp)
+      000709                       1379 00254$:
+      000709 A3 02 77         [ 2] 1380 	cpw	x, #0x0277
+      00070C 27 30            [ 1] 1381 	jreq	00129$
+      00070E A3 02 66         [ 2] 1382 	cpw	x, #0x0266
+      000711 27 2B            [ 1] 1383 	jreq	00129$
+      000713 A3 02 55         [ 2] 1384 	cpw	x, #0x0255
+      000716 27 26            [ 1] 1385 	jreq	00129$
+      000718 A3 02 44         [ 2] 1386 	cpw	x, #0x0244
+      00071B 27 21            [ 1] 1387 	jreq	00129$
+      00071D A3 02 35         [ 2] 1388 	cpw	x, #0x0235
+      000720 27 1C            [ 1] 1389 	jreq	00129$
+      000722 0D 01            [ 1] 1390 	tnz	(0x01, sp)
+      000724 26 18            [ 1] 1391 	jrne	00129$
+      000726 0D 02            [ 1] 1392 	tnz	(0x02, sp)
+      000728 26 14            [ 1] 1393 	jrne	00129$
+      00072A 0D 03            [ 1] 1394 	tnz	(0x03, sp)
+      00072C 26 10            [ 1] 1395 	jrne	00129$
+      00072E 90 89            [ 2] 1396 	pushw	y
+      000730 4B EB            [ 1] 1397 	push	#0xeb
+      000732 4B 02            [ 1] 1398 	push	#0x02
+      000734 5F               [ 1] 1399 	clrw	x
+      000735 89               [ 2] 1400 	pushw	x
+      000736 AEr00r00         [ 2] 1401 	ldw	x, #(___str_0+0)
+      000739 CDr00r00         [ 4] 1402 	call	_assert_failed
+      00073C 90 85            [ 2] 1403 	popw	y
+      00073E                       1404 00129$:
+                                   1405 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 750: itpos = (uint8_t)((uint8_t)1 << (uint8_t)((uint8_t)UART2_IT & (uint8_t)0x0F));
+      00073E 93               [ 1] 1406 	ldw	x, y
+      00073F 9F               [ 1] 1407 	ld	a, xl
+      000740 A4 0F            [ 1] 1408 	and	a, #0x0f
+      000742 88               [ 1] 1409 	push	a
+      000743 A6 01            [ 1] 1410 	ld	a, #0x01
+      000745 6B 05            [ 1] 1411 	ld	(0x05, sp), a
+      000747 84               [ 1] 1412 	pop	a
+      000748 4D               [ 1] 1413 	tnz	a
+      000749 27 05            [ 1] 1414 	jreq	00274$
+      00074B                       1415 00273$:
+      00074B 08 04            [ 1] 1416 	sll	(0x04, sp)
+      00074D 4A               [ 1] 1417 	dec	a
+      00074E 26 FB            [ 1] 1418 	jrne	00273$
+      000750                       1419 00274$:
+                                   1420 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 752: itmask1 = (uint8_t)((uint8_t)UART2_IT >> (uint8_t)4);
+      000750 9F               [ 1] 1421 	ld	a, xl
+      000751 4E               [ 1] 1422 	swap	a
+      000752 A4 0F            [ 1] 1423 	and	a, #0x0f
+                                   1424 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 754: itmask2 = (uint8_t)((uint8_t)1 << itmask1);
+      000754 88               [ 1] 1425 	push	a
+      000755 A6 01            [ 1] 1426 	ld	a, #0x01
+      000757 6B 06            [ 1] 1427 	ld	(0x06, sp), a
+      000759 84               [ 1] 1428 	pop	a
+      00075A 4D               [ 1] 1429 	tnz	a
+      00075B 27 05            [ 1] 1430 	jreq	00276$
+      00075D                       1431 00275$:
+      00075D 08 05            [ 1] 1432 	sll	(0x05, sp)
+      00075F 4A               [ 1] 1433 	dec	a
+      000760 26 FB            [ 1] 1434 	jrne	00275$
+      000762                       1435 00276$:
+                                   1436 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 757: if (UART2_IT == UART2_IT_PE)
+      000762 7B 03            [ 1] 1437 	ld	a, (0x03, sp)
+      000764 27 18            [ 1] 1438 	jreq	00124$
+                                   1439 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 760: enablestatus = (uint8_t)((uint8_t)UART2->CR1 & itmask2);
+      000766 C6 52 44         [ 1] 1440 	ld	a, 0x5244
+      000769 14 05            [ 1] 1441 	and	a, (0x05, sp)
+      00076B 97               [ 1] 1442 	ld	xl, a
+                                   1443 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 763: if (((UART2->SR & itpos) != (uint8_t)0x00) && enablestatus)
+      00076C C6 52 40         [ 1] 1444 	ld	a, 0x5240
+      00076F 14 04            [ 1] 1445 	and	a, (0x04, sp)
+      000771 27 08            [ 1] 1446 	jreq	00102$
+      000773 9F               [ 1] 1447 	ld	a, xl
+      000774 4D               [ 1] 1448 	tnz	a
+      000775 27 04            [ 1] 1449 	jreq	00102$
+                                   1450 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 766: pendingbitstatus = SET;
+      000777 A6 01            [ 1] 1451 	ld	a, #0x01
+      000779 20 50            [ 2] 1452 	jra	00125$
+      00077B                       1453 00102$:
+                                   1454 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 771: pendingbitstatus = RESET;
+      00077B 4F               [ 1] 1455 	clr	a
+      00077C 20 4D            [ 2] 1456 	jra	00125$
+      00077E                       1457 00124$:
+                                   1458 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 774: else if (UART2_IT == UART2_IT_LBDF)
+      00077E 7B 01            [ 1] 1459 	ld	a, (0x01, sp)
+      000780 27 18            [ 1] 1460 	jreq	00121$
+                                   1461 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 777: enablestatus = (uint8_t)((uint8_t)UART2->CR4 & itmask2);
+      000782 C6 52 47         [ 1] 1462 	ld	a, 0x5247
+      000785 14 05            [ 1] 1463 	and	a, (0x05, sp)
+      000787 97               [ 1] 1464 	ld	xl, a
+                                   1465 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 779: if (((UART2->CR4 & itpos) != (uint8_t)0x00) && enablestatus)
+      000788 C6 52 47         [ 1] 1466 	ld	a, 0x5247
+      00078B 14 04            [ 1] 1467 	and	a, (0x04, sp)
+      00078D 27 08            [ 1] 1468 	jreq	00106$
+      00078F 9F               [ 1] 1469 	ld	a, xl
+      000790 4D               [ 1] 1470 	tnz	a
+      000791 27 04            [ 1] 1471 	jreq	00106$
+                                   1472 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 782: pendingbitstatus = SET;
+      000793 A6 01            [ 1] 1473 	ld	a, #0x01
+      000795 20 34            [ 2] 1474 	jra	00125$
+      000797                       1475 00106$:
+                                   1476 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 787: pendingbitstatus = RESET;
+      000797 4F               [ 1] 1477 	clr	a
+      000798 20 31            [ 2] 1478 	jra	00125$
+      00079A                       1479 00121$:
+                                   1480 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 790: else if (UART2_IT == UART2_IT_LHDF)
+      00079A 7B 02            [ 1] 1481 	ld	a, (0x02, sp)
+      00079C 27 18            [ 1] 1482 	jreq	00118$
+                                   1483 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 793: enablestatus = (uint8_t)((uint8_t)UART2->CR6 & itmask2);
+      00079E C6 52 49         [ 1] 1484 	ld	a, 0x5249
+      0007A1 14 05            [ 1] 1485 	and	a, (0x05, sp)
+      0007A3 97               [ 1] 1486 	ld	xl, a
+                                   1487 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 795: if (((UART2->CR6 & itpos) != (uint8_t)0x00) && enablestatus)
+      0007A4 C6 52 49         [ 1] 1488 	ld	a, 0x5249
+      0007A7 14 04            [ 1] 1489 	and	a, (0x04, sp)
+      0007A9 27 08            [ 1] 1490 	jreq	00110$
+      0007AB 9F               [ 1] 1491 	ld	a, xl
+      0007AC 4D               [ 1] 1492 	tnz	a
+      0007AD 27 04            [ 1] 1493 	jreq	00110$
+                                   1494 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 798: pendingbitstatus = SET;
+      0007AF A6 01            [ 1] 1495 	ld	a, #0x01
+      0007B1 20 18            [ 2] 1496 	jra	00125$
+      0007B3                       1497 00110$:
+                                   1498 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 803: pendingbitstatus = RESET;
+      0007B3 4F               [ 1] 1499 	clr	a
+      0007B4 20 15            [ 2] 1500 	jra	00125$
+      0007B6                       1501 00118$:
+                                   1502 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 809: enablestatus = (uint8_t)((uint8_t)UART2->CR2 & itmask2);
+      0007B6 C6 52 45         [ 1] 1503 	ld	a, 0x5245
+      0007B9 14 05            [ 1] 1504 	and	a, (0x05, sp)
+      0007BB 97               [ 1] 1505 	ld	xl, a
+                                   1506 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 811: if (((UART2->SR & itpos) != (uint8_t)0x00) && enablestatus)
+      0007BC C6 52 40         [ 1] 1507 	ld	a, 0x5240
+      0007BF 14 04            [ 1] 1508 	and	a, (0x04, sp)
+      0007C1 27 07            [ 1] 1509 	jreq	00114$
+      0007C3 9F               [ 1] 1510 	ld	a, xl
+      0007C4 4D               [ 1] 1511 	tnz	a
+      0007C5 27 03            [ 1] 1512 	jreq	00114$
+                                   1513 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 814: pendingbitstatus = SET;
+      0007C7 A6 01            [ 1] 1514 	ld	a, #0x01
+                                   1515 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 819: pendingbitstatus = RESET;
+      0007C9 21                    1516 	.byte 0x21
+      0007CA                       1517 00114$:
+      0007CA 4F               [ 1] 1518 	clr	a
+      0007CB                       1519 00125$:
+                                   1520 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 823: return  pendingbitstatus;
+                                   1521 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 824: }
+      0007CB 5B 05            [ 2] 1522 	addw	sp, #5
+      0007CD 81               [ 4] 1523 	ret
+                                   1524 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 852: void UART2_ClearITPendingBit(UART2_IT_TypeDef UART2_IT)
+                                   1525 ;	-----------------------------------------
+                                   1526 ;	 function UART2_ClearITPendingBit
+                                   1527 ;	-----------------------------------------
+      0007CE                       1528 _UART2_ClearITPendingBit:
+      0007CE 88               [ 1] 1529 	push	a
+                                   1530 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 854: assert_param(IS_UART2_CLEAR_IT_OK(UART2_IT));
+      0007CF A3 02 55         [ 2] 1531 	cpw	x, #0x0255
+      0007D2 26 03            [ 1] 1532 	jrne	00143$
+      0007D4 A6 01            [ 1] 1533 	ld	a, #0x01
+      0007D6 21                    1534 	.byte 0x21
+      0007D7                       1535 00143$:
+      0007D7 4F               [ 1] 1536 	clr	a
+      0007D8                       1537 00144$:
+      0007D8 A3 03 46         [ 2] 1538 	cpw	x, #0x0346
+      0007DB 26 07            [ 1] 1539 	jrne	00146$
+      0007DD 88               [ 1] 1540 	push	a
+      0007DE A6 01            [ 1] 1541 	ld	a, #0x01
+      0007E0 6B 02            [ 1] 1542 	ld	(0x02, sp), a
+      0007E2 84               [ 1] 1543 	pop	a
+      0007E3 C5                    1544 	.byte 0xc5
+      0007E4                       1545 00146$:
+      0007E4 0F 01            [ 1] 1546 	clr	(0x01, sp)
+      0007E6                       1547 00147$:
+      0007E6 4D               [ 1] 1548 	tnz	a
+      0007E7 26 17            [ 1] 1549 	jrne	00110$
+      0007E9 A3 04 12         [ 2] 1550 	cpw	x, #0x0412
+      0007EC 27 12            [ 1] 1551 	jreq	00110$
+      0007EE 0D 01            [ 1] 1552 	tnz	(0x01, sp)
+      0007F0 26 0E            [ 1] 1553 	jrne	00110$
+      0007F2 88               [ 1] 1554 	push	a
+      0007F3 4B 56            [ 1] 1555 	push	#0x56
+      0007F5 4B 03            [ 1] 1556 	push	#0x03
+      0007F7 5F               [ 1] 1557 	clrw	x
+      0007F8 89               [ 2] 1558 	pushw	x
+      0007F9 AEr00r00         [ 2] 1559 	ldw	x, #(___str_0+0)
+      0007FC CDr00r00         [ 4] 1560 	call	_assert_failed
+      0007FF 84               [ 1] 1561 	pop	a
+      000800                       1562 00110$:
+                                   1563 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 857: if (UART2_IT == UART2_IT_RXNE)
+      000800 4D               [ 1] 1564 	tnz	a
+      000801 27 06            [ 1] 1565 	jreq	00105$
+                                   1566 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 859: UART2->SR = (uint8_t)~(UART2_SR_RXNE);
+      000803 35 DF 52 40      [ 1] 1567 	mov	0x5240+0, #0xdf
+      000807 20 0E            [ 2] 1568 	jra	00107$
+      000809                       1569 00105$:
+                                   1570 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 862: else if (UART2_IT == UART2_IT_LBDF)
+      000809 7B 01            [ 1] 1571 	ld	a, (0x01, sp)
+      00080B 27 06            [ 1] 1572 	jreq	00102$
+                                   1573 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 864: UART2->CR4 &= (uint8_t)~(UART2_CR4_LBDF);
+      00080D 72 19 52 47      [ 1] 1574 	bres	0x5247, #4
+      000811 20 04            [ 2] 1575 	jra	00107$
+      000813                       1576 00102$:
+                                   1577 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 869: UART2->CR6 &= (uint8_t)(~UART2_CR6_LHDF);
+      000813 72 13 52 49      [ 1] 1578 	bres	0x5249, #1
+      000817                       1579 00107$:
+                                   1580 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c: 871: }
+      000817 84               [ 1] 1581 	pop	a
+      000818 81               [ 4] 1582 	ret
+                                   1583 	.area CODE
+                                   1584 	.area CONST
+                                   1585 	.area CONST
+      000000                       1586 ___str_0:
+      000000 2F 55 73 65 72 73 2F  1587 	.ascii "/Users/alekseydunaev/.platformio/packages/framework-ststm8sp"
+             61 6C 65 6B 73 65 79
+             64 75 6E 61 65 76 2F
+             2E 70 6C 61 74 66 6F
+             72 6D 69 6F 2F 70 61
+             63 6B 61 67 65 73 2F
+             66 72 61 6D 65 77 6F
+             72 6B 2D 73 74 73 74
+             6D 38 73 70
+      00003C 6C 2F 4C 69 62 72 61  1588 	.ascii "l/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart2.c"
+             72 69 65 73 2F 53 54
+             4D 38 53 5F 53 74 64
+             50 65 72 69 70 68 5F
+             44 72 69 76 65 72 2F
+             73 72 63 2F 73 74 6D
+             38 73 5F 75 61 72 74
+             32 2E 63
+      000070 00                    1589 	.db 0x00
+                                   1590 	.area CODE
+                                   1591 	.area INITIALIZER
+                                   1592 	.area CABS (ABS)

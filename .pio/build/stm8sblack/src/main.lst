@@ -1,0 +1,1639 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 4.2.0 #13081 (Mac OS X x86_64)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module main
+                                      6 	.optsdcc -mstm8
+                                      7 	
+                                      8 ;--------------------------------------------------------
+                                      9 ; Public variables in this module
+                                     10 ;--------------------------------------------------------
+                                     11 	.globl _main
+                                     12 	.globl _UART_Setup
+                                     13 	.globl _GPIO_Setup
+                                     14 	.globl _Clock_Setup
+                                     15 	.globl _BME280_SetMode
+                                     16 	.globl _BME280_SetOversamplingHum
+                                     17 	.globl _BME280_SetOversamplingPressure
+                                     18 	.globl _BME280_SetOversamplingTemper
+                                     19 	.globl _BME280_SetFilter
+                                     20 	.globl _BME280_ReadCoefficients
+                                     21 	.globl _BME280_ReadStatus
+                                     22 	.globl _BME280_ReadReg
+                                     23 	.globl _BME280_WriteReg
+                                     24 	.globl _BME280_Setup
+                                     25 	.globl _Error
+                                     26 	.globl _DS18X20_Setup
+                                     27 	.globl _DS18X20_Get_Temperature
+                                     28 	.globl _DS18X20_Read_ID
+                                     29 	.globl _DS18X20_Reset
+                                     30 	.globl _I2C_Setup
+                                     31 	.globl _delay_ms
+                                     32 	.globl _free
+                                     33 	.globl _malloc
+                                     34 	.globl _puts
+                                     35 	.globl _sprintf
+                                     36 	.globl _printf
+                                     37 	.globl _UART2_GetFlagStatus
+                                     38 	.globl _UART2_SendData8
+                                     39 	.globl _UART2_ReceiveData8
+                                     40 	.globl _UART2_Init
+                                     41 	.globl _UART2_DeInit
+                                     42 	.globl _GPIO_WriteLow
+                                     43 	.globl _GPIO_WriteHigh
+                                     44 	.globl _GPIO_Init
+                                     45 	.globl _GPIO_DeInit
+                                     46 	.globl _CLK_GetFlagStatus
+                                     47 	.globl _CLK_SYSCLKConfig
+                                     48 	.globl _CLK_HSIPrescalerConfig
+                                     49 	.globl _CLK_ClockSwitchConfig
+                                     50 	.globl _CLK_PeripheralClockConfig
+                                     51 	.globl _CLK_ClockSwitchCmd
+                                     52 	.globl _CLK_LSICmd
+                                     53 	.globl _CLK_HSICmd
+                                     54 	.globl _CLK_HSECmd
+                                     55 	.globl _CLK_DeInit
+                                     56 	.globl _fAHTX0Temperature
+                                     57 	.globl _fAHTX0Humidity
+                                     58 	.globl _fDS18X20Temperature
+                                     59 	.globl _str1
+                                     60 	.globl _sString
+                                     61 	.globl _iI2CRead
+                                     62 	.globl _iI2CWrite
+                                     63 	.globl _iDS18X20RomID
+                                     64 	.globl _FloatToStr
+                                     65 	.globl _putchar
+                                     66 	.globl _getchar
+                                     67 	.globl _assert_failed
+                                     68 ;--------------------------------------------------------
+                                     69 ; ram data
+                                     70 ;--------------------------------------------------------
+                                     71 	.area DATA
+      000000                         72 _iDS18X20RomID::
+      000000                         73 	.ds 8
+      000008                         74 _iI2CWrite::
+      000008                         75 	.ds 3
+      00000B                         76 _iI2CRead::
+      00000B                         77 	.ds 7
+      000012                         78 _sString::
+      000012                         79 	.ds 100
+      000076                         80 _str1::
+      000076                         81 	.ds 100
+                                     82 ;--------------------------------------------------------
+                                     83 ; ram data
+                                     84 ;--------------------------------------------------------
+                                     85 	.area INITIALIZED
+      000000                         86 _fDS18X20Temperature::
+      000000                         87 	.ds 4
+      000004                         88 _fAHTX0Humidity::
+      000004                         89 	.ds 4
+      000008                         90 _fAHTX0Temperature::
+      000008                         91 	.ds 4
+                                     92 ;--------------------------------------------------------
+                                     93 ; Stack segment in internal ram
+                                     94 ;--------------------------------------------------------
+                                     95 	.area	SSEG
+      000000                         96 __start__stack:
+      000000                         97 	.ds	1
+                                     98 
+                                     99 ;--------------------------------------------------------
+                                    100 ; absolute external ram data
+                                    101 ;--------------------------------------------------------
+                                    102 	.area DABS (ABS)
+                                    103 
+                                    104 ; default segment ordering for linker
+                                    105 	.area HOME
+                                    106 	.area GSINIT
+                                    107 	.area GSFINAL
+                                    108 	.area CONST
+                                    109 	.area INITIALIZER
+                                    110 	.area CODE
+                                    111 
+                                    112 ;--------------------------------------------------------
+                                    113 ; interrupt vector
+                                    114 ;--------------------------------------------------------
+                                    115 	.area HOME
+      000000                        116 __interrupt_vect:
+      000000 82v00u00u00            117 	int s_GSINIT ; reset
+      000004 82v00u00u00            118 	int _TRAP_IRQHandler ; trap
+      000008 82v00u00u00            119 	int _TLI_IRQHandler ; int0
+      00000C 82v00u00u00            120 	int _AWU_IRQHandler ; int1
+      000010 82v00u00u00            121 	int _CLK_IRQHandler ; int2
+      000014 82v00u00u00            122 	int _EXTI_PORTA_IRQHandler ; int3
+      000018 82v00u00u00            123 	int _EXTI_PORTB_IRQHandler ; int4
+      00001C 82v00u00u00            124 	int _EXTI_PORTC_IRQHandler ; int5
+      000020 82v00u00u00            125 	int _EXTI_PORTD_IRQHandler ; int6
+      000024 82v00u00u00            126 	int _EXTI_PORTE_IRQHandler ; int7
+      000028 82 00 00 00            127 	int 0x000000 ; int8
+      00002C 82 00 00 00            128 	int 0x000000 ; int9
+      000030 82v00u00u00            129 	int _SPI_IRQHandler ; int10
+      000034 82v00u00u00            130 	int _TIM1_UPD_OVF_TRG_BRK_IRQHandler ; int11
+      000038 82v00u00u00            131 	int _TIM1_CAP_COM_IRQHandler ; int12
+      00003C 82v00u00u00            132 	int _TIM2_UPD_OVF_BRK_IRQHandler ; int13
+      000040 82v00u00u00            133 	int _TIM2_CAP_COM_IRQHandler ; int14
+      000044 82v00u00u00            134 	int _TIM3_UPD_OVF_BRK_IRQHandler ; int15
+      000048 82v00u00u00            135 	int _TIM3_CAP_COM_IRQHandler ; int16
+      00004C 82 00 00 00            136 	int 0x000000 ; int17
+      000050 82 00 00 00            137 	int 0x000000 ; int18
+      000054 82v00u00u00            138 	int _I2C_IRQHandler ; int19
+      000058 82v00u00u00            139 	int _UART2_TX_IRQHandler ; int20
+      00005C 82v00u00u00            140 	int _UART2_RX_IRQHandler ; int21
+      000060 82v00u00u00            141 	int _ADC1_IRQHandler ; int22
+      000064 82v00u00u00            142 	int _TIM4_UPD_OVF_IRQHandler ; int23
+      000068 82v00u00u00            143 	int _EEPROM_EEC_IRQHandler ; int24
+                                    144 ;--------------------------------------------------------
+                                    145 ; global & static initialisations
+                                    146 ;--------------------------------------------------------
+                                    147 	.area HOME
+                                    148 	.area GSINIT
+                                    149 	.area GSFINAL
+                                    150 	.area GSINIT
+      000000                        151 __sdcc_init_data:
+                                    152 ; stm8_genXINIT() start
+      000000 AEr00r00         [ 2]  153 	ldw x, #l_DATA
+      000003 27 07            [ 1]  154 	jreq	00002$
+      000005                        155 00001$:
+      000005 72 4FuFFuFF      [ 1]  156 	clr (s_DATA - 1, x)
+      000009 5A               [ 2]  157 	decw x
+      00000A 26 F9            [ 1]  158 	jrne	00001$
+      00000C                        159 00002$:
+      00000C AEr00r00         [ 2]  160 	ldw	x, #l_INITIALIZER
+      00000F 27 09            [ 1]  161 	jreq	00004$
+      000011                        162 00003$:
+      000011 D6uFFuFF         [ 1]  163 	ld	a, (s_INITIALIZER - 1, x)
+      000014 D7uFFuFF         [ 1]  164 	ld	(s_INITIALIZED - 1, x), a
+      000017 5A               [ 2]  165 	decw	x
+      000018 26 F7            [ 1]  166 	jrne	00003$
+      00001A                        167 00004$:
+                                    168 ; stm8_genXINIT() end
+                                    169 	.area GSFINAL
+      000000 CCr00r6C         [ 2]  170 	jp	__sdcc_program_startup
+                                    171 ;--------------------------------------------------------
+                                    172 ; Home
+                                    173 ;--------------------------------------------------------
+                                    174 	.area HOME
+                                    175 	.area HOME
+      00006C                        176 __sdcc_program_startup:
+      00006C CCr00r7E         [ 2]  177 	jp	_main
+                                    178 ;	return from main will return to caller
+                                    179 ;--------------------------------------------------------
+                                    180 ; code
+                                    181 ;--------------------------------------------------------
+                                    182 	.area CODE
+                                    183 ;	src/main.c: 136: void Clock_Setup(void) {
+                                    184 ;	-----------------------------------------
+                                    185 ;	 function Clock_Setup
+                                    186 ;	-----------------------------------------
+      000000                        187 _Clock_Setup:
+                                    188 ;	src/main.c: 137: CLK_DeInit();
+      000000 CDr00r00         [ 4]  189 	call	_CLK_DeInit
+                                    190 ;	src/main.c: 138: CLK_HSECmd(DISABLE);
+      000003 4F               [ 1]  191 	clr	a
+      000004 CDr00r00         [ 4]  192 	call	_CLK_HSECmd
+                                    193 ;	src/main.c: 139: CLK_LSICmd(DISABLE);
+      000007 4F               [ 1]  194 	clr	a
+      000008 CDr00r00         [ 4]  195 	call	_CLK_LSICmd
+                                    196 ;	src/main.c: 140: CLK_HSICmd(ENABLE);
+      00000B A6 01            [ 1]  197 	ld	a, #0x01
+      00000D CDr00r00         [ 4]  198 	call	_CLK_HSICmd
+                                    199 ;	src/main.c: 141: while(CLK_GetFlagStatus(CLK_FLAG_HSIRDY) == FALSE);
+      000010                        200 00101$:
+      000010 AE 01 02         [ 2]  201 	ldw	x, #0x0102
+      000013 CDr00r00         [ 4]  202 	call	_CLK_GetFlagStatus
+      000016 4D               [ 1]  203 	tnz	a
+      000017 27 F7            [ 1]  204 	jreq	00101$
+                                    205 ;	src/main.c: 142: CLK_ClockSwitchCmd(ENABLE);
+      000019 A6 01            [ 1]  206 	ld	a, #0x01
+      00001B CDr00r00         [ 4]  207 	call	_CLK_ClockSwitchCmd
+                                    208 ;	src/main.c: 143: CLK_HSIPrescalerConfig(CLK_PRESCALER_HSIDIV1);
+      00001E 4F               [ 1]  209 	clr	a
+      00001F CDr00r00         [ 4]  210 	call	_CLK_HSIPrescalerConfig
+                                    211 ;	src/main.c: 144: CLK_SYSCLKConfig(CLK_PRESCALER_CPUDIV1);
+      000022 A6 80            [ 1]  212 	ld	a, #0x80
+      000024 CDr00r00         [ 4]  213 	call	_CLK_SYSCLKConfig
+                                    214 ;	src/main.c: 145: CLK_ClockSwitchConfig(CLK_SWITCHMODE_AUTO, CLK_SOURCE_HSI, DISABLE, CLK_CURRENTCLOCKSTATE_ENABLE);
+      000027 4B 01            [ 1]  215 	push	#0x01
+      000029 4B 00            [ 1]  216 	push	#0x00
+      00002B 4B E1            [ 1]  217 	push	#0xe1
+      00002D A6 01            [ 1]  218 	ld	a, #0x01
+      00002F CDr00r00         [ 4]  219 	call	_CLK_ClockSwitchConfig
+                                    220 ;	src/main.c: 147: CLK_PeripheralClockConfig(CLK_PERIPHERAL_SPI, DISABLE);
+      000032 4B 00            [ 1]  221 	push	#0x00
+      000034 A6 01            [ 1]  222 	ld	a, #0x01
+      000036 CDr00r00         [ 4]  223 	call	_CLK_PeripheralClockConfig
+                                    224 ;	src/main.c: 148: CLK_PeripheralClockConfig(CLK_PERIPHERAL_AWU, DISABLE);
+      000039 4B 00            [ 1]  225 	push	#0x00
+      00003B A6 12            [ 1]  226 	ld	a, #0x12
+      00003D CDr00r00         [ 4]  227 	call	_CLK_PeripheralClockConfig
+                                    228 ;	src/main.c: 150: CLK_PeripheralClockConfig(CLK_PERIPHERAL_TIMER1, DISABLE);
+      000040 4B 00            [ 1]  229 	push	#0x00
+      000042 A6 07            [ 1]  230 	ld	a, #0x07
+      000044 CDr00r00         [ 4]  231 	call	_CLK_PeripheralClockConfig
+                                    232 ;	src/main.c: 151: CLK_PeripheralClockConfig(CLK_PERIPHERAL_TIMER2, DISABLE);
+      000047 4B 00            [ 1]  233 	push	#0x00
+      000049 A6 05            [ 1]  234 	ld	a, #0x05
+      00004B CDr00r00         [ 4]  235 	call	_CLK_PeripheralClockConfig
+                                    236 ;	src/main.c: 152: CLK_PeripheralClockConfig(CLK_PERIPHERAL_TIMER4, DISABLE);
+      00004E 4B 00            [ 1]  237 	push	#0x00
+      000050 A6 04            [ 1]  238 	ld	a, #0x04
+      000052 CDr00r00         [ 4]  239 	call	_CLK_PeripheralClockConfig
+                                    240 ;	src/main.c: 153: }
+      000055 81               [ 4]  241 	ret
+                                    242 ;	src/main.c: 155: void GPIO_Setup(void) {
+                                    243 ;	-----------------------------------------
+                                    244 ;	 function GPIO_Setup
+                                    245 ;	-----------------------------------------
+      000056                        246 _GPIO_Setup:
+                                    247 ;	src/main.c: 160: GPIO_DeInit(GPIOE);
+      000056 AE 50 14         [ 2]  248 	ldw	x, #0x5014
+      000059 CDr00r00         [ 4]  249 	call	_GPIO_DeInit
+                                    250 ;	src/main.c: 161: GPIO_Init(LED_PORT, LED_PIN, GPIO_MODE_OUT_PP_HIGH_FAST);
+      00005C 4B F0            [ 1]  251 	push	#0xf0
+      00005E A6 20            [ 1]  252 	ld	a, #0x20
+      000060 AE 50 14         [ 2]  253 	ldw	x, #0x5014
+      000063 CDr00r00         [ 4]  254 	call	_GPIO_Init
+                                    255 ;	src/main.c: 162: }
+      000066 81               [ 4]  256 	ret
+                                    257 ;	src/main.c: 164: void UART_Setup() {
+                                    258 ;	-----------------------------------------
+                                    259 ;	 function UART_Setup
+                                    260 ;	-----------------------------------------
+      000067                        261 _UART_Setup:
+                                    262 ;	src/main.c: 165: UART_DEINIT();
+      000067 CDr00r00         [ 4]  263 	call	_UART2_DeInit
+                                    264 ;	src/main.c: 175: UART_INIT((uint32_t)9600, UART_WORDLENGTH_8D, UART_STOPBITS_1, UART_PARITY_NO, UART_SYNCMODE_CLOCK_DISABLE, UART_MODE_TXRX_ENABLE);
+      00006A 4B 0C            [ 1]  265 	push	#0x0c
+      00006C 4B 80            [ 1]  266 	push	#0x80
+      00006E 4B 00            [ 1]  267 	push	#0x00
+      000070 4B 00            [ 1]  268 	push	#0x00
+      000072 4B 00            [ 1]  269 	push	#0x00
+      000074 4B 80            [ 1]  270 	push	#0x80
+      000076 4B 25            [ 1]  271 	push	#0x25
+      000078 5F               [ 1]  272 	clrw	x
+      000079 89               [ 2]  273 	pushw	x
+      00007A CDr00r00         [ 4]  274 	call	_UART2_Init
+                                    275 ;	src/main.c: 176: }
+      00007D 81               [ 4]  276 	ret
+                                    277 ;	src/main.c: 186: void main(void) {
+                                    278 ;	-----------------------------------------
+                                    279 ;	 function main
+                                    280 ;	-----------------------------------------
+      00007E                        281 _main:
+      00007E 52 9F            [ 2]  282 	sub	sp, #159
+                                    283 ;	src/main.c: 187: Clock_Setup();
+      000080 CDr00r00         [ 4]  284 	call	_Clock_Setup
+                                    285 ;	src/main.c: 188: GPIO_Setup();
+      000083 CDr00r56         [ 4]  286 	call	_GPIO_Setup
+                                    287 ;	src/main.c: 189: DS18X20_Setup();
+      000086 CDr00r00         [ 4]  288 	call	_DS18X20_Setup
+                                    289 ;	src/main.c: 190: I2C_Setup();
+      000089 CDr00r00         [ 4]  290 	call	_I2C_Setup
+                                    291 ;	src/main.c: 191: UART_Setup();
+      00008C CDr00r67         [ 4]  292 	call	_UART_Setup
+                                    293 ;	src/main.c: 192: BME280_Setup();
+      00008F CDr00r00         [ 4]  294 	call	_BME280_Setup
+                                    295 ;	src/main.c: 195: BME280_ReadCoefficients();
+      000092 CDr00r00         [ 4]  296 	call	_BME280_ReadCoefficients
+                                    297 ;	src/main.c: 196: BME280_SetFilter(BME280_FILTER_4);
+      000095 A6 08            [ 1]  298 	ld	a, #0x08
+      000097 CDr00r00         [ 4]  299 	call	_BME280_SetFilter
+                                    300 ;	src/main.c: 197: BME280_SetOversamplingTemper(BME280_OSRS_T_x4);
+      00009A A6 60            [ 1]  301 	ld	a, #0x60
+      00009C CDr00r00         [ 4]  302 	call	_BME280_SetOversamplingTemper
+                                    303 ;	src/main.c: 198: BME280_SetOversamplingPressure(BME280_OSRS_P_x2);
+      00009F A6 08            [ 1]  304 	ld	a, #0x08
+      0000A1 CDr00r00         [ 4]  305 	call	_BME280_SetOversamplingPressure
+                                    306 ;	src/main.c: 199: BME280_SetOversamplingHum(BME280_OSRS_H_x1);
+      0000A4 A6 01            [ 1]  307 	ld	a, #0x01
+      0000A6 CDr00r00         [ 4]  308 	call	_BME280_SetOversamplingHum
+                                    309 ;	src/main.c: 201: uint16_t value32 = BME280_ReadReg(BME280_REG_CTRL_MEAS);
+      0000A9 A6 F4            [ 1]  310 	ld	a, #0xf4
+      0000AB CDr00r00         [ 4]  311 	call	_BME280_ReadReg
+      0000AE 5F               [ 1]  312 	clrw	x
+      0000AF 97               [ 1]  313 	ld	xl, a
+                                    314 ;	src/main.c: 202: value32 |= BME280_ReadReg(BME280_REG_CTRL_HUM) << 8;
+      0000B0 89               [ 2]  315 	pushw	x
+      0000B1 A6 F2            [ 1]  316 	ld	a, #0xf2
+      0000B3 CDr00r00         [ 4]  317 	call	_BME280_ReadReg
+      0000B6 85               [ 2]  318 	popw	x
+      0000B7 0F 9F            [ 1]  319 	clr	(0x9f, sp)
+      0000B9 89               [ 2]  320 	pushw	x
+      0000BA 1A 01            [ 1]  321 	or	a, (1, sp)
+      0000BC 85               [ 2]  322 	popw	x
+      0000BD 01               [ 1]  323 	rrwa	x
+      0000BE 1A 9F            [ 1]  324 	or	a, (0x9f, sp)
+      0000C0 97               [ 1]  325 	ld	xl, a
+                                    326 ;	src/main.c: 203: sprintf(str1, "Measurements status: %04X\r\n", value32);
+      0000C1 1F 9A            [ 2]  327 	ldw	(0x9a, sp), x
+      0000C3 89               [ 2]  328 	pushw	x
+      0000C4 4Br0A            [ 1]  329 	push	#<(___str_3+0)
+      0000C6 4Bs00            [ 1]  330 	push	#((___str_3+0) >> 8)
+      0000C8 4Br76            [ 1]  331 	push	#<(_str1+0)
+      0000CA 4Bs00            [ 1]  332 	push	#((_str1+0) >> 8)
+      0000CC CDr00r00         [ 4]  333 	call	_sprintf
+      0000CF 5B 06            [ 2]  334 	addw	sp, #6
+                                    335 ;	src/main.c: 204: printf("%s", str1);
+      0000D1 4Br76            [ 1]  336 	push	#<(_str1+0)
+      0000D3 4Bs00            [ 1]  337 	push	#((_str1+0) >> 8)
+      0000D5 4Br26            [ 1]  338 	push	#<(___str_4+0)
+      0000D7 4Bs00            [ 1]  339 	push	#((___str_4+0) >> 8)
+      0000D9 CDr00r00         [ 4]  340 	call	_printf
+      0000DC 5B 04            [ 2]  341 	addw	sp, #4
+                                    342 ;	src/main.c: 208: ((value32 >> 8) & BME280_OSRS_H_MSK) ? "ON" : "OFF");
+      0000DE 7B 9A            [ 1]  343 	ld	a, (0x9a, sp)
+      0000E0 A5 07            [ 1]  344 	bcp	a, #0x07
+      0000E2 27 07            [ 1]  345 	jreq	00121$
+      0000E4 AEr00r57         [ 2]  346 	ldw	x, #(___str_6+0)
+      0000E7 1F 9E            [ 2]  347 	ldw	(0x9e, sp), x
+      0000E9 20 05            [ 2]  348 	jra	00122$
+      0000EB                        349 00121$:
+      0000EB AEr00r5A         [ 2]  350 	ldw	x, #(___str_7+0)
+      0000EE 1F 9E            [ 2]  351 	ldw	(0x9e, sp), x
+      0000F0                        352 00122$:
+      0000F0 16 9E            [ 2]  353 	ldw	y, (0x9e, sp)
+      0000F2 17 9C            [ 2]  354 	ldw	(0x9c, sp), y
+                                    355 ;	src/main.c: 207: (value32 & BME280_OSRS_P_MSK) ? "ON" : "OFF",
+      0000F4 7B 9B            [ 1]  356 	ld	a, (0x9b, sp)
+      0000F6 A5 1C            [ 1]  357 	bcp	a, #0x1c
+      0000F8 27 04            [ 1]  358 	jreq	00123$
+      0000FA AEr00r57         [ 2]  359 	ldw	x, #___str_6+0
+      0000FD BC                     360 	.byte 0xbc
+      0000FE                        361 00123$:
+      0000FE AEr00r5A         [ 2]  362 	ldw	x, #(___str_7+0)
+      000101                        363 00124$:
+      000101 1F 9E            [ 2]  364 	ldw	(0x9e, sp), x
+                                    365 ;	src/main.c: 206: (value32 & BME280_OSRS_T_MSK) ? "ON" : "OFF",
+      000103 7B 9B            [ 1]  366 	ld	a, (0x9b, sp)
+      000105 A5 E0            [ 1]  367 	bcp	a, #0xe0
+      000107 27 04            [ 1]  368 	jreq	00125$
+      000109 AEr00r57         [ 2]  369 	ldw	x, #___str_6+0
+      00010C BC                     370 	.byte 0xbc
+      00010D                        371 00125$:
+      00010D AEr00r5A         [ 2]  372 	ldw	x, #(___str_7+0)
+      000110                        373 00126$:
+                                    374 ;	src/main.c: 205: sprintf(str1, "Temperature: %s\r\nPressure: %s\r\nHumidity: %s\r\n",
+      000110 16 9C            [ 2]  375 	ldw	y, (0x9c, sp)
+      000112 90 89            [ 2]  376 	pushw	y
+      000114 16 A0            [ 2]  377 	ldw	y, (0xa0, sp)
+      000116 90 89            [ 2]  378 	pushw	y
+      000118 89               [ 2]  379 	pushw	x
+      000119 4Br29            [ 1]  380 	push	#<(___str_5+0)
+      00011B 4Bs00            [ 1]  381 	push	#((___str_5+0) >> 8)
+      00011D 4Br76            [ 1]  382 	push	#<(_str1+0)
+      00011F 4Bs00            [ 1]  383 	push	#((_str1+0) >> 8)
+      000121 CDr00r00         [ 4]  384 	call	_sprintf
+      000124 5B 0A            [ 2]  385 	addw	sp, #10
+                                    386 ;	src/main.c: 209: printf("%s", str1);
+      000126 4Br76            [ 1]  387 	push	#<(_str1+0)
+      000128 4Bs00            [ 1]  388 	push	#((_str1+0) >> 8)
+      00012A 4Br26            [ 1]  389 	push	#<(___str_4+0)
+      00012C 4Bs00            [ 1]  390 	push	#((___str_4+0) >> 8)
+      00012E CDr00r00         [ 4]  391 	call	_printf
+      000131 5B 04            [ 2]  392 	addw	sp, #4
+                                    393 ;	src/main.c: 210: BME280_SetMode(BME280_MODE_NORMAL);
+      000133 A6 03            [ 1]  394 	ld	a, #0x03
+      000135 CDr00r00         [ 4]  395 	call	_BME280_SetMode
+                                    396 ;	src/main.c: 215: while (1) {
+      000138                        397 00111$:
+                                    398 ;	src/main.c: 223: const char placeholderDS18X20String[] = "{\"topic\" : \"mqtt\/temperature-room\", \"value\" : \"%s\"}";
+      000138 A6 7B            [ 1]  399 	ld	a, #0x7b
+      00013A 6B 01            [ 1]  400 	ld	(0x01, sp), a
+      00013C A6 22            [ 1]  401 	ld	a, #0x22
+      00013E 6B 02            [ 1]  402 	ld	(0x02, sp), a
+      000140 A6 74            [ 1]  403 	ld	a, #0x74
+      000142 6B 03            [ 1]  404 	ld	(0x03, sp), a
+      000144 A6 6F            [ 1]  405 	ld	a, #0x6f
+      000146 6B 04            [ 1]  406 	ld	(0x04, sp), a
+      000148 A6 70            [ 1]  407 	ld	a, #0x70
+      00014A 6B 05            [ 1]  408 	ld	(0x05, sp), a
+      00014C A6 69            [ 1]  409 	ld	a, #0x69
+      00014E 6B 06            [ 1]  410 	ld	(0x06, sp), a
+      000150 A6 63            [ 1]  411 	ld	a, #0x63
+      000152 6B 07            [ 1]  412 	ld	(0x07, sp), a
+      000154 A6 22            [ 1]  413 	ld	a, #0x22
+      000156 6B 08            [ 1]  414 	ld	(0x08, sp), a
+      000158 A6 20            [ 1]  415 	ld	a, #0x20
+      00015A 6B 09            [ 1]  416 	ld	(0x09, sp), a
+      00015C A6 3A            [ 1]  417 	ld	a, #0x3a
+      00015E 6B 0A            [ 1]  418 	ld	(0x0a, sp), a
+      000160 A6 20            [ 1]  419 	ld	a, #0x20
+      000162 6B 0B            [ 1]  420 	ld	(0x0b, sp), a
+      000164 A6 22            [ 1]  421 	ld	a, #0x22
+      000166 6B 0C            [ 1]  422 	ld	(0x0c, sp), a
+      000168 A6 6D            [ 1]  423 	ld	a, #0x6d
+      00016A 6B 0D            [ 1]  424 	ld	(0x0d, sp), a
+      00016C A6 71            [ 1]  425 	ld	a, #0x71
+      00016E 6B 0E            [ 1]  426 	ld	(0x0e, sp), a
+      000170 A6 74            [ 1]  427 	ld	a, #0x74
+      000172 6B 0F            [ 1]  428 	ld	(0x0f, sp), a
+      000174 6B 10            [ 1]  429 	ld	(0x10, sp), a
+      000176 A6 2F            [ 1]  430 	ld	a, #0x2f
+      000178 6B 11            [ 1]  431 	ld	(0x11, sp), a
+      00017A A6 74            [ 1]  432 	ld	a, #0x74
+      00017C 6B 12            [ 1]  433 	ld	(0x12, sp), a
+      00017E A6 65            [ 1]  434 	ld	a, #0x65
+      000180 6B 13            [ 1]  435 	ld	(0x13, sp), a
+      000182 A6 6D            [ 1]  436 	ld	a, #0x6d
+      000184 6B 14            [ 1]  437 	ld	(0x14, sp), a
+      000186 A6 70            [ 1]  438 	ld	a, #0x70
+      000188 6B 15            [ 1]  439 	ld	(0x15, sp), a
+      00018A A6 65            [ 1]  440 	ld	a, #0x65
+      00018C 6B 16            [ 1]  441 	ld	(0x16, sp), a
+      00018E A6 72            [ 1]  442 	ld	a, #0x72
+      000190 6B 17            [ 1]  443 	ld	(0x17, sp), a
+      000192 A6 61            [ 1]  444 	ld	a, #0x61
+      000194 6B 18            [ 1]  445 	ld	(0x18, sp), a
+      000196 A6 74            [ 1]  446 	ld	a, #0x74
+      000198 6B 19            [ 1]  447 	ld	(0x19, sp), a
+      00019A A6 75            [ 1]  448 	ld	a, #0x75
+      00019C 6B 1A            [ 1]  449 	ld	(0x1a, sp), a
+      00019E A6 72            [ 1]  450 	ld	a, #0x72
+      0001A0 6B 1B            [ 1]  451 	ld	(0x1b, sp), a
+      0001A2 A6 65            [ 1]  452 	ld	a, #0x65
+      0001A4 6B 1C            [ 1]  453 	ld	(0x1c, sp), a
+      0001A6 A6 2D            [ 1]  454 	ld	a, #0x2d
+      0001A8 6B 1D            [ 1]  455 	ld	(0x1d, sp), a
+      0001AA A6 72            [ 1]  456 	ld	a, #0x72
+      0001AC 6B 1E            [ 1]  457 	ld	(0x1e, sp), a
+      0001AE A6 6F            [ 1]  458 	ld	a, #0x6f
+      0001B0 6B 1F            [ 1]  459 	ld	(0x1f, sp), a
+      0001B2 6B 20            [ 1]  460 	ld	(0x20, sp), a
+      0001B4 A6 6D            [ 1]  461 	ld	a, #0x6d
+      0001B6 6B 21            [ 1]  462 	ld	(0x21, sp), a
+      0001B8 A6 22            [ 1]  463 	ld	a, #0x22
+      0001BA 6B 22            [ 1]  464 	ld	(0x22, sp), a
+      0001BC A6 2C            [ 1]  465 	ld	a, #0x2c
+      0001BE 6B 23            [ 1]  466 	ld	(0x23, sp), a
+      0001C0 A6 20            [ 1]  467 	ld	a, #0x20
+      0001C2 6B 24            [ 1]  468 	ld	(0x24, sp), a
+      0001C4 A6 22            [ 1]  469 	ld	a, #0x22
+      0001C6 6B 25            [ 1]  470 	ld	(0x25, sp), a
+      0001C8 A6 76            [ 1]  471 	ld	a, #0x76
+      0001CA 6B 26            [ 1]  472 	ld	(0x26, sp), a
+      0001CC A6 61            [ 1]  473 	ld	a, #0x61
+      0001CE 6B 27            [ 1]  474 	ld	(0x27, sp), a
+      0001D0 A6 6C            [ 1]  475 	ld	a, #0x6c
+      0001D2 6B 28            [ 1]  476 	ld	(0x28, sp), a
+      0001D4 A6 75            [ 1]  477 	ld	a, #0x75
+      0001D6 6B 29            [ 1]  478 	ld	(0x29, sp), a
+      0001D8 A6 65            [ 1]  479 	ld	a, #0x65
+      0001DA 6B 2A            [ 1]  480 	ld	(0x2a, sp), a
+      0001DC A6 22            [ 1]  481 	ld	a, #0x22
+      0001DE 6B 2B            [ 1]  482 	ld	(0x2b, sp), a
+      0001E0 A6 20            [ 1]  483 	ld	a, #0x20
+      0001E2 6B 2C            [ 1]  484 	ld	(0x2c, sp), a
+      0001E4 A6 3A            [ 1]  485 	ld	a, #0x3a
+      0001E6 6B 2D            [ 1]  486 	ld	(0x2d, sp), a
+      0001E8 A6 20            [ 1]  487 	ld	a, #0x20
+      0001EA 6B 2E            [ 1]  488 	ld	(0x2e, sp), a
+      0001EC A6 22            [ 1]  489 	ld	a, #0x22
+      0001EE 6B 2F            [ 1]  490 	ld	(0x2f, sp), a
+      0001F0 A6 25            [ 1]  491 	ld	a, #0x25
+      0001F2 6B 30            [ 1]  492 	ld	(0x30, sp), a
+      0001F4 A6 73            [ 1]  493 	ld	a, #0x73
+      0001F6 6B 31            [ 1]  494 	ld	(0x31, sp), a
+      0001F8 A6 22            [ 1]  495 	ld	a, #0x22
+      0001FA 6B 32            [ 1]  496 	ld	(0x32, sp), a
+      0001FC A6 7D            [ 1]  497 	ld	a, #0x7d
+      0001FE 6B 33            [ 1]  498 	ld	(0x33, sp), a
+      000200 0F 34            [ 1]  499 	clr	(0x34, sp)
+                                    500 ;	src/main.c: 224: const char placeholderHumidityAHTX0String[] = "{\"topic\" : \"mqtt\/humidity-aht20\", \"value\": \"%s\"}";
+      000202 A6 7B            [ 1]  501 	ld	a, #0x7b
+      000204 6B 35            [ 1]  502 	ld	(0x35, sp), a
+      000206 A6 22            [ 1]  503 	ld	a, #0x22
+      000208 6B 36            [ 1]  504 	ld	(0x36, sp), a
+      00020A A6 74            [ 1]  505 	ld	a, #0x74
+      00020C 6B 37            [ 1]  506 	ld	(0x37, sp), a
+      00020E A6 6F            [ 1]  507 	ld	a, #0x6f
+      000210 6B 38            [ 1]  508 	ld	(0x38, sp), a
+      000212 A6 70            [ 1]  509 	ld	a, #0x70
+      000214 6B 39            [ 1]  510 	ld	(0x39, sp), a
+      000216 A6 69            [ 1]  511 	ld	a, #0x69
+      000218 6B 3A            [ 1]  512 	ld	(0x3a, sp), a
+      00021A A6 63            [ 1]  513 	ld	a, #0x63
+      00021C 6B 3B            [ 1]  514 	ld	(0x3b, sp), a
+      00021E A6 22            [ 1]  515 	ld	a, #0x22
+      000220 6B 3C            [ 1]  516 	ld	(0x3c, sp), a
+      000222 A6 20            [ 1]  517 	ld	a, #0x20
+      000224 6B 3D            [ 1]  518 	ld	(0x3d, sp), a
+      000226 A6 3A            [ 1]  519 	ld	a, #0x3a
+      000228 6B 3E            [ 1]  520 	ld	(0x3e, sp), a
+      00022A A6 20            [ 1]  521 	ld	a, #0x20
+      00022C 6B 3F            [ 1]  522 	ld	(0x3f, sp), a
+      00022E A6 22            [ 1]  523 	ld	a, #0x22
+      000230 6B 40            [ 1]  524 	ld	(0x40, sp), a
+      000232 A6 6D            [ 1]  525 	ld	a, #0x6d
+      000234 6B 41            [ 1]  526 	ld	(0x41, sp), a
+      000236 A6 71            [ 1]  527 	ld	a, #0x71
+      000238 6B 42            [ 1]  528 	ld	(0x42, sp), a
+      00023A A6 74            [ 1]  529 	ld	a, #0x74
+      00023C 6B 43            [ 1]  530 	ld	(0x43, sp), a
+      00023E 6B 44            [ 1]  531 	ld	(0x44, sp), a
+      000240 A6 2F            [ 1]  532 	ld	a, #0x2f
+      000242 6B 45            [ 1]  533 	ld	(0x45, sp), a
+      000244 A6 68            [ 1]  534 	ld	a, #0x68
+      000246 6B 46            [ 1]  535 	ld	(0x46, sp), a
+      000248 A6 75            [ 1]  536 	ld	a, #0x75
+      00024A 6B 47            [ 1]  537 	ld	(0x47, sp), a
+      00024C A6 6D            [ 1]  538 	ld	a, #0x6d
+      00024E 6B 48            [ 1]  539 	ld	(0x48, sp), a
+      000250 A6 69            [ 1]  540 	ld	a, #0x69
+      000252 6B 49            [ 1]  541 	ld	(0x49, sp), a
+      000254 A6 64            [ 1]  542 	ld	a, #0x64
+      000256 6B 4A            [ 1]  543 	ld	(0x4a, sp), a
+      000258 A6 69            [ 1]  544 	ld	a, #0x69
+      00025A 6B 4B            [ 1]  545 	ld	(0x4b, sp), a
+      00025C A6 74            [ 1]  546 	ld	a, #0x74
+      00025E 6B 4C            [ 1]  547 	ld	(0x4c, sp), a
+      000260 A6 79            [ 1]  548 	ld	a, #0x79
+      000262 6B 4D            [ 1]  549 	ld	(0x4d, sp), a
+      000264 A6 2D            [ 1]  550 	ld	a, #0x2d
+      000266 6B 4E            [ 1]  551 	ld	(0x4e, sp), a
+      000268 A6 61            [ 1]  552 	ld	a, #0x61
+      00026A 6B 4F            [ 1]  553 	ld	(0x4f, sp), a
+      00026C A6 68            [ 1]  554 	ld	a, #0x68
+      00026E 6B 50            [ 1]  555 	ld	(0x50, sp), a
+      000270 A6 74            [ 1]  556 	ld	a, #0x74
+      000272 6B 51            [ 1]  557 	ld	(0x51, sp), a
+      000274 A6 32            [ 1]  558 	ld	a, #0x32
+      000276 6B 52            [ 1]  559 	ld	(0x52, sp), a
+      000278 A6 30            [ 1]  560 	ld	a, #0x30
+      00027A 6B 53            [ 1]  561 	ld	(0x53, sp), a
+      00027C A6 22            [ 1]  562 	ld	a, #0x22
+      00027E 6B 54            [ 1]  563 	ld	(0x54, sp), a
+      000280 A6 2C            [ 1]  564 	ld	a, #0x2c
+      000282 6B 55            [ 1]  565 	ld	(0x55, sp), a
+      000284 A6 20            [ 1]  566 	ld	a, #0x20
+      000286 6B 56            [ 1]  567 	ld	(0x56, sp), a
+      000288 A6 22            [ 1]  568 	ld	a, #0x22
+      00028A 6B 57            [ 1]  569 	ld	(0x57, sp), a
+      00028C A6 76            [ 1]  570 	ld	a, #0x76
+      00028E 6B 58            [ 1]  571 	ld	(0x58, sp), a
+      000290 A6 61            [ 1]  572 	ld	a, #0x61
+      000292 6B 59            [ 1]  573 	ld	(0x59, sp), a
+      000294 A6 6C            [ 1]  574 	ld	a, #0x6c
+      000296 6B 5A            [ 1]  575 	ld	(0x5a, sp), a
+      000298 A6 75            [ 1]  576 	ld	a, #0x75
+      00029A 6B 5B            [ 1]  577 	ld	(0x5b, sp), a
+      00029C A6 65            [ 1]  578 	ld	a, #0x65
+      00029E 6B 5C            [ 1]  579 	ld	(0x5c, sp), a
+      0002A0 A6 22            [ 1]  580 	ld	a, #0x22
+      0002A2 6B 5D            [ 1]  581 	ld	(0x5d, sp), a
+      0002A4 A6 3A            [ 1]  582 	ld	a, #0x3a
+      0002A6 6B 5E            [ 1]  583 	ld	(0x5e, sp), a
+      0002A8 A6 20            [ 1]  584 	ld	a, #0x20
+      0002AA 6B 5F            [ 1]  585 	ld	(0x5f, sp), a
+      0002AC A6 22            [ 1]  586 	ld	a, #0x22
+      0002AE 6B 60            [ 1]  587 	ld	(0x60, sp), a
+      0002B0 A6 25            [ 1]  588 	ld	a, #0x25
+      0002B2 6B 61            [ 1]  589 	ld	(0x61, sp), a
+      0002B4 A6 73            [ 1]  590 	ld	a, #0x73
+      0002B6 6B 62            [ 1]  591 	ld	(0x62, sp), a
+      0002B8 A6 22            [ 1]  592 	ld	a, #0x22
+      0002BA 6B 63            [ 1]  593 	ld	(0x63, sp), a
+      0002BC A6 7D            [ 1]  594 	ld	a, #0x7d
+      0002BE 6B 64            [ 1]  595 	ld	(0x64, sp), a
+      0002C0 0F 65            [ 1]  596 	clr	(0x65, sp)
+                                    597 ;	src/main.c: 225: const char placeholderTemperatureAHTX0String[] = "{\"topic\" : \"mqtt\/temperature-aht20\", \"value\": \"%s\"}";
+      0002C2 A6 7B            [ 1]  598 	ld	a, #0x7b
+      0002C4 6B 66            [ 1]  599 	ld	(0x66, sp), a
+      0002C6 A6 22            [ 1]  600 	ld	a, #0x22
+      0002C8 6B 67            [ 1]  601 	ld	(0x67, sp), a
+      0002CA A6 74            [ 1]  602 	ld	a, #0x74
+      0002CC 6B 68            [ 1]  603 	ld	(0x68, sp), a
+      0002CE A6 6F            [ 1]  604 	ld	a, #0x6f
+      0002D0 6B 69            [ 1]  605 	ld	(0x69, sp), a
+      0002D2 A6 70            [ 1]  606 	ld	a, #0x70
+      0002D4 6B 6A            [ 1]  607 	ld	(0x6a, sp), a
+      0002D6 A6 69            [ 1]  608 	ld	a, #0x69
+      0002D8 6B 6B            [ 1]  609 	ld	(0x6b, sp), a
+      0002DA A6 63            [ 1]  610 	ld	a, #0x63
+      0002DC 6B 6C            [ 1]  611 	ld	(0x6c, sp), a
+      0002DE A6 22            [ 1]  612 	ld	a, #0x22
+      0002E0 6B 6D            [ 1]  613 	ld	(0x6d, sp), a
+      0002E2 A6 20            [ 1]  614 	ld	a, #0x20
+      0002E4 6B 6E            [ 1]  615 	ld	(0x6e, sp), a
+      0002E6 A6 3A            [ 1]  616 	ld	a, #0x3a
+      0002E8 6B 6F            [ 1]  617 	ld	(0x6f, sp), a
+      0002EA A6 20            [ 1]  618 	ld	a, #0x20
+      0002EC 6B 70            [ 1]  619 	ld	(0x70, sp), a
+      0002EE A6 22            [ 1]  620 	ld	a, #0x22
+      0002F0 6B 71            [ 1]  621 	ld	(0x71, sp), a
+      0002F2 A6 6D            [ 1]  622 	ld	a, #0x6d
+      0002F4 6B 72            [ 1]  623 	ld	(0x72, sp), a
+      0002F6 A6 71            [ 1]  624 	ld	a, #0x71
+      0002F8 6B 73            [ 1]  625 	ld	(0x73, sp), a
+      0002FA A6 74            [ 1]  626 	ld	a, #0x74
+      0002FC 6B 74            [ 1]  627 	ld	(0x74, sp), a
+      0002FE 6B 75            [ 1]  628 	ld	(0x75, sp), a
+      000300 A6 2F            [ 1]  629 	ld	a, #0x2f
+      000302 6B 76            [ 1]  630 	ld	(0x76, sp), a
+      000304 A6 74            [ 1]  631 	ld	a, #0x74
+      000306 6B 77            [ 1]  632 	ld	(0x77, sp), a
+      000308 A6 65            [ 1]  633 	ld	a, #0x65
+      00030A 6B 78            [ 1]  634 	ld	(0x78, sp), a
+      00030C A6 6D            [ 1]  635 	ld	a, #0x6d
+      00030E 6B 79            [ 1]  636 	ld	(0x79, sp), a
+      000310 A6 70            [ 1]  637 	ld	a, #0x70
+      000312 6B 7A            [ 1]  638 	ld	(0x7a, sp), a
+      000314 A6 65            [ 1]  639 	ld	a, #0x65
+      000316 6B 7B            [ 1]  640 	ld	(0x7b, sp), a
+      000318 A6 72            [ 1]  641 	ld	a, #0x72
+      00031A 6B 7C            [ 1]  642 	ld	(0x7c, sp), a
+      00031C A6 61            [ 1]  643 	ld	a, #0x61
+      00031E 6B 7D            [ 1]  644 	ld	(0x7d, sp), a
+      000320 A6 74            [ 1]  645 	ld	a, #0x74
+      000322 6B 7E            [ 1]  646 	ld	(0x7e, sp), a
+      000324 A6 75            [ 1]  647 	ld	a, #0x75
+      000326 6B 7F            [ 1]  648 	ld	(0x7f, sp), a
+      000328 A6 72            [ 1]  649 	ld	a, #0x72
+      00032A 6B 80            [ 1]  650 	ld	(0x80, sp), a
+      00032C A6 65            [ 1]  651 	ld	a, #0x65
+      00032E 6B 81            [ 1]  652 	ld	(0x81, sp), a
+      000330 A6 2D            [ 1]  653 	ld	a, #0x2d
+      000332 6B 82            [ 1]  654 	ld	(0x82, sp), a
+      000334 A6 61            [ 1]  655 	ld	a, #0x61
+      000336 6B 83            [ 1]  656 	ld	(0x83, sp), a
+      000338 A6 68            [ 1]  657 	ld	a, #0x68
+      00033A 6B 84            [ 1]  658 	ld	(0x84, sp), a
+      00033C A6 74            [ 1]  659 	ld	a, #0x74
+      00033E 6B 85            [ 1]  660 	ld	(0x85, sp), a
+      000340 A6 32            [ 1]  661 	ld	a, #0x32
+      000342 6B 86            [ 1]  662 	ld	(0x86, sp), a
+      000344 A6 30            [ 1]  663 	ld	a, #0x30
+      000346 6B 87            [ 1]  664 	ld	(0x87, sp), a
+      000348 A6 22            [ 1]  665 	ld	a, #0x22
+      00034A 6B 88            [ 1]  666 	ld	(0x88, sp), a
+      00034C A6 2C            [ 1]  667 	ld	a, #0x2c
+      00034E 6B 89            [ 1]  668 	ld	(0x89, sp), a
+      000350 A6 20            [ 1]  669 	ld	a, #0x20
+      000352 6B 8A            [ 1]  670 	ld	(0x8a, sp), a
+      000354 A6 22            [ 1]  671 	ld	a, #0x22
+      000356 6B 8B            [ 1]  672 	ld	(0x8b, sp), a
+      000358 A6 76            [ 1]  673 	ld	a, #0x76
+      00035A 6B 8C            [ 1]  674 	ld	(0x8c, sp), a
+      00035C A6 61            [ 1]  675 	ld	a, #0x61
+      00035E 6B 8D            [ 1]  676 	ld	(0x8d, sp), a
+      000360 A6 6C            [ 1]  677 	ld	a, #0x6c
+      000362 6B 8E            [ 1]  678 	ld	(0x8e, sp), a
+      000364 A6 75            [ 1]  679 	ld	a, #0x75
+      000366 6B 8F            [ 1]  680 	ld	(0x8f, sp), a
+      000368 A6 65            [ 1]  681 	ld	a, #0x65
+      00036A 6B 90            [ 1]  682 	ld	(0x90, sp), a
+      00036C A6 22            [ 1]  683 	ld	a, #0x22
+      00036E 6B 91            [ 1]  684 	ld	(0x91, sp), a
+      000370 A6 3A            [ 1]  685 	ld	a, #0x3a
+      000372 6B 92            [ 1]  686 	ld	(0x92, sp), a
+      000374 A6 20            [ 1]  687 	ld	a, #0x20
+      000376 6B 93            [ 1]  688 	ld	(0x93, sp), a
+      000378 A6 22            [ 1]  689 	ld	a, #0x22
+      00037A 6B 94            [ 1]  690 	ld	(0x94, sp), a
+      00037C A6 25            [ 1]  691 	ld	a, #0x25
+      00037E 6B 95            [ 1]  692 	ld	(0x95, sp), a
+      000380 A6 73            [ 1]  693 	ld	a, #0x73
+      000382 6B 96            [ 1]  694 	ld	(0x96, sp), a
+      000384 A6 22            [ 1]  695 	ld	a, #0x22
+      000386 6B 97            [ 1]  696 	ld	(0x97, sp), a
+      000388 A6 7D            [ 1]  697 	ld	a, #0x7d
+      00038A 6B 98            [ 1]  698 	ld	(0x98, sp), a
+      00038C 0F 99            [ 1]  699 	clr	(0x99, sp)
+                                    700 ;	src/main.c: 228: LED_ON;
+      00038E A6 20            [ 1]  701 	ld	a, #0x20
+      000390 AE 50 14         [ 2]  702 	ldw	x, #0x5014
+      000393 CDr00r00         [ 4]  703 	call	_GPIO_WriteLow
+                                    704 ;	src/main.c: 231: DS18X20_Reset();
+      000396 CDr00r00         [ 4]  705 	call	_DS18X20_Reset
+                                    706 ;	src/main.c: 233: delay_ms(2000);
+      000399 AE 07 D0         [ 2]  707 	ldw	x, #0x07d0
+      00039C CDr00r00         [ 4]  708 	call	_delay_ms
+                                    709 ;	src/main.c: 235: if (!DS18X20_Read_ID(iDS18X20RomID)) {
+      00039F AEr00r00         [ 2]  710 	ldw	x, #(_iDS18X20RomID+0)
+      0003A2 CDr00r00         [ 4]  711 	call	_DS18X20_Read_ID
+      0003A5 4D               [ 1]  712 	tnz	a
+      0003A6 26 0E            [ 1]  713 	jrne	00103$
+                                    714 ;	src/main.c: 236: for (uint8_t i = 0; i < 8; i++) {
+      0003A8 4F               [ 1]  715 	clr	a
+      0003A9                        716 00114$:
+      0003A9 A1 08            [ 1]  717 	cp	a, #0x08
+      0003AB 24 09            [ 1]  718 	jrnc	00103$
+                                    719 ;	src/main.c: 237: iDS18X20RomID[i] = 0;
+      0003AD 5F               [ 1]  720 	clrw	x
+      0003AE 97               [ 1]  721 	ld	xl, a
+      0003AF 72 4Fu00u00      [ 1]  722 	clr	((_iDS18X20RomID+0), x)
+                                    723 ;	src/main.c: 236: for (uint8_t i = 0; i < 8; i++) {
+      0003B3 4C               [ 1]  724 	inc	a
+      0003B4 20 F3            [ 2]  725 	jra	00114$
+      0003B6                        726 00103$:
+                                    727 ;	src/main.c: 242: printf("Famaly ID: 0x%02x, ", iDS18X20RomID[0]);
+      0003B6 C6u00u00         [ 1]  728 	ld	a, _iDS18X20RomID+0
+      0003B9 5F               [ 1]  729 	clrw	x
+      0003BA 97               [ 1]  730 	ld	xl, a
+      0003BB 89               [ 2]  731 	pushw	x
+      0003BC 4Br5E            [ 1]  732 	push	#<(___str_8+0)
+      0003BE 4Bs00            [ 1]  733 	push	#((___str_8+0) >> 8)
+      0003C0 CDr00r00         [ 4]  734 	call	_printf
+      0003C3 5B 04            [ 2]  735 	addw	sp, #4
+                                    736 ;	src/main.c: 243: printf("Sensor ID; ");
+      0003C5 4Br72            [ 1]  737 	push	#<(___str_9+0)
+      0003C7 4Bs00            [ 1]  738 	push	#((___str_9+0) >> 8)
+      0003C9 CDr00r00         [ 4]  739 	call	_printf
+      0003CC 85               [ 2]  740 	popw	x
+                                    741 ;	src/main.c: 245: for (int8_t i = 6; i > 0 ; i--) {
+      0003CD A6 06            [ 1]  742 	ld	a, #0x06
+      0003CF 6B 9F            [ 1]  743 	ld	(0x9f, sp), a
+      0003D1                        744 00117$:
+                                    745 ;	src/main.c: 246: printf("0x%02x ", iDS18X20RomID[i]);
+      0003D1 7B 9F            [ 1]  746 	ld	a, (0x9f, sp)
+      0003D3 A1 00            [ 1]  747 	cp	a, #0x00
+      0003D5 2D 19            [ 1]  748 	jrsle	00104$
+      0003D7 97               [ 1]  749 	ld	xl, a
+      0003D8 49               [ 1]  750 	rlc	a
+      0003D9 4F               [ 1]  751 	clr	a
+      0003DA A2 00            [ 1]  752 	sbc	a, #0x00
+      0003DC 95               [ 1]  753 	ld	xh, a
+      0003DD D6u00u00         [ 1]  754 	ld	a, (_iDS18X20RomID+0, x)
+      0003E0 5F               [ 1]  755 	clrw	x
+      0003E1 97               [ 1]  756 	ld	xl, a
+      0003E2 89               [ 2]  757 	pushw	x
+      0003E3 4Br7E            [ 1]  758 	push	#<(___str_10+0)
+      0003E5 4Bs00            [ 1]  759 	push	#((___str_10+0) >> 8)
+      0003E7 CDr00r00         [ 4]  760 	call	_printf
+      0003EA 5B 04            [ 2]  761 	addw	sp, #4
+                                    762 ;	src/main.c: 245: for (int8_t i = 6; i > 0 ; i--) {
+      0003EC 0A 9F            [ 1]  763 	dec	(0x9f, sp)
+      0003EE 20 E1            [ 2]  764 	jra	00117$
+      0003F0                        765 00104$:
+                                    766 ;	src/main.c: 249: printf("\r\n");
+      0003F0 AEr00r86         [ 2]  767 	ldw	x, #(___str_12+0)
+      0003F3 CDr00r00         [ 4]  768 	call	_puts
+                                    769 ;	src/main.c: 252: fDS18X20Temperature = DS18X20_Get_Temperature();
+      0003F6 CDr00r00         [ 4]  770 	call	_DS18X20_Get_Temperature
+      0003F9 CFu00u02         [ 2]  771 	ldw	_fDS18X20Temperature+2, x
+      0003FC 90 CFu00u00      [ 2]  772 	ldw	_fDS18X20Temperature+0, y
+                                    773 ;	src/main.c: 257: FloatToStr(sString, fDS18X20Temperature, integer_bit, decimal_bit);
+      000400 4B 04            [ 1]  774 	push	#0x04
+      000402 4B 02            [ 1]  775 	push	#0x02
+      000404 CEu00u02         [ 2]  776 	ldw	x, _fDS18X20Temperature+2
+      000407 89               [ 2]  777 	pushw	x
+      000408 CEu00u00         [ 2]  778 	ldw	x, _fDS18X20Temperature+0
+      00040B 89               [ 2]  779 	pushw	x
+      00040C AEr00r12         [ 2]  780 	ldw	x, #(_sString+0)
+      00040F CDr06rD2         [ 4]  781 	call	_FloatToStr
+                                    782 ;	src/main.c: 258: printf("DS18X20 temperature: %s\r\n", sString);
+      000412 4Br12            [ 1]  783 	push	#<(_sString+0)
+      000414 4Bs00            [ 1]  784 	push	#((_sString+0) >> 8)
+      000416 4Br88            [ 1]  785 	push	#<(___str_13+0)
+      000418 4Bs00            [ 1]  786 	push	#((___str_13+0) >> 8)
+      00041A CDr00r00         [ 4]  787 	call	_printf
+      00041D 5B 04            [ 2]  788 	addw	sp, #4
+                                    789 ;	src/main.c: 264: stringValue = (char*)malloc(sizeValueString * sizeof(char));
+      00041F AE 00 07         [ 2]  790 	ldw	x, #0x0007
+      000422 CDr00r00         [ 4]  791 	call	_malloc
+      000425 1F 9C            [ 2]  792 	ldw	(0x9c, sp), x
+                                    793 ;	src/main.c: 265: stringSendUART = (char*)malloc(sizeSendUARTString * sizeof(char));
+      000427 AE 00 3B         [ 2]  794 	ldw	x, #0x003b
+      00042A CDr00r00         [ 4]  795 	call	_malloc
+      00042D 1F 9E            [ 2]  796 	ldw	(0x9e, sp), x
+                                    797 ;	src/main.c: 267: FloatToStr(stringValue, fDS18X20Temperature, integer_bit, decimal_bit);
+      00042F 4B 04            [ 1]  798 	push	#0x04
+      000431 4B 02            [ 1]  799 	push	#0x02
+      000433 CEu00u02         [ 2]  800 	ldw	x, _fDS18X20Temperature+2
+      000436 89               [ 2]  801 	pushw	x
+      000437 CEu00u00         [ 2]  802 	ldw	x, _fDS18X20Temperature+0
+      00043A 89               [ 2]  803 	pushw	x
+      00043B 1E A2            [ 2]  804 	ldw	x, (0xa2, sp)
+      00043D CDr06rD2         [ 4]  805 	call	_FloatToStr
+                                    806 ;	src/main.c: 269: sprintf(stringSendUART, placeholderDS18X20String, stringValue);
+      000440 1E 9C            [ 2]  807 	ldw	x, (0x9c, sp)
+      000442 89               [ 2]  808 	pushw	x
+      000443 96               [ 1]  809 	ldw	x, sp
+      000444 1C 00 03         [ 2]  810 	addw	x, #3
+      000447 89               [ 2]  811 	pushw	x
+      000448 1E A2            [ 2]  812 	ldw	x, (0xa2, sp)
+      00044A 89               [ 2]  813 	pushw	x
+      00044B CDr00r00         [ 4]  814 	call	_sprintf
+      00044E 5B 06            [ 2]  815 	addw	sp, #6
+                                    816 ;	src/main.c: 270: printf("%s\r\n", stringSendUART);
+      000450 1E 9E            [ 2]  817 	ldw	x, (0x9e, sp)
+      000452 89               [ 2]  818 	pushw	x
+      000453 4BrA2            [ 1]  819 	push	#<(___str_14+0)
+      000455 4Bs00            [ 1]  820 	push	#((___str_14+0) >> 8)
+      000457 CDr00r00         [ 4]  821 	call	_printf
+      00045A 5B 04            [ 2]  822 	addw	sp, #4
+                                    823 ;	src/main.c: 272: free(stringSendUART);
+      00045C 1E 9E            [ 2]  824 	ldw	x, (0x9e, sp)
+      00045E CDr00r00         [ 4]  825 	call	_free
+                                    826 ;	src/main.c: 273: free(stringValue);
+      000461 1E 9C            [ 2]  827 	ldw	x, (0x9c, sp)
+      000463 CDr00r00         [ 4]  828 	call	_free
+                                    829 ;	src/main.c: 275: delay_ms(5000);
+      000466 AE 13 88         [ 2]  830 	ldw	x, #0x1388
+      000469 CDr00r00         [ 4]  831 	call	_delay_ms
+                                    832 ;	src/main.c: 345: uint8_t res = BME280_ReadReg(BME280_REG_ID);
+      00046C A6 D0            [ 1]  833 	ld	a, #0xd0
+      00046E CDr00r00         [ 4]  834 	call	_BME280_ReadReg
+                                    835 ;	src/main.c: 346: printf("BME280_ID: 0x%02x", res);
+      000471 5F               [ 1]  836 	clrw	x
+      000472 97               [ 1]  837 	ld	xl, a
+      000473 88               [ 1]  838 	push	a
+      000474 89               [ 2]  839 	pushw	x
+      000475 4BrA7            [ 1]  840 	push	#<(___str_15+0)
+      000477 4Bs00            [ 1]  841 	push	#((___str_15+0) >> 8)
+      000479 CDr00r00         [ 4]  842 	call	_printf
+      00047C 5B 04            [ 2]  843 	addw	sp, #4
+      00047E AEr00r86         [ 2]  844 	ldw	x, #(___str_12+0)
+      000481 CDr00r00         [ 4]  845 	call	_puts
+      000484 84               [ 1]  846 	pop	a
+                                    847 ;	src/main.c: 350: if (res != BME280_ID) {
+      000485 A1 60            [ 1]  848 	cp	a, #0x60
+      000487 27 06            [ 1]  849 	jreq	00106$
+                                    850 ;	src/main.c: 351: Error();
+      000489 CDr00r00         [ 4]  851 	call	_Error
+                                    852 ;	src/main.c: 352: return;
+      00048C CCr06rCF         [ 2]  853 	jp	00119$
+      00048F                        854 00106$:
+                                    855 ;	src/main.c: 355: BME280_WriteReg(BME280_REG_SOFTRESET,BME280_SOFTRESET_VALUE);
+      00048F 4B B6            [ 1]  856 	push	#0xb6
+      000491 A6 E0            [ 1]  857 	ld	a, #0xe0
+      000493 CDr00r00         [ 4]  858 	call	_BME280_WriteReg
+                                    859 ;	src/main.c: 356: while (BME280_ReadStatus() & BME280_STATUS_IM_UPDATE);
+      000496                        860 00107$:
+      000496 CDr00r00         [ 4]  861 	call	_BME280_ReadStatus
+      000499 44               [ 1]  862 	srl	a
+      00049A 25 FA            [ 1]  863 	jrc	00107$
+                                    864 ;	src/main.c: 358: sprintf(str1, "DIG_T1: %u\r\n", CalibData.dig_T1);
+      00049C CEu00u00         [ 2]  865 	ldw	x, _CalibData+0
+      00049F 89               [ 2]  866 	pushw	x
+      0004A0 4BrB9            [ 1]  867 	push	#<(___str_17+0)
+      0004A2 4Bs00            [ 1]  868 	push	#((___str_17+0) >> 8)
+      0004A4 4Br76            [ 1]  869 	push	#<(_str1+0)
+      0004A6 4Bs00            [ 1]  870 	push	#((_str1+0) >> 8)
+      0004A8 CDr00r00         [ 4]  871 	call	_sprintf
+      0004AB 5B 06            [ 2]  872 	addw	sp, #6
+                                    873 ;	src/main.c: 359: printf("%s", str1);
+      0004AD 4Br76            [ 1]  874 	push	#<(_str1+0)
+      0004AF 4Bs00            [ 1]  875 	push	#((_str1+0) >> 8)
+      0004B1 4Br26            [ 1]  876 	push	#<(___str_4+0)
+      0004B3 4Bs00            [ 1]  877 	push	#((___str_4+0) >> 8)
+      0004B5 CDr00r00         [ 4]  878 	call	_printf
+      0004B8 5B 04            [ 2]  879 	addw	sp, #4
+                                    880 ;	src/main.c: 361: sprintf(str1, "DIG_T2: %d\r\n", CalibData.dig_T2);
+      0004BA CEu00u02         [ 2]  881 	ldw	x, _CalibData+2
+      0004BD 89               [ 2]  882 	pushw	x
+      0004BE 4BrC6            [ 1]  883 	push	#<(___str_18+0)
+      0004C0 4Bs00            [ 1]  884 	push	#((___str_18+0) >> 8)
+      0004C2 4Br76            [ 1]  885 	push	#<(_str1+0)
+      0004C4 4Bs00            [ 1]  886 	push	#((_str1+0) >> 8)
+      0004C6 CDr00r00         [ 4]  887 	call	_sprintf
+      0004C9 5B 06            [ 2]  888 	addw	sp, #6
+                                    889 ;	src/main.c: 362: printf("%s", str1);
+      0004CB 4Br76            [ 1]  890 	push	#<(_str1+0)
+      0004CD 4Bs00            [ 1]  891 	push	#((_str1+0) >> 8)
+      0004CF 4Br26            [ 1]  892 	push	#<(___str_4+0)
+      0004D1 4Bs00            [ 1]  893 	push	#((___str_4+0) >> 8)
+      0004D3 CDr00r00         [ 4]  894 	call	_printf
+      0004D6 5B 04            [ 2]  895 	addw	sp, #4
+                                    896 ;	src/main.c: 364: sprintf(str1, "DIG_T3: %d\r\n", CalibData.dig_T3);
+      0004D8 CEu00u04         [ 2]  897 	ldw	x, _CalibData+4
+      0004DB 89               [ 2]  898 	pushw	x
+      0004DC 4BrD3            [ 1]  899 	push	#<(___str_19+0)
+      0004DE 4Bs00            [ 1]  900 	push	#((___str_19+0) >> 8)
+      0004E0 4Br76            [ 1]  901 	push	#<(_str1+0)
+      0004E2 4Bs00            [ 1]  902 	push	#((_str1+0) >> 8)
+      0004E4 CDr00r00         [ 4]  903 	call	_sprintf
+      0004E7 5B 06            [ 2]  904 	addw	sp, #6
+                                    905 ;	src/main.c: 365: printf("%s", str1);
+      0004E9 4Br76            [ 1]  906 	push	#<(_str1+0)
+      0004EB 4Bs00            [ 1]  907 	push	#((_str1+0) >> 8)
+      0004ED 4Br26            [ 1]  908 	push	#<(___str_4+0)
+      0004EF 4Bs00            [ 1]  909 	push	#((___str_4+0) >> 8)
+      0004F1 CDr00r00         [ 4]  910 	call	_printf
+      0004F4 5B 04            [ 2]  911 	addw	sp, #4
+                                    912 ;	src/main.c: 367: sprintf(str1, "DIG_P1: %u\r\n", CalibData.dig_P1);
+      0004F6 CEu00u06         [ 2]  913 	ldw	x, _CalibData+6
+      0004F9 89               [ 2]  914 	pushw	x
+      0004FA 4BrE0            [ 1]  915 	push	#<(___str_20+0)
+      0004FC 4Bs00            [ 1]  916 	push	#((___str_20+0) >> 8)
+      0004FE 4Br76            [ 1]  917 	push	#<(_str1+0)
+      000500 4Bs00            [ 1]  918 	push	#((_str1+0) >> 8)
+      000502 CDr00r00         [ 4]  919 	call	_sprintf
+      000505 5B 06            [ 2]  920 	addw	sp, #6
+                                    921 ;	src/main.c: 368: printf("%s", str1);
+      000507 4Br76            [ 1]  922 	push	#<(_str1+0)
+      000509 4Bs00            [ 1]  923 	push	#((_str1+0) >> 8)
+      00050B 4Br26            [ 1]  924 	push	#<(___str_4+0)
+      00050D 4Bs00            [ 1]  925 	push	#((___str_4+0) >> 8)
+      00050F CDr00r00         [ 4]  926 	call	_printf
+      000512 5B 04            [ 2]  927 	addw	sp, #4
+                                    928 ;	src/main.c: 370: sprintf(str1, "DIG_P2: %d\r\n", CalibData.dig_P2);
+      000514 CEu00u08         [ 2]  929 	ldw	x, _CalibData+8
+      000517 89               [ 2]  930 	pushw	x
+      000518 4BrED            [ 1]  931 	push	#<(___str_21+0)
+      00051A 4Bs00            [ 1]  932 	push	#((___str_21+0) >> 8)
+      00051C 4Br76            [ 1]  933 	push	#<(_str1+0)
+      00051E 4Bs00            [ 1]  934 	push	#((_str1+0) >> 8)
+      000520 CDr00r00         [ 4]  935 	call	_sprintf
+      000523 5B 06            [ 2]  936 	addw	sp, #6
+                                    937 ;	src/main.c: 371: printf("%s", str1);
+      000525 4Br76            [ 1]  938 	push	#<(_str1+0)
+      000527 4Bs00            [ 1]  939 	push	#((_str1+0) >> 8)
+      000529 4Br26            [ 1]  940 	push	#<(___str_4+0)
+      00052B 4Bs00            [ 1]  941 	push	#((___str_4+0) >> 8)
+      00052D CDr00r00         [ 4]  942 	call	_printf
+      000530 5B 04            [ 2]  943 	addw	sp, #4
+                                    944 ;	src/main.c: 373: sprintf(str1, "DIG_P3: %d\r\n", CalibData.dig_P3);
+      000532 CEu00u0A         [ 2]  945 	ldw	x, _CalibData+10
+      000535 89               [ 2]  946 	pushw	x
+      000536 4BrFA            [ 1]  947 	push	#<(___str_22+0)
+      000538 4Bs00            [ 1]  948 	push	#((___str_22+0) >> 8)
+      00053A 4Br76            [ 1]  949 	push	#<(_str1+0)
+      00053C 4Bs00            [ 1]  950 	push	#((_str1+0) >> 8)
+      00053E CDr00r00         [ 4]  951 	call	_sprintf
+      000541 5B 06            [ 2]  952 	addw	sp, #6
+                                    953 ;	src/main.c: 374: printf("%s", str1);
+      000543 4Br76            [ 1]  954 	push	#<(_str1+0)
+      000545 4Bs00            [ 1]  955 	push	#((_str1+0) >> 8)
+      000547 4Br26            [ 1]  956 	push	#<(___str_4+0)
+      000549 4Bs00            [ 1]  957 	push	#((___str_4+0) >> 8)
+      00054B CDr00r00         [ 4]  958 	call	_printf
+      00054E 5B 04            [ 2]  959 	addw	sp, #4
+                                    960 ;	src/main.c: 376: sprintf(str1, "DIG_P4: %d\r\n", CalibData.dig_P4);
+      000550 CEu00u0C         [ 2]  961 	ldw	x, _CalibData+12
+      000553 89               [ 2]  962 	pushw	x
+      000554 4Br07            [ 1]  963 	push	#<(___str_23+0)
+      000556 4Bs01            [ 1]  964 	push	#((___str_23+0) >> 8)
+      000558 4Br76            [ 1]  965 	push	#<(_str1+0)
+      00055A 4Bs00            [ 1]  966 	push	#((_str1+0) >> 8)
+      00055C CDr00r00         [ 4]  967 	call	_sprintf
+      00055F 5B 06            [ 2]  968 	addw	sp, #6
+                                    969 ;	src/main.c: 377: printf("%s", str1);
+      000561 4Br76            [ 1]  970 	push	#<(_str1+0)
+      000563 4Bs00            [ 1]  971 	push	#((_str1+0) >> 8)
+      000565 4Br26            [ 1]  972 	push	#<(___str_4+0)
+      000567 4Bs00            [ 1]  973 	push	#((___str_4+0) >> 8)
+      000569 CDr00r00         [ 4]  974 	call	_printf
+      00056C 5B 04            [ 2]  975 	addw	sp, #4
+                                    976 ;	src/main.c: 379: sprintf(str1, "DIG_P5: %d\r\n", CalibData.dig_P5);
+      00056E CEu00u0E         [ 2]  977 	ldw	x, _CalibData+14
+      000571 89               [ 2]  978 	pushw	x
+      000572 4Br14            [ 1]  979 	push	#<(___str_24+0)
+      000574 4Bs01            [ 1]  980 	push	#((___str_24+0) >> 8)
+      000576 4Br76            [ 1]  981 	push	#<(_str1+0)
+      000578 4Bs00            [ 1]  982 	push	#((_str1+0) >> 8)
+      00057A CDr00r00         [ 4]  983 	call	_sprintf
+      00057D 5B 06            [ 2]  984 	addw	sp, #6
+                                    985 ;	src/main.c: 380: printf("%s", str1);
+      00057F 4Br76            [ 1]  986 	push	#<(_str1+0)
+      000581 4Bs00            [ 1]  987 	push	#((_str1+0) >> 8)
+      000583 4Br26            [ 1]  988 	push	#<(___str_4+0)
+      000585 4Bs00            [ 1]  989 	push	#((___str_4+0) >> 8)
+      000587 CDr00r00         [ 4]  990 	call	_printf
+      00058A 5B 04            [ 2]  991 	addw	sp, #4
+                                    992 ;	src/main.c: 382: sprintf(str1, "DIG_P6: %d\r\n", CalibData.dig_P6);
+      00058C CEu00u10         [ 2]  993 	ldw	x, _CalibData+16
+      00058F 89               [ 2]  994 	pushw	x
+      000590 4Br21            [ 1]  995 	push	#<(___str_25+0)
+      000592 4Bs01            [ 1]  996 	push	#((___str_25+0) >> 8)
+      000594 4Br76            [ 1]  997 	push	#<(_str1+0)
+      000596 4Bs00            [ 1]  998 	push	#((_str1+0) >> 8)
+      000598 CDr00r00         [ 4]  999 	call	_sprintf
+      00059B 5B 06            [ 2] 1000 	addw	sp, #6
+                                   1001 ;	src/main.c: 383: printf("%s", str1);
+      00059D 4Br76            [ 1] 1002 	push	#<(_str1+0)
+      00059F 4Bs00            [ 1] 1003 	push	#((_str1+0) >> 8)
+      0005A1 4Br26            [ 1] 1004 	push	#<(___str_4+0)
+      0005A3 4Bs00            [ 1] 1005 	push	#((___str_4+0) >> 8)
+      0005A5 CDr00r00         [ 4] 1006 	call	_printf
+      0005A8 5B 04            [ 2] 1007 	addw	sp, #4
+                                   1008 ;	src/main.c: 385: sprintf(str1, "DIG_P7: %d\r\n", CalibData.dig_P7);
+      0005AA CEu00u12         [ 2] 1009 	ldw	x, _CalibData+18
+      0005AD 89               [ 2] 1010 	pushw	x
+      0005AE 4Br2E            [ 1] 1011 	push	#<(___str_26+0)
+      0005B0 4Bs01            [ 1] 1012 	push	#((___str_26+0) >> 8)
+      0005B2 4Br76            [ 1] 1013 	push	#<(_str1+0)
+      0005B4 4Bs00            [ 1] 1014 	push	#((_str1+0) >> 8)
+      0005B6 CDr00r00         [ 4] 1015 	call	_sprintf
+      0005B9 5B 06            [ 2] 1016 	addw	sp, #6
+                                   1017 ;	src/main.c: 386: printf("%s", str1);
+      0005BB 4Br76            [ 1] 1018 	push	#<(_str1+0)
+      0005BD 4Bs00            [ 1] 1019 	push	#((_str1+0) >> 8)
+      0005BF 4Br26            [ 1] 1020 	push	#<(___str_4+0)
+      0005C1 4Bs00            [ 1] 1021 	push	#((___str_4+0) >> 8)
+      0005C3 CDr00r00         [ 4] 1022 	call	_printf
+      0005C6 5B 04            [ 2] 1023 	addw	sp, #4
+                                   1024 ;	src/main.c: 388: sprintf(str1, "DIG_P8: %d\r\n", CalibData.dig_P8);
+      0005C8 CEu00u14         [ 2] 1025 	ldw	x, _CalibData+20
+      0005CB 89               [ 2] 1026 	pushw	x
+      0005CC 4Br3B            [ 1] 1027 	push	#<(___str_27+0)
+      0005CE 4Bs01            [ 1] 1028 	push	#((___str_27+0) >> 8)
+      0005D0 4Br76            [ 1] 1029 	push	#<(_str1+0)
+      0005D2 4Bs00            [ 1] 1030 	push	#((_str1+0) >> 8)
+      0005D4 CDr00r00         [ 4] 1031 	call	_sprintf
+      0005D7 5B 06            [ 2] 1032 	addw	sp, #6
+                                   1033 ;	src/main.c: 389: printf("%s", str1);
+      0005D9 4Br76            [ 1] 1034 	push	#<(_str1+0)
+      0005DB 4Bs00            [ 1] 1035 	push	#((_str1+0) >> 8)
+      0005DD 4Br26            [ 1] 1036 	push	#<(___str_4+0)
+      0005DF 4Bs00            [ 1] 1037 	push	#((___str_4+0) >> 8)
+      0005E1 CDr00r00         [ 4] 1038 	call	_printf
+      0005E4 5B 04            [ 2] 1039 	addw	sp, #4
+                                   1040 ;	src/main.c: 391: sprintf(str1, "DIG_P9: %d\r\n", CalibData.dig_P9);
+      0005E6 CEu00u16         [ 2] 1041 	ldw	x, _CalibData+22
+      0005E9 89               [ 2] 1042 	pushw	x
+      0005EA 4Br48            [ 1] 1043 	push	#<(___str_28+0)
+      0005EC 4Bs01            [ 1] 1044 	push	#((___str_28+0) >> 8)
+      0005EE 4Br76            [ 1] 1045 	push	#<(_str1+0)
+      0005F0 4Bs00            [ 1] 1046 	push	#((_str1+0) >> 8)
+      0005F2 CDr00r00         [ 4] 1047 	call	_sprintf
+      0005F5 5B 06            [ 2] 1048 	addw	sp, #6
+                                   1049 ;	src/main.c: 392: printf("%s", str1);
+      0005F7 4Br76            [ 1] 1050 	push	#<(_str1+0)
+      0005F9 4Bs00            [ 1] 1051 	push	#((_str1+0) >> 8)
+      0005FB 4Br26            [ 1] 1052 	push	#<(___str_4+0)
+      0005FD 4Bs00            [ 1] 1053 	push	#((___str_4+0) >> 8)
+      0005FF CDr00r00         [ 4] 1054 	call	_printf
+      000602 5B 04            [ 2] 1055 	addw	sp, #4
+                                   1056 ;	src/main.c: 394: sprintf(str1, "DIG_H1: %d\r\n", CalibData.dig_H1);
+      000604 C6u00u18         [ 1] 1057 	ld	a, _CalibData+24
+      000607 5F               [ 1] 1058 	clrw	x
+      000608 97               [ 1] 1059 	ld	xl, a
+      000609 89               [ 2] 1060 	pushw	x
+      00060A 4Br55            [ 1] 1061 	push	#<(___str_29+0)
+      00060C 4Bs01            [ 1] 1062 	push	#((___str_29+0) >> 8)
+      00060E 4Br76            [ 1] 1063 	push	#<(_str1+0)
+      000610 4Bs00            [ 1] 1064 	push	#((_str1+0) >> 8)
+      000612 CDr00r00         [ 4] 1065 	call	_sprintf
+      000615 5B 06            [ 2] 1066 	addw	sp, #6
+                                   1067 ;	src/main.c: 395: printf("%s", str1);
+      000617 4Br76            [ 1] 1068 	push	#<(_str1+0)
+      000619 4Bs00            [ 1] 1069 	push	#((_str1+0) >> 8)
+      00061B 4Br26            [ 1] 1070 	push	#<(___str_4+0)
+      00061D 4Bs00            [ 1] 1071 	push	#((___str_4+0) >> 8)
+      00061F CDr00r00         [ 4] 1072 	call	_printf
+      000622 5B 04            [ 2] 1073 	addw	sp, #4
+                                   1074 ;	src/main.c: 397: sprintf(str1, "DIG_H2: %d\r\n", CalibData.dig_H2);
+      000624 CEu00u19         [ 2] 1075 	ldw	x, _CalibData+25
+      000627 89               [ 2] 1076 	pushw	x
+      000628 4Br62            [ 1] 1077 	push	#<(___str_30+0)
+      00062A 4Bs01            [ 1] 1078 	push	#((___str_30+0) >> 8)
+      00062C 4Br76            [ 1] 1079 	push	#<(_str1+0)
+      00062E 4Bs00            [ 1] 1080 	push	#((_str1+0) >> 8)
+      000630 CDr00r00         [ 4] 1081 	call	_sprintf
+      000633 5B 06            [ 2] 1082 	addw	sp, #6
+                                   1083 ;	src/main.c: 398: printf("%s", str1);
+      000635 4Br76            [ 1] 1084 	push	#<(_str1+0)
+      000637 4Bs00            [ 1] 1085 	push	#((_str1+0) >> 8)
+      000639 4Br26            [ 1] 1086 	push	#<(___str_4+0)
+      00063B 4Bs00            [ 1] 1087 	push	#((___str_4+0) >> 8)
+      00063D CDr00r00         [ 4] 1088 	call	_printf
+      000640 5B 04            [ 2] 1089 	addw	sp, #4
+                                   1090 ;	src/main.c: 400: sprintf(str1, "DIG_H3: %d\r\n", CalibData.dig_H3);
+      000642 C6u00u1B         [ 1] 1091 	ld	a, _CalibData+27
+      000645 5F               [ 1] 1092 	clrw	x
+      000646 97               [ 1] 1093 	ld	xl, a
+      000647 89               [ 2] 1094 	pushw	x
+      000648 4Br6F            [ 1] 1095 	push	#<(___str_31+0)
+      00064A 4Bs01            [ 1] 1096 	push	#((___str_31+0) >> 8)
+      00064C 4Br76            [ 1] 1097 	push	#<(_str1+0)
+      00064E 4Bs00            [ 1] 1098 	push	#((_str1+0) >> 8)
+      000650 CDr00r00         [ 4] 1099 	call	_sprintf
+      000653 5B 06            [ 2] 1100 	addw	sp, #6
+                                   1101 ;	src/main.c: 401: printf("%s", str1);
+      000655 4Br76            [ 1] 1102 	push	#<(_str1+0)
+      000657 4Bs00            [ 1] 1103 	push	#((_str1+0) >> 8)
+      000659 4Br26            [ 1] 1104 	push	#<(___str_4+0)
+      00065B 4Bs00            [ 1] 1105 	push	#((___str_4+0) >> 8)
+      00065D CDr00r00         [ 4] 1106 	call	_printf
+      000660 5B 04            [ 2] 1107 	addw	sp, #4
+                                   1108 ;	src/main.c: 403: sprintf(str1, "DIG_H4: %d\r\n", CalibData.dig_H4);
+      000662 CEu00u1C         [ 2] 1109 	ldw	x, _CalibData+28
+      000665 89               [ 2] 1110 	pushw	x
+      000666 4Br7C            [ 1] 1111 	push	#<(___str_32+0)
+      000668 4Bs01            [ 1] 1112 	push	#((___str_32+0) >> 8)
+      00066A 4Br76            [ 1] 1113 	push	#<(_str1+0)
+      00066C 4Bs00            [ 1] 1114 	push	#((_str1+0) >> 8)
+      00066E CDr00r00         [ 4] 1115 	call	_sprintf
+      000671 5B 06            [ 2] 1116 	addw	sp, #6
+                                   1117 ;	src/main.c: 404: printf("%s", str1);
+      000673 4Br76            [ 1] 1118 	push	#<(_str1+0)
+      000675 4Bs00            [ 1] 1119 	push	#((_str1+0) >> 8)
+      000677 4Br26            [ 1] 1120 	push	#<(___str_4+0)
+      000679 4Bs00            [ 1] 1121 	push	#((___str_4+0) >> 8)
+      00067B CDr00r00         [ 4] 1122 	call	_printf
+      00067E 5B 04            [ 2] 1123 	addw	sp, #4
+                                   1124 ;	src/main.c: 406: sprintf(str1, "DIG_H5: %d\r\n", CalibData.dig_H5);
+      000680 CEu00u1E         [ 2] 1125 	ldw	x, _CalibData+30
+      000683 89               [ 2] 1126 	pushw	x
+      000684 4Br89            [ 1] 1127 	push	#<(___str_33+0)
+      000686 4Bs01            [ 1] 1128 	push	#((___str_33+0) >> 8)
+      000688 4Br76            [ 1] 1129 	push	#<(_str1+0)
+      00068A 4Bs00            [ 1] 1130 	push	#((_str1+0) >> 8)
+      00068C CDr00r00         [ 4] 1131 	call	_sprintf
+      00068F 5B 06            [ 2] 1132 	addw	sp, #6
+                                   1133 ;	src/main.c: 407: printf("%s", str1);
+      000691 4Br76            [ 1] 1134 	push	#<(_str1+0)
+      000693 4Bs00            [ 1] 1135 	push	#((_str1+0) >> 8)
+      000695 4Br26            [ 1] 1136 	push	#<(___str_4+0)
+      000697 4Bs00            [ 1] 1137 	push	#((___str_4+0) >> 8)
+      000699 CDr00r00         [ 4] 1138 	call	_printf
+      00069C 5B 04            [ 2] 1139 	addw	sp, #4
+                                   1140 ;	src/main.c: 409: sprintf(str1, "DIG_H6: %d\r\n", CalibData.dig_H3);
+      00069E C6u00u1B         [ 1] 1141 	ld	a, _CalibData+27
+      0006A1 5F               [ 1] 1142 	clrw	x
+      0006A2 97               [ 1] 1143 	ld	xl, a
+      0006A3 89               [ 2] 1144 	pushw	x
+      0006A4 4Br96            [ 1] 1145 	push	#<(___str_34+0)
+      0006A6 4Bs01            [ 1] 1146 	push	#((___str_34+0) >> 8)
+      0006A8 4Br76            [ 1] 1147 	push	#<(_str1+0)
+      0006AA 4Bs00            [ 1] 1148 	push	#((_str1+0) >> 8)
+      0006AC CDr00r00         [ 4] 1149 	call	_sprintf
+      0006AF 5B 06            [ 2] 1150 	addw	sp, #6
+                                   1151 ;	src/main.c: 410: printf("%s", str1);
+      0006B1 4Br76            [ 1] 1152 	push	#<(_str1+0)
+      0006B3 4Bs00            [ 1] 1153 	push	#((_str1+0) >> 8)
+      0006B5 4Br26            [ 1] 1154 	push	#<(___str_4+0)
+      0006B7 4Bs00            [ 1] 1155 	push	#((___str_4+0) >> 8)
+      0006B9 CDr00r00         [ 4] 1156 	call	_printf
+      0006BC 5B 04            [ 2] 1157 	addw	sp, #4
+                                   1158 ;	src/main.c: 416: delay_ms(10000);
+      0006BE AE 27 10         [ 2] 1159 	ldw	x, #0x2710
+      0006C1 CDr00r00         [ 4] 1160 	call	_delay_ms
+                                   1161 ;	src/main.c: 425: LED_OFF;
+      0006C4 A6 20            [ 1] 1162 	ld	a, #0x20
+      0006C6 AE 50 14         [ 2] 1163 	ldw	x, #0x5014
+      0006C9 CDr00r00         [ 4] 1164 	call	_GPIO_WriteHigh
+      0006CC CCr01r38         [ 2] 1165 	jp	00111$
+      0006CF                       1166 00119$:
+                                   1167 ;	src/main.c: 435: }
+      0006CF 5B 9F            [ 2] 1168 	addw	sp, #159
+      0006D1 81               [ 4] 1169 	ret
+                                   1170 ;	src/main.c: 437: void FloatToStr(char *str, float number, uint8_t integer_bit, uint8_t decimal_bit) {
+                                   1171 ;	-----------------------------------------
+                                   1172 ;	 function FloatToStr
+                                   1173 ;	-----------------------------------------
+      0006D2                       1174 _FloatToStr:
+      0006D2 52 11            [ 2] 1175 	sub	sp, #17
+      0006D4 1F 0F            [ 2] 1176 	ldw	(0x0f, sp), x
+                                   1177 ;	src/main.c: 439: uint32_t temp = (uint8_t)number/1;
+      0006D6 1E 16            [ 2] 1178 	ldw	x, (0x16, sp)
+      0006D8 89               [ 2] 1179 	pushw	x
+      0006D9 1E 16            [ 2] 1180 	ldw	x, (0x16, sp)
+      0006DB 89               [ 2] 1181 	pushw	x
+      0006DC CDr00r00         [ 4] 1182 	call	___fs2uchar
+      0006DF 5F               [ 1] 1183 	clrw	x
+      0006E0 97               [ 1] 1184 	ld	xl, a
+      0006E1 1F 0D            [ 2] 1185 	ldw	(0x0d, sp), x
+      0006E3 7B 0D            [ 1] 1186 	ld	a, (0x0d, sp)
+      0006E5 49               [ 1] 1187 	rlc	a
+      0006E6 4F               [ 1] 1188 	clr	a
+      0006E7 A2 00            [ 1] 1189 	sbc	a, #0x00
+      0006E9 6B 0C            [ 1] 1190 	ld	(0x0c, sp), a
+      0006EB 6B 0B            [ 1] 1191 	ld	(0x0b, sp), a
+                                   1192 ;	src/main.c: 442: for (i = 1; i <= integer_bit; i++) {
+      0006ED A6 01            [ 1] 1193 	ld	a, #0x01
+      0006EF 6B 11            [ 1] 1194 	ld	(0x11, sp), a
+      0006F1                       1195 00107$:
+                                   1196 ;	src/main.c: 444: str[integer_bit - i] = table[0];
+      0006F1 7B 18            [ 1] 1197 	ld	a, (0x18, sp)
+      0006F3 6B 02            [ 1] 1198 	ld	(0x02, sp), a
+      0006F5 0F 01            [ 1] 1199 	clr	(0x01, sp)
+                                   1200 ;	src/main.c: 442: for (i = 1; i <= integer_bit; i++) {
+      0006F7 7B 11            [ 1] 1201 	ld	a, (0x11, sp)
+      0006F9 11 18            [ 1] 1202 	cp	a, (0x18, sp)
+      0006FB 22 4D            [ 1] 1203 	jrugt	00104$
+                                   1204 ;	src/main.c: 444: str[integer_bit - i] = table[0];
+      0006FD 5F               [ 1] 1205 	clrw	x
+      0006FE 7B 11            [ 1] 1206 	ld	a, (0x11, sp)
+      000700 97               [ 1] 1207 	ld	xl, a
+      000701 50               [ 2] 1208 	negw	x
+      000702 72 FB 01         [ 2] 1209 	addw	x, (0x01, sp)
+      000705 72 FB 0F         [ 2] 1210 	addw	x, (0x0f, sp)
+      000708 1F 09            [ 2] 1211 	ldw	(0x09, sp), x
+                                   1212 ;	src/main.c: 443: if (temp == 0) {
+      00070A 1E 0D            [ 2] 1213 	ldw	x, (0x0d, sp)
+      00070C 26 0C            [ 1] 1214 	jrne	00102$
+      00070E 1E 0B            [ 2] 1215 	ldw	x, (0x0b, sp)
+      000710 26 08            [ 1] 1216 	jrne	00102$
+                                   1217 ;	src/main.c: 444: str[integer_bit - i] = table[0];
+      000712 C6u00u00         [ 1] 1218 	ld	a, _table+0
+      000715 1E 09            [ 2] 1219 	ldw	x, (0x09, sp)
+      000717 F7               [ 1] 1220 	ld	(x), a
+      000718 20 17            [ 2] 1221 	jra	00103$
+      00071A                       1222 00102$:
+                                   1223 ;	src/main.c: 446: str[integer_bit - i] = table[temp%10];
+      00071A 4B 0A            [ 1] 1224 	push	#0x0a
+      00071C 5F               [ 1] 1225 	clrw	x
+      00071D 89               [ 2] 1226 	pushw	x
+      00071E 4B 00            [ 1] 1227 	push	#0x00
+      000720 1E 11            [ 2] 1228 	ldw	x, (0x11, sp)
+      000722 89               [ 2] 1229 	pushw	x
+      000723 1E 11            [ 2] 1230 	ldw	x, (0x11, sp)
+      000725 89               [ 2] 1231 	pushw	x
+      000726 CDr00r00         [ 4] 1232 	call	__modulong
+      000729 5B 08            [ 2] 1233 	addw	sp, #8
+      00072B D6u00u00         [ 1] 1234 	ld	a, (_table+0, x)
+      00072E 1E 09            [ 2] 1235 	ldw	x, (0x09, sp)
+      000730 F7               [ 1] 1236 	ld	(x), a
+      000731                       1237 00103$:
+                                   1238 ;	src/main.c: 448: temp /= 10;
+      000731 4B 0A            [ 1] 1239 	push	#0x0a
+      000733 5F               [ 1] 1240 	clrw	x
+      000734 89               [ 2] 1241 	pushw	x
+      000735 4B 00            [ 1] 1242 	push	#0x00
+      000737 1E 11            [ 2] 1243 	ldw	x, (0x11, sp)
+      000739 89               [ 2] 1244 	pushw	x
+      00073A 1E 11            [ 2] 1245 	ldw	x, (0x11, sp)
+      00073C 89               [ 2] 1246 	pushw	x
+      00073D CDr00r00         [ 4] 1247 	call	__divulong
+      000740 5B 08            [ 2] 1248 	addw	sp, #8
+      000742 1F 0D            [ 2] 1249 	ldw	(0x0d, sp), x
+      000744 17 0B            [ 2] 1250 	ldw	(0x0b, sp), y
+                                   1251 ;	src/main.c: 442: for (i = 1; i <= integer_bit; i++) {
+      000746 0C 11            [ 1] 1252 	inc	(0x11, sp)
+      000748 20 A7            [ 2] 1253 	jra	00107$
+      00074A                       1254 00104$:
+                                   1255 ;	src/main.c: 451: *(str + integer_bit) = '.';
+      00074A 5F               [ 1] 1256 	clrw	x
+      00074B 7B 18            [ 1] 1257 	ld	a, (0x18, sp)
+      00074D 97               [ 1] 1258 	ld	xl, a
+      00074E 72 FB 0F         [ 2] 1259 	addw	x, (0x0f, sp)
+      000751 1F 03            [ 2] 1260 	ldw	(0x03, sp), x
+      000753 A6 2E            [ 1] 1261 	ld	a, #0x2e
+      000755 F7               [ 1] 1262 	ld	(x), a
+                                   1263 ;	src/main.c: 453: t2 = number;
+      000756 16 16            [ 2] 1264 	ldw	y, (0x16, sp)
+      000758 17 0D            [ 2] 1265 	ldw	(0x0d, sp), y
+      00075A 16 14            [ 2] 1266 	ldw	y, (0x14, sp)
+      00075C 17 0B            [ 2] 1267 	ldw	(0x0b, sp), y
+                                   1268 ;	src/main.c: 455: for (i = 1; i <= decimal_bit; i++) {
+      00075E A6 01            [ 1] 1269 	ld	a, #0x01
+      000760 6B 11            [ 1] 1270 	ld	(0x11, sp), a
+      000762                       1271 00110$:
+      000762 7B 11            [ 1] 1272 	ld	a, (0x11, sp)
+      000764 11 19            [ 1] 1273 	cp	a, (0x19, sp)
+      000766 22 4E            [ 1] 1274 	jrugt	00105$
+                                   1275 ;	src/main.c: 456: temp = t2 * 10;
+      000768 1E 0D            [ 2] 1276 	ldw	x, (0x0d, sp)
+      00076A 89               [ 2] 1277 	pushw	x
+      00076B 1E 0D            [ 2] 1278 	ldw	x, (0x0d, sp)
+      00076D 89               [ 2] 1279 	pushw	x
+      00076E 5F               [ 1] 1280 	clrw	x
+      00076F 89               [ 2] 1281 	pushw	x
+      000770 4B 20            [ 1] 1282 	push	#0x20
+      000772 4B 41            [ 1] 1283 	push	#0x41
+      000774 CDr00r00         [ 4] 1284 	call	___fsmul
+      000777 1F 07            [ 2] 1285 	ldw	(0x07, sp), x
+      000779 17 05            [ 2] 1286 	ldw	(0x05, sp), y
+      00077B 1E 07            [ 2] 1287 	ldw	x, (0x07, sp)
+      00077D 89               [ 2] 1288 	pushw	x
+      00077E 1E 07            [ 2] 1289 	ldw	x, (0x07, sp)
+      000780 89               [ 2] 1290 	pushw	x
+      000781 CDr00r00         [ 4] 1291 	call	___fs2ulong
+      000784 5B 04            [ 2] 1292 	addw	sp, #4
+      000786 1F 0B            [ 2] 1293 	ldw	(0x0b, sp), x
+                                   1294 ;	src/main.c: 457: str[integer_bit + i] = table[temp%10];
+      000788 7B 11            [ 1] 1295 	ld	a, (0x11, sp)
+      00078A 5F               [ 1] 1296 	clrw	x
+      00078B 97               [ 1] 1297 	ld	xl, a
+      00078C 72 FB 01         [ 2] 1298 	addw	x, (0x01, sp)
+      00078F 72 FB 0F         [ 2] 1299 	addw	x, (0x0f, sp)
+      000792 1F 0D            [ 2] 1300 	ldw	(0x0d, sp), x
+      000794 4B 0A            [ 1] 1301 	push	#0x0a
+      000796 5F               [ 1] 1302 	clrw	x
+      000797 89               [ 2] 1303 	pushw	x
+      000798 4B 00            [ 1] 1304 	push	#0x00
+      00079A 1E 0F            [ 2] 1305 	ldw	x, (0x0f, sp)
+      00079C 89               [ 2] 1306 	pushw	x
+      00079D 90 89            [ 2] 1307 	pushw	y
+      00079F CDr00r00         [ 4] 1308 	call	__modulong
+      0007A2 5B 08            [ 2] 1309 	addw	sp, #8
+      0007A4 D6u00u00         [ 1] 1310 	ld	a, (_table+0, x)
+      0007A7 1E 0D            [ 2] 1311 	ldw	x, (0x0d, sp)
+      0007A9 F7               [ 1] 1312 	ld	(x), a
+                                   1313 ;	src/main.c: 458: t2 *= 10;
+      0007AA 1E 07            [ 2] 1314 	ldw	x, (0x07, sp)
+      0007AC 16 05            [ 2] 1315 	ldw	y, (0x05, sp)
+      0007AE 1F 0D            [ 2] 1316 	ldw	(0x0d, sp), x
+      0007B0 17 0B            [ 2] 1317 	ldw	(0x0b, sp), y
+                                   1318 ;	src/main.c: 455: for (i = 1; i <= decimal_bit; i++) {
+      0007B2 0C 11            [ 1] 1319 	inc	(0x11, sp)
+      0007B4 20 AC            [ 2] 1320 	jra	00110$
+      0007B6                       1321 00105$:
+                                   1322 ;	src/main.c: 461: *(str + integer_bit + 1 + decimal_bit) = '\0';
+      0007B6 1E 03            [ 2] 1323 	ldw	x, (0x03, sp)
+      0007B8 5C               [ 1] 1324 	incw	x
+      0007B9 9F               [ 1] 1325 	ld	a, xl
+      0007BA 1B 19            [ 1] 1326 	add	a, (0x19, sp)
+      0007BC 02               [ 1] 1327 	rlwa	x
+      0007BD A9 00            [ 1] 1328 	adc	a, #0x00
+      0007BF 95               [ 1] 1329 	ld	xh, a
+      0007C0 7F               [ 1] 1330 	clr	(x)
+                                   1331 ;	src/main.c: 462: }
+      0007C1 1E 12            [ 2] 1332 	ldw	x, (18, sp)
+      0007C3 5B 19            [ 2] 1333 	addw	sp, #25
+      0007C5 FC               [ 2] 1334 	jp	(x)
+                                   1335 ;	src/main.c: 469: PUTCHAR_PROTOTYPE
+                                   1336 ;	-----------------------------------------
+                                   1337 ;	 function putchar
+                                   1338 ;	-----------------------------------------
+      0007C6                       1339 _putchar:
+                                   1340 ;	src/main.c: 472: UART_SENDDATA8(c);
+      0007C6 9F               [ 1] 1341 	ld	a, xl
+      0007C7 89               [ 2] 1342 	pushw	x
+      0007C8 CDr00r00         [ 4] 1343 	call	_UART2_SendData8
+      0007CB 85               [ 2] 1344 	popw	x
+                                   1345 ;	src/main.c: 474: while (UART_GETFLAGSTATUS(UART_FLAG_TXE) == RESET);
+      0007CC                       1346 00101$:
+      0007CC 89               [ 2] 1347 	pushw	x
+      0007CD AE 00 80         [ 2] 1348 	ldw	x, #0x0080
+      0007D0 CDr00r00         [ 4] 1349 	call	_UART2_GetFlagStatus
+      0007D3 85               [ 2] 1350 	popw	x
+      0007D4 4D               [ 1] 1351 	tnz	a
+      0007D5 27 F5            [ 1] 1352 	jreq	00101$
+                                   1353 ;	src/main.c: 476: return (c);
+                                   1354 ;	src/main.c: 477: }
+      0007D7 81               [ 4] 1355 	ret
+                                   1356 ;	src/main.c: 484: GETCHAR_PROTOTYPE
+                                   1357 ;	-----------------------------------------
+                                   1358 ;	 function getchar
+                                   1359 ;	-----------------------------------------
+      0007D8                       1360 _getchar:
+                                   1361 ;	src/main.c: 492: while (UART_GETFLAGSTATUS(UART_FLAG_TXE) == RESET);
+      0007D8                       1362 00101$:
+      0007D8 AE 00 80         [ 2] 1363 	ldw	x, #0x0080
+      0007DB CDr00r00         [ 4] 1364 	call	_UART2_GetFlagStatus
+      0007DE 4D               [ 1] 1365 	tnz	a
+      0007DF 27 F7            [ 1] 1366 	jreq	00101$
+                                   1367 ;	src/main.c: 493: c = UART_RECEIVEDATA8();
+      0007E1 CDr00r00         [ 4] 1368 	call	_UART2_ReceiveData8
+      0007E4 5F               [ 1] 1369 	clrw	x
+                                   1370 ;	src/main.c: 494: return (c);
+      0007E5 97               [ 1] 1371 	ld	xl, a
+                                   1372 ;	src/main.c: 495: }
+      0007E6 81               [ 4] 1373 	ret
+                                   1374 ;	src/main.c: 506: void assert_failed(uint8_t* file, uint32_t line)
+                                   1375 ;	-----------------------------------------
+                                   1376 ;	 function assert_failed
+                                   1377 ;	-----------------------------------------
+      0007E7                       1378 _assert_failed:
+                                   1379 ;	src/main.c: 513: while (1)
+      0007E7                       1380 00102$:
+      0007E7 20 FE            [ 2] 1381 	jra	00102$
+                                   1382 ;	src/main.c: 516: }
+      0007E9 1E 01            [ 2] 1383 	ldw	x, (1, sp)
+      0007EB 5B 06            [ 2] 1384 	addw	sp, #6
+      0007ED FC               [ 2] 1385 	jp	(x)
+                                   1386 	.area CODE
+                                   1387 	.area CONST
+      000000                       1388 _table:
+      000000 30                    1389 	.db #0x30	; 48	'0'
+      000001 31                    1390 	.db #0x31	; 49	'1'
+      000002 32                    1391 	.db #0x32	; 50	'2'
+      000003 33                    1392 	.db #0x33	; 51	'3'
+      000004 34                    1393 	.db #0x34	; 52	'4'
+      000005 35                    1394 	.db #0x35	; 53	'5'
+      000006 36                    1395 	.db #0x36	; 54	'6'
+      000007 37                    1396 	.db #0x37	; 55	'7'
+      000008 38                    1397 	.db #0x38	; 56	'8'
+      000009 39                    1398 	.db #0x39	; 57	'9'
+                                   1399 	.area CONST
+      00000A                       1400 ___str_3:
+      00000A 4D 65 61 73 75 72 65  1401 	.ascii "Measurements status: %04X"
+             6D 65 6E 74 73 20 73
+             74 61 74 75 73 3A 20
+             25 30 34 58
+      000023 0D                    1402 	.db 0x0d
+      000024 0A                    1403 	.db 0x0a
+      000025 00                    1404 	.db 0x00
+                                   1405 	.area CODE
+                                   1406 	.area CONST
+      000026                       1407 ___str_4:
+      000026 25 73                 1408 	.ascii "%s"
+      000028 00                    1409 	.db 0x00
+                                   1410 	.area CODE
+                                   1411 	.area CONST
+      000029                       1412 ___str_5:
+      000029 54 65 6D 70 65 72 61  1413 	.ascii "Temperature: %s"
+             74 75 72 65 3A 20 25
+             73
+      000038 0D                    1414 	.db 0x0d
+      000039 0A                    1415 	.db 0x0a
+      00003A 50 72 65 73 73 75 72  1416 	.ascii "Pressure: %s"
+             65 3A 20 25 73
+      000046 0D                    1417 	.db 0x0d
+      000047 0A                    1418 	.db 0x0a
+      000048 48 75 6D 69 64 69 74  1419 	.ascii "Humidity: %s"
+             79 3A 20 25 73
+      000054 0D                    1420 	.db 0x0d
+      000055 0A                    1421 	.db 0x0a
+      000056 00                    1422 	.db 0x00
+                                   1423 	.area CODE
+                                   1424 	.area CONST
+      000057                       1425 ___str_6:
+      000057 4F 4E                 1426 	.ascii "ON"
+      000059 00                    1427 	.db 0x00
+                                   1428 	.area CODE
+                                   1429 	.area CONST
+      00005A                       1430 ___str_7:
+      00005A 4F 46 46              1431 	.ascii "OFF"
+      00005D 00                    1432 	.db 0x00
+                                   1433 	.area CODE
+                                   1434 	.area CONST
+      00005E                       1435 ___str_8:
+      00005E 46 61 6D 61 6C 79 20  1436 	.ascii "Famaly ID: 0x%02x, "
+             49 44 3A 20 30 78 25
+             30 32 78 2C 20
+      000071 00                    1437 	.db 0x00
+                                   1438 	.area CODE
+                                   1439 	.area CONST
+      000072                       1440 ___str_9:
+      000072 53 65 6E 73 6F 72 20  1441 	.ascii "Sensor ID; "
+             49 44 3B 20
+      00007D 00                    1442 	.db 0x00
+                                   1443 	.area CODE
+                                   1444 	.area CONST
+      00007E                       1445 ___str_10:
+      00007E 30 78 25 30 32 78 20  1446 	.ascii "0x%02x "
+      000085 00                    1447 	.db 0x00
+                                   1448 	.area CODE
+                                   1449 	.area CONST
+      000086                       1450 ___str_12:
+      000086 0D                    1451 	.db 0x0d
+      000087 00                    1452 	.db 0x00
+                                   1453 	.area CODE
+                                   1454 	.area CONST
+      000088                       1455 ___str_13:
+      000088 44 53 31 38 58 32 30  1456 	.ascii "DS18X20 temperature: %s"
+             20 74 65 6D 70 65 72
+             61 74 75 72 65 3A 20
+             25 73
+      00009F 0D                    1457 	.db 0x0d
+      0000A0 0A                    1458 	.db 0x0a
+      0000A1 00                    1459 	.db 0x00
+                                   1460 	.area CODE
+                                   1461 	.area CONST
+      0000A2                       1462 ___str_14:
+      0000A2 25 73                 1463 	.ascii "%s"
+      0000A4 0D                    1464 	.db 0x0d
+      0000A5 0A                    1465 	.db 0x0a
+      0000A6 00                    1466 	.db 0x00
+                                   1467 	.area CODE
+                                   1468 	.area CONST
+      0000A7                       1469 ___str_15:
+      0000A7 42 4D 45 32 38 30 5F  1470 	.ascii "BME280_ID: 0x%02x"
+             49 44 3A 20 30 78 25
+             30 32 78
+      0000B8 00                    1471 	.db 0x00
+                                   1472 	.area CODE
+                                   1473 	.area CONST
+      0000B9                       1474 ___str_17:
+      0000B9 44 49 47 5F 54 31 3A  1475 	.ascii "DIG_T1: %u"
+             20 25 75
+      0000C3 0D                    1476 	.db 0x0d
+      0000C4 0A                    1477 	.db 0x0a
+      0000C5 00                    1478 	.db 0x00
+                                   1479 	.area CODE
+                                   1480 	.area CONST
+      0000C6                       1481 ___str_18:
+      0000C6 44 49 47 5F 54 32 3A  1482 	.ascii "DIG_T2: %d"
+             20 25 64
+      0000D0 0D                    1483 	.db 0x0d
+      0000D1 0A                    1484 	.db 0x0a
+      0000D2 00                    1485 	.db 0x00
+                                   1486 	.area CODE
+                                   1487 	.area CONST
+      0000D3                       1488 ___str_19:
+      0000D3 44 49 47 5F 54 33 3A  1489 	.ascii "DIG_T3: %d"
+             20 25 64
+      0000DD 0D                    1490 	.db 0x0d
+      0000DE 0A                    1491 	.db 0x0a
+      0000DF 00                    1492 	.db 0x00
+                                   1493 	.area CODE
+                                   1494 	.area CONST
+      0000E0                       1495 ___str_20:
+      0000E0 44 49 47 5F 50 31 3A  1496 	.ascii "DIG_P1: %u"
+             20 25 75
+      0000EA 0D                    1497 	.db 0x0d
+      0000EB 0A                    1498 	.db 0x0a
+      0000EC 00                    1499 	.db 0x00
+                                   1500 	.area CODE
+                                   1501 	.area CONST
+      0000ED                       1502 ___str_21:
+      0000ED 44 49 47 5F 50 32 3A  1503 	.ascii "DIG_P2: %d"
+             20 25 64
+      0000F7 0D                    1504 	.db 0x0d
+      0000F8 0A                    1505 	.db 0x0a
+      0000F9 00                    1506 	.db 0x00
+                                   1507 	.area CODE
+                                   1508 	.area CONST
+      0000FA                       1509 ___str_22:
+      0000FA 44 49 47 5F 50 33 3A  1510 	.ascii "DIG_P3: %d"
+             20 25 64
+      000104 0D                    1511 	.db 0x0d
+      000105 0A                    1512 	.db 0x0a
+      000106 00                    1513 	.db 0x00
+                                   1514 	.area CODE
+                                   1515 	.area CONST
+      000107                       1516 ___str_23:
+      000107 44 49 47 5F 50 34 3A  1517 	.ascii "DIG_P4: %d"
+             20 25 64
+      000111 0D                    1518 	.db 0x0d
+      000112 0A                    1519 	.db 0x0a
+      000113 00                    1520 	.db 0x00
+                                   1521 	.area CODE
+                                   1522 	.area CONST
+      000114                       1523 ___str_24:
+      000114 44 49 47 5F 50 35 3A  1524 	.ascii "DIG_P5: %d"
+             20 25 64
+      00011E 0D                    1525 	.db 0x0d
+      00011F 0A                    1526 	.db 0x0a
+      000120 00                    1527 	.db 0x00
+                                   1528 	.area CODE
+                                   1529 	.area CONST
+      000121                       1530 ___str_25:
+      000121 44 49 47 5F 50 36 3A  1531 	.ascii "DIG_P6: %d"
+             20 25 64
+      00012B 0D                    1532 	.db 0x0d
+      00012C 0A                    1533 	.db 0x0a
+      00012D 00                    1534 	.db 0x00
+                                   1535 	.area CODE
+                                   1536 	.area CONST
+      00012E                       1537 ___str_26:
+      00012E 44 49 47 5F 50 37 3A  1538 	.ascii "DIG_P7: %d"
+             20 25 64
+      000138 0D                    1539 	.db 0x0d
+      000139 0A                    1540 	.db 0x0a
+      00013A 00                    1541 	.db 0x00
+                                   1542 	.area CODE
+                                   1543 	.area CONST
+      00013B                       1544 ___str_27:
+      00013B 44 49 47 5F 50 38 3A  1545 	.ascii "DIG_P8: %d"
+             20 25 64
+      000145 0D                    1546 	.db 0x0d
+      000146 0A                    1547 	.db 0x0a
+      000147 00                    1548 	.db 0x00
+                                   1549 	.area CODE
+                                   1550 	.area CONST
+      000148                       1551 ___str_28:
+      000148 44 49 47 5F 50 39 3A  1552 	.ascii "DIG_P9: %d"
+             20 25 64
+      000152 0D                    1553 	.db 0x0d
+      000153 0A                    1554 	.db 0x0a
+      000154 00                    1555 	.db 0x00
+                                   1556 	.area CODE
+                                   1557 	.area CONST
+      000155                       1558 ___str_29:
+      000155 44 49 47 5F 48 31 3A  1559 	.ascii "DIG_H1: %d"
+             20 25 64
+      00015F 0D                    1560 	.db 0x0d
+      000160 0A                    1561 	.db 0x0a
+      000161 00                    1562 	.db 0x00
+                                   1563 	.area CODE
+                                   1564 	.area CONST
+      000162                       1565 ___str_30:
+      000162 44 49 47 5F 48 32 3A  1566 	.ascii "DIG_H2: %d"
+             20 25 64
+      00016C 0D                    1567 	.db 0x0d
+      00016D 0A                    1568 	.db 0x0a
+      00016E 00                    1569 	.db 0x00
+                                   1570 	.area CODE
+                                   1571 	.area CONST
+      00016F                       1572 ___str_31:
+      00016F 44 49 47 5F 48 33 3A  1573 	.ascii "DIG_H3: %d"
+             20 25 64
+      000179 0D                    1574 	.db 0x0d
+      00017A 0A                    1575 	.db 0x0a
+      00017B 00                    1576 	.db 0x00
+                                   1577 	.area CODE
+                                   1578 	.area CONST
+      00017C                       1579 ___str_32:
+      00017C 44 49 47 5F 48 34 3A  1580 	.ascii "DIG_H4: %d"
+             20 25 64
+      000186 0D                    1581 	.db 0x0d
+      000187 0A                    1582 	.db 0x0a
+      000188 00                    1583 	.db 0x00
+                                   1584 	.area CODE
+                                   1585 	.area CONST
+      000189                       1586 ___str_33:
+      000189 44 49 47 5F 48 35 3A  1587 	.ascii "DIG_H5: %d"
+             20 25 64
+      000193 0D                    1588 	.db 0x0d
+      000194 0A                    1589 	.db 0x0a
+      000195 00                    1590 	.db 0x00
+                                   1591 	.area CODE
+                                   1592 	.area CONST
+      000196                       1593 ___str_34:
+      000196 44 49 47 5F 48 36 3A  1594 	.ascii "DIG_H6: %d"
+             20 25 64
+      0001A0 0D                    1595 	.db 0x0d
+      0001A1 0A                    1596 	.db 0x0a
+      0001A2 00                    1597 	.db 0x00
+                                   1598 	.area CODE
+                                   1599 	.area INITIALIZER
+      000000                       1600 __xinit__fDS18X20Temperature:
+      000000 C2 C8 00 00           1601 	.byte #0xc2, #0xc8, #0x00, #0x00	; -1.000000e+02
+      000004                       1602 __xinit__fAHTX0Humidity:
+      000004 00 00 00 00           1603 	.byte #0x00, #0x00, #0x00, #0x00	;  0.000000e+00
+      000008                       1604 __xinit__fAHTX0Temperature:
+      000008 00 00 00 00           1605 	.byte #0x00, #0x00, #0x00, #0x00	;  0.000000e+00
+                                   1606 	.area CABS (ABS)

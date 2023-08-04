@@ -13,36 +13,7 @@ void I2C_Setup(void) {
   I2C_Cmd(ENABLE);
 }
 
-void I2C_Send_Byte(uint8_t iAddr, uint8_t iData) {
-  I2C_GenerateSTART(ENABLE);
-  while(!I2C_CheckEvent(I2C_EVENT_MASTER_MODE_SELECT));
-  I2C_Send7bitAddress(iAddr, I2C_DIRECTION_TX);
-  while(!I2C_GetFlagStatus(I2C_FLAG_ADDRESSSENTMATCHED));
-  (void)I2C->SR1;//Комбинация для сброса ADDR.
-  (void)I2C->SR3;//Комбинация для сброса ADDR.
-  I2C_SendData(iData);
-  while(!I2C_CheckEvent(I2C_EVENT_MASTER_BYTE_TRANSMITTED));
-  I2C_GenerateSTOP(ENABLE);
-  while(!I2C_CheckEvent(I2C_EVENT_SLAVE_STOP_DETECTED));
-  // while(I2C->CR2 & I2C_CR2_STOP);
-}
-
-void I2C_Read_Byte(uint8_t iAddr, uint8_t iData, uint8_t* pBuff) {
-  while(I2C_GetFlagStatus(I2C_FLAG_BUSBUSY));
-  I2C_GenerateSTART(ENABLE);
-  while(!I2C_CheckEvent(I2C_EVENT_MASTER_MODE_SELECT));
-  I2C_Send7bitAddress(iAddr, I2C_DIRECTION_RX);
-  while(!I2C_GetFlagStatus(I2C_FLAG_ADDRESSSENTMATCHED));
-  I2C_SendData((uint8_t)(iData));
-  while(!I2C_CheckEvent(I2C_EVENT_MASTER_BYTE_TRANSMITTED));
-  I2C_GenerateSTOP(ENABLE);
-  while(!I2C_CheckEvent(I2C_EVENT_SLAVE_STOP_DETECTED));
-  *pBuff = I2C_ReceiveData();
-  I2C_AcknowledgeConfig(I2C_ACK_NONE);
-  I2C_GenerateSTOP(ENABLE);
-}
-
-void I2C_Send_Data( uint8_t Addr, uint16_t countData, uint8_t* dataBuffer) {
+void I2C_Send_Bytes(uint8_t Addr, uint16_t countData, uint8_t* dataBuffer) {
     uint32_t time_out= I2C_TIME_ERROR;//Счетчик от зависания функции.
     while((I2C_GetFlagStatus(I2C_FLAG_BUSBUSY)) && (time_out--));//Проверяем занятость линии I2C.
     I2C_GenerateSTART(ENABLE);//Запуск I2C для передачи данных.
@@ -66,7 +37,7 @@ void I2C_Send_Data( uint8_t Addr, uint16_t countData, uint8_t* dataBuffer) {
     while((I2C->CR2 & I2C_CR2_STOP) && (time_out--));//Ждём остановки передачи и STOP на линии.
 }
 
-uint8_t I2C_Read_Byte_Old(uint8_t Addr) {
+uint8_t I2C_Read_Byte(uint8_t Addr) {
   uint32_t time_out = I2C_TIME_ERROR;//Счетчик от зависания функции.
   while((I2C_GetFlagStatus(I2C_FLAG_BUSBUSY)) && (time_out--));//Проверяем занятость линии I2C.
   I2C_GenerateSTART(ENABLE);//Запуск I2C для передачи данных.
@@ -94,7 +65,7 @@ uint8_t I2C_Read_Byte_Old(uint8_t Addr) {
   return read_byte;
 }
 
-/*Функция читает из DS1307 три байта данных.*/
+/*Функция читает три байта данных.*/
 void I2C_Read_Bytes(uint8_t Addr, uint16_t countData, uint8_t* dataBuffer) {
     uint32_t time_out = I2C_TIME_ERROR;//Счетчик от зависания функции.
     while((I2C_GetFlagStatus(I2C_FLAG_BUSBUSY)) && (time_out--));//Проверяем занятость линии I2C.

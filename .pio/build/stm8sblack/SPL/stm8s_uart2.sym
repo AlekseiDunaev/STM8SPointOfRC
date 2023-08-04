@@ -1,0 +1,58 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (STMicroelectronics STM8), page 1.
+Hexadecimal [24-Bits]
+
+Symbol Table
+
+    .__.$$$.                                                    =  002710 L
+    .__.ABS.                                                    =  000000 G
+    .__.CPU.                                                    =  000000 L
+    .__.H$L.                                                    =  000001 L
+    _CLK_GetClockFreq                                              ****** GX
+  9 _UART2_ClearFlag                                               000671 GR
+  9 _UART2_ClearITPendingBit                                       0007CE GR
+  9 _UART2_Cmd                                                     00025C GR
+  9 _UART2_DeInit                                                  000000 GR
+  9 _UART2_GetFlagStatus                                           0005AE GR
+  9 _UART2_GetITStatus                                             0006E1 GR
+  9 _UART2_ITConfig                                                000274 GR
+  9 _UART2_Init                                                    000027 GR
+  9 _UART2_IrDACmd                                                 000397 GR
+  9 _UART2_IrDAConfig                                              00036C GR
+  9 _UART2_LINBreakDetectionConfig                                 0003C2 GR
+  9 _UART2_LINCmd                                                  00046B GR
+  9 _UART2_LINConfig                                               0003ED GR
+  9 _UART2_ReceiveData8                                            00053C GR
+  9 _UART2_ReceiveData9                                            000540 GR
+  9 _UART2_ReceiverWakeUpCmd                                       000511 GR
+  9 _UART2_SendBreak                                               00057C GR
+  9 _UART2_SendData8                                               00055B GR
+  9 _UART2_SendData9                                               00055F GR
+  9 _UART2_SetAddress                                              000581 GR
+  9 _UART2_SetGuardTime                                            0005A6 GR
+  9 _UART2_SetPrescaler                                            0005AA GR
+  9 _UART2_SmartCardCmd                                            000496 GR
+  9 _UART2_SmartCardNACKCmd                                        0004C1 GR
+  9 _UART2_WakeUpConfig                                            0004EC GR
+  7 ___str_0                                                       000000 R
+    __divulong                                                     ****** GX
+    __mullong                                                      ****** GX
+    _assert_failed                                                 ****** GX
+
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (STMicroelectronics STM8), page 2.
+Hexadecimal [24-Bits]
+
+Area Table
+
+   0 _CODE                                      size      0   flags    0
+   1 DATA                                       size      0   flags    0
+   2 INITIALIZED                                size      0   flags    0
+   3 DABS                                       size      0   flags    8
+   4 HOME                                       size      0   flags    0
+   5 GSINIT                                     size      0   flags    0
+   6 GSFINAL                                    size      0   flags    0
+   7 CONST                                      size     71   flags    0
+   8 INITIALIZER                                size      0   flags    0
+   9 CODE                                       size    819   flags    0
+   A CABS                                       size      0   flags    8
+

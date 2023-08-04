@@ -36,7 +36,12 @@
 #include "delay.h"
 #include "i2c.h"
 #include "ds18X20.h"
+#include "athx0.h"
+#include "bme280.h"
+
 /**
+ * 
+ * 
   * @addtogroup UART1_Printf
   * @{
   */
@@ -72,10 +77,11 @@
  * For the TX and RX pins, see chip datasheet.
  * For STM8S103 devices, this is e.g. TX=PD5, RX=PD6.
 */
-#define NODEBUG
+#define DEBUG
 #define PRODUCT
 #define DS18X20_ENABLE
-#define AHTX0_ENABLE
+#define AHTX0_DISABLE
+#define BME280_ENABLE
 
 #define MAX_LENGHT_STRING 100
 
@@ -110,7 +116,7 @@
 #define UART_MODE_TXRX_ENABLE UART1_MODE_TXRX_ENABLE
 #endif
 
-// Function
+// Functions
 void FloatToStr(char *str, float number, uint8_t integer_bit, uint8_t decimal_bit);
 
 // Variables
@@ -118,12 +124,14 @@ static const char table[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
 uint8_t iDS18X20RomID[8];
 uint8_t iI2CWrite[3];
 uint8_t iI2CRead[7];
+float fDS18X20Temperature = -100.0;
 float fAHTX0Humidity = 0;
 float fAHTX0Temperature = 0;
-float fDS18X20Temperature = -100.0;
 #ifdef DEBUG
 char sString[MAX_LENGHT_STRING];
+char str1[MAX_LENGHT_STRING];
 #endif
+extern BME280_CalibData CalibData;
 
 void Clock_Setup(void) {
   CLK_DeInit();
@@ -149,6 +157,8 @@ void GPIO_Setup(void) {
   // GPIO_DeInit(GPIOB);
   // GPIO_DeInit(GPIOC);
   // GPIO_DeInit(GPIOD);
+  GPIO_DeInit(GPIOE);
+  GPIO_Init(LED_PORT, LED_PIN, GPIO_MODE_OUT_PP_HIGH_FAST);
 }
 
 void UART_Setup() {
@@ -179,6 +189,28 @@ void main(void) {
   DS18X20_Setup();
   I2C_Setup();
   UART_Setup();
+  BME280_Setup();
+
+  #ifdef BME280_ENABLE
+  BME280_ReadCoefficients();
+  BME280_SetFilter(BME280_FILTER_4);
+  BME280_SetOversamplingTemper(BME280_OSRS_T_x4);
+  BME280_SetOversamplingPressure(BME280_OSRS_P_x2);
+  BME280_SetOversamplingHum(BME280_OSRS_H_x1);
+
+  uint16_t value32 = BME280_ReadReg(BME280_REG_CTRL_MEAS);
+  value32 |= BME280_ReadReg(BME280_REG_CTRL_HUM) << 8;
+  sprintf(str1, "Measurements status: %04X\r\n", value32);
+  printf("%s", str1);
+  sprintf(str1, "Temperature: %s\r\nPressure: %s\r\nHumidity: %s\r\n",
+  (value32 & BME280_OSRS_T_MSK) ? "ON" : "OFF",
+  (value32 & BME280_OSRS_P_MSK) ? "ON" : "OFF",
+  ((value32 >> 8) & BME280_OSRS_H_MSK) ? "ON" : "OFF");
+  printf("%s", str1);
+  BME280_SetMode(BME280_MODE_NORMAL);
+
+
+  #endif
 
   while (1) {
     #ifdef PRODUCT
@@ -192,6 +224,8 @@ void main(void) {
     const char placeholderHumidityAHTX0String[] = "{\"topic\" : \"mqtt\/humidity-aht20\", \"value\": \"%s\"}";
     const char placeholderTemperatureAHTX0String[] = "{\"topic\" : \"mqtt\/temperature-aht20\", \"value\": \"%s\"}";
     #endif
+
+    LED_ON;
 
     #ifdef DS18X20_ENABLE
     DS18X20_Reset();
@@ -215,7 +249,7 @@ void main(void) {
     printf("\r\n");
     #endif
 
-    fDS18X20Temperature =  DS18X20_Get_Temperature();
+    fDS18X20Temperature = DS18X20_Get_Temperature();
     integer_bit = 2;
     decimal_bit = 4;
     
@@ -238,37 +272,22 @@ void main(void) {
     free(stringSendUART);
     free(stringValue);
 
+    delay_ms(5000);
+    
     #endif
     #endif
     
-    delay_ms(25000);
-
     #ifdef AHTX0_ENABLE
     iI2CWrite[0] = 0xAC;
     iI2CWrite[1] = 0x33;
     iI2CWrite[2] = 0x00;
 
-    I2C_Send_Data((I2C_ID << 1), sizeof(iI2CWrite), iI2CWrite);
-    delay_ms(160);
+    I2C_Send_Bytes((I2C_ID << 1), sizeof(iI2CWrite), iI2CWrite);
+    delay_ms(300);
     I2C_Read_Bytes((I2C_ID << 1), sizeof(iI2CRead), iI2CRead);
 
-    fAHTX0Humidity = iI2CRead[1];
-    fAHTX0Humidity *= 256;
-    fAHTX0Humidity += iI2CRead[2];
-    fAHTX0Humidity *= 16;
-    fAHTX0Humidity += (iI2CRead[3]>>4);
-
-    fAHTX0Humidity /= 1048576;
-    fAHTX0Humidity *= 100;
-
-    fAHTX0Temperature = (iI2CRead[3] & 0x0f);
-    fAHTX0Temperature *= 256;
-    fAHTX0Temperature += iI2CRead[4];
-    fAHTX0Temperature *= 256;
-    fAHTX0Temperature += iI2CRead[5];
-
-    fAHTX0Temperature /= 1048576;
-    fAHTX0Temperature = fAHTX0Temperature * 200 - 50;
+    fAHTX0Humidity = ATHX0ConverHumidity(iI2CRead);
+    fAHTX0Temperature = ATHX0ConvertTemperature(iI2CRead);
     
     #ifdef DEBUG
     FloatToStr(sString, fAHTX0Humidity, 2, 2);
@@ -297,6 +316,8 @@ void main(void) {
     
     integer_bit = 2;
     decimal_bit = 2;
+
+    delay_ms(5000);
     
     sizeValueString = integer_bit + decimal_bit + 1;
     sizeSendUARTString = sizeof(placeholderTemperatureAHTX0String) + sizeValueString;
@@ -313,6 +334,95 @@ void main(void) {
 
     #endif
     #endif
+
+    #ifdef BME280_ENABLE
+    // iI2CWrite[0] = 0xD0;
+    // iI2CWrite[1] = 0x33;
+    // iI2CWrite[2] = 0x00;
+
+    // I2C_Send_Bytes((BME280_ADDRESS << 1), (uint16_t)1, iI2CWrite);
+    #ifdef DEBUG
+    uint8_t res = BME280_ReadReg(BME280_REG_ID);
+    printf("BME280_ID: 0x%02x", res);
+    // printf("BME280_ID: 0x%02x, ", I2C_Read_Byte(BME280_ADDRESS << 1));
+    printf("\r\n");
+
+    if (res != BME280_ID) {
+      Error();
+      return;
+    }
+
+    BME280_WriteReg(BME280_REG_SOFTRESET,BME280_SOFTRESET_VALUE);
+    while (BME280_ReadStatus() & BME280_STATUS_IM_UPDATE);
+
+    sprintf(str1, "DIG_T1: %u\r\n", CalibData.dig_T1);
+    printf("%s", str1);
+ 
+    sprintf(str1, "DIG_T2: %d\r\n", CalibData.dig_T2);
+    printf("%s", str1);
+  
+    sprintf(str1, "DIG_T3: %d\r\n", CalibData.dig_T3);
+    printf("%s", str1);
+  
+    sprintf(str1, "DIG_P1: %u\r\n", CalibData.dig_P1);
+    printf("%s", str1);
+  
+    sprintf(str1, "DIG_P2: %d\r\n", CalibData.dig_P2);
+    printf("%s", str1);
+  
+    sprintf(str1, "DIG_P3: %d\r\n", CalibData.dig_P3);
+    printf("%s", str1);
+  
+    sprintf(str1, "DIG_P4: %d\r\n", CalibData.dig_P4);
+    printf("%s", str1);
+  
+    sprintf(str1, "DIG_P5: %d\r\n", CalibData.dig_P5);
+    printf("%s", str1);
+  
+    sprintf(str1, "DIG_P6: %d\r\n", CalibData.dig_P6);
+    printf("%s", str1);
+  
+    sprintf(str1, "DIG_P7: %d\r\n", CalibData.dig_P7);
+    printf("%s", str1);
+  
+    sprintf(str1, "DIG_P8: %d\r\n", CalibData.dig_P8);
+    printf("%s", str1);
+  
+    sprintf(str1, "DIG_P9: %d\r\n", CalibData.dig_P9);
+    printf("%s", str1);
+  
+    sprintf(str1, "DIG_H1: %d\r\n", CalibData.dig_H1);
+    printf("%s", str1);
+  
+    sprintf(str1, "DIG_H2: %d\r\n", CalibData.dig_H2);
+    printf("%s", str1);
+  
+    sprintf(str1, "DIG_H3: %d\r\n", CalibData.dig_H3);
+    printf("%s", str1);
+  
+    sprintf(str1, "DIG_H4: %d\r\n", CalibData.dig_H4);
+    printf("%s", str1);
+  
+    sprintf(str1, "DIG_H5: %d\r\n", CalibData.dig_H5);
+    printf("%s", str1);
+  
+    sprintf(str1, "DIG_H6: %d\r\n", CalibData.dig_H3);
+    printf("%s", str1);
+
+    #endif
+    #endif
+    
+    #ifdef DEBUG 
+      delay_ms(10000);
+    #endif
+
+    #ifndef DEBUG
+    for (uint8_t i = 0; i < 9; i++) {
+      delay_ms(65535);
+    }
+    #endif
+
+    LED_OFF;
 
     // Polling mode
     // HAL_I2C_Master_Transmit(&hi2c1, (I2C_ADDRESS << 1), &regAddress, 1,  I2C_TIMEOUT);
