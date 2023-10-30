@@ -24,7 +24,7 @@
             },
             "defines": [
                 "F_CPU=16000000L",
-                "PLATFORMIO=60109",
+                "PLATFORMIO=60111",
                 "STM8S_BLACK",
                 "STM8S105",
                 "USE_STDPERIPH_DRIVER",

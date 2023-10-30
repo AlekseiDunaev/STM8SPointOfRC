@@ -66,77 +66,98 @@ uint8_t BME280_ReadStatus(void) {
 
 void BME280_ReadCoefficients(void) {
   BME280_ReadReg_U16(BME280_REGISTER_DIG_T1, &CalibData.dig_T1);
-  // sprintf(str1, "DIG_T1: %urn", CalibData.dig_T1);
-  // printf("%s", str1);
-  // printf("\r\n");
   BME280_ReadReg_S16(BME280_REGISTER_DIG_T2, &CalibData.dig_T2);
-  // sprintf(str1, "DIG_T2: %drn", CalibData.dig_T2);
-  // printf("%s", str1);
-  // printf("\r\n");
   BME280_ReadReg_S16(BME280_REGISTER_DIG_T3, &CalibData.dig_T3);
-  // sprintf(str1, "DIG_T3: %drn", CalibData.dig_T3);
-  // printf("%s", str1);
-  // printf("\r\n");
   BME280_ReadReg_U16(BME280_REGISTER_DIG_P1, &CalibData.dig_P1);
-  // sprintf(str1, "DIG_P1: %urn", CalibData.dig_P1);
-  // printf("%s", str1);
-  // printf("\r\n");
   BME280_ReadReg_S16(BME280_REGISTER_DIG_P2, &CalibData.dig_P2);
-  // sprintf(str1, "DIG_P2: %drn", CalibData.dig_P2);
-  // printf("%s", str1);
-  // printf("\r\n");
   BME280_ReadReg_S16(BME280_REGISTER_DIG_P3, &CalibData.dig_P3);
-  // sprintf(str1, "DIG_P3: %drn", CalibData.dig_P3);
-  // printf("%s", str1);
-  // printf("\r\n");
   BME280_ReadReg_S16(BME280_REGISTER_DIG_P4, &CalibData.dig_P4);
-  // sprintf(str1, "DIG_P4: %drn", CalibData.dig_P4);
-  // printf("%s", str1);
-  // printf("\r\n");
   BME280_ReadReg_S16(BME280_REGISTER_DIG_P5, &CalibData.dig_P5);
-  // sprintf(str1, "DIG_P5: %drn", CalibData.dig_P5);
-  // printf("%s", str1);
-  // printf("\r\n");
   BME280_ReadReg_S16(BME280_REGISTER_DIG_P6, &CalibData.dig_P6);
-  //  sprintf(str1, "DIG_P6: %drn", CalibData.dig_P6);
-  // printf("%s", str1);
-  // printf("\r\n");
   BME280_ReadReg_S16(BME280_REGISTER_DIG_P7, &CalibData.dig_P7);
-  // sprintf(str1, "DIG_P7: %drn", CalibData.dig_P7);
-  // printf("%s", str1);
-  // printf("\r\n");
   BME280_ReadReg_S16(BME280_REGISTER_DIG_P8, &CalibData.dig_P8);
-  // sprintf(str1, "DIG_P8: %drn", CalibData.dig_P8);
-  // printf("%s", str1);
-  // printf("\r\n");
   BME280_ReadReg_S16(BME280_REGISTER_DIG_P9, &CalibData.dig_P9);
-  // sprintf(str1, "DIG_P9: %drn", CalibData.dig_P9);
-  // printf("%s", str1);
-  // printf("\r\n");
   CalibData.dig_H1 = BME280_ReadReg(BME280_REGISTER_DIG_H1);
-  // sprintf(str1, "DIG_H1: %drn", CalibData.dig_H1);
-  // printf("%s", str1);
-  // printf("\r\n");
   BME280_ReadReg_S16(BME280_REGISTER_DIG_H2, &CalibData.dig_H2);
-  // sprintf(str1, "DIG_H2: %drn", CalibData.dig_H2);
-  // printf("%s", str1);
-  // printf("\r\n");
   CalibData.dig_H3 = BME280_ReadReg(BME280_REGISTER_DIG_H3);
-  // sprintf(str1, "DIG_H3: %drn", CalibData.dig_H3);
-  // printf("%s", str1);
-  // printf("\r\n");
   CalibData.dig_H4 = (BME280_ReadReg(BME280_REGISTER_DIG_H4) << 4) | (BME280_ReadReg(BME280_REGISTER_DIG_H4+1) & 0xF);
-  // sprintf(str1, "DIG_H4: %drn", CalibData.dig_H4);
-  // printf("%s", str1);
-  // printf("\r\n");
   CalibData.dig_H5 = (BME280_ReadReg(BME280_REGISTER_DIG_H5+1) << 4) | (BME280_ReadReg(BME280_REGISTER_DIG_H5) >> 4);
-  // sprintf(str1, "DIG_H5: %drn", CalibData.dig_H5);
-  // printf("%s", str1);
-  // printf("\r\n");
   CalibData.dig_H6 = (int8_t)BME280_ReadReg(BME280_REGISTER_DIG_H6);
-  // sprintf(str1, "DIG_H6: %drn", CalibData.dig_H3);
-  // printf("%s", str1);
-  // printf("\r\n");
+
+  #ifdef DEBUG
+  sprintf(str1, "DIG_T1: %urn", CalibData.dig_T1);
+  printf("%s", str1);
+  printf("\r\n");
+
+  sprintf(str1, "DIG_T2: %drn", CalibData.dig_T2);
+  printf("%s", str1);
+  printf("\r\n");
+
+  sprintf(str1, "DIG_T3: %drn", CalibData.dig_T3);
+  printf("%s", str1);
+  printf("\r\n");
+
+  sprintf(str1, "DIG_P1: %urn", CalibData.dig_P1);
+  printf("%s", str1);
+  printf("\r\n");
+
+  sprintf(str1, "DIG_P2: %drn", CalibData.dig_P2);
+  printf("%s", str1);
+  printf("\r\n");
+
+  sprintf(str1, "DIG_P3: %drn", CalibData.dig_P3);
+  printf("%s", str1);
+  printf("\r\n");
+
+  sprintf(str1, "DIG_P4: %drn", CalibData.dig_P4);
+  printf("%s", str1);
+  printf("\r\n");
+
+  sprintf(str1, "DIG_P5: %drn", CalibData.dig_P5);
+  printf("%s", str1);
+  printf("\r\n");
+  
+  sprintf(str1, "DIG_P6: %drn", CalibData.dig_P6);
+  printf("%s", str1);
+  printf("\r\n");
+  
+  sprintf(str1, "DIG_P7: %drn", CalibData.dig_P7);
+  printf("%s", str1);
+  printf("\r\n");
+  
+  sprintf(str1, "DIG_P8: %drn", CalibData.dig_P8);
+  printf("%s", str1);
+  printf("\r\n");
+
+  sprintf(str1, "DIG_P9: %drn", CalibData.dig_P9);
+  printf("%s", str1);
+  printf("\r\n");
+
+  sprintf(str1, "DIG_H1: %drn", CalibData.dig_H1);
+  printf("%s", str1);
+  printf("\r\n");
+  
+  sprintf(str1, "DIG_H2: %drn", CalibData.dig_H2);
+  printf("%s", str1);
+  printf("\r\n");
+  
+  sprintf(str1, "DIG_H3: %drn", CalibData.dig_H3);
+  printf("%s", str1);
+  printf("\r\n");
+  
+  sprintf(str1, "DIG_H4: %drn", CalibData.dig_H4);
+  printf("%s", str1);
+  printf("\r\n");
+  
+  sprintf(str1, "DIG_H5: %drn", CalibData.dig_H5);
+  printf("%s", str1);
+  printf("\r\n");
+  
+  sprintf(str1, "DIG_H6: %drn", CalibData.dig_H3);
+  printf("%s", str1);
+  printf("\r\n");
+
+  #endif
 }
 
 void BME280_SetStandby(uint8_t tsb) {
@@ -202,5 +223,6 @@ float BME280_ReadHumidity(void) {
 
 float BME280_ReadAltitude(float seaLevel) {
   float att = 0.0f;
+  seaLevel += 1;
   return att;
 }

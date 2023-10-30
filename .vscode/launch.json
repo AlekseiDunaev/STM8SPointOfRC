@@ -14,7 +14,7 @@
             "name": "PIO Debug",
             "executable": "/Users/alekseydunaev/Documents/PlatformIO/Projects/STM8SPointOfRC/.pio/build/stm8sblack/firmware.elf",
             "projectEnvName": "stm8sblack",
-            "toolchainBinDir": "/Users/alekseydunaev/.platformio/packages/tool-stm8binutils/bin",
+            "toolchainBinDir": "/Users/alekseydunaev/.platformio/packages/toolchain-sdcc/bin",
             "internalConsoleOptions": "openOnSessionStart",
             "svdPath": "/Users/alekseydunaev/.platformio/platforms/ststm8/misc/svd/STM8S105K4.svd",
             "preLaunchTask": {
@@ -28,7 +28,7 @@
             "name": "PIO Debug (skip Pre-Debug)",
             "executable": "/Users/alekseydunaev/Documents/PlatformIO/Projects/STM8SPointOfRC/.pio/build/stm8sblack/firmware.elf",
             "projectEnvName": "stm8sblack",
-            "toolchainBinDir": "/Users/alekseydunaev/.platformio/packages/tool-stm8binutils/bin",
+            "toolchainBinDir": "/Users/alekseydunaev/.platformio/packages/toolchain-sdcc/bin",
             "internalConsoleOptions": "openOnSessionStart",
             "svdPath": "/Users/alekseydunaev/.platformio/platforms/ststm8/misc/svd/STM8S105K4.svd"
         },
@@ -38,7 +38,7 @@
             "name": "PIO Debug (without uploading)",
             "executable": "/Users/alekseydunaev/Documents/PlatformIO/Projects/STM8SPointOfRC/.pio/build/stm8sblack/firmware.elf",
             "projectEnvName": "stm8sblack",
-            "toolchainBinDir": "/Users/alekseydunaev/.platformio/packages/tool-stm8binutils/bin",
+            "toolchainBinDir": "/Users/alekseydunaev/.platformio/packages/toolchain-sdcc/bin",
             "internalConsoleOptions": "openOnSessionStart",
             "svdPath": "/Users/alekseydunaev/.platformio/platforms/ststm8/misc/svd/STM8S105K4.svd",
             "loadMode": "manual"

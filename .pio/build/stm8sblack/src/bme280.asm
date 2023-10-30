@@ -251,63 +251,63 @@ _BME280_ReadCoefficients:
 	ldw	x, #(_CalibData+0)
 	ld	a, #0x88
 	call	_BME280_ReadReg_U16
-;	src/bme280.c: 72: BME280_ReadReg_S16(BME280_REGISTER_DIG_T2, &CalibData.dig_T2);
+;	src/bme280.c: 69: BME280_ReadReg_S16(BME280_REGISTER_DIG_T2, &CalibData.dig_T2);
 	ldw	x, #(_CalibData+2)
 	ld	a, #0x8a
 	call	_BME280_ReadReg_S16
-;	src/bme280.c: 76: BME280_ReadReg_S16(BME280_REGISTER_DIG_T3, &CalibData.dig_T3);
+;	src/bme280.c: 70: BME280_ReadReg_S16(BME280_REGISTER_DIG_T3, &CalibData.dig_T3);
 	ldw	x, #(_CalibData+4)
 	ld	a, #0x8c
 	call	_BME280_ReadReg_S16
-;	src/bme280.c: 80: BME280_ReadReg_U16(BME280_REGISTER_DIG_P1, &CalibData.dig_P1);
+;	src/bme280.c: 71: BME280_ReadReg_U16(BME280_REGISTER_DIG_P1, &CalibData.dig_P1);
 	ldw	x, #(_CalibData+6)
 	ld	a, #0x8e
 	call	_BME280_ReadReg_U16
-;	src/bme280.c: 84: BME280_ReadReg_S16(BME280_REGISTER_DIG_P2, &CalibData.dig_P2);
+;	src/bme280.c: 72: BME280_ReadReg_S16(BME280_REGISTER_DIG_P2, &CalibData.dig_P2);
 	ldw	x, #(_CalibData+8)
 	ld	a, #0x90
 	call	_BME280_ReadReg_S16
-;	src/bme280.c: 88: BME280_ReadReg_S16(BME280_REGISTER_DIG_P3, &CalibData.dig_P3);
+;	src/bme280.c: 73: BME280_ReadReg_S16(BME280_REGISTER_DIG_P3, &CalibData.dig_P3);
 	ldw	x, #(_CalibData+10)
 	ld	a, #0x92
 	call	_BME280_ReadReg_S16
-;	src/bme280.c: 92: BME280_ReadReg_S16(BME280_REGISTER_DIG_P4, &CalibData.dig_P4);
+;	src/bme280.c: 74: BME280_ReadReg_S16(BME280_REGISTER_DIG_P4, &CalibData.dig_P4);
 	ldw	x, #(_CalibData+12)
 	ld	a, #0x94
 	call	_BME280_ReadReg_S16
-;	src/bme280.c: 96: BME280_ReadReg_S16(BME280_REGISTER_DIG_P5, &CalibData.dig_P5);
+;	src/bme280.c: 75: BME280_ReadReg_S16(BME280_REGISTER_DIG_P5, &CalibData.dig_P5);
 	ldw	x, #(_CalibData+14)
 	ld	a, #0x96
 	call	_BME280_ReadReg_S16
-;	src/bme280.c: 100: BME280_ReadReg_S16(BME280_REGISTER_DIG_P6, &CalibData.dig_P6);
+;	src/bme280.c: 76: BME280_ReadReg_S16(BME280_REGISTER_DIG_P6, &CalibData.dig_P6);
 	ldw	x, #(_CalibData+16)
 	ld	a, #0x98
 	call	_BME280_ReadReg_S16
-;	src/bme280.c: 104: BME280_ReadReg_S16(BME280_REGISTER_DIG_P7, &CalibData.dig_P7);
+;	src/bme280.c: 77: BME280_ReadReg_S16(BME280_REGISTER_DIG_P7, &CalibData.dig_P7);
 	ldw	x, #(_CalibData+18)
 	ld	a, #0x9a
 	call	_BME280_ReadReg_S16
-;	src/bme280.c: 108: BME280_ReadReg_S16(BME280_REGISTER_DIG_P8, &CalibData.dig_P8);
+;	src/bme280.c: 78: BME280_ReadReg_S16(BME280_REGISTER_DIG_P8, &CalibData.dig_P8);
 	ldw	x, #(_CalibData+20)
 	ld	a, #0x9c
 	call	_BME280_ReadReg_S16
-;	src/bme280.c: 112: BME280_ReadReg_S16(BME280_REGISTER_DIG_P9, &CalibData.dig_P9);
+;	src/bme280.c: 79: BME280_ReadReg_S16(BME280_REGISTER_DIG_P9, &CalibData.dig_P9);
 	ldw	x, #(_CalibData+22)
 	ld	a, #0x9e
 	call	_BME280_ReadReg_S16
-;	src/bme280.c: 116: CalibData.dig_H1 = BME280_ReadReg(BME280_REGISTER_DIG_H1);
+;	src/bme280.c: 80: CalibData.dig_H1 = BME280_ReadReg(BME280_REGISTER_DIG_H1);
 	ld	a, #0xa1
 	call	_BME280_ReadReg
 	ld	_CalibData+24, a
-;	src/bme280.c: 120: BME280_ReadReg_S16(BME280_REGISTER_DIG_H2, &CalibData.dig_H2);
+;	src/bme280.c: 81: BME280_ReadReg_S16(BME280_REGISTER_DIG_H2, &CalibData.dig_H2);
 	ldw	x, #(_CalibData+25)
 	ld	a, #0xe1
 	call	_BME280_ReadReg_S16
-;	src/bme280.c: 124: CalibData.dig_H3 = BME280_ReadReg(BME280_REGISTER_DIG_H3);
+;	src/bme280.c: 82: CalibData.dig_H3 = BME280_ReadReg(BME280_REGISTER_DIG_H3);
 	ld	a, #0xe3
 	call	_BME280_ReadReg
 	ld	_CalibData+27, a
-;	src/bme280.c: 128: CalibData.dig_H4 = (BME280_ReadReg(BME280_REGISTER_DIG_H4) << 4) | (BME280_ReadReg(BME280_REGISTER_DIG_H4+1) & 0xF);
+;	src/bme280.c: 83: CalibData.dig_H4 = (BME280_ReadReg(BME280_REGISTER_DIG_H4) << 4) | (BME280_ReadReg(BME280_REGISTER_DIG_H4+1) & 0xF);
 	ld	a, #0xe4
 	call	_BME280_ReadReg
 	clrw	x
@@ -327,7 +327,7 @@ _BME280_ReadCoefficients:
 	or	a, (0x04, sp)
 	ld	xl, a
 	ldw	_CalibData+28, x
-;	src/bme280.c: 132: CalibData.dig_H5 = (BME280_ReadReg(BME280_REGISTER_DIG_H5+1) << 4) | (BME280_ReadReg(BME280_REGISTER_DIG_H5) >> 4);
+;	src/bme280.c: 84: CalibData.dig_H5 = (BME280_ReadReg(BME280_REGISTER_DIG_H5+1) << 4) | (BME280_ReadReg(BME280_REGISTER_DIG_H5) >> 4);
 	ld	a, #0xe6
 	call	_BME280_ReadReg
 	clrw	x
@@ -347,197 +347,197 @@ _BME280_ReadCoefficients:
 	or	a, (0x03, sp)
 	ld	xh, a
 	ldw	_CalibData+30, x
-;	src/bme280.c: 136: CalibData.dig_H6 = (int8_t)BME280_ReadReg(BME280_REGISTER_DIG_H6);
+;	src/bme280.c: 85: CalibData.dig_H6 = (int8_t)BME280_ReadReg(BME280_REGISTER_DIG_H6);
 	ld	a, #0xe7
 	call	_BME280_ReadReg
 	ld	_CalibData+32, a
-;	src/bme280.c: 140: }
+;	src/bme280.c: 161: }
 	addw	sp, #4
 	ret
-;	src/bme280.c: 142: void BME280_SetStandby(uint8_t tsb) {
+;	src/bme280.c: 163: void BME280_SetStandby(uint8_t tsb) {
 ;	-----------------------------------------
 ;	 function BME280_SetStandby
 ;	-----------------------------------------
 _BME280_SetStandby:
 	pushw	x
 	ld	(0x02, sp), a
-;	src/bme280.c: 144: reg = BME280_ReadReg(BME280_REG_CONFIG) & ~BME280_STBY_MSK;
+;	src/bme280.c: 165: reg = BME280_ReadReg(BME280_REG_CONFIG) & ~BME280_STBY_MSK;
 	ld	a, #0xf5
 	call	_BME280_ReadReg
 	and	a, #0x1f
 	ld	(0x01, sp), a
-;	src/bme280.c: 145: reg |= tsb & BME280_STBY_MSK;
+;	src/bme280.c: 166: reg |= tsb & BME280_STBY_MSK;
 	ld	a, (0x02, sp)
 	and	a, #0xe0
 	or	a, (0x01, sp)
-;	src/bme280.c: 146: BME280_WriteReg(BME280_REG_CONFIG,reg);
+;	src/bme280.c: 167: BME280_WriteReg(BME280_REG_CONFIG,reg);
 	push	a
 	ld	a, #0xf5
 	call	_BME280_WriteReg
-;	src/bme280.c: 147: }
+;	src/bme280.c: 168: }
 	popw	x
 	ret
-;	src/bme280.c: 149: void BME280_SetFilter(uint8_t filter) {
+;	src/bme280.c: 170: void BME280_SetFilter(uint8_t filter) {
 ;	-----------------------------------------
 ;	 function BME280_SetFilter
 ;	-----------------------------------------
 _BME280_SetFilter:
 	pushw	x
 	ld	(0x02, sp), a
-;	src/bme280.c: 151: reg = BME280_ReadReg(BME280_REG_CONFIG) & ~BME280_FILTER_MSK;
+;	src/bme280.c: 172: reg = BME280_ReadReg(BME280_REG_CONFIG) & ~BME280_FILTER_MSK;
 	ld	a, #0xf5
 	call	_BME280_ReadReg
 	and	a, #0xe3
 	ld	(0x01, sp), a
-;	src/bme280.c: 152: reg |= filter & BME280_FILTER_MSK;
+;	src/bme280.c: 173: reg |= filter & BME280_FILTER_MSK;
 	ld	a, (0x02, sp)
 	and	a, #0x1c
 	or	a, (0x01, sp)
-;	src/bme280.c: 153: BME280_WriteReg(BME280_REG_CONFIG,reg);
+;	src/bme280.c: 174: BME280_WriteReg(BME280_REG_CONFIG,reg);
 	push	a
 	ld	a, #0xf5
 	call	_BME280_WriteReg
-;	src/bme280.c: 154: }
+;	src/bme280.c: 175: }
 	popw	x
 	ret
-;	src/bme280.c: 156: void BME280_SetOversamplingTemper(uint8_t osrs) {
+;	src/bme280.c: 177: void BME280_SetOversamplingTemper(uint8_t osrs) {
 ;	-----------------------------------------
 ;	 function BME280_SetOversamplingTemper
 ;	-----------------------------------------
 _BME280_SetOversamplingTemper:
 	pushw	x
 	ld	(0x02, sp), a
-;	src/bme280.c: 158: reg = BME280_ReadReg(BME280_REG_CTRL_MEAS) & ~BME280_OSRS_T_MSK;
+;	src/bme280.c: 179: reg = BME280_ReadReg(BME280_REG_CTRL_MEAS) & ~BME280_OSRS_T_MSK;
 	ld	a, #0xf4
 	call	_BME280_ReadReg
 	and	a, #0x1f
 	ld	(0x01, sp), a
-;	src/bme280.c: 159: reg |= osrs & BME280_OSRS_T_MSK;
+;	src/bme280.c: 180: reg |= osrs & BME280_OSRS_T_MSK;
 	ld	a, (0x02, sp)
 	and	a, #0xe0
 	or	a, (0x01, sp)
-;	src/bme280.c: 160: BME280_WriteReg(BME280_REG_CTRL_MEAS,reg);
+;	src/bme280.c: 181: BME280_WriteReg(BME280_REG_CTRL_MEAS,reg);
 	push	a
 	ld	a, #0xf4
 	call	_BME280_WriteReg
-;	src/bme280.c: 161: }
+;	src/bme280.c: 182: }
 	popw	x
 	ret
-;	src/bme280.c: 163: void BME280_SetOversamplingPressure(uint8_t osrs) {
+;	src/bme280.c: 184: void BME280_SetOversamplingPressure(uint8_t osrs) {
 ;	-----------------------------------------
 ;	 function BME280_SetOversamplingPressure
 ;	-----------------------------------------
 _BME280_SetOversamplingPressure:
 	pushw	x
 	ld	(0x02, sp), a
-;	src/bme280.c: 165: reg = BME280_ReadReg(BME280_REG_CTRL_MEAS) & ~BME280_OSRS_P_MSK;
+;	src/bme280.c: 186: reg = BME280_ReadReg(BME280_REG_CTRL_MEAS) & ~BME280_OSRS_P_MSK;
 	ld	a, #0xf4
 	call	_BME280_ReadReg
 	and	a, #0xe3
 	ld	(0x01, sp), a
-;	src/bme280.c: 166: reg |= osrs & BME280_OSRS_P_MSK;
+;	src/bme280.c: 187: reg |= osrs & BME280_OSRS_P_MSK;
 	ld	a, (0x02, sp)
 	and	a, #0x1c
 	or	a, (0x01, sp)
-;	src/bme280.c: 167: BME280_WriteReg(BME280_REG_CTRL_MEAS,reg);
+;	src/bme280.c: 188: BME280_WriteReg(BME280_REG_CTRL_MEAS,reg);
 	push	a
 	ld	a, #0xf4
 	call	_BME280_WriteReg
-;	src/bme280.c: 168: }
+;	src/bme280.c: 189: }
 	popw	x
 	ret
-;	src/bme280.c: 170: void BME280_SetOversamplingHum(uint8_t osrs) {
+;	src/bme280.c: 191: void BME280_SetOversamplingHum(uint8_t osrs) {
 ;	-----------------------------------------
 ;	 function BME280_SetOversamplingHum
 ;	-----------------------------------------
 _BME280_SetOversamplingHum:
 	pushw	x
 	ld	(0x02, sp), a
-;	src/bme280.c: 172: reg = BME280_ReadReg(BME280_REG_CTRL_HUM) & ~BME280_OSRS_H_MSK;
+;	src/bme280.c: 193: reg = BME280_ReadReg(BME280_REG_CTRL_HUM) & ~BME280_OSRS_H_MSK;
 	ld	a, #0xf2
 	call	_BME280_ReadReg
 	and	a, #0xf8
 	ld	(0x01, sp), a
-;	src/bme280.c: 173: reg |= osrs & BME280_OSRS_H_MSK;
+;	src/bme280.c: 194: reg |= osrs & BME280_OSRS_H_MSK;
 	ld	a, (0x02, sp)
 	and	a, #0x07
 	or	a, (0x01, sp)
-;	src/bme280.c: 174: BME280_WriteReg(BME280_REG_CTRL_HUM,reg);
+;	src/bme280.c: 195: BME280_WriteReg(BME280_REG_CTRL_HUM,reg);
 	push	a
 	ld	a, #0xf2
 	call	_BME280_WriteReg
-;	src/bme280.c: 177: reg = BME280_ReadReg(BME280_REG_CTRL_MEAS);
+;	src/bme280.c: 198: reg = BME280_ReadReg(BME280_REG_CTRL_MEAS);
 	ld	a, #0xf4
 	call	_BME280_ReadReg
-;	src/bme280.c: 178: BME280_WriteReg(BME280_REG_CTRL_MEAS,reg);
+;	src/bme280.c: 199: BME280_WriteReg(BME280_REG_CTRL_MEAS,reg);
 	push	a
 	ld	a, #0xf4
 	call	_BME280_WriteReg
-;	src/bme280.c: 179: }
+;	src/bme280.c: 200: }
 	popw	x
 	ret
-;	src/bme280.c: 181: void BME280_SetMode(uint8_t mode) {
+;	src/bme280.c: 202: void BME280_SetMode(uint8_t mode) {
 ;	-----------------------------------------
 ;	 function BME280_SetMode
 ;	-----------------------------------------
 _BME280_SetMode:
 	pushw	x
 	ld	(0x02, sp), a
-;	src/bme280.c: 183: reg = BME280_ReadReg(BME280_REG_CTRL_MEAS) & ~BME280_MODE_MSK;
+;	src/bme280.c: 204: reg = BME280_ReadReg(BME280_REG_CTRL_MEAS) & ~BME280_MODE_MSK;
 	ld	a, #0xf4
 	call	_BME280_ReadReg
 	and	a, #0xfc
 	ld	(0x01, sp), a
-;	src/bme280.c: 184: reg |= mode & BME280_MODE_MSK;
+;	src/bme280.c: 205: reg |= mode & BME280_MODE_MSK;
 	ld	a, (0x02, sp)
 	and	a, #0x03
 	or	a, (0x01, sp)
-;	src/bme280.c: 185: BME280_WriteReg(BME280_REG_CTRL_MEAS,reg);
+;	src/bme280.c: 206: BME280_WriteReg(BME280_REG_CTRL_MEAS,reg);
 	push	a
 	ld	a, #0xf4
 	call	_BME280_WriteReg
-;	src/bme280.c: 186: }
+;	src/bme280.c: 207: }
 	popw	x
 	ret
-;	src/bme280.c: 188: float BME280_ReadTemperature(void) {
+;	src/bme280.c: 209: float BME280_ReadTemperature(void) {
 ;	-----------------------------------------
 ;	 function BME280_ReadTemperature
 ;	-----------------------------------------
 _BME280_ReadTemperature:
-;	src/bme280.c: 190: return temper_float;
+;	src/bme280.c: 211: return temper_float;
 	clrw	x
 	clrw	y
-;	src/bme280.c: 191: }
+;	src/bme280.c: 212: }
 	ret
-;	src/bme280.c: 193: float BME280_ReadPressure(void) {
+;	src/bme280.c: 214: float BME280_ReadPressure(void) {
 ;	-----------------------------------------
 ;	 function BME280_ReadPressure
 ;	-----------------------------------------
 _BME280_ReadPressure:
-;	src/bme280.c: 195: return press_float;
+;	src/bme280.c: 216: return press_float;
 	clrw	x
 	clrw	y
-;	src/bme280.c: 196: }
+;	src/bme280.c: 217: }
 	ret
-;	src/bme280.c: 198: float BME280_ReadHumidity(void) {
+;	src/bme280.c: 219: float BME280_ReadHumidity(void) {
 ;	-----------------------------------------
 ;	 function BME280_ReadHumidity
 ;	-----------------------------------------
 _BME280_ReadHumidity:
-;	src/bme280.c: 200: return hum_float;
+;	src/bme280.c: 221: return hum_float;
 	clrw	x
 	clrw	y
-;	src/bme280.c: 201: }
+;	src/bme280.c: 222: }
 	ret
-;	src/bme280.c: 203: float BME280_ReadAltitude(float seaLevel) {
+;	src/bme280.c: 224: float BME280_ReadAltitude(float seaLevel) {
 ;	-----------------------------------------
 ;	 function BME280_ReadAltitude
 ;	-----------------------------------------
 _BME280_ReadAltitude:
-;	src/bme280.c: 205: return att;
+;	src/bme280.c: 227: return att;
 	clrw	x
 	clrw	y
-;	src/bme280.c: 206: }
+;	src/bme280.c: 228: }
 	pushw	x
 	ldw	x, (3, sp)
 	ldw	(7, sp), x
