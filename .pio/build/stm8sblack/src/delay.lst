@@ -1,6 +1,6 @@
                                       1 ;--------------------------------------------------------
                                       2 ; File Created by SDCC : free open source ANSI-C Compiler
-                                      3 ; Version 4.2.0 #13081 (Mac OS X x86_64)
+                                      3 ; Version 4.2.0 #13081 (MINGW64)
                                       4 ;--------------------------------------------------------
                                       5 	.module delay
                                       6 	.optsdcc -mstm8
@@ -47,49 +47,49 @@
                                      47 ; code
                                      48 ;--------------------------------------------------------
                                      49 	.area CODE
-                                     50 ;	src/delay.c: 3: void delay_us(uint16_t value) {
+                                     50 ;	src\delay.c: 3: void delay_us(uint16_t value) {
                                      51 ;	-----------------------------------------
                                      52 ;	 function delay_us
                                      53 ;	-----------------------------------------
       000000                         54 _delay_us:
-                                     55 ;	src/delay.c: 4: register unsigned int loops = (dly_const * value) ;
+                                     55 ;	src\delay.c: 4: register unsigned int loops = (dly_const * value) ;
       000000 CDr00r00         [ 4]   56 	call	___uint2fs
       000003 89               [ 2]   57 	pushw	x
       000004 90 89            [ 2]   58 	pushw	y
       000006 CDr00r00         [ 4]   59 	call	___fs2uint
-                                     60 ;	src/delay.c: 6: while(loops) {
+                                     60 ;	src\delay.c: 6: while(loops) {
       000009                         61 00101$:
       000009 5D               [ 2]   62 	tnzw	x
       00000A 26 01            [ 1]   63 	jrne	00117$
       00000C 81               [ 4]   64 	ret
       00000D                         65 00117$:
-                                     66 ;	src/delay.c: 7: __asm__ ("nop");
+                                     66 ;	src\delay.c: 7: __asm__ ("nop");
       00000D 9D               [ 1]   67 	nop
-                                     68 ;	src/delay.c: 8: loops--;
+                                     68 ;	src\delay.c: 8: loops--;
       00000E 5A               [ 2]   69 	decw	x
       00000F 20 F8            [ 2]   70 	jra	00101$
-                                     71 ;	src/delay.c: 10: }
+                                     71 ;	src\delay.c: 10: }
       000011 81               [ 4]   72 	ret
-                                     73 ;	src/delay.c: 12: void delay_ms(uint16_t value) {
+                                     73 ;	src\delay.c: 12: void delay_ms(uint16_t value) {
                                      74 ;	-----------------------------------------
                                      75 ;	 function delay_ms
                                      76 ;	-----------------------------------------
       000012                         77 _delay_ms:
-                                     78 ;	src/delay.c: 13: while(value)
+                                     78 ;	src\delay.c: 13: while(value)
       000012                         79 00101$:
       000012 5D               [ 2]   80 	tnzw	x
       000013 26 01            [ 1]   81 	jrne	00117$
       000015 81               [ 4]   82 	ret
       000016                         83 00117$:
-                                     84 ;	src/delay.c: 15: delay_us(1000);
+                                     84 ;	src\delay.c: 15: delay_us(1000);
       000016 89               [ 2]   85 	pushw	x
       000017 AE 03 E8         [ 2]   86 	ldw	x, #0x03e8
       00001A CDr00r00         [ 4]   87 	call	_delay_us
       00001D 85               [ 2]   88 	popw	x
-                                     89 ;	src/delay.c: 16: value--;
+                                     89 ;	src\delay.c: 16: value--;
       00001E 5A               [ 2]   90 	decw	x
       00001F 20 F1            [ 2]   91 	jra	00101$
-                                     92 ;	src/delay.c: 18: }
+                                     92 ;	src\delay.c: 18: }
       000021 81               [ 4]   93 	ret
                                      94 	.area CODE
                                      95 	.area CONST

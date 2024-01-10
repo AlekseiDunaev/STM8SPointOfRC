@@ -7,26 +7,26 @@ Symbol Table
     .__.ABS.                                                    =  000000 G
     .__.CPU.                                                    =  000000 L
     .__.H$L.                                                    =  000001 L
-  9 _I2C_AcknowledgeConfig                                         0002EB GR
-  9 _I2C_CheckEvent                                                000411 GR
-  9 _I2C_ClearFlag                                                 00057F GR
-  9 _I2C_ClearITPendingBit                                         000633 GR
-  9 _I2C_Cmd                                                       0001E9 GR
+  9 _I2C_AcknowledgeConfig                                         0002DF GR
+  9 _I2C_CheckEvent                                                000405 GR
+  9 _I2C_ClearFlag                                                 000573 GR
+  9 _I2C_ClearITPendingBit                                         000627 GR
+  9 _I2C_Cmd                                                       0001DD GR
   9 _I2C_DeInit                                                    000000 GR
-  9 _I2C_FastModeDutyCycleConfig                                   00039C GR
-  9 _I2C_GeneralCallCmd                                            000214 GR
-  9 _I2C_GenerateSTART                                             00023F GR
-  9 _I2C_GenerateSTOP                                              00026A GR
-  9 _I2C_GetFlagStatus                                             0004E8 GR
-  9 _I2C_GetITStatus                                               00059F GR
-  9 _I2C_GetLastEvent                                              0004BF GR
-  9 _I2C_ITConfig                                                  00033B GR
+  9 _I2C_FastModeDutyCycleConfig                                   000390 GR
+  9 _I2C_GeneralCallCmd                                            000208 GR
+  9 _I2C_GenerateSTART                                             000233 GR
+  9 _I2C_GenerateSTOP                                              00025E GR
+  9 _I2C_GetFlagStatus                                             0004DC GR
+  9 _I2C_GetITStatus                                               000593 GR
+  9 _I2C_GetLastEvent                                              0004B3 GR
+  9 _I2C_ITConfig                                                  00032F GR
   9 _I2C_Init                                                      000025 GR
-  9 _I2C_ReceiveData                                               0003D5 GR
-  9 _I2C_Send7bitAddress                                           0003D9 GR
-  9 _I2C_SendData                                                  00040D GR
-  9 _I2C_SoftwareResetCmd                                          000295 GR
-  9 _I2C_StretchClockCmd                                           0002C0 GR
+  9 _I2C_ReceiveData                                               0003C9 GR
+  9 _I2C_Send7bitAddress                                           0003CD GR
+  9 _I2C_SendData                                                  000401 GR
+  9 _I2C_SoftwareResetCmd                                          000289 GR
+  9 _I2C_StretchClockCmd                                           0002B4 GR
   7 ___str_0                                                       000000 R
     __divsint                                                      ****** GX
     __divulong                                                     ****** GX
@@ -46,8 +46,8 @@ Area Table
    4 HOME                                       size      0   flags    0
    5 GSINIT                                     size      0   flags    0
    6 GSFINAL                                    size      0   flags    0
-   7 CONST                                      size     6F   flags    0
+   7 CONST                                      size     69   flags    0
    8 INITIALIZER                                size      0   flags    0
-   9 CODE                                       size    664   flags    0
+   9 CODE                                       size    658   flags    0
    A CABS                                       size      0   flags    8
 

@@ -1,6 +1,6 @@
                                       1 ;--------------------------------------------------------
                                       2 ; File Created by SDCC : free open source ANSI-C Compiler
-                                      3 ; Version 4.2.0 #13081 (Mac OS X x86_64)
+                                      3 ; Version 4.2.0 #13081 (MINGW64)
                                       4 ;--------------------------------------------------------
                                       5 	.module ds18X20
                                       6 	.optsdcc -mstm8
@@ -59,401 +59,401 @@
                                      59 ; code
                                      60 ;--------------------------------------------------------
                                      61 	.area CODE
-                                     62 ;	src/ds18X20.c: 3: bool DS18X20_Reset(void) {
+                                     62 ;	src\ds18X20.c: 3: bool DS18X20_Reset(void) {
                                      63 ;	-----------------------------------------
                                      64 ;	 function DS18X20_Reset
                                      65 ;	-----------------------------------------
-      009C4C                         66 _DS18X20_Reset:
-                                     67 ;	src/ds18X20.c: 6: OW_LOW();
-      009C4C A6 08            [ 1]   68 	ld	a, #0x08
-      009C4E AE 50 0A         [ 2]   69 	ldw	x, #0x500a
-      009C51 CD 8A 15         [ 4]   70 	call	_GPIO_WriteLow
-                                     71 ;	src/ds18X20.c: 8: delay_us(900);
-      009C54 AE 03 84         [ 2]   72 	ldw	x, #0x0384
-      009C57 CD 9C 2A         [ 4]   73 	call	_delay_us
-                                     74 ;	src/ds18X20.c: 9: OW_HIGH();
-      009C5A A6 08            [ 1]   75 	ld	a, #0x08
-      009C5C AE 50 0A         [ 2]   76 	ldw	x, #0x500a
-      009C5F CD 8A 0C         [ 4]   77 	call	_GPIO_WriteHigh
-                                     78 ;	src/ds18X20.c: 11: delay_us(120);
-      009C62 AE 00 78         [ 2]   79 	ldw	x, #0x0078
-      009C65 CD 9C 2A         [ 4]   80 	call	_delay_us
-                                     81 ;	src/ds18X20.c: 13: if(!OW_READ()) {
-      009C68 A6 08            [ 1]   82 	ld	a, #0x08
-      009C6A AE 50 0A         [ 2]   83 	ldw	x, #0x500a
-      009C6D CD 8A 2F         [ 4]   84 	call	_GPIO_ReadInputPin
-      009C70 4D               [ 1]   85 	tnz	a
-      009C71 26 1A            [ 1]   86 	jrne	00104$
-                                     87 ;	src/ds18X20.c: 14: delay_us(480);
-      009C73 AE 01 E0         [ 2]   88 	ldw	x, #0x01e0
-      009C76 CD 9C 2A         [ 4]   89 	call	_delay_us
-                                     90 ;	src/ds18X20.c: 15: if(OW_READ()) {
-      009C79 A6 08            [ 1]   91 	ld	a, #0x08
-      009C7B AE 50 0A         [ 2]   92 	ldw	x, #0x500a
-      009C7E CD 8A 2F         [ 4]   93 	call	_GPIO_ReadInputPin
-      009C81 4D               [ 1]   94 	tnz	a
-      009C82 27 0F            [ 1]   95 	jreq	00105$
-                                     96 ;	src/ds18X20.c: 16: delay_us(360);
-      009C84 AE 01 68         [ 2]   97 	ldw	x, #0x0168
-      009C87 CD 9C 2A         [ 4]   98 	call	_delay_us
-                                     99 ;	src/ds18X20.c: 17: return TRUE;
-      009C8A A6 01            [ 1]  100 	ld	a, #0x01
-      009C8C 81               [ 4]  101 	ret
-      009C8D                        102 00104$:
-                                    103 ;	src/ds18X20.c: 20: delay_us(900);
-      009C8D AE 03 84         [ 2]  104 	ldw	x, #0x0384
-      009C90 CD 9C 2A         [ 4]  105 	call	_delay_us
-      009C93                        106 00105$:
-                                    107 ;	src/ds18X20.c: 23: return FALSE;
-      009C93 4F               [ 1]  108 	clr	a
-                                    109 ;	src/ds18X20.c: 25: }
-      009C94 81               [ 4]  110 	ret
-                                    111 ;	src/ds18X20.c: 27: void DS18X20_Write_Byte(uint8_t data) {
+      00A1BC                         66 _DS18X20_Reset:
+                                     67 ;	src\ds18X20.c: 6: OW_LOW();
+      00A1BC A6 08            [ 1]   68 	ld	a, #0x08
+      00A1BE AE 50 0A         [ 2]   69 	ldw	x, #0x500a
+      00A1C1 CD 8A 8C         [ 4]   70 	call	_GPIO_WriteLow
+                                     71 ;	src\ds18X20.c: 8: delay_us(900);
+      00A1C4 AE 03 84         [ 2]   72 	ldw	x, #0x0384
+      00A1C7 CD A1 9A         [ 4]   73 	call	_delay_us
+                                     74 ;	src\ds18X20.c: 9: OW_HIGH();
+      00A1CA A6 08            [ 1]   75 	ld	a, #0x08
+      00A1CC AE 50 0A         [ 2]   76 	ldw	x, #0x500a
+      00A1CF CD 8A 83         [ 4]   77 	call	_GPIO_WriteHigh
+                                     78 ;	src\ds18X20.c: 11: delay_us(120);
+      00A1D2 AE 00 78         [ 2]   79 	ldw	x, #0x0078
+      00A1D5 CD A1 9A         [ 4]   80 	call	_delay_us
+                                     81 ;	src\ds18X20.c: 13: if(!OW_READ()) {
+      00A1D8 A6 08            [ 1]   82 	ld	a, #0x08
+      00A1DA AE 50 0A         [ 2]   83 	ldw	x, #0x500a
+      00A1DD CD 8A A6         [ 4]   84 	call	_GPIO_ReadInputPin
+      00A1E0 4D               [ 1]   85 	tnz	a
+      00A1E1 26 1A            [ 1]   86 	jrne	00104$
+                                     87 ;	src\ds18X20.c: 14: delay_us(480);
+      00A1E3 AE 01 E0         [ 2]   88 	ldw	x, #0x01e0
+      00A1E6 CD A1 9A         [ 4]   89 	call	_delay_us
+                                     90 ;	src\ds18X20.c: 15: if(OW_READ()) {
+      00A1E9 A6 08            [ 1]   91 	ld	a, #0x08
+      00A1EB AE 50 0A         [ 2]   92 	ldw	x, #0x500a
+      00A1EE CD 8A A6         [ 4]   93 	call	_GPIO_ReadInputPin
+      00A1F1 4D               [ 1]   94 	tnz	a
+      00A1F2 27 0F            [ 1]   95 	jreq	00105$
+                                     96 ;	src\ds18X20.c: 16: delay_us(360);
+      00A1F4 AE 01 68         [ 2]   97 	ldw	x, #0x0168
+      00A1F7 CD A1 9A         [ 4]   98 	call	_delay_us
+                                     99 ;	src\ds18X20.c: 17: return TRUE;
+      00A1FA A6 01            [ 1]  100 	ld	a, #0x01
+      00A1FC 81               [ 4]  101 	ret
+      00A1FD                        102 00104$:
+                                    103 ;	src\ds18X20.c: 20: delay_us(900);
+      00A1FD AE 03 84         [ 2]  104 	ldw	x, #0x0384
+      00A200 CD A1 9A         [ 4]  105 	call	_delay_us
+      00A203                        106 00105$:
+                                    107 ;	src\ds18X20.c: 23: return FALSE;
+      00A203 4F               [ 1]  108 	clr	a
+                                    109 ;	src\ds18X20.c: 25: }
+      00A204 81               [ 4]  110 	ret
+                                    111 ;	src\ds18X20.c: 27: void DS18X20_Write_Byte(uint8_t data) {
                                     112 ;	-----------------------------------------
                                     113 ;	 function DS18X20_Write_Byte
                                     114 ;	-----------------------------------------
-      009C95                        115 _DS18X20_Write_Byte:
-      009C95 89               [ 2]  116 	pushw	x
-      009C96 6B 01            [ 1]  117 	ld	(0x01, sp), a
-                                    118 ;	src/ds18X20.c: 28: for(uint8_t i = 0; i < 8; i++)
-      009C98 0F 02            [ 1]  119 	clr	(0x02, sp)
-      009C9A                        120 00106$:
-      009C9A 7B 02            [ 1]  121 	ld	a, (0x02, sp)
-      009C9C A1 08            [ 1]  122 	cp	a, #0x08
-      009C9E 24 47            [ 1]  123 	jrnc	00108$
-                                    124 ;	src/ds18X20.c: 30: if(data & 0x01)
-      009CA0 7B 01            [ 1]  125 	ld	a, (0x01, sp)
-      009CA2 44               [ 1]  126 	srl	a
-      009CA3 24 1F            [ 1]  127 	jrnc	00102$
-                                    128 ;	src/ds18X20.c: 32: OW_LOW();               /* master - drive bus low */
-      009CA5 A6 08            [ 1]  129 	ld	a, #0x08
-      009CA7 AE 50 0A         [ 2]  130 	ldw	x, #0x500a
-      009CAA CD 8A 15         [ 4]  131 	call	_GPIO_WriteLow
-                                    132 ;	src/ds18X20.c: 34: __asm__ ("nop");
-      009CAD 9D               [ 1]  133 	nop
-                                    134 ;	src/ds18X20.c: 35: __asm__ ("nop");
-      009CAE 9D               [ 1]  135 	nop
-                                    136 ;	src/ds18X20.c: 36: __asm__ ("nop");
-      009CAF 9D               [ 1]  137 	nop
-                                    138 ;	src/ds18X20.c: 37: __asm__ ("nop");
-      009CB0 9D               [ 1]  139 	nop
-                                    140 ;	src/ds18X20.c: 38: __asm__ ("nop");
-      009CB1 9D               [ 1]  141 	nop
-                                    142 ;	src/ds18X20.c: 39: __asm__ ("nop");
-      009CB2 9D               [ 1]  143 	nop
-                                    144 ;	src/ds18X20.c: 40: __asm__ ("nop");
-      009CB3 9D               [ 1]  145 	nop
-                                    146 ;	src/ds18X20.c: 41: OW_HIGH();              /* master - release bus */
-      009CB4 A6 08            [ 1]  147 	ld	a, #0x08
-      009CB6 AE 50 0A         [ 2]  148 	ldw	x, #0x500a
-      009CB9 CD 8A 0C         [ 4]  149 	call	_GPIO_WriteHigh
-                                    150 ;	src/ds18X20.c: 43: delay_us(50);   /* master - wait 64us (B-59,64,N/A) */
-      009CBC AE 00 32         [ 2]  151 	ldw	x, #0x0032
-      009CBF CD 9C 2A         [ 4]  152 	call	_delay_us
-      009CC2 20 1D            [ 2]  153 	jra	00103$
-      009CC4                        154 00102$:
-                                    155 ;	src/ds18X20.c: 47: OW_LOW();                /* master - drive bus low */
-      009CC4 A6 08            [ 1]  156 	ld	a, #0x08
-      009CC6 AE 50 0A         [ 2]  157 	ldw	x, #0x500a
-      009CC9 CD 8A 15         [ 4]  158 	call	_GPIO_WriteLow
-                                    159 ;	src/ds18X20.c: 48: delay_us(50);    /* master - wait 60us (C-60,60,120) */
-      009CCC AE 00 32         [ 2]  160 	ldw	x, #0x0032
-      009CCF CD 9C 2A         [ 4]  161 	call	_delay_us
-                                    162 ;	src/ds18X20.c: 49: OW_HIGH();               /* master - release bus */
-      009CD2 A6 08            [ 1]  163 	ld	a, #0x08
-      009CD4 AE 50 0A         [ 2]  164 	ldw	x, #0x500a
-      009CD7 CD 8A 0C         [ 4]  165 	call	_GPIO_WriteHigh
-                                    166 ;	src/ds18X20.c: 51: __asm__ ("nop");
-      009CDA 9D               [ 1]  167 	nop
-                                    168 ;	src/ds18X20.c: 52: __asm__ ("nop");
-      009CDB 9D               [ 1]  169 	nop
-                                    170 ;	src/ds18X20.c: 53: __asm__ ("nop");
-      009CDC 9D               [ 1]  171 	nop
-                                    172 ;	src/ds18X20.c: 54: __asm__ ("nop");
-      009CDD 9D               [ 1]  173 	nop
-                                    174 ;	src/ds18X20.c: 55: __asm__ ("nop");
-      009CDE 9D               [ 1]  175 	nop
-                                    176 ;	src/ds18X20.c: 56: __asm__ ("nop");
-      009CDF 9D               [ 1]  177 	nop
-                                    178 ;	src/ds18X20.c: 57: __asm__ ("nop");
-      009CE0 9D               [ 1]  179 	nop
-      009CE1                        180 00103$:
-                                    181 ;	src/ds18X20.c: 59: data >>= 1;
-      009CE1 04 01            [ 1]  182 	srl	(0x01, sp)
-                                    183 ;	src/ds18X20.c: 28: for(uint8_t i = 0; i < 8; i++)
-      009CE3 0C 02            [ 1]  184 	inc	(0x02, sp)
-      009CE5 20 B3            [ 2]  185 	jra	00106$
-      009CE7                        186 00108$:
-                                    187 ;	src/ds18X20.c: 61: }
-      009CE7 85               [ 2]  188 	popw	x
-      009CE8 81               [ 4]  189 	ret
-                                    190 ;	src/ds18X20.c: 63: uint8_t DS18X20_Read_Byte(void) {
+      00A205                        115 _DS18X20_Write_Byte:
+      00A205 89               [ 2]  116 	pushw	x
+      00A206 6B 01            [ 1]  117 	ld	(0x01, sp), a
+                                    118 ;	src\ds18X20.c: 28: for(uint8_t i = 0; i < 8; i++)
+      00A208 0F 02            [ 1]  119 	clr	(0x02, sp)
+      00A20A                        120 00106$:
+      00A20A 7B 02            [ 1]  121 	ld	a, (0x02, sp)
+      00A20C A1 08            [ 1]  122 	cp	a, #0x08
+      00A20E 24 47            [ 1]  123 	jrnc	00108$
+                                    124 ;	src\ds18X20.c: 30: if(data & 0x01)
+      00A210 7B 01            [ 1]  125 	ld	a, (0x01, sp)
+      00A212 44               [ 1]  126 	srl	a
+      00A213 24 1F            [ 1]  127 	jrnc	00102$
+                                    128 ;	src\ds18X20.c: 32: OW_LOW();               /* master - drive bus low */
+      00A215 A6 08            [ 1]  129 	ld	a, #0x08
+      00A217 AE 50 0A         [ 2]  130 	ldw	x, #0x500a
+      00A21A CD 8A 8C         [ 4]  131 	call	_GPIO_WriteLow
+                                    132 ;	src\ds18X20.c: 34: __asm__ ("nop");
+      00A21D 9D               [ 1]  133 	nop
+                                    134 ;	src\ds18X20.c: 35: __asm__ ("nop");
+      00A21E 9D               [ 1]  135 	nop
+                                    136 ;	src\ds18X20.c: 36: __asm__ ("nop");
+      00A21F 9D               [ 1]  137 	nop
+                                    138 ;	src\ds18X20.c: 37: __asm__ ("nop");
+      00A220 9D               [ 1]  139 	nop
+                                    140 ;	src\ds18X20.c: 38: __asm__ ("nop");
+      00A221 9D               [ 1]  141 	nop
+                                    142 ;	src\ds18X20.c: 39: __asm__ ("nop");
+      00A222 9D               [ 1]  143 	nop
+                                    144 ;	src\ds18X20.c: 40: __asm__ ("nop");
+      00A223 9D               [ 1]  145 	nop
+                                    146 ;	src\ds18X20.c: 41: OW_HIGH();              /* master - release bus */
+      00A224 A6 08            [ 1]  147 	ld	a, #0x08
+      00A226 AE 50 0A         [ 2]  148 	ldw	x, #0x500a
+      00A229 CD 8A 83         [ 4]  149 	call	_GPIO_WriteHigh
+                                    150 ;	src\ds18X20.c: 43: delay_us(50);   /* master - wait 64us (B-59,64,N/A) */
+      00A22C AE 00 32         [ 2]  151 	ldw	x, #0x0032
+      00A22F CD A1 9A         [ 4]  152 	call	_delay_us
+      00A232 20 1D            [ 2]  153 	jra	00103$
+      00A234                        154 00102$:
+                                    155 ;	src\ds18X20.c: 47: OW_LOW();                /* master - drive bus low */
+      00A234 A6 08            [ 1]  156 	ld	a, #0x08
+      00A236 AE 50 0A         [ 2]  157 	ldw	x, #0x500a
+      00A239 CD 8A 8C         [ 4]  158 	call	_GPIO_WriteLow
+                                    159 ;	src\ds18X20.c: 48: delay_us(50);    /* master - wait 60us (C-60,60,120) */
+      00A23C AE 00 32         [ 2]  160 	ldw	x, #0x0032
+      00A23F CD A1 9A         [ 4]  161 	call	_delay_us
+                                    162 ;	src\ds18X20.c: 49: OW_HIGH();               /* master - release bus */
+      00A242 A6 08            [ 1]  163 	ld	a, #0x08
+      00A244 AE 50 0A         [ 2]  164 	ldw	x, #0x500a
+      00A247 CD 8A 83         [ 4]  165 	call	_GPIO_WriteHigh
+                                    166 ;	src\ds18X20.c: 51: __asm__ ("nop");
+      00A24A 9D               [ 1]  167 	nop
+                                    168 ;	src\ds18X20.c: 52: __asm__ ("nop");
+      00A24B 9D               [ 1]  169 	nop
+                                    170 ;	src\ds18X20.c: 53: __asm__ ("nop");
+      00A24C 9D               [ 1]  171 	nop
+                                    172 ;	src\ds18X20.c: 54: __asm__ ("nop");
+      00A24D 9D               [ 1]  173 	nop
+                                    174 ;	src\ds18X20.c: 55: __asm__ ("nop");
+      00A24E 9D               [ 1]  175 	nop
+                                    176 ;	src\ds18X20.c: 56: __asm__ ("nop");
+      00A24F 9D               [ 1]  177 	nop
+                                    178 ;	src\ds18X20.c: 57: __asm__ ("nop");
+      00A250 9D               [ 1]  179 	nop
+      00A251                        180 00103$:
+                                    181 ;	src\ds18X20.c: 59: data >>= 1;
+      00A251 04 01            [ 1]  182 	srl	(0x01, sp)
+                                    183 ;	src\ds18X20.c: 28: for(uint8_t i = 0; i < 8; i++)
+      00A253 0C 02            [ 1]  184 	inc	(0x02, sp)
+      00A255 20 B3            [ 2]  185 	jra	00106$
+      00A257                        186 00108$:
+                                    187 ;	src\ds18X20.c: 61: }
+      00A257 85               [ 2]  188 	popw	x
+      00A258 81               [ 4]  189 	ret
+                                    190 ;	src\ds18X20.c: 63: uint8_t DS18X20_Read_Byte(void) {
                                     191 ;	-----------------------------------------
                                     192 ;	 function DS18X20_Read_Byte
                                     193 ;	-----------------------------------------
-      009CE9                        194 _DS18X20_Read_Byte:
-      009CE9 89               [ 2]  195 	pushw	x
-                                    196 ;	src/ds18X20.c: 64: uint8_t result = 0;
-      009CEA 0F 01            [ 1]  197 	clr	(0x01, sp)
-                                    198 ;	src/ds18X20.c: 66: for(uint8_t i = 0; i < 8; i++)
-      009CEC 0F 02            [ 1]  199 	clr	(0x02, sp)
-      009CEE                        200 00105$:
-      009CEE 7B 02            [ 1]  201 	ld	a, (0x02, sp)
-      009CF0 A1 08            [ 1]  202 	cp	a, #0x08
-      009CF2 24 40            [ 1]  203 	jrnc	00103$
-                                    204 ;	src/ds18X20.c: 68: result >>= 1;
-      009CF4 04 01            [ 1]  205 	srl	(0x01, sp)
-                                    206 ;	src/ds18X20.c: 69: OW_LOW();                 /* master - drive bus low */
-      009CF6 A6 08            [ 1]  207 	ld	a, #0x08
-      009CF8 AE 50 0A         [ 2]  208 	ldw	x, #0x500a
-      009CFB CD 8A 15         [ 4]  209 	call	_GPIO_WriteLow
-                                    210 ;	src/ds18X20.c: 71: __asm__ ("nop");
-      009CFE 9D               [ 1]  211 	nop
-                                    212 ;	src/ds18X20.c: 72: __asm__ ("nop");
-      009CFF 9D               [ 1]  213 	nop
-                                    214 ;	src/ds18X20.c: 73: __asm__ ("nop");
-      009D00 9D               [ 1]  215 	nop
-                                    216 ;	src/ds18X20.c: 74: __asm__ ("nop");
-      009D01 9D               [ 1]  217 	nop
-                                    218 ;	src/ds18X20.c: 75: __asm__ ("nop");
-      009D02 9D               [ 1]  219 	nop
-                                    220 ;	src/ds18X20.c: 76: __asm__ ("nop");
-      009D03 9D               [ 1]  221 	nop
-                                    222 ;	src/ds18X20.c: 77: __asm__ ("nop");
-      009D04 9D               [ 1]  223 	nop
-                                    224 ;	src/ds18X20.c: 78: OW_HIGH();                /* master - release bus */
-      009D05 A6 08            [ 1]  225 	ld	a, #0x08
-      009D07 AE 50 0A         [ 2]  226 	ldw	x, #0x500a
-      009D0A CD 8A 0C         [ 4]  227 	call	_GPIO_WriteHigh
-                                    228 ;	src/ds18X20.c: 80: __asm__ ("nop");
-      009D0D 9D               [ 1]  229 	nop
-                                    230 ;	src/ds18X20.c: 81: __asm__ ("nop");
-      009D0E 9D               [ 1]  231 	nop
-                                    232 ;	src/ds18X20.c: 82: __asm__ ("nop");
-      009D0F 9D               [ 1]  233 	nop
-                                    234 ;	src/ds18X20.c: 83: __asm__ ("nop");
-      009D10 9D               [ 1]  235 	nop
-                                    236 ;	src/ds18X20.c: 84: __asm__ ("nop");
-      009D11 9D               [ 1]  237 	nop
-                                    238 ;	src/ds18X20.c: 85: __asm__ ("nop");
-      009D12 9D               [ 1]  239 	nop
-                                    240 ;	src/ds18X20.c: 86: __asm__ ("nop");
-      009D13 9D               [ 1]  241 	nop
-                                    242 ;	src/ds18X20.c: 87: __asm__ ("nop");
-      009D14 9D               [ 1]  243 	nop
-                                    244 ;	src/ds18X20.c: 88: __asm__ ("nop");
-      009D15 9D               [ 1]  245 	nop
-                                    246 ;	src/ds18X20.c: 89: __asm__ ("nop");
-      009D16 9D               [ 1]  247 	nop
-                                    248 ;	src/ds18X20.c: 90: __asm__ ("nop");
-      009D17 9D               [ 1]  249 	nop
-                                    250 ;	src/ds18X20.c: 91: __asm__ ("nop");
-      009D18 9D               [ 1]  251 	nop
-                                    252 ;	src/ds18X20.c: 92: __asm__ ("nop");
-      009D19 9D               [ 1]  253 	nop
-                                    254 ;	src/ds18X20.c: 94: if(OW_READ())  result |= 0x80;
-      009D1A A6 08            [ 1]  255 	ld	a, #0x08
-      009D1C AE 50 0A         [ 2]  256 	ldw	x, #0x500a
-      009D1F CD 8A 2F         [ 4]  257 	call	_GPIO_ReadInputPin
-      009D22 4D               [ 1]  258 	tnz	a
-      009D23 27 05            [ 1]  259 	jreq	00102$
-      009D25 08 01            [ 1]  260 	sll	(0x01, sp)
-      009D27 99               [ 1]  261 	scf
-      009D28 06 01            [ 1]  262 	rrc	(0x01, sp)
-      009D2A                        263 00102$:
-                                    264 ;	src/ds18X20.c: 95: delay_us(55);     /* master - wait 55us (F-50,55,N/A) */
-      009D2A AE 00 37         [ 2]  265 	ldw	x, #0x0037
-      009D2D CD 9C 2A         [ 4]  266 	call	_delay_us
-                                    267 ;	src/ds18X20.c: 66: for(uint8_t i = 0; i < 8; i++)
-      009D30 0C 02            [ 1]  268 	inc	(0x02, sp)
-      009D32 20 BA            [ 2]  269 	jra	00105$
-      009D34                        270 00103$:
-                                    271 ;	src/ds18X20.c: 97: return (result);
-      009D34 7B 01            [ 1]  272 	ld	a, (0x01, sp)
-                                    273 ;	src/ds18X20.c: 98: }
-      009D36 85               [ 2]  274 	popw	x
-      009D37 81               [ 4]  275 	ret
-                                    276 ;	src/ds18X20.c: 100: bool DS18X20_Read_ID(u8 *ROM_ID) {
+      00A259                        194 _DS18X20_Read_Byte:
+      00A259 89               [ 2]  195 	pushw	x
+                                    196 ;	src\ds18X20.c: 64: uint8_t result = 0;
+      00A25A 0F 01            [ 1]  197 	clr	(0x01, sp)
+                                    198 ;	src\ds18X20.c: 66: for(uint8_t i = 0; i < 8; i++)
+      00A25C 0F 02            [ 1]  199 	clr	(0x02, sp)
+      00A25E                        200 00105$:
+      00A25E 7B 02            [ 1]  201 	ld	a, (0x02, sp)
+      00A260 A1 08            [ 1]  202 	cp	a, #0x08
+      00A262 24 40            [ 1]  203 	jrnc	00103$
+                                    204 ;	src\ds18X20.c: 68: result >>= 1;
+      00A264 04 01            [ 1]  205 	srl	(0x01, sp)
+                                    206 ;	src\ds18X20.c: 69: OW_LOW();                 /* master - drive bus low */
+      00A266 A6 08            [ 1]  207 	ld	a, #0x08
+      00A268 AE 50 0A         [ 2]  208 	ldw	x, #0x500a
+      00A26B CD 8A 8C         [ 4]  209 	call	_GPIO_WriteLow
+                                    210 ;	src\ds18X20.c: 71: __asm__ ("nop");
+      00A26E 9D               [ 1]  211 	nop
+                                    212 ;	src\ds18X20.c: 72: __asm__ ("nop");
+      00A26F 9D               [ 1]  213 	nop
+                                    214 ;	src\ds18X20.c: 73: __asm__ ("nop");
+      00A270 9D               [ 1]  215 	nop
+                                    216 ;	src\ds18X20.c: 74: __asm__ ("nop");
+      00A271 9D               [ 1]  217 	nop
+                                    218 ;	src\ds18X20.c: 75: __asm__ ("nop");
+      00A272 9D               [ 1]  219 	nop
+                                    220 ;	src\ds18X20.c: 76: __asm__ ("nop");
+      00A273 9D               [ 1]  221 	nop
+                                    222 ;	src\ds18X20.c: 77: __asm__ ("nop");
+      00A274 9D               [ 1]  223 	nop
+                                    224 ;	src\ds18X20.c: 78: OW_HIGH();                /* master - release bus */
+      00A275 A6 08            [ 1]  225 	ld	a, #0x08
+      00A277 AE 50 0A         [ 2]  226 	ldw	x, #0x500a
+      00A27A CD 8A 83         [ 4]  227 	call	_GPIO_WriteHigh
+                                    228 ;	src\ds18X20.c: 80: __asm__ ("nop");
+      00A27D 9D               [ 1]  229 	nop
+                                    230 ;	src\ds18X20.c: 81: __asm__ ("nop");
+      00A27E 9D               [ 1]  231 	nop
+                                    232 ;	src\ds18X20.c: 82: __asm__ ("nop");
+      00A27F 9D               [ 1]  233 	nop
+                                    234 ;	src\ds18X20.c: 83: __asm__ ("nop");
+      00A280 9D               [ 1]  235 	nop
+                                    236 ;	src\ds18X20.c: 84: __asm__ ("nop");
+      00A281 9D               [ 1]  237 	nop
+                                    238 ;	src\ds18X20.c: 85: __asm__ ("nop");
+      00A282 9D               [ 1]  239 	nop
+                                    240 ;	src\ds18X20.c: 86: __asm__ ("nop");
+      00A283 9D               [ 1]  241 	nop
+                                    242 ;	src\ds18X20.c: 87: __asm__ ("nop");
+      00A284 9D               [ 1]  243 	nop
+                                    244 ;	src\ds18X20.c: 88: __asm__ ("nop");
+      00A285 9D               [ 1]  245 	nop
+                                    246 ;	src\ds18X20.c: 89: __asm__ ("nop");
+      00A286 9D               [ 1]  247 	nop
+                                    248 ;	src\ds18X20.c: 90: __asm__ ("nop");
+      00A287 9D               [ 1]  249 	nop
+                                    250 ;	src\ds18X20.c: 91: __asm__ ("nop");
+      00A288 9D               [ 1]  251 	nop
+                                    252 ;	src\ds18X20.c: 92: __asm__ ("nop");
+      00A289 9D               [ 1]  253 	nop
+                                    254 ;	src\ds18X20.c: 94: if(OW_READ())  result |= 0x80;
+      00A28A A6 08            [ 1]  255 	ld	a, #0x08
+      00A28C AE 50 0A         [ 2]  256 	ldw	x, #0x500a
+      00A28F CD 8A A6         [ 4]  257 	call	_GPIO_ReadInputPin
+      00A292 4D               [ 1]  258 	tnz	a
+      00A293 27 05            [ 1]  259 	jreq	00102$
+      00A295 08 01            [ 1]  260 	sll	(0x01, sp)
+      00A297 99               [ 1]  261 	scf
+      00A298 06 01            [ 1]  262 	rrc	(0x01, sp)
+      00A29A                        263 00102$:
+                                    264 ;	src\ds18X20.c: 95: delay_us(55);     /* master - wait 55us (F-50,55,N/A) */
+      00A29A AE 00 37         [ 2]  265 	ldw	x, #0x0037
+      00A29D CD A1 9A         [ 4]  266 	call	_delay_us
+                                    267 ;	src\ds18X20.c: 66: for(uint8_t i = 0; i < 8; i++)
+      00A2A0 0C 02            [ 1]  268 	inc	(0x02, sp)
+      00A2A2 20 BA            [ 2]  269 	jra	00105$
+      00A2A4                        270 00103$:
+                                    271 ;	src\ds18X20.c: 97: return (result);
+      00A2A4 7B 01            [ 1]  272 	ld	a, (0x01, sp)
+                                    273 ;	src\ds18X20.c: 98: }
+      00A2A6 85               [ 2]  274 	popw	x
+      00A2A7 81               [ 4]  275 	ret
+                                    276 ;	src\ds18X20.c: 100: bool DS18X20_Read_ID(u8 *ROM_ID) {
                                     277 ;	-----------------------------------------
                                     278 ;	 function DS18X20_Read_ID
                                     279 ;	-----------------------------------------
-      009D38                        280 _DS18X20_Read_ID:
-      009D38 52 03            [ 2]  281 	sub	sp, #3
-      009D3A 1F 01            [ 2]  282 	ldw	(0x01, sp), x
-                                    283 ;	src/ds18X20.c: 101: if(!DS18X20_Reset()) return FALSE;
-      009D3C CD 9C 4C         [ 4]  284 	call	_DS18X20_Reset
-      009D3F 4D               [ 1]  285 	tnz	a
-      009D40 26 03            [ 1]  286 	jrne	00102$
-      009D42 4F               [ 1]  287 	clr	a
-      009D43 20 26            [ 2]  288 	jra	00107$
-      009D45                        289 00102$:
-                                    290 ;	src/ds18X20.c: 102: DS18X20_Write_Byte(READ_ROM);
-      009D45 A6 33            [ 1]  291 	ld	a, #0x33
-      009D47 CD 9C 95         [ 4]  292 	call	_DS18X20_Write_Byte
-                                    293 ;	src/ds18X20.c: 103: delay_us(100);
-      009D4A AE 00 64         [ 2]  294 	ldw	x, #0x0064
-      009D4D CD 9C 2A         [ 4]  295 	call	_delay_us
-                                    296 ;	src/ds18X20.c: 104: for(uint8_t i = 0; i < 8; i++)
-      009D50 0F 03            [ 1]  297 	clr	(0x03, sp)
-      009D52                        298 00105$:
-      009D52 7B 03            [ 1]  299 	ld	a, (0x03, sp)
-      009D54 A1 08            [ 1]  300 	cp	a, #0x08
-      009D56 24 11            [ 1]  301 	jrnc	00103$
-                                    302 ;	src/ds18X20.c: 106: ROM_ID[i] = DS18X20_Read_Byte();
-      009D58 5F               [ 1]  303 	clrw	x
-      009D59 7B 03            [ 1]  304 	ld	a, (0x03, sp)
-      009D5B 97               [ 1]  305 	ld	xl, a
-      009D5C 72 FB 01         [ 2]  306 	addw	x, (0x01, sp)
-      009D5F 89               [ 2]  307 	pushw	x
-      009D60 CD 9C E9         [ 4]  308 	call	_DS18X20_Read_Byte
-      009D63 85               [ 2]  309 	popw	x
-      009D64 F7               [ 1]  310 	ld	(x), a
-                                    311 ;	src/ds18X20.c: 104: for(uint8_t i = 0; i < 8; i++)
-      009D65 0C 03            [ 1]  312 	inc	(0x03, sp)
-      009D67 20 E9            [ 2]  313 	jra	00105$
-      009D69                        314 00103$:
-                                    315 ;	src/ds18X20.c: 108: return TRUE;
-      009D69 A6 01            [ 1]  316 	ld	a, #0x01
-      009D6B                        317 00107$:
-                                    318 ;	src/ds18X20.c: 109: }
-      009D6B 5B 03            [ 2]  319 	addw	sp, #3
-      009D6D 81               [ 4]  320 	ret
-                                    321 ;	src/ds18X20.c: 111: bool DS18X20_Skip_ID() {
+      00A2A8                        280 _DS18X20_Read_ID:
+      00A2A8 52 03            [ 2]  281 	sub	sp, #3
+      00A2AA 1F 01            [ 2]  282 	ldw	(0x01, sp), x
+                                    283 ;	src\ds18X20.c: 101: if(!DS18X20_Reset()) return FALSE;
+      00A2AC CD A1 BC         [ 4]  284 	call	_DS18X20_Reset
+      00A2AF 4D               [ 1]  285 	tnz	a
+      00A2B0 26 03            [ 1]  286 	jrne	00102$
+      00A2B2 4F               [ 1]  287 	clr	a
+      00A2B3 20 26            [ 2]  288 	jra	00107$
+      00A2B5                        289 00102$:
+                                    290 ;	src\ds18X20.c: 102: DS18X20_Write_Byte(READ_ROM);
+      00A2B5 A6 33            [ 1]  291 	ld	a, #0x33
+      00A2B7 CD A2 05         [ 4]  292 	call	_DS18X20_Write_Byte
+                                    293 ;	src\ds18X20.c: 103: delay_us(100);
+      00A2BA AE 00 64         [ 2]  294 	ldw	x, #0x0064
+      00A2BD CD A1 9A         [ 4]  295 	call	_delay_us
+                                    296 ;	src\ds18X20.c: 104: for(uint8_t i = 0; i < 8; i++)
+      00A2C0 0F 03            [ 1]  297 	clr	(0x03, sp)
+      00A2C2                        298 00105$:
+      00A2C2 7B 03            [ 1]  299 	ld	a, (0x03, sp)
+      00A2C4 A1 08            [ 1]  300 	cp	a, #0x08
+      00A2C6 24 11            [ 1]  301 	jrnc	00103$
+                                    302 ;	src\ds18X20.c: 106: ROM_ID[i] = DS18X20_Read_Byte();
+      00A2C8 5F               [ 1]  303 	clrw	x
+      00A2C9 7B 03            [ 1]  304 	ld	a, (0x03, sp)
+      00A2CB 97               [ 1]  305 	ld	xl, a
+      00A2CC 72 FB 01         [ 2]  306 	addw	x, (0x01, sp)
+      00A2CF 89               [ 2]  307 	pushw	x
+      00A2D0 CD A2 59         [ 4]  308 	call	_DS18X20_Read_Byte
+      00A2D3 85               [ 2]  309 	popw	x
+      00A2D4 F7               [ 1]  310 	ld	(x), a
+                                    311 ;	src\ds18X20.c: 104: for(uint8_t i = 0; i < 8; i++)
+      00A2D5 0C 03            [ 1]  312 	inc	(0x03, sp)
+      00A2D7 20 E9            [ 2]  313 	jra	00105$
+      00A2D9                        314 00103$:
+                                    315 ;	src\ds18X20.c: 108: return TRUE;
+      00A2D9 A6 01            [ 1]  316 	ld	a, #0x01
+      00A2DB                        317 00107$:
+                                    318 ;	src\ds18X20.c: 109: }
+      00A2DB 5B 03            [ 2]  319 	addw	sp, #3
+      00A2DD 81               [ 4]  320 	ret
+                                    321 ;	src\ds18X20.c: 111: bool DS18X20_Skip_ID() {
                                     322 ;	-----------------------------------------
                                     323 ;	 function DS18X20_Skip_ID
                                     324 ;	-----------------------------------------
-      009D6E                        325 _DS18X20_Skip_ID:
-                                    326 ;	src/ds18X20.c: 112: if(!DS18X20_Reset()) return FALSE;
-      009D6E CD 9C 4C         [ 4]  327 	call	_DS18X20_Reset
-      009D71 4D               [ 1]  328 	tnz	a
-      009D72 26 02            [ 1]  329 	jrne	00102$
-      009D74 4F               [ 1]  330 	clr	a
-      009D75 81               [ 4]  331 	ret
-      009D76                        332 00102$:
-                                    333 ;	src/ds18X20.c: 113: DS18X20_Write_Byte(SKIP_ROM);
-      009D76 A6 CC            [ 1]  334 	ld	a, #0xcc
-      009D78 CD 9C 95         [ 4]  335 	call	_DS18X20_Write_Byte
-                                    336 ;	src/ds18X20.c: 114: delay_us(100);
-      009D7B AE 00 64         [ 2]  337 	ldw	x, #0x0064
-      009D7E CD 9C 2A         [ 4]  338 	call	_delay_us
-                                    339 ;	src/ds18X20.c: 115: return TRUE;
-      009D81 A6 01            [ 1]  340 	ld	a, #0x01
-                                    341 ;	src/ds18X20.c: 116: }
-      009D83 81               [ 4]  342 	ret
-                                    343 ;	src/ds18X20.c: 118: float DS18X20_Get_Temperature() {
+      00A2DE                        325 _DS18X20_Skip_ID:
+                                    326 ;	src\ds18X20.c: 112: if(!DS18X20_Reset()) return FALSE;
+      00A2DE CD A1 BC         [ 4]  327 	call	_DS18X20_Reset
+      00A2E1 4D               [ 1]  328 	tnz	a
+      00A2E2 26 02            [ 1]  329 	jrne	00102$
+      00A2E4 4F               [ 1]  330 	clr	a
+      00A2E5 81               [ 4]  331 	ret
+      00A2E6                        332 00102$:
+                                    333 ;	src\ds18X20.c: 113: DS18X20_Write_Byte(SKIP_ROM);
+      00A2E6 A6 CC            [ 1]  334 	ld	a, #0xcc
+      00A2E8 CD A2 05         [ 4]  335 	call	_DS18X20_Write_Byte
+                                    336 ;	src\ds18X20.c: 114: delay_us(100);
+      00A2EB AE 00 64         [ 2]  337 	ldw	x, #0x0064
+      00A2EE CD A1 9A         [ 4]  338 	call	_delay_us
+                                    339 ;	src\ds18X20.c: 115: return TRUE;
+      00A2F1 A6 01            [ 1]  340 	ld	a, #0x01
+                                    341 ;	src\ds18X20.c: 116: }
+      00A2F3 81               [ 4]  342 	ret
+                                    343 ;	src\ds18X20.c: 118: float DS18X20_Get_Temperature() {
                                     344 ;	-----------------------------------------
                                     345 ;	 function DS18X20_Get_Temperature
                                     346 ;	-----------------------------------------
-      009D84                        347 _DS18X20_Get_Temperature:
-      009D84 52 05            [ 2]  348 	sub	sp, #5
-                                    349 ;	src/ds18X20.c: 123: int8_t sign = 1;
-      009D86 A6 01            [ 1]  350 	ld	a, #0x01
-      009D88 6B 01            [ 1]  351 	ld	(0x01, sp), a
-                                    352 ;	src/ds18X20.c: 125: DS18X20_Skip_ID();
-      009D8A CD 9D 6E         [ 4]  353 	call	_DS18X20_Skip_ID
-                                    354 ;	src/ds18X20.c: 126: if (!DS18X20_Skip_ID()) {
-      009D8D CD 9D 6E         [ 4]  355 	call	_DS18X20_Skip_ID
-      009D90 4D               [ 1]  356 	tnz	a
-      009D91 26 07            [ 1]  357 	jrne	00102$
-                                    358 ;	src/ds18X20.c: 127: return temperature;
-      009D93 5F               [ 1]  359 	clrw	x
-      009D94 90 AE C2 C8      [ 2]  360 	ldw	y, #0xc2c8
-      009D98 20 6C            [ 2]  361 	jra	00107$
-      009D9A                        362 00102$:
-                                    363 ;	src/ds18X20.c: 129: DS18X20_Write_Byte(CONVERT_T);
-      009D9A A6 44            [ 1]  364 	ld	a, #0x44
-      009D9C CD 9C 95         [ 4]  365 	call	_DS18X20_Write_Byte
-                                    366 ;	src/ds18X20.c: 130: delay_ms(4000);
-      009D9F AE 0F A0         [ 2]  367 	ldw	x, #0x0fa0
-      009DA2 CD 9C 3C         [ 4]  368 	call	_delay_ms
-                                    369 ;	src/ds18X20.c: 131: DS18X20_Skip_ID();
-      009DA5 CD 9D 6E         [ 4]  370 	call	_DS18X20_Skip_ID
-                                    371 ;	src/ds18X20.c: 132: if (!DS18X20_Skip_ID()) {
-      009DA8 CD 9D 6E         [ 4]  372 	call	_DS18X20_Skip_ID
-      009DAB 4D               [ 1]  373 	tnz	a
-      009DAC 26 07            [ 1]  374 	jrne	00104$
-                                    375 ;	src/ds18X20.c: 133: return temperature;
-      009DAE 5F               [ 1]  376 	clrw	x
-      009DAF 90 AE C2 C8      [ 2]  377 	ldw	y, #0xc2c8
-      009DB3 20 51            [ 2]  378 	jra	00107$
-      009DB5                        379 00104$:
-                                    380 ;	src/ds18X20.c: 135: DS18X20_Write_Byte(READ_SCRATCHPAD);
-      009DB5 A6 BE            [ 1]  381 	ld	a, #0xbe
-      009DB7 CD 9C 95         [ 4]  382 	call	_DS18X20_Write_Byte
-                                    383 ;	src/ds18X20.c: 136: lsb = DS18X20_Read_Byte();
-      009DBA CD 9C E9         [ 4]  384 	call	_DS18X20_Read_Byte
-      009DBD 6B 05            [ 1]  385 	ld	(0x05, sp), a
-                                    386 ;	src/ds18X20.c: 137: msb = DS18X20_Read_Byte();
-      009DBF CD 9C E9         [ 4]  387 	call	_DS18X20_Read_Byte
-                                    388 ;	src/ds18X20.c: 138: if (msb >> 7) {
-      009DC2 95               [ 1]  389 	ld	xh, a
-      009DC3 4E               [ 1]  390 	swap	a
-      009DC4 A4 0F            [ 1]  391 	and	a, #0x0f
-      009DC6 44               [ 1]  392 	srl	a
-      009DC7 44               [ 1]  393 	srl	a
-      009DC8 44               [ 1]  394 	srl	a
-      009DC9 4D               [ 1]  395 	tnz	a
-      009DCA 27 09            [ 1]  396 	jreq	00106$
-                                    397 ;	src/ds18X20.c: 139: msb = ~msb;
-      009DCC 9E               [ 1]  398 	ld	a, xh
-      009DCD 43               [ 1]  399 	cpl	a
-      009DCE 95               [ 1]  400 	ld	xh, a
-                                    401 ;	src/ds18X20.c: 140: lsb = ~lsb;
-      009DCF 03 05            [ 1]  402 	cpl	(0x05, sp)
-                                    403 ;	src/ds18X20.c: 141: sign = -1;
-      009DD1 A6 FF            [ 1]  404 	ld	a, #0xff
-      009DD3 6B 01            [ 1]  405 	ld	(0x01, sp), a
-      009DD5                        406 00106$:
-                                    407 ;	src/ds18X20.c: 143: temp = msb;
-                                    408 ;	src/ds18X20.c: 144: temp = temp << 8;
-      009DD5 0F 03            [ 1]  409 	clr	(0x03, sp)
-                                    410 ;	src/ds18X20.c: 145: temp |= lsb;
-      009DD7 7B 05            [ 1]  411 	ld	a, (0x05, sp)
-      009DD9 0F 04            [ 1]  412 	clr	(0x04, sp)
-      009DDB 1A 03            [ 1]  413 	or	a, (0x03, sp)
-      009DDD 02               [ 1]  414 	rlwa	x
-      009DDE 1A 04            [ 1]  415 	or	a, (0x04, sp)
-                                    416 ;	src/ds18X20.c: 146: temp += 1;
-      009DE0 95               [ 1]  417 	ld	xh, a
-      009DE1 5C               [ 1]  418 	incw	x
-                                    419 ;	src/ds18X20.c: 168: return temperature = temp * 0.0625 * sign;
-      009DE2 CD B1 26         [ 4]  420 	call	___sint2fs
-      009DE5 89               [ 2]  421 	pushw	x
-      009DE6 90 89            [ 2]  422 	pushw	y
-      009DE8 5F               [ 1]  423 	clrw	x
-      009DE9 89               [ 2]  424 	pushw	x
-      009DEA 4B 80            [ 1]  425 	push	#0x80
-      009DEC 4B 3D            [ 1]  426 	push	#0x3d
-      009DEE CD AB 05         [ 4]  427 	call	___fsmul
-      009DF1 1F 04            [ 2]  428 	ldw	(0x04, sp), x
-      009DF3 17 02            [ 2]  429 	ldw	(0x02, sp), y
-      009DF5 7B 01            [ 1]  430 	ld	a, (0x01, sp)
-      009DF7 CD B1 E3         [ 4]  431 	call	___schar2fs
-      009DFA 89               [ 2]  432 	pushw	x
-      009DFB 90 89            [ 2]  433 	pushw	y
-      009DFD 1E 08            [ 2]  434 	ldw	x, (0x08, sp)
-      009DFF 89               [ 2]  435 	pushw	x
-      009E00 1E 08            [ 2]  436 	ldw	x, (0x08, sp)
-      009E02 89               [ 2]  437 	pushw	x
-      009E03 CD AB 05         [ 4]  438 	call	___fsmul
-      009E06                        439 00107$:
-                                    440 ;	src/ds18X20.c: 169: }
-      009E06 5B 05            [ 2]  441 	addw	sp, #5
-      009E08 81               [ 4]  442 	ret
-                                    443 ;	src/ds18X20.c: 171: void DS18X20_Setup(void) {
+      00A2F4                        347 _DS18X20_Get_Temperature:
+      00A2F4 52 05            [ 2]  348 	sub	sp, #5
+                                    349 ;	src\ds18X20.c: 123: int8_t sign = 1;
+      00A2F6 A6 01            [ 1]  350 	ld	a, #0x01
+      00A2F8 6B 01            [ 1]  351 	ld	(0x01, sp), a
+                                    352 ;	src\ds18X20.c: 125: DS18X20_Skip_ID();
+      00A2FA CD A2 DE         [ 4]  353 	call	_DS18X20_Skip_ID
+                                    354 ;	src\ds18X20.c: 126: if (!DS18X20_Skip_ID()) {
+      00A2FD CD A2 DE         [ 4]  355 	call	_DS18X20_Skip_ID
+      00A300 4D               [ 1]  356 	tnz	a
+      00A301 26 07            [ 1]  357 	jrne	00102$
+                                    358 ;	src\ds18X20.c: 127: return temperature;
+      00A303 5F               [ 1]  359 	clrw	x
+      00A304 90 AE C2 C8      [ 2]  360 	ldw	y, #0xc2c8
+      00A308 20 6C            [ 2]  361 	jra	00107$
+      00A30A                        362 00102$:
+                                    363 ;	src\ds18X20.c: 129: DS18X20_Write_Byte(CONVERT_T);
+      00A30A A6 44            [ 1]  364 	ld	a, #0x44
+      00A30C CD A2 05         [ 4]  365 	call	_DS18X20_Write_Byte
+                                    366 ;	src\ds18X20.c: 130: delay_ms(4000);
+      00A30F AE 0F A0         [ 2]  367 	ldw	x, #0x0fa0
+      00A312 CD A1 AC         [ 4]  368 	call	_delay_ms
+                                    369 ;	src\ds18X20.c: 131: DS18X20_Skip_ID();
+      00A315 CD A2 DE         [ 4]  370 	call	_DS18X20_Skip_ID
+                                    371 ;	src\ds18X20.c: 132: if (!DS18X20_Skip_ID()) {
+      00A318 CD A2 DE         [ 4]  372 	call	_DS18X20_Skip_ID
+      00A31B 4D               [ 1]  373 	tnz	a
+      00A31C 26 07            [ 1]  374 	jrne	00104$
+                                    375 ;	src\ds18X20.c: 133: return temperature;
+      00A31E 5F               [ 1]  376 	clrw	x
+      00A31F 90 AE C2 C8      [ 2]  377 	ldw	y, #0xc2c8
+      00A323 20 51            [ 2]  378 	jra	00107$
+      00A325                        379 00104$:
+                                    380 ;	src\ds18X20.c: 135: DS18X20_Write_Byte(READ_SCRATCHPAD);
+      00A325 A6 BE            [ 1]  381 	ld	a, #0xbe
+      00A327 CD A2 05         [ 4]  382 	call	_DS18X20_Write_Byte
+                                    383 ;	src\ds18X20.c: 136: lsb = DS18X20_Read_Byte();
+      00A32A CD A2 59         [ 4]  384 	call	_DS18X20_Read_Byte
+      00A32D 6B 05            [ 1]  385 	ld	(0x05, sp), a
+                                    386 ;	src\ds18X20.c: 137: msb = DS18X20_Read_Byte();
+      00A32F CD A2 59         [ 4]  387 	call	_DS18X20_Read_Byte
+                                    388 ;	src\ds18X20.c: 138: if (msb >> 7) {
+      00A332 95               [ 1]  389 	ld	xh, a
+      00A333 4E               [ 1]  390 	swap	a
+      00A334 A4 0F            [ 1]  391 	and	a, #0x0f
+      00A336 44               [ 1]  392 	srl	a
+      00A337 44               [ 1]  393 	srl	a
+      00A338 44               [ 1]  394 	srl	a
+      00A339 4D               [ 1]  395 	tnz	a
+      00A33A 27 09            [ 1]  396 	jreq	00106$
+                                    397 ;	src\ds18X20.c: 139: msb = ~msb;
+      00A33C 9E               [ 1]  398 	ld	a, xh
+      00A33D 43               [ 1]  399 	cpl	a
+      00A33E 95               [ 1]  400 	ld	xh, a
+                                    401 ;	src\ds18X20.c: 140: lsb = ~lsb;
+      00A33F 03 05            [ 1]  402 	cpl	(0x05, sp)
+                                    403 ;	src\ds18X20.c: 141: sign = -1;
+      00A341 A6 FF            [ 1]  404 	ld	a, #0xff
+      00A343 6B 01            [ 1]  405 	ld	(0x01, sp), a
+      00A345                        406 00106$:
+                                    407 ;	src\ds18X20.c: 143: temp = msb;
+                                    408 ;	src\ds18X20.c: 144: temp = temp << 8;
+      00A345 0F 03            [ 1]  409 	clr	(0x03, sp)
+                                    410 ;	src\ds18X20.c: 145: temp |= lsb;
+      00A347 7B 05            [ 1]  411 	ld	a, (0x05, sp)
+      00A349 0F 04            [ 1]  412 	clr	(0x04, sp)
+      00A34B 1A 03            [ 1]  413 	or	a, (0x03, sp)
+      00A34D 02               [ 1]  414 	rlwa	x
+      00A34E 1A 04            [ 1]  415 	or	a, (0x04, sp)
+                                    416 ;	src\ds18X20.c: 146: temp += 1;
+      00A350 95               [ 1]  417 	ld	xh, a
+      00A351 5C               [ 1]  418 	incw	x
+                                    419 ;	src\ds18X20.c: 168: return temperature = temp * 0.0625 * sign;
+      00A352 CD B2 C3         [ 4]  420 	call	___sint2fs
+      00A355 89               [ 2]  421 	pushw	x
+      00A356 90 89            [ 2]  422 	pushw	y
+      00A358 5F               [ 1]  423 	clrw	x
+      00A359 89               [ 2]  424 	pushw	x
+      00A35A 4B 80            [ 1]  425 	push	#0x80
+      00A35C 4B 3D            [ 1]  426 	push	#0x3d
+      00A35E CD AB DE         [ 4]  427 	call	___fsmul
+      00A361 1F 04            [ 2]  428 	ldw	(0x04, sp), x
+      00A363 17 02            [ 2]  429 	ldw	(0x02, sp), y
+      00A365 7B 01            [ 1]  430 	ld	a, (0x01, sp)
+      00A367 CD B3 80         [ 4]  431 	call	___schar2fs
+      00A36A 89               [ 2]  432 	pushw	x
+      00A36B 90 89            [ 2]  433 	pushw	y
+      00A36D 1E 08            [ 2]  434 	ldw	x, (0x08, sp)
+      00A36F 89               [ 2]  435 	pushw	x
+      00A370 1E 08            [ 2]  436 	ldw	x, (0x08, sp)
+      00A372 89               [ 2]  437 	pushw	x
+      00A373 CD AB DE         [ 4]  438 	call	___fsmul
+      00A376                        439 00107$:
+                                    440 ;	src\ds18X20.c: 169: }
+      00A376 5B 05            [ 2]  441 	addw	sp, #5
+      00A378 81               [ 4]  442 	ret
+                                    443 ;	src\ds18X20.c: 171: void DS18X20_Setup(void) {
                                     444 ;	-----------------------------------------
                                     445 ;	 function DS18X20_Setup
                                     446 ;	-----------------------------------------
-      009E09                        447 _DS18X20_Setup:
-                                    448 ;	src/ds18X20.c: 172: OW_OUTPUT();
-      009E09 AE 50 0A         [ 2]  449 	ldw	x, #0x500a
-      009E0C CD 89 1E         [ 4]  450 	call	_GPIO_DeInit
-      009E0F 4B F0            [ 1]  451 	push	#0xf0
-      009E11 A6 08            [ 1]  452 	ld	a, #0x08
-      009E13 AE 50 0A         [ 2]  453 	ldw	x, #0x500a
-      009E16 CD 89 2C         [ 4]  454 	call	_GPIO_Init
-                                    455 ;	src/ds18X20.c: 173: }
-      009E19 81               [ 4]  456 	ret
+      00A379                        447 _DS18X20_Setup:
+                                    448 ;	src\ds18X20.c: 172: OW_OUTPUT();
+      00A379 AE 50 0A         [ 2]  449 	ldw	x, #0x500a
+      00A37C CD 89 99         [ 4]  450 	call	_GPIO_DeInit
+      00A37F 4B F0            [ 1]  451 	push	#0xf0
+      00A381 A6 08            [ 1]  452 	ld	a, #0x08
+      00A383 AE 50 0A         [ 2]  453 	ldw	x, #0x500a
+      00A386 CD 89 A7         [ 4]  454 	call	_GPIO_Init
+                                    455 ;	src\ds18X20.c: 173: }
+      00A389 81               [ 4]  456 	ret
                                     457 	.area CODE
                                     458 	.area CONST
                                     459 	.area INITIALIZER

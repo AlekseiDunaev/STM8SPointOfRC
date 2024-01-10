@@ -78,12 +78,16 @@
  * For STM8S103 devices, this is e.g. TX=PD5, RX=PD6.
 */
 
-// #define DEBUG
+#define DEBUG
+// #define DEBUG_FLOATTOSTR
 // #define QUICK_CICLE
 #define PRODUCT
 #define DS18X20_ENABLE
+// #define DS18B20_DEBUG
 #define AHTX0_DISABLE
+// #define AHTX0_DEBUG
 #define BME280_ENABLE
+#define BME280_DEBUG
 
 #define MAX_LENGHT_STRING 100
 
@@ -126,11 +130,11 @@ static const char table[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
 uint8_t iDS18X20RomID[8];
 uint8_t iI2CWrite[3];
 uint8_t iI2CRead[7];
-float fDS18X20Temperature = -100.0;
-float fAHTX0Humidity = 0;
-float fAHTX0Temperature = 0;
-float fBME280Humidity = 0;
-float fBME280Temperature = 0;
+float fDS18X20Temperature = -100.0f;
+// float fAHTX0Humidity = 0.0f;
+// float fAHTX0Temperature = 0.0f;
+float fBME280Temperature = 0.0f;
+float fBME280Humidity = 0.0f;
 char sString[MAX_LENGHT_STRING];
 char str1[MAX_LENGHT_STRING];
 extern BME280_CalibData CalibData;
@@ -191,48 +195,26 @@ void main(void) {
   DS18X20_Setup();
   I2C_Setup();
   UART_Setup();
-  BME280_Setup();
-
 #ifdef BME280_ENABLE
-  BME280_ReadCoefficients();
-  BME280_SetFilter(BME280_FILTER_4);
-  BME280_SetOversamplingTemper(BME280_OSRS_T_x4);
-  BME280_SetOversamplingPressure(BME280_OSRS_P_x2);
-  BME280_SetOversamplingHum(BME280_OSRS_H_x1);
-
-  #ifdef DEBUG
-  uint16_t value32 = BME280_ReadReg(BME280_REG_CTRL_MEAS);
-  value32 |= BME280_ReadReg(BME280_REG_CTRL_HUM) << 8;
-  sprintf(str1, "Measurements status: %04X\r\n", value32);
-  printf("%s", str1);
-  sprintf(str1, "Temperature: %s\r\nPressure: %s\r\nHumidity: %s\r\n",
-  (value32 & BME280_OSRS_T_MSK) ? "ON" : "OFF",
-  (value32 & BME280_OSRS_P_MSK) ? "ON" : "OFF",
-  ((value32 >> 8) & BME280_OSRS_H_MSK) ? "ON" : "OFF");
-  printf("%s", str1);
-  #endif
-
-  BME280_SetMode(BME280_MODE_NORMAL);
-
+  BME280_Setup();
 #endif
 
   while (1) {
-  #ifdef PRODUCT
     char *stringSendUART = NULL;
     char *stringValue = NULL;
     uint8_t integer_bit, decimal_bit;
     uint8_t sizeValueString = 0;
     uint8_t sizeSendUARTString = 0;
-    const char placeholderDS18X20String[] = "{\"topic\" : \"mqtt\/temperature-room\", \"value\" : \"%s\"}";
-    const char placeholderHumidityAHTX0String[] = "{\"topic\" : \"mqtt\/humidity-aht20\", \"value\": \"%s\"}";
-    const char placeholderTemperatureAHTX0String[] = "{\"topic\" : \"mqtt\/temperature-aht20\", \"value\": \"%s\"}";
-    const char placeholderHumidityBME280String[] = "{\"topic\" : \"mqtt\/humidity-bme280\", \"value\": \"%s\"}";
-    const char placeholderTemperatureBME280String[] = "{\"topic\" : \"mqtt\/temperature-bme280\", \"value\": \"%s\"}";
-  #endif
+    static const char placeholderDS18X20String[] = "{\"topic\" : \"mqtt\/temperature-room\", \"value\" : \"%s\"}";
+    // const char placeholderHumidityAHTX0String[] = "{\"topic\" : \"mqtt\/humidity-aht20\", \"value\": \"%s\"}";
+    // const char placeholderTemperatureAHTX0String[] = "{\"topic\" : \"mqtt\/temperature-aht20\", \"value\": \"%s\"}";
+    static const char placeholderHumidityBME280String[] = "{\"topic\" : \"mqtt\/humidity-bme280\", \"value\": \"%s\"}";
+    static const char placeholderTemperatureBME280String[] = "{\"topic\" : \"mqtt\/temperature-bme280\", \"value\": \"%s\"}";
+    // static const char placeholderTemperatureBME280String[] = "{\"topic\" : \"mqtt\/pressure-bme280\", \"value\": \"%s\"}";
 
     LED_ON;
 
-  #ifdef DS18X20_ENABLE
+#ifdef DS18X20_ENABLE
     DS18X20_Reset();
 
     delay_ms(2000);
@@ -242,28 +224,24 @@ void main(void) {
         iDS18X20RomID[i] = 0;
       }
     };
-
-    #ifdef DEBUG
-    printf("Famaly ID: 0x%02x, ", iDS18X20RomID[0]);
-    printf("Sensor ID; ");
-
-    for (int8_t i = 6; i > 0 ; i--) {
-      printf("0x%02x ", iDS18X20RomID[i]);
-    }
-
-    printf("\r\n");
-    #endif
-
     fDS18X20Temperature = DS18X20_Get_Temperature();
     integer_bit = 2;
     decimal_bit = 2;
     
-    #ifdef DEBUG
+#ifdef DS18B20_DEBUG
+    printf("Famaly ID: 0x%02X, ", iDS18X20RomID[0]);
+    printf("Sensor ID: ");
+
+    for (int8_t i = 6; i > 0 ; i--) {
+      printf("0x%02X", iDS18X20RomID[i]);
+    }
+
+    printf("\r\n");
+
     FloatToStr(sString, fDS18X20Temperature, integer_bit, decimal_bit);
     printf("DS18X20 temperature: %s\r\n", sString);
-    #endif
+#endif
 
-    #ifdef PRODUCT
     sizeValueString = integer_bit + decimal_bit + 1;
     sizeSendUARTString = sizeof(placeholderDS18X20String) + sizeValueString;
     stringValue = (char*)malloc(sizeValueString * sizeof(char));
@@ -272,17 +250,18 @@ void main(void) {
     FloatToStr(stringValue, fDS18X20Temperature, integer_bit, decimal_bit);
 
     sprintf(stringSendUART, placeholderDS18X20String, stringValue);
+    putchar(0x00);
+    putchar(0x00);
+    putchar(0x18);
     printf("%s\r\n", stringSendUART);
 
     free(stringSendUART);
     free(stringValue);
 
     delay_ms(5000);
+#endif
     
-    #endif
-  #endif
-    
-  #ifdef AHTX0_ENABLE
+#ifdef AHTX0_ENABLE
     iI2CWrite[0] = 0xAC;
     iI2CWrite[1] = 0x33;
     iI2CWrite[2] = 0x00;
@@ -294,14 +273,12 @@ void main(void) {
     fAHTX0Humidity = ATHX0ConverHumidity(iI2CRead);
     fAHTX0Temperature = ATHX0ConvertTemperature(iI2CRead);
     
-    #ifdef DEBUG
+#ifdef AHTX0_DEBUG
     FloatToStr(sString, fAHTX0Humidity, 2, 2);
     printf("ATHX0 humidity: %s\r\n", sString);
     FloatToStr(sString, fAHTX0Temperature, 2, 2);
     printf("AHTX0 temperature: %s\r\n", sString);
-    #endif
-
-    #ifdef PRODUCT
+#endif
 
     integer_bit = 2;
     decimal_bit = 2;
@@ -337,137 +314,56 @@ void main(void) {
     free(stringSendUART);
     free(stringValue);
 
-    #endif
-  #endif
+#endif
 
-  #ifdef BME280_ENABLE
-  // iI2CWrite[0] = 0xD0;
-  // iI2CWrite[1] = 0x33;
-  // iI2CWrite[2] = 0x00;
+#ifdef BME280_ENABLE
 
-  // I2C_Send_Bytes((BME280_ADDRESS << 1), (uint16_t)1, iI2CWrite);
-  uint8_t res = BME280_ReadReg(BME280_REG_ID);
+    integer_bit = 3;
+    decimal_bit = 2;
 
-  if (res != BME280_ID) {
-    Error();
-    return;
-  }
-  
-  #ifdef DEBUG
-
-  printf("BME280_ID: 0x%02x", res);
-  // printf("BME280_ID: 0x%02x, ", I2C_Read_Byte(BME280_ADDRESS << 1));
-  printf("\r\n");
-
-  #endif
-
-  BME280_WriteReg(BME280_REG_SOFTRESET,BME280_SOFTRESET_VALUE);
-  while (BME280_ReadStatus() & BME280_STATUS_IM_UPDATE);
-
-  #ifdef DEBUG
-
-  sprintf(str1, "DIG_T1: %u\r\n", CalibData.dig_T1);
-  printf("%s", str1);
- 
-  sprintf(str1, "DIG_T2: %d\r\n", CalibData.dig_T2);
-  printf("%s", str1);
-  
-  sprintf(str1, "DIG_T3: %d\r\n", CalibData.dig_T3);
-  printf("%s", str1);
-  
-  sprintf(str1, "DIG_P1: %u\r\n", CalibData.dig_P1);
-  printf("%s", str1);
-  
-  sprintf(str1, "DIG_P2: %d\r\n", CalibData.dig_P2);
-  printf("%s", str1);
-  
-  sprintf(str1, "DIG_P3: %d\r\n", CalibData.dig_P3);
-  printf("%s", str1);
-  
-  sprintf(str1, "DIG_P4: %d\r\n", CalibData.dig_P4);
-  printf("%s", str1);
-  
-  sprintf(str1, "DIG_P5: %d\r\n", CalibData.dig_P5);
-  printf("%s", str1);
-  
-  sprintf(str1, "DIG_P6: %d\r\n", CalibData.dig_P6);
-  printf("%s", str1);
-  
-  sprintf(str1, "DIG_P7: %d\r\n", CalibData.dig_P7);
-  printf("%s", str1);
-  
-  sprintf(str1, "DIG_P8: %d\r\n", CalibData.dig_P8);
-  printf("%s", str1);
-  
-  sprintf(str1, "DIG_P9: %d\r\n", CalibData.dig_P9);
-  printf("%s", str1);
-  
-  sprintf(str1, "DIG_H1: %d\r\n", CalibData.dig_H1);
-  printf("%s", str1);
-  
-  sprintf(str1, "DIG_H2: %d\r\n", CalibData.dig_H2);
-  printf("%s", str1);
-  
-  sprintf(str1, "DIG_H3: %d\r\n", CalibData.dig_H3);
-  printf("%s", str1);
-  
-  sprintf(str1, "DIG_H4: %d\r\n", CalibData.dig_H4);
-  printf("%s", str1);
-  
-  sprintf(str1, "DIG_H5: %d\r\n", CalibData.dig_H5);
-  printf("%s", str1);
-  
-  sprintf(str1, "DIG_H6: %d\r\n", CalibData.dig_H3);
-  printf("%s", str1);
-  
-  #endif
-
-  #ifdef PRODUCT
-
-  // Temprorary value Humidity and Temperature
-  fBME280Humidity = 50;
-  fBME280Temperature = -11.7;
-
-  integer_bit = 2;
-  decimal_bit = 2;
+    fBME280Temperature = BME280_ReadTemperature();
+    delay_ms(2000);
     
-  sizeValueString = integer_bit + decimal_bit + 1;
-  sizeSendUARTString = sizeof(placeholderHumidityBME280String) + sizeValueString;
-  stringValue = (char*)malloc(sizeValueString * sizeof(char));
-  stringSendUART = (char*)malloc(sizeSendUARTString * sizeof(char));
-
-  FloatToStr(stringValue, fBME280Humidity, integer_bit, decimal_bit);
-
-  sprintf(stringSendUART, placeholderHumidityBME280String, stringValue);
-  printf("%s\r\n", stringSendUART);
+    sizeValueString = integer_bit + decimal_bit + 1;
+    stringValue = (char*)malloc(sizeValueString * sizeof(char));
+    sizeSendUARTString = sizeof(placeholderTemperatureBME280String) + sizeValueString;
+    stringSendUART = (char*)malloc(sizeSendUARTString * sizeof(char));
     
-  free(stringSendUART);
-  free(stringValue);
-    
-  integer_bit = 5;
-  decimal_bit = 2;
-
-  delay_ms(5000);
-    
-  sizeValueString = integer_bit + decimal_bit + 1;
-  stringValue = (char*)malloc(sizeValueString * sizeof(char));
+    FloatToStr(stringValue, fBME280Temperature, integer_bit, decimal_bit);
+    sprintf(stringSendUART, placeholderTemperatureBME280String, stringValue);
+    putchar(0x00);
+    putchar(0x00);
+    putchar(0x18);
+    printf("%s\r\n", stringSendUART);
   
-  sizeSendUARTString = sizeof(placeholderTemperatureBME280String) + sizeValueString;
-  stringSendUART = (char*)malloc(sizeSendUARTString * sizeof(char));
-    
-  FloatToStr(stringValue, fBME280Temperature, integer_bit, decimal_bit);
+    free(stringSendUART);
+    free(stringValue);
 
-  sprintf(stringSendUART, placeholderTemperatureBME280String, stringValue);
-  printf("%s\r\n", stringSendUART);
-    
-  free(stringSendUART);
-  free(stringValue);
+    integer_bit = 2;
+    decimal_bit = 2;
 
-  #endif
+    fBME280Humidity = BME280_ReadHumidity();
+    delay_ms(2000);
+    
+    sizeValueString = integer_bit + decimal_bit + 1;
+    sizeSendUARTString = sizeof(placeholderHumidityBME280String) + sizeValueString;
+    stringValue = (char*)malloc(sizeValueString * sizeof(char));
+    stringSendUART = (char*)malloc(sizeSendUARTString * sizeof(char));
+
+    FloatToStr(stringValue, fBME280Humidity, integer_bit, decimal_bit);
+    sprintf(stringSendUART, placeholderHumidityBME280String, stringValue);
+    putchar(0x00);
+    putchar(0x00);
+    putchar(0x18);
+    printf("%s\r\n", stringSendUART);
+    
+    free(stringSendUART);
+    free(stringValue);
+
 #endif
     
 #ifdef QUICK_CICLE
-      delay_ms(10000);
+    delay_ms(10000);
 #endif
 
 #ifndef QUICK_CICLE
@@ -520,7 +416,7 @@ void FloatToStr(char *str, float number, uint8_t integer_bit, uint8_t decimal_bi
           }
         }
         
-        #ifdef DEBUG
+        #ifdef DEBUG_FLOATTOSTR
         sprintf(str1, "%d\r\n", trailing_zero_count);
         printf("%s", str1);
         #endif

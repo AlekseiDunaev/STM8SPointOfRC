@@ -1,6 +1,6 @@
                                       1 ;--------------------------------------------------------
                                       2 ; File Created by SDCC : free open source ANSI-C Compiler
-                                      3 ; Version 4.2.0 #13081 (Mac OS X x86_64)
+                                      3 ; Version 4.2.0 #13081 (MINGW64)
                                       4 ;--------------------------------------------------------
                                       5 	.module athx0
                                       6 	.optsdcc -mstm8
@@ -47,17 +47,17 @@
                                      47 ; code
                                      48 ;--------------------------------------------------------
                                      49 	.area CODE
-                                     50 ;	src/athx0.c: 3: float ATHX0ConverHumidity(uint8_t *Buf) {
+                                     50 ;	src\athx0.c: 3: float ATHX0ConverHumidity(uint8_t *Buf) {
                                      51 ;	-----------------------------------------
                                      52 ;	 function ATHX0ConverHumidity
                                      53 ;	-----------------------------------------
       000000                         54 _ATHX0ConverHumidity:
       000000 52 06            [ 2]   55 	sub	sp, #6
-                                     56 ;	src/athx0.c: 5: fAHTX0Humidity = Buf[1];
+                                     56 ;	src\athx0.c: 5: fAHTX0Humidity = Buf[1];
       000002 1F 05            [ 2]   57 	ldw	(0x05, sp), x
       000004 E6 01            [ 1]   58 	ld	a, (0x1, x)
       000006 CDr00r00         [ 4]   59 	call	___uchar2fs
-                                     60 ;	src/athx0.c: 6: fAHTX0Humidity *= 256;
+                                     60 ;	src\athx0.c: 6: fAHTX0Humidity *= 256;
       000009 89               [ 2]   61 	pushw	x
       00000A 90 89            [ 2]   62 	pushw	y
       00000C 5F               [ 1]   63 	clrw	x
@@ -67,7 +67,7 @@
       000012 CDr00r00         [ 4]   67 	call	___fsmul
       000015 1F 03            [ 2]   68 	ldw	(0x03, sp), x
       000017 17 01            [ 2]   69 	ldw	(0x01, sp), y
-                                     70 ;	src/athx0.c: 7: fAHTX0Humidity += Buf[2];
+                                     70 ;	src\athx0.c: 7: fAHTX0Humidity += Buf[2];
       000019 1E 05            [ 2]   71 	ldw	x, (0x05, sp)
       00001B E6 02            [ 1]   72 	ld	a, (0x2, x)
       00001D 5F               [ 1]   73 	clrw	x
@@ -80,7 +80,7 @@
       000028 1E 07            [ 2]   80 	ldw	x, (0x07, sp)
       00002A 89               [ 2]   81 	pushw	x
       00002B CDr00r00         [ 4]   82 	call	___fsadd
-                                     83 ;	src/athx0.c: 8: fAHTX0Humidity *= 16;
+                                     83 ;	src\athx0.c: 8: fAHTX0Humidity *= 16;
       00002E 89               [ 2]   84 	pushw	x
       00002F 90 89            [ 2]   85 	pushw	y
       000031 5F               [ 1]   86 	clrw	x
@@ -90,7 +90,7 @@
       000037 CDr00r00         [ 4]   90 	call	___fsmul
       00003A 1F 03            [ 2]   91 	ldw	(0x03, sp), x
       00003C 17 01            [ 2]   92 	ldw	(0x01, sp), y
-                                     93 ;	src/athx0.c: 9: fAHTX0Humidity += (Buf[3]>>4);
+                                     93 ;	src\athx0.c: 9: fAHTX0Humidity += (Buf[3]>>4);
       00003E 1E 05            [ 2]   94 	ldw	x, (0x05, sp)
       000040 E6 03            [ 1]   95 	ld	a, (0x3, x)
       000042 4E               [ 1]   96 	swap	a
@@ -105,7 +105,7 @@
       000050 1E 07            [ 2]  105 	ldw	x, (0x07, sp)
       000052 89               [ 2]  106 	pushw	x
       000053 CDr00r00         [ 4]  107 	call	___fsadd
-                                    108 ;	src/athx0.c: 11: fAHTX0Humidity /= 1048576;
+                                    108 ;	src\athx0.c: 11: fAHTX0Humidity /= 1048576;
       000056 4B 00            [ 1]  109 	push	#0x00
       000058 4B 00            [ 1]  110 	push	#0x00
       00005A 4B 80            [ 1]  111 	push	#0x80
@@ -113,7 +113,7 @@
       00005E 89               [ 2]  113 	pushw	x
       00005F 90 89            [ 2]  114 	pushw	y
       000061 CDr00r00         [ 4]  115 	call	___fsdiv
-                                    116 ;	src/athx0.c: 12: fAHTX0Humidity *= 100;
+                                    116 ;	src\athx0.c: 12: fAHTX0Humidity *= 100;
       000064 89               [ 2]  117 	pushw	x
       000065 90 89            [ 2]  118 	pushw	y
       000067 5F               [ 1]  119 	clrw	x
@@ -121,17 +121,17 @@
       000069 4B C8            [ 1]  121 	push	#0xc8
       00006B 4B 42            [ 1]  122 	push	#0x42
       00006D CDr00r00         [ 4]  123 	call	___fsmul
-                                    124 ;	src/athx0.c: 14: return fAHTX0Humidity;
-                                    125 ;	src/athx0.c: 15: }
+                                    124 ;	src\athx0.c: 14: return fAHTX0Humidity;
+                                    125 ;	src\athx0.c: 15: }
       000070 5B 06            [ 2]  126 	addw	sp, #6
       000072 81               [ 4]  127 	ret
-                                    128 ;	src/athx0.c: 17: float ATHX0ConvertTemperature(uint8_t *Buf) {
+                                    128 ;	src\athx0.c: 17: float ATHX0ConvertTemperature(uint8_t *Buf) {
                                     129 ;	-----------------------------------------
                                     130 ;	 function ATHX0ConvertTemperature
                                     131 ;	-----------------------------------------
       000073                        132 _ATHX0ConvertTemperature:
       000073 52 06            [ 2]  133 	sub	sp, #6
-                                    134 ;	src/athx0.c: 19: fAHTX0Temperature = (Buf[3] & 0x0f);
+                                    134 ;	src\athx0.c: 19: fAHTX0Temperature = (Buf[3] & 0x0f);
       000075 1F 05            [ 2]  135 	ldw	(0x05, sp), x
       000077 E6 03            [ 1]  136 	ld	a, (0x3, x)
       000079 A4 0F            [ 1]  137 	and	a, #0x0f
@@ -139,7 +139,7 @@
       00007C 4F               [ 1]  139 	clr	a
       00007D 95               [ 1]  140 	ld	xh, a
       00007E CDr00r00         [ 4]  141 	call	___sint2fs
-                                    142 ;	src/athx0.c: 20: fAHTX0Temperature *= 256;
+                                    142 ;	src\athx0.c: 20: fAHTX0Temperature *= 256;
       000081 89               [ 2]  143 	pushw	x
       000082 90 89            [ 2]  144 	pushw	y
       000084 5F               [ 1]  145 	clrw	x
@@ -149,7 +149,7 @@
       00008A CDr00r00         [ 4]  149 	call	___fsmul
       00008D 1F 03            [ 2]  150 	ldw	(0x03, sp), x
       00008F 17 01            [ 2]  151 	ldw	(0x01, sp), y
-                                    152 ;	src/athx0.c: 21: fAHTX0Temperature += Buf[4];
+                                    152 ;	src\athx0.c: 21: fAHTX0Temperature += Buf[4];
       000091 1E 05            [ 2]  153 	ldw	x, (0x05, sp)
       000093 E6 04            [ 1]  154 	ld	a, (0x4, x)
       000095 5F               [ 1]  155 	clrw	x
@@ -162,7 +162,7 @@
       0000A0 1E 07            [ 2]  162 	ldw	x, (0x07, sp)
       0000A2 89               [ 2]  163 	pushw	x
       0000A3 CDr00r00         [ 4]  164 	call	___fsadd
-                                    165 ;	src/athx0.c: 22: fAHTX0Temperature *= 256;
+                                    165 ;	src\athx0.c: 22: fAHTX0Temperature *= 256;
       0000A6 89               [ 2]  166 	pushw	x
       0000A7 90 89            [ 2]  167 	pushw	y
       0000A9 5F               [ 1]  168 	clrw	x
@@ -172,7 +172,7 @@
       0000AF CDr00r00         [ 4]  172 	call	___fsmul
       0000B2 1F 03            [ 2]  173 	ldw	(0x03, sp), x
       0000B4 17 01            [ 2]  174 	ldw	(0x01, sp), y
-                                    175 ;	src/athx0.c: 23: fAHTX0Temperature += Buf[5];
+                                    175 ;	src\athx0.c: 23: fAHTX0Temperature += Buf[5];
       0000B6 1E 05            [ 2]  176 	ldw	x, (0x05, sp)
       0000B8 E6 05            [ 1]  177 	ld	a, (0x5, x)
       0000BA 5F               [ 1]  178 	clrw	x
@@ -185,7 +185,7 @@
       0000C5 1E 07            [ 2]  185 	ldw	x, (0x07, sp)
       0000C7 89               [ 2]  186 	pushw	x
       0000C8 CDr00r00         [ 4]  187 	call	___fsadd
-                                    188 ;	src/athx0.c: 25: fAHTX0Temperature /= 1048576;
+                                    188 ;	src\athx0.c: 25: fAHTX0Temperature /= 1048576;
       0000CB 4B 00            [ 1]  189 	push	#0x00
       0000CD 4B 00            [ 1]  190 	push	#0x00
       0000CF 4B 80            [ 1]  191 	push	#0x80
@@ -193,7 +193,7 @@
       0000D3 89               [ 2]  193 	pushw	x
       0000D4 90 89            [ 2]  194 	pushw	y
       0000D6 CDr00r00         [ 4]  195 	call	___fsdiv
-                                    196 ;	src/athx0.c: 26: fAHTX0Temperature = fAHTX0Temperature * 200 - 50;
+                                    196 ;	src\athx0.c: 26: fAHTX0Temperature = fAHTX0Temperature * 200 - 50;
       0000D9 89               [ 2]  197 	pushw	x
       0000DA 90 89            [ 2]  198 	pushw	y
       0000DC 5F               [ 1]  199 	clrw	x
@@ -208,8 +208,8 @@
       0000ED 89               [ 2]  208 	pushw	x
       0000EE 90 89            [ 2]  209 	pushw	y
       0000F0 CDr00r00         [ 4]  210 	call	___fssub
-                                    211 ;	src/athx0.c: 28: return fAHTX0Temperature;
-                                    212 ;	src/athx0.c: 29: }
+                                    211 ;	src\athx0.c: 28: return fAHTX0Temperature;
+                                    212 ;	src\athx0.c: 29: }
       0000F3 5B 06            [ 2]  213 	addw	sp, #6
       0000F5 81               [ 4]  214 	ret
                                     215 	.area CODE

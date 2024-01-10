@@ -49,7 +49,7 @@ Area Table
    4 HOME                                       size      0   flags    0
    5 GSINIT                                     size      0   flags    0
    6 GSFINAL                                    size      0   flags    0
-   7 CONST                                      size     7B   flags    0
+   7 CONST                                      size     75   flags    0
    8 INITIALIZER                                size      0   flags    0
    9 CODE                                       size    696   flags    0
    A CABS                                       size      0   flags    8

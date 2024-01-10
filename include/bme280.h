@@ -8,7 +8,8 @@
 #include "math.h"
 #include "config.h"
 
-#define BME280_ADDRESS 0x77
+#define BME280_ADDRESS 0xEE //BME280 I2C ADDRES (0x77<<1)
+// #define BME280_ADDRESS 0x77
 #define BME280_REG_ID 0xD0 //BME280 ID REGISTER
 #define BME280_ID 0x60 //BME280 I2C ID
 #define BME280_REG_SOFTRESET 0xE0 //BME280 SOFT RESET REGISTER
@@ -85,6 +86,9 @@
 #define BME280_MODE_FORCED 0x01
 #define BME280_MODE_NORMAL 0x03
 
+#define be16toword(a) ((((a)>>8)&0xff)|(((a)<<8)&0xff00))
+#define be24toword(a) ((((a)>>16)&0x000000ff)|((a)&0x0000ff00)|(((a)<<16)&0x00ff0000))
+
 typedef struct {
   uint16_t dig_T1;
   int16_t dig_T2;
@@ -107,11 +111,19 @@ typedef struct {
 } BME280_CalibData;
 
 void Error(void);
+static void I2Cx_WriteData(uint16_t Addr, uint8_t Reg, uint8_t Value);
+static uint8_t I2Cx_ReadData(uint16_t Addr, uint8_t Reg);
+static void I2Cx_ReadData16(uint16_t Addr, uint8_t Reg, uint16_t *Value);
+static void I2Cx_ReadData24(uint16_t Addr, uint8_t Reg, uint32_t *Value);
 void BME280_Setup(void);
 void BME280_WriteReg(uint8_t Reg, uint8_t Value);
 uint8_t BME280_ReadReg(uint8_t Reg);
 void BME280_ReadReg_U16(uint8_t iReg, uint16_t *iValue);
 void BME280_ReadReg_S16(uint8_t iReg, int16_t *iValue);
+void BME280_ReadReg_LE_U16(uint8_t iReg, uint16_t *iValue);
+void BME280_ReadReg_LE_S16(uint8_t iReg, int16_t *iValue);
+void BME280_ReadReg_U24(uint8_t iReg, uint32_t *iValue);
+// void BME280_ReadReg_LE_U24(uint8_t iReg, uint32_t *iValue);
 uint8_t BME280_ReadStatus(void);
 void BME280_ReadCoefficients(void);
 void BME280_SetStandby(uint8_t tsb);
@@ -121,8 +133,8 @@ void BME280_SetOversamplingPressure(uint8_t osrs);
 void BME280_SetOversamplingHum(uint8_t osrs);
 void BME280_SetMode(uint8_t mode);
 float BME280_ReadTemperature(void);
-float BME280_ReadPressure(void);
+// float BME280_ReadPressure(void);
 float BME280_ReadHumidity(void);
-float BME280_ReadAltitude(float seaLevel);
+// float BME280_ReadAltitude(float seaLevel);
 
 #endif /* _BME280_H_ */

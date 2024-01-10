@@ -15,8 +15,8 @@ Symbol Table
     _I2C_GenerateSTOP                                              ****** GX
     _I2C_GetFlagStatus                                             ****** GX
     _I2C_Init                                                      ****** GX
-  9 _I2C_Read_Byte                                                 00015D GR
-  9 _I2C_Read_Bytes                                                00025C GR
+  9 _I2C_Read_Byte                                                 000160 GR
+  9 _I2C_Read_Bytes                                                00025F GR
     _I2C_ReceiveData                                               ****** GX
     _I2C_Send7bitAddress                                           ****** GX
     _I2C_SendData                                                  ****** GX
@@ -38,6 +38,6 @@ Area Table
    6 GSFINAL                                    size      0   flags    0
    7 CONST                                      size      0   flags    0
    8 INITIALIZER                                size      0   flags    0
-   9 CODE                                       size    403   flags    0
+   9 CODE                                       size    40E   flags    0
    A CABS                                       size      0   flags    8
 

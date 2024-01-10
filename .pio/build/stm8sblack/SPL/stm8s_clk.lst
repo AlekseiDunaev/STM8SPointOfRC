@@ -1,6 +1,6 @@
                                       1 ;--------------------------------------------------------
                                       2 ; File Created by SDCC : free open source ANSI-C Compiler
-                                      3 ; Version 4.2.0 #13081 (Mac OS X x86_64)
+                                      3 ; Version 4.2.0 #13081 (MINGW64)
                                       4 ;--------------------------------------------------------
                                       5 	.module stm8s_clk
                                       6 	.optsdcc -mstm8
@@ -71,47 +71,47 @@
                                      71 ; code
                                      72 ;--------------------------------------------------------
                                      73 	.area CODE
-                                     74 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 72: void CLK_DeInit(void)
+                                     74 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 72: void CLK_DeInit(void)
                                      75 ;	-----------------------------------------
                                      76 ;	 function CLK_DeInit
                                      77 ;	-----------------------------------------
       000000                         78 _CLK_DeInit:
-                                     79 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 74: CLK->ICKR = CLK_ICKR_RESET_VALUE;
+                                     79 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 74: CLK->ICKR = CLK_ICKR_RESET_VALUE;
       000000 35 01 50 C0      [ 1]   80 	mov	0x50c0+0, #0x01
-                                     81 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 75: CLK->ECKR = CLK_ECKR_RESET_VALUE;
+                                     81 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 75: CLK->ECKR = CLK_ECKR_RESET_VALUE;
       000004 35 00 50 C1      [ 1]   82 	mov	0x50c1+0, #0x00
-                                     83 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 76: CLK->SWR  = CLK_SWR_RESET_VALUE;
+                                     83 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 76: CLK->SWR  = CLK_SWR_RESET_VALUE;
       000008 35 E1 50 C4      [ 1]   84 	mov	0x50c4+0, #0xe1
-                                     85 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 77: CLK->SWCR = CLK_SWCR_RESET_VALUE;
+                                     85 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 77: CLK->SWCR = CLK_SWCR_RESET_VALUE;
       00000C 35 00 50 C5      [ 1]   86 	mov	0x50c5+0, #0x00
-                                     87 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 78: CLK->CKDIVR = CLK_CKDIVR_RESET_VALUE;
+                                     87 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 78: CLK->CKDIVR = CLK_CKDIVR_RESET_VALUE;
       000010 35 18 50 C6      [ 1]   88 	mov	0x50c6+0, #0x18
-                                     89 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 79: CLK->PCKENR1 = CLK_PCKENR1_RESET_VALUE;
+                                     89 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 79: CLK->PCKENR1 = CLK_PCKENR1_RESET_VALUE;
       000014 35 FF 50 C7      [ 1]   90 	mov	0x50c7+0, #0xff
-                                     91 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 80: CLK->PCKENR2 = CLK_PCKENR2_RESET_VALUE;
+                                     91 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 80: CLK->PCKENR2 = CLK_PCKENR2_RESET_VALUE;
       000018 35 FF 50 CA      [ 1]   92 	mov	0x50ca+0, #0xff
-                                     93 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 81: CLK->CSSR = CLK_CSSR_RESET_VALUE;
+                                     93 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 81: CLK->CSSR = CLK_CSSR_RESET_VALUE;
       00001C 35 00 50 C8      [ 1]   94 	mov	0x50c8+0, #0x00
-                                     95 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 82: CLK->CCOR = CLK_CCOR_RESET_VALUE;
+                                     95 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 82: CLK->CCOR = CLK_CCOR_RESET_VALUE;
       000020 35 00 50 C9      [ 1]   96 	mov	0x50c9+0, #0x00
-                                     97 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 83: while ((CLK->CCOR & CLK_CCOR_CCOEN)!= 0)
+                                     97 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 83: while ((CLK->CCOR & CLK_CCOR_CCOEN)!= 0)
       000024                         98 00101$:
       000024 72 00 50 C9 FB   [ 2]   99 	btjt	0x50c9, #0, 00101$
-                                    100 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 85: CLK->CCOR = CLK_CCOR_RESET_VALUE;
+                                    100 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 85: CLK->CCOR = CLK_CCOR_RESET_VALUE;
       000029 35 00 50 C9      [ 1]  101 	mov	0x50c9+0, #0x00
-                                    102 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 86: CLK->HSITRIMR = CLK_HSITRIMR_RESET_VALUE;
+                                    102 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 86: CLK->HSITRIMR = CLK_HSITRIMR_RESET_VALUE;
       00002D 35 00 50 CC      [ 1]  103 	mov	0x50cc+0, #0x00
-                                    104 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 87: CLK->SWIMCCR = CLK_SWIMCCR_RESET_VALUE;
+                                    104 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 87: CLK->SWIMCCR = CLK_SWIMCCR_RESET_VALUE;
       000031 35 00 50 CD      [ 1]  105 	mov	0x50cd+0, #0x00
-                                    106 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 88: }
+                                    106 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 88: }
       000035 81               [ 4]  107 	ret
-                                    108 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 99: void CLK_FastHaltWakeUpCmd(FunctionalState NewState)
+                                    108 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 99: void CLK_FastHaltWakeUpCmd(FunctionalState NewState)
                                     109 ;	-----------------------------------------
                                     110 ;	 function CLK_FastHaltWakeUpCmd
                                     111 ;	-----------------------------------------
       000036                        112 _CLK_FastHaltWakeUpCmd:
       000036 88               [ 1]  113 	push	a
-                                    114 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 102: assert_param(IS_FUNCTIONALSTATE_OK(NewState));
+                                    114 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 102: assert_param(IS_FUNCTIONALSTATE_OK(NewState));
       000037 6B 01            [ 1]  115 	ld	(0x01, sp), a
       000039 27 11            [ 1]  116 	jreq	00107$
       00003B 7B 01            [ 1]  117 	ld	a, (0x01, sp)
@@ -124,30 +124,30 @@
       000046 AEr00r0C         [ 2]  124 	ldw	x, #(___str_0+0)
       000049 CDr00r00         [ 4]  125 	call	_assert_failed
       00004C                        126 00107$:
-                                    127 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 107: CLK->ICKR |= CLK_ICKR_FHWU;
+                                    127 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 107: CLK->ICKR |= CLK_ICKR_FHWU;
       00004C C6 50 C0         [ 1]  128 	ld	a, 0x50c0
-                                    129 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 104: if (NewState != DISABLE)
+                                    129 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 104: if (NewState != DISABLE)
       00004F 0D 01            [ 1]  130 	tnz	(0x01, sp)
       000051 27 07            [ 1]  131 	jreq	00102$
-                                    132 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 107: CLK->ICKR |= CLK_ICKR_FHWU;
+                                    132 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 107: CLK->ICKR |= CLK_ICKR_FHWU;
       000053 AA 04            [ 1]  133 	or	a, #0x04
       000055 C7 50 C0         [ 1]  134 	ld	0x50c0, a
       000058 20 05            [ 2]  135 	jra	00104$
       00005A                        136 00102$:
-                                    137 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 112: CLK->ICKR &= (uint8_t)(~CLK_ICKR_FHWU);
+                                    137 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 112: CLK->ICKR &= (uint8_t)(~CLK_ICKR_FHWU);
       00005A A4 FB            [ 1]  138 	and	a, #0xfb
       00005C C7 50 C0         [ 1]  139 	ld	0x50c0, a
       00005F                        140 00104$:
-                                    141 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 114: }
+                                    141 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 114: }
       00005F 84               [ 1]  142 	pop	a
       000060 81               [ 4]  143 	ret
-                                    144 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 121: void CLK_HSECmd(FunctionalState NewState)
+                                    144 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 121: void CLK_HSECmd(FunctionalState NewState)
                                     145 ;	-----------------------------------------
                                     146 ;	 function CLK_HSECmd
                                     147 ;	-----------------------------------------
       000061                        148 _CLK_HSECmd:
       000061 88               [ 1]  149 	push	a
-                                    150 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 124: assert_param(IS_FUNCTIONALSTATE_OK(NewState));
+                                    150 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 124: assert_param(IS_FUNCTIONALSTATE_OK(NewState));
       000062 6B 01            [ 1]  151 	ld	(0x01, sp), a
       000064 27 11            [ 1]  152 	jreq	00107$
       000066 7B 01            [ 1]  153 	ld	a, (0x01, sp)
@@ -160,30 +160,30 @@
       000071 AEr00r0C         [ 2]  160 	ldw	x, #(___str_0+0)
       000074 CDr00r00         [ 4]  161 	call	_assert_failed
       000077                        162 00107$:
-                                    163 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 129: CLK->ECKR |= CLK_ECKR_HSEEN;
+                                    163 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 129: CLK->ECKR |= CLK_ECKR_HSEEN;
       000077 C6 50 C1         [ 1]  164 	ld	a, 0x50c1
-                                    165 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 126: if (NewState != DISABLE)
+                                    165 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 126: if (NewState != DISABLE)
       00007A 0D 01            [ 1]  166 	tnz	(0x01, sp)
       00007C 27 07            [ 1]  167 	jreq	00102$
-                                    168 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 129: CLK->ECKR |= CLK_ECKR_HSEEN;
+                                    168 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 129: CLK->ECKR |= CLK_ECKR_HSEEN;
       00007E AA 01            [ 1]  169 	or	a, #0x01
       000080 C7 50 C1         [ 1]  170 	ld	0x50c1, a
       000083 20 05            [ 2]  171 	jra	00104$
       000085                        172 00102$:
-                                    173 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 134: CLK->ECKR &= (uint8_t)(~CLK_ECKR_HSEEN);
+                                    173 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 134: CLK->ECKR &= (uint8_t)(~CLK_ECKR_HSEEN);
       000085 A4 FE            [ 1]  174 	and	a, #0xfe
       000087 C7 50 C1         [ 1]  175 	ld	0x50c1, a
       00008A                        176 00104$:
-                                    177 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 136: }
+                                    177 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 136: }
       00008A 84               [ 1]  178 	pop	a
       00008B 81               [ 4]  179 	ret
-                                    180 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 143: void CLK_HSICmd(FunctionalState NewState)
+                                    180 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 143: void CLK_HSICmd(FunctionalState NewState)
                                     181 ;	-----------------------------------------
                                     182 ;	 function CLK_HSICmd
                                     183 ;	-----------------------------------------
       00008C                        184 _CLK_HSICmd:
       00008C 88               [ 1]  185 	push	a
-                                    186 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 146: assert_param(IS_FUNCTIONALSTATE_OK(NewState));
+                                    186 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 146: assert_param(IS_FUNCTIONALSTATE_OK(NewState));
       00008D 6B 01            [ 1]  187 	ld	(0x01, sp), a
       00008F 27 11            [ 1]  188 	jreq	00107$
       000091 7B 01            [ 1]  189 	ld	a, (0x01, sp)
@@ -196,30 +196,30 @@
       00009C AEr00r0C         [ 2]  196 	ldw	x, #(___str_0+0)
       00009F CDr00r00         [ 4]  197 	call	_assert_failed
       0000A2                        198 00107$:
-                                    199 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 151: CLK->ICKR |= CLK_ICKR_HSIEN;
+                                    199 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 151: CLK->ICKR |= CLK_ICKR_HSIEN;
       0000A2 C6 50 C0         [ 1]  200 	ld	a, 0x50c0
-                                    201 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 148: if (NewState != DISABLE)
+                                    201 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 148: if (NewState != DISABLE)
       0000A5 0D 01            [ 1]  202 	tnz	(0x01, sp)
       0000A7 27 07            [ 1]  203 	jreq	00102$
-                                    204 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 151: CLK->ICKR |= CLK_ICKR_HSIEN;
+                                    204 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 151: CLK->ICKR |= CLK_ICKR_HSIEN;
       0000A9 AA 01            [ 1]  205 	or	a, #0x01
       0000AB C7 50 C0         [ 1]  206 	ld	0x50c0, a
       0000AE 20 05            [ 2]  207 	jra	00104$
       0000B0                        208 00102$:
-                                    209 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 156: CLK->ICKR &= (uint8_t)(~CLK_ICKR_HSIEN);
+                                    209 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 156: CLK->ICKR &= (uint8_t)(~CLK_ICKR_HSIEN);
       0000B0 A4 FE            [ 1]  210 	and	a, #0xfe
       0000B2 C7 50 C0         [ 1]  211 	ld	0x50c0, a
       0000B5                        212 00104$:
-                                    213 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 158: }
+                                    213 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 158: }
       0000B5 84               [ 1]  214 	pop	a
       0000B6 81               [ 4]  215 	ret
-                                    216 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 166: void CLK_LSICmd(FunctionalState NewState)
+                                    216 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 166: void CLK_LSICmd(FunctionalState NewState)
                                     217 ;	-----------------------------------------
                                     218 ;	 function CLK_LSICmd
                                     219 ;	-----------------------------------------
       0000B7                        220 _CLK_LSICmd:
       0000B7 88               [ 1]  221 	push	a
-                                    222 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 169: assert_param(IS_FUNCTIONALSTATE_OK(NewState));
+                                    222 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 169: assert_param(IS_FUNCTIONALSTATE_OK(NewState));
       0000B8 6B 01            [ 1]  223 	ld	(0x01, sp), a
       0000BA 27 11            [ 1]  224 	jreq	00107$
       0000BC 7B 01            [ 1]  225 	ld	a, (0x01, sp)
@@ -232,30 +232,30 @@
       0000C7 AEr00r0C         [ 2]  232 	ldw	x, #(___str_0+0)
       0000CA CDr00r00         [ 4]  233 	call	_assert_failed
       0000CD                        234 00107$:
-                                    235 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 174: CLK->ICKR |= CLK_ICKR_LSIEN;
+                                    235 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 174: CLK->ICKR |= CLK_ICKR_LSIEN;
       0000CD C6 50 C0         [ 1]  236 	ld	a, 0x50c0
-                                    237 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 171: if (NewState != DISABLE)
+                                    237 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 171: if (NewState != DISABLE)
       0000D0 0D 01            [ 1]  238 	tnz	(0x01, sp)
       0000D2 27 07            [ 1]  239 	jreq	00102$
-                                    240 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 174: CLK->ICKR |= CLK_ICKR_LSIEN;
+                                    240 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 174: CLK->ICKR |= CLK_ICKR_LSIEN;
       0000D4 AA 08            [ 1]  241 	or	a, #0x08
       0000D6 C7 50 C0         [ 1]  242 	ld	0x50c0, a
       0000D9 20 05            [ 2]  243 	jra	00104$
       0000DB                        244 00102$:
-                                    245 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 179: CLK->ICKR &= (uint8_t)(~CLK_ICKR_LSIEN);
+                                    245 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 179: CLK->ICKR &= (uint8_t)(~CLK_ICKR_LSIEN);
       0000DB A4 F7            [ 1]  246 	and	a, #0xf7
       0000DD C7 50 C0         [ 1]  247 	ld	0x50c0, a
       0000E0                        248 00104$:
-                                    249 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 181: }
+                                    249 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 181: }
       0000E0 84               [ 1]  250 	pop	a
       0000E1 81               [ 4]  251 	ret
-                                    252 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 189: void CLK_CCOCmd(FunctionalState NewState)
+                                    252 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 189: void CLK_CCOCmd(FunctionalState NewState)
                                     253 ;	-----------------------------------------
                                     254 ;	 function CLK_CCOCmd
                                     255 ;	-----------------------------------------
       0000E2                        256 _CLK_CCOCmd:
       0000E2 88               [ 1]  257 	push	a
-                                    258 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 192: assert_param(IS_FUNCTIONALSTATE_OK(NewState));
+                                    258 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 192: assert_param(IS_FUNCTIONALSTATE_OK(NewState));
       0000E3 6B 01            [ 1]  259 	ld	(0x01, sp), a
       0000E5 27 11            [ 1]  260 	jreq	00107$
       0000E7 7B 01            [ 1]  261 	ld	a, (0x01, sp)
@@ -268,30 +268,30 @@
       0000F2 AEr00r0C         [ 2]  268 	ldw	x, #(___str_0+0)
       0000F5 CDr00r00         [ 4]  269 	call	_assert_failed
       0000F8                        270 00107$:
-                                    271 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 197: CLK->CCOR |= CLK_CCOR_CCOEN;
+                                    271 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 197: CLK->CCOR |= CLK_CCOR_CCOEN;
       0000F8 C6 50 C9         [ 1]  272 	ld	a, 0x50c9
-                                    273 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 194: if (NewState != DISABLE)
+                                    273 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 194: if (NewState != DISABLE)
       0000FB 0D 01            [ 1]  274 	tnz	(0x01, sp)
       0000FD 27 07            [ 1]  275 	jreq	00102$
-                                    276 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 197: CLK->CCOR |= CLK_CCOR_CCOEN;
+                                    276 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 197: CLK->CCOR |= CLK_CCOR_CCOEN;
       0000FF AA 01            [ 1]  277 	or	a, #0x01
       000101 C7 50 C9         [ 1]  278 	ld	0x50c9, a
       000104 20 05            [ 2]  279 	jra	00104$
       000106                        280 00102$:
-                                    281 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 202: CLK->CCOR &= (uint8_t)(~CLK_CCOR_CCOEN);
+                                    281 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 202: CLK->CCOR &= (uint8_t)(~CLK_CCOR_CCOEN);
       000106 A4 FE            [ 1]  282 	and	a, #0xfe
       000108 C7 50 C9         [ 1]  283 	ld	0x50c9, a
       00010B                        284 00104$:
-                                    285 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 204: }
+                                    285 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 204: }
       00010B 84               [ 1]  286 	pop	a
       00010C 81               [ 4]  287 	ret
-                                    288 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 213: void CLK_ClockSwitchCmd(FunctionalState NewState)
+                                    288 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 213: void CLK_ClockSwitchCmd(FunctionalState NewState)
                                     289 ;	-----------------------------------------
                                     290 ;	 function CLK_ClockSwitchCmd
                                     291 ;	-----------------------------------------
       00010D                        292 _CLK_ClockSwitchCmd:
       00010D 88               [ 1]  293 	push	a
-                                    294 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 216: assert_param(IS_FUNCTIONALSTATE_OK(NewState));
+                                    294 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 216: assert_param(IS_FUNCTIONALSTATE_OK(NewState));
       00010E 6B 01            [ 1]  295 	ld	(0x01, sp), a
       000110 27 11            [ 1]  296 	jreq	00107$
       000112 7B 01            [ 1]  297 	ld	a, (0x01, sp)
@@ -304,30 +304,30 @@
       00011D AEr00r0C         [ 2]  304 	ldw	x, #(___str_0+0)
       000120 CDr00r00         [ 4]  305 	call	_assert_failed
       000123                        306 00107$:
-                                    307 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 221: CLK->SWCR |= CLK_SWCR_SWEN;
+                                    307 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 221: CLK->SWCR |= CLK_SWCR_SWEN;
       000123 C6 50 C5         [ 1]  308 	ld	a, 0x50c5
-                                    309 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 218: if (NewState != DISABLE )
+                                    309 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 218: if (NewState != DISABLE )
       000126 0D 01            [ 1]  310 	tnz	(0x01, sp)
       000128 27 07            [ 1]  311 	jreq	00102$
-                                    312 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 221: CLK->SWCR |= CLK_SWCR_SWEN;
+                                    312 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 221: CLK->SWCR |= CLK_SWCR_SWEN;
       00012A AA 02            [ 1]  313 	or	a, #0x02
       00012C C7 50 C5         [ 1]  314 	ld	0x50c5, a
       00012F 20 05            [ 2]  315 	jra	00104$
       000131                        316 00102$:
-                                    317 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 226: CLK->SWCR &= (uint8_t)(~CLK_SWCR_SWEN);
+                                    317 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 226: CLK->SWCR &= (uint8_t)(~CLK_SWCR_SWEN);
       000131 A4 FD            [ 1]  318 	and	a, #0xfd
       000133 C7 50 C5         [ 1]  319 	ld	0x50c5, a
       000136                        320 00104$:
-                                    321 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 228: }
+                                    321 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 228: }
       000136 84               [ 1]  322 	pop	a
       000137 81               [ 4]  323 	ret
-                                    324 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 238: void CLK_SlowActiveHaltWakeUpCmd(FunctionalState NewState)
+                                    324 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 238: void CLK_SlowActiveHaltWakeUpCmd(FunctionalState NewState)
                                     325 ;	-----------------------------------------
                                     326 ;	 function CLK_SlowActiveHaltWakeUpCmd
                                     327 ;	-----------------------------------------
       000138                        328 _CLK_SlowActiveHaltWakeUpCmd:
       000138 88               [ 1]  329 	push	a
-                                    330 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 241: assert_param(IS_FUNCTIONALSTATE_OK(NewState));
+                                    330 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 241: assert_param(IS_FUNCTIONALSTATE_OK(NewState));
       000139 6B 01            [ 1]  331 	ld	(0x01, sp), a
       00013B 27 11            [ 1]  332 	jreq	00107$
       00013D 7B 01            [ 1]  333 	ld	a, (0x01, sp)
@@ -340,31 +340,31 @@
       000148 AEr00r0C         [ 2]  340 	ldw	x, #(___str_0+0)
       00014B CDr00r00         [ 4]  341 	call	_assert_failed
       00014E                        342 00107$:
-                                    343 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 246: CLK->ICKR |= CLK_ICKR_SWUAH;
+                                    343 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 246: CLK->ICKR |= CLK_ICKR_SWUAH;
       00014E C6 50 C0         [ 1]  344 	ld	a, 0x50c0
-                                    345 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 243: if (NewState != DISABLE)
+                                    345 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 243: if (NewState != DISABLE)
       000151 0D 01            [ 1]  346 	tnz	(0x01, sp)
       000153 27 07            [ 1]  347 	jreq	00102$
-                                    348 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 246: CLK->ICKR |= CLK_ICKR_SWUAH;
+                                    348 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 246: CLK->ICKR |= CLK_ICKR_SWUAH;
       000155 AA 20            [ 1]  349 	or	a, #0x20
       000157 C7 50 C0         [ 1]  350 	ld	0x50c0, a
       00015A 20 05            [ 2]  351 	jra	00104$
       00015C                        352 00102$:
-                                    353 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 251: CLK->ICKR &= (uint8_t)(~CLK_ICKR_SWUAH);
+                                    353 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 251: CLK->ICKR &= (uint8_t)(~CLK_ICKR_SWUAH);
       00015C A4 DF            [ 1]  354 	and	a, #0xdf
       00015E C7 50 C0         [ 1]  355 	ld	0x50c0, a
       000161                        356 00104$:
-                                    357 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 253: }
+                                    357 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 253: }
       000161 84               [ 1]  358 	pop	a
       000162 81               [ 4]  359 	ret
-                                    360 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 263: void CLK_PeripheralClockConfig(CLK_Peripheral_TypeDef CLK_Peripheral, FunctionalState NewState)
+                                    360 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 263: void CLK_PeripheralClockConfig(CLK_Peripheral_TypeDef CLK_Peripheral, FunctionalState NewState)
                                     361 ;	-----------------------------------------
                                     362 ;	 function CLK_PeripheralClockConfig
                                     363 ;	-----------------------------------------
       000163                        364 _CLK_PeripheralClockConfig:
       000163 52 03            [ 2]  365 	sub	sp, #3
       000165 6B 03            [ 1]  366 	ld	(0x03, sp), a
-                                    367 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 266: assert_param(IS_FUNCTIONALSTATE_OK(NewState));
+                                    367 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 266: assert_param(IS_FUNCTIONALSTATE_OK(NewState));
       000167 0D 06            [ 1]  368 	tnz	(0x06, sp)
       000169 27 11            [ 1]  369 	jreq	00113$
       00016B 7B 06            [ 1]  370 	ld	a, (0x06, sp)
@@ -377,7 +377,7 @@
       000176 AEr00r0C         [ 2]  377 	ldw	x, #(___str_0+0)
       000179 CDr00r00         [ 4]  378 	call	_assert_failed
       00017C                        379 00113$:
-                                    380 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 267: assert_param(IS_CLK_PERIPHERAL_OK(CLK_Peripheral));
+                                    380 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 267: assert_param(IS_CLK_PERIPHERAL_OK(CLK_Peripheral));
       00017C 0D 03            [ 1]  381 	tnz	(0x03, sp)
       00017E 27 64            [ 1]  382 	jreq	00118$
       000180 7B 03            [ 1]  383 	ld	a, (0x03, sp)
@@ -447,7 +447,7 @@
       0001DE AEr00r0C         [ 2]  447 	ldw	x, #(___str_0+0)
       0001E1 CDr00r00         [ 4]  448 	call	_assert_failed
       0001E4                        449 00118$:
-                                    450 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 274: CLK->PCKENR1 |= (uint8_t)((uint8_t)1 << ((uint8_t)CLK_Peripheral & (uint8_t)0x0F));
+                                    450 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 274: CLK->PCKENR1 |= (uint8_t)((uint8_t)1 << ((uint8_t)CLK_Peripheral & (uint8_t)0x0F));
       0001E4 7B 03            [ 1]  451 	ld	a, (0x03, sp)
       0001E6 A4 0F            [ 1]  452 	and	a, #0x0f
       0001E8 88               [ 1]  453 	push	a
@@ -461,56 +461,56 @@
       0001F3 4A               [ 1]  461 	dec	a
       0001F4 26 FB            [ 1]  462 	jrne	00292$
       0001F6                        463 00293$:
-                                    464 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 279: CLK->PCKENR1 &= (uint8_t)(~(uint8_t)(((uint8_t)1 << ((uint8_t)CLK_Peripheral & (uint8_t)0x0F))));
+                                    464 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 279: CLK->PCKENR1 &= (uint8_t)(~(uint8_t)(((uint8_t)1 << ((uint8_t)CLK_Peripheral & (uint8_t)0x0F))));
       0001F6 7B 01            [ 1]  465 	ld	a, (0x01, sp)
       0001F8 43               [ 1]  466 	cpl	a
       0001F9 6B 02            [ 1]  467 	ld	(0x02, sp), a
-                                    468 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 269: if (((uint8_t)CLK_Peripheral & (uint8_t)0x10) == 0x00)
+                                    468 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 269: if (((uint8_t)CLK_Peripheral & (uint8_t)0x10) == 0x00)
       0001FB 7B 03            [ 1]  469 	ld	a, (0x03, sp)
       0001FD A5 10            [ 1]  470 	bcp	a, #0x10
       0001FF 26 15            [ 1]  471 	jrne	00108$
-                                    472 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 274: CLK->PCKENR1 |= (uint8_t)((uint8_t)1 << ((uint8_t)CLK_Peripheral & (uint8_t)0x0F));
+                                    472 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 274: CLK->PCKENR1 |= (uint8_t)((uint8_t)1 << ((uint8_t)CLK_Peripheral & (uint8_t)0x0F));
       000201 C6 50 C7         [ 1]  473 	ld	a, 0x50c7
-                                    474 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 271: if (NewState != DISABLE)
+                                    474 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 271: if (NewState != DISABLE)
       000204 0D 06            [ 1]  475 	tnz	(0x06, sp)
       000206 27 07            [ 1]  476 	jreq	00102$
-                                    477 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 274: CLK->PCKENR1 |= (uint8_t)((uint8_t)1 << ((uint8_t)CLK_Peripheral & (uint8_t)0x0F));
+                                    477 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 274: CLK->PCKENR1 |= (uint8_t)((uint8_t)1 << ((uint8_t)CLK_Peripheral & (uint8_t)0x0F));
       000208 1A 01            [ 1]  478 	or	a, (0x01, sp)
       00020A C7 50 C7         [ 1]  479 	ld	0x50c7, a
       00020D 20 1A            [ 2]  480 	jra	00110$
       00020F                        481 00102$:
-                                    482 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 279: CLK->PCKENR1 &= (uint8_t)(~(uint8_t)(((uint8_t)1 << ((uint8_t)CLK_Peripheral & (uint8_t)0x0F))));
+                                    482 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 279: CLK->PCKENR1 &= (uint8_t)(~(uint8_t)(((uint8_t)1 << ((uint8_t)CLK_Peripheral & (uint8_t)0x0F))));
       00020F 14 02            [ 1]  483 	and	a, (0x02, sp)
       000211 C7 50 C7         [ 1]  484 	ld	0x50c7, a
       000214 20 13            [ 2]  485 	jra	00110$
       000216                        486 00108$:
-                                    487 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 287: CLK->PCKENR2 |= (uint8_t)((uint8_t)1 << ((uint8_t)CLK_Peripheral & (uint8_t)0x0F));
+                                    487 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 287: CLK->PCKENR2 |= (uint8_t)((uint8_t)1 << ((uint8_t)CLK_Peripheral & (uint8_t)0x0F));
       000216 C6 50 CA         [ 1]  488 	ld	a, 0x50ca
-                                    489 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 284: if (NewState != DISABLE)
+                                    489 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 284: if (NewState != DISABLE)
       000219 0D 06            [ 1]  490 	tnz	(0x06, sp)
       00021B 27 07            [ 1]  491 	jreq	00105$
-                                    492 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 287: CLK->PCKENR2 |= (uint8_t)((uint8_t)1 << ((uint8_t)CLK_Peripheral & (uint8_t)0x0F));
+                                    492 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 287: CLK->PCKENR2 |= (uint8_t)((uint8_t)1 << ((uint8_t)CLK_Peripheral & (uint8_t)0x0F));
       00021D 1A 01            [ 1]  493 	or	a, (0x01, sp)
       00021F C7 50 CA         [ 1]  494 	ld	0x50ca, a
       000222 20 05            [ 2]  495 	jra	00110$
       000224                        496 00105$:
-                                    497 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 292: CLK->PCKENR2 &= (uint8_t)(~(uint8_t)(((uint8_t)1 << ((uint8_t)CLK_Peripheral & (uint8_t)0x0F))));
+                                    497 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 292: CLK->PCKENR2 &= (uint8_t)(~(uint8_t)(((uint8_t)1 << ((uint8_t)CLK_Peripheral & (uint8_t)0x0F))));
       000224 14 02            [ 1]  498 	and	a, (0x02, sp)
       000226 C7 50 CA         [ 1]  499 	ld	0x50ca, a
       000229                        500 00110$:
-                                    501 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 295: }
+                                    501 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 295: }
       000229 5B 03            [ 2]  502 	addw	sp, #3
       00022B 85               [ 2]  503 	popw	x
       00022C 84               [ 1]  504 	pop	a
       00022D FC               [ 2]  505 	jp	(x)
-                                    506 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 309: ErrorStatus CLK_ClockSwitchConfig(CLK_SwitchMode_TypeDef CLK_SwitchMode, CLK_Source_TypeDef CLK_NewClock, FunctionalState ITState, CLK_CurrentClockState_TypeDef CLK_CurrentClockState)
+                                    506 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 309: ErrorStatus CLK_ClockSwitchConfig(CLK_SwitchMode_TypeDef CLK_SwitchMode, CLK_Source_TypeDef CLK_NewClock, FunctionalState ITState, CLK_CurrentClockState_TypeDef CLK_CurrentClockState)
                                     507 ;	-----------------------------------------
                                     508 ;	 function CLK_ClockSwitchConfig
                                     509 ;	-----------------------------------------
       00022E                        510 _CLK_ClockSwitchConfig:
       00022E 89               [ 2]  511 	pushw	x
       00022F 6B 02            [ 1]  512 	ld	(0x02, sp), a
-                                    513 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 316: assert_param(IS_CLK_SOURCE_OK(CLK_NewClock));
+                                    513 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 316: assert_param(IS_CLK_SOURCE_OK(CLK_NewClock));
       000231 7B 05            [ 1]  514 	ld	a, (0x05, sp)
       000233 A1 E1            [ 1]  515 	cp	a, #0xe1
       000235 27 18            [ 1]  516 	jreq	00140$
@@ -527,7 +527,7 @@
       000249 AEr00r0C         [ 2]  527 	ldw	x, #(___str_0+0)
       00024C CDr00r00         [ 4]  528 	call	_assert_failed
       00024F                        529 00140$:
-                                    530 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 317: assert_param(IS_CLK_SWITCHMODE_OK(CLK_SwitchMode));
+                                    530 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 317: assert_param(IS_CLK_SWITCHMODE_OK(CLK_SwitchMode));
       00024F 7B 02            [ 1]  531 	ld	a, (0x02, sp)
       000251 4A               [ 1]  532 	dec	a
       000252 26 05            [ 1]  533 	jrne	00309$
@@ -548,7 +548,7 @@
       000269 AEr00r0C         [ 2]  548 	ldw	x, #(___str_0+0)
       00026C CDr00r00         [ 4]  549 	call	_assert_failed
       00026F                        550 00148$:
-                                    551 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 318: assert_param(IS_FUNCTIONALSTATE_OK(ITState));
+                                    551 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 318: assert_param(IS_FUNCTIONALSTATE_OK(ITState));
       00026F 0D 06            [ 1]  552 	tnz	(0x06, sp)
       000271 27 11            [ 1]  553 	jreq	00153$
       000273 7B 06            [ 1]  554 	ld	a, (0x06, sp)
@@ -561,7 +561,7 @@
       00027E AEr00r0C         [ 2]  561 	ldw	x, #(___str_0+0)
       000281 CDr00r00         [ 4]  562 	call	_assert_failed
       000284                        563 00153$:
-                                    564 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 319: assert_param(IS_CLK_CURRENTCLOCKSTATE_OK(CLK_CurrentClockState));
+                                    564 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 319: assert_param(IS_CLK_CURRENTCLOCKSTATE_OK(CLK_CurrentClockState));
       000284 0D 07            [ 1]  565 	tnz	(0x07, sp)
       000286 27 11            [ 1]  566 	jreq	00158$
       000288 7B 07            [ 1]  567 	ld	a, (0x07, sp)
@@ -574,147 +574,147 @@
       000293 AEr00r0C         [ 2]  574 	ldw	x, #(___str_0+0)
       000296 CDr00r00         [ 4]  575 	call	_assert_failed
       000299                        576 00158$:
-                                    577 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 322: clock_master = (CLK_Source_TypeDef)CLK->CMSR;
+                                    577 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 322: clock_master = (CLK_Source_TypeDef)CLK->CMSR;
       000299 C6 50 C3         [ 1]  578 	ld	a, 0x50c3
       00029C 90 97            [ 1]  579 	ld	yl, a
-                                    580 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 328: CLK->SWCR |= CLK_SWCR_SWEN;
+                                    580 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 328: CLK->SWCR |= CLK_SWCR_SWEN;
       00029E C6 50 C5         [ 1]  581 	ld	a, 0x50c5
       0002A1 97               [ 1]  582 	ld	xl, a
-                                    583 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 325: if (CLK_SwitchMode == CLK_SWITCHMODE_AUTO)
+                                    583 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 325: if (CLK_SwitchMode == CLK_SWITCHMODE_AUTO)
       0002A2 7B 01            [ 1]  584 	ld	a, (0x01, sp)
       0002A4 27 37            [ 1]  585 	jreq	00122$
-                                    586 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 328: CLK->SWCR |= CLK_SWCR_SWEN;
+                                    586 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 328: CLK->SWCR |= CLK_SWCR_SWEN;
       0002A6 9F               [ 1]  587 	ld	a, xl
       0002A7 AA 02            [ 1]  588 	or	a, #0x02
       0002A9 C7 50 C5         [ 1]  589 	ld	0x50c5, a
       0002AC C6 50 C5         [ 1]  590 	ld	a, 0x50c5
-                                    591 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 331: if (ITState != DISABLE)
+                                    591 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 331: if (ITState != DISABLE)
       0002AF 0D 06            [ 1]  592 	tnz	(0x06, sp)
       0002B1 27 07            [ 1]  593 	jreq	00102$
-                                    594 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 333: CLK->SWCR |= CLK_SWCR_SWIEN;
+                                    594 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 333: CLK->SWCR |= CLK_SWCR_SWIEN;
       0002B3 AA 04            [ 1]  595 	or	a, #0x04
       0002B5 C7 50 C5         [ 1]  596 	ld	0x50c5, a
       0002B8 20 05            [ 2]  597 	jra	00103$
       0002BA                        598 00102$:
-                                    599 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 337: CLK->SWCR &= (uint8_t)(~CLK_SWCR_SWIEN);
+                                    599 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 337: CLK->SWCR &= (uint8_t)(~CLK_SWCR_SWIEN);
       0002BA A4 FB            [ 1]  600 	and	a, #0xfb
       0002BC C7 50 C5         [ 1]  601 	ld	0x50c5, a
       0002BF                        602 00103$:
-                                    603 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 341: CLK->SWR = (uint8_t)CLK_NewClock;
+                                    603 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 341: CLK->SWR = (uint8_t)CLK_NewClock;
       0002BF AE 50 C4         [ 2]  604 	ldw	x, #0x50c4
       0002C2 7B 05            [ 1]  605 	ld	a, (0x05, sp)
       0002C4 F7               [ 1]  606 	ld	(x), a
-                                    607 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 344: while((((CLK->SWCR & CLK_SWCR_SWBSY) != 0 )&& (DownCounter != 0)))
+                                    607 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 344: while((((CLK->SWCR & CLK_SWCR_SWBSY) != 0 )&& (DownCounter != 0)))
       0002C5 5F               [ 1]  608 	clrw	x
       0002C6 5A               [ 2]  609 	decw	x
       0002C7                        610 00105$:
       0002C7 72 01 50 C5 06   [ 2]  611 	btjf	0x50c5, #0, 00107$
       0002CC 5D               [ 2]  612 	tnzw	x
       0002CD 27 03            [ 1]  613 	jreq	00107$
-                                    614 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 346: DownCounter--;
+                                    614 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 346: DownCounter--;
       0002CF 5A               [ 2]  615 	decw	x
       0002D0 20 F5            [ 2]  616 	jra	00105$
       0002D2                        617 00107$:
-                                    618 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 349: if(DownCounter != 0)
+                                    618 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 349: if(DownCounter != 0)
       0002D2 5D               [ 2]  619 	tnzw	x
       0002D3 27 05            [ 1]  620 	jreq	00109$
-                                    621 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 351: Swif = SUCCESS;
+                                    621 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 351: Swif = SUCCESS;
       0002D5 A6 01            [ 1]  622 	ld	a, #0x01
       0002D7 97               [ 1]  623 	ld	xl, a
       0002D8 20 34            [ 2]  624 	jra	00123$
       0002DA                        625 00109$:
-                                    626 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 355: Swif = ERROR;
+                                    626 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 355: Swif = ERROR;
       0002DA 5F               [ 1]  627 	clrw	x
       0002DB 20 31            [ 2]  628 	jra	00123$
       0002DD                        629 00122$:
-                                    630 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 361: if (ITState != DISABLE)
+                                    630 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 361: if (ITState != DISABLE)
       0002DD 0D 06            [ 1]  631 	tnz	(0x06, sp)
       0002DF 27 08            [ 1]  632 	jreq	00112$
-                                    633 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 363: CLK->SWCR |= CLK_SWCR_SWIEN;
+                                    633 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 363: CLK->SWCR |= CLK_SWCR_SWIEN;
       0002E1 9F               [ 1]  634 	ld	a, xl
       0002E2 AA 04            [ 1]  635 	or	a, #0x04
       0002E4 C7 50 C5         [ 1]  636 	ld	0x50c5, a
       0002E7 20 06            [ 2]  637 	jra	00113$
       0002E9                        638 00112$:
-                                    639 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 367: CLK->SWCR &= (uint8_t)(~CLK_SWCR_SWIEN);
+                                    639 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 367: CLK->SWCR &= (uint8_t)(~CLK_SWCR_SWIEN);
       0002E9 9F               [ 1]  640 	ld	a, xl
       0002EA A4 FB            [ 1]  641 	and	a, #0xfb
       0002EC C7 50 C5         [ 1]  642 	ld	0x50c5, a
       0002EF                        643 00113$:
-                                    644 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 371: CLK->SWR = (uint8_t)CLK_NewClock;
+                                    644 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 371: CLK->SWR = (uint8_t)CLK_NewClock;
       0002EF AE 50 C4         [ 2]  645 	ldw	x, #0x50c4
       0002F2 7B 05            [ 1]  646 	ld	a, (0x05, sp)
       0002F4 F7               [ 1]  647 	ld	(x), a
-                                    648 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 374: while((((CLK->SWCR & CLK_SWCR_SWIF) != 0 ) && (DownCounter != 0)))
+                                    648 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 374: while((((CLK->SWCR & CLK_SWCR_SWIF) != 0 ) && (DownCounter != 0)))
       0002F5 5F               [ 1]  649 	clrw	x
       0002F6 5A               [ 2]  650 	decw	x
       0002F7                        651 00115$:
       0002F7 72 07 50 C5 06   [ 2]  652 	btjf	0x50c5, #3, 00117$
       0002FC 5D               [ 2]  653 	tnzw	x
       0002FD 27 03            [ 1]  654 	jreq	00117$
-                                    655 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 376: DownCounter--;
+                                    655 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 376: DownCounter--;
       0002FF 5A               [ 2]  656 	decw	x
       000300 20 F5            [ 2]  657 	jra	00115$
       000302                        658 00117$:
-                                    659 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 379: if(DownCounter != 0)
+                                    659 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 379: if(DownCounter != 0)
       000302 5D               [ 2]  660 	tnzw	x
       000303 27 08            [ 1]  661 	jreq	00119$
-                                    662 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 382: CLK->SWCR |= CLK_SWCR_SWEN;
+                                    662 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 382: CLK->SWCR |= CLK_SWCR_SWEN;
       000305 72 12 50 C5      [ 1]  663 	bset	0x50c5, #1
-                                    664 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 383: Swif = SUCCESS;
+                                    664 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 383: Swif = SUCCESS;
       000309 A6 01            [ 1]  665 	ld	a, #0x01
       00030B 97               [ 1]  666 	ld	xl, a
-                                    667 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 387: Swif = ERROR;
+                                    667 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 387: Swif = ERROR;
       00030C 21                     668 	.byte 0x21
       00030D                        669 00119$:
       00030D 5F               [ 1]  670 	clrw	x
       00030E                        671 00123$:
-                                    672 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 390: if(Swif != ERROR)
+                                    672 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 390: if(Swif != ERROR)
       00030E 9F               [ 1]  673 	ld	a, xl
       00030F 4D               [ 1]  674 	tnz	a
       000310 27 2E            [ 1]  675 	jreq	00136$
-                                    676 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 393: if((CLK_CurrentClockState == CLK_CURRENTCLOCKSTATE_DISABLE) && ( clock_master == CLK_SOURCE_HSI))
+                                    676 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 393: if((CLK_CurrentClockState == CLK_CURRENTCLOCKSTATE_DISABLE) && ( clock_master == CLK_SOURCE_HSI))
       000312 0D 07            [ 1]  677 	tnz	(0x07, sp)
       000314 26 0C            [ 1]  678 	jrne	00132$
       000316 90 9F            [ 1]  679 	ld	a, yl
       000318 A1 E1            [ 1]  680 	cp	a, #0xe1
       00031A 26 06            [ 1]  681 	jrne	00132$
-                                    682 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 395: CLK->ICKR &= (uint8_t)(~CLK_ICKR_HSIEN);
+                                    682 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 395: CLK->ICKR &= (uint8_t)(~CLK_ICKR_HSIEN);
       00031C 72 11 50 C0      [ 1]  683 	bres	0x50c0, #0
       000320 20 1E            [ 2]  684 	jra	00136$
       000322                        685 00132$:
-                                    686 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 397: else if((CLK_CurrentClockState == CLK_CURRENTCLOCKSTATE_DISABLE) && ( clock_master == CLK_SOURCE_LSI))
+                                    686 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 397: else if((CLK_CurrentClockState == CLK_CURRENTCLOCKSTATE_DISABLE) && ( clock_master == CLK_SOURCE_LSI))
       000322 0D 07            [ 1]  687 	tnz	(0x07, sp)
       000324 26 0C            [ 1]  688 	jrne	00128$
       000326 90 9F            [ 1]  689 	ld	a, yl
       000328 A1 D2            [ 1]  690 	cp	a, #0xd2
       00032A 26 06            [ 1]  691 	jrne	00128$
-                                    692 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 399: CLK->ICKR &= (uint8_t)(~CLK_ICKR_LSIEN);
+                                    692 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 399: CLK->ICKR &= (uint8_t)(~CLK_ICKR_LSIEN);
       00032C 72 17 50 C0      [ 1]  693 	bres	0x50c0, #3
       000330 20 0E            [ 2]  694 	jra	00136$
       000332                        695 00128$:
-                                    696 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 401: else if ((CLK_CurrentClockState == CLK_CURRENTCLOCKSTATE_DISABLE) && ( clock_master == CLK_SOURCE_HSE))
+                                    696 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 401: else if ((CLK_CurrentClockState == CLK_CURRENTCLOCKSTATE_DISABLE) && ( clock_master == CLK_SOURCE_HSE))
       000332 0D 07            [ 1]  697 	tnz	(0x07, sp)
       000334 26 0A            [ 1]  698 	jrne	00136$
       000336 90 9F            [ 1]  699 	ld	a, yl
       000338 A1 B4            [ 1]  700 	cp	a, #0xb4
       00033A 26 04            [ 1]  701 	jrne	00136$
-                                    702 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 403: CLK->ECKR &= (uint8_t)(~CLK_ECKR_HSEEN);
+                                    702 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 403: CLK->ECKR &= (uint8_t)(~CLK_ECKR_HSEEN);
       00033C 72 11 50 C1      [ 1]  703 	bres	0x50c1, #0
       000340                        704 00136$:
-                                    705 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 406: return(Swif);
+                                    705 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 406: return(Swif);
       000340 9F               [ 1]  706 	ld	a, xl
-                                    707 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 407: }
+                                    707 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 407: }
       000341 1E 03            [ 2]  708 	ldw	x, (3, sp)
       000343 5B 07            [ 2]  709 	addw	sp, #7
       000345 FC               [ 2]  710 	jp	(x)
-                                    711 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 415: void CLK_HSIPrescalerConfig(CLK_Prescaler_TypeDef HSIPrescaler)
+                                    711 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 415: void CLK_HSIPrescalerConfig(CLK_Prescaler_TypeDef HSIPrescaler)
                                     712 ;	-----------------------------------------
                                     713 ;	 function CLK_HSIPrescalerConfig
                                     714 ;	-----------------------------------------
       000346                        715 _CLK_HSIPrescalerConfig:
       000346 88               [ 1]  716 	push	a
-                                    717 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 418: assert_param(IS_CLK_HSIPRESCALER_OK(HSIPrescaler));
+                                    717 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 418: assert_param(IS_CLK_HSIPRESCALER_OK(HSIPrescaler));
       000347 6B 01            [ 1]  718 	ld	(0x01, sp), a
       000349 27 1E            [ 1]  719 	jreq	00104$
       00034B 7B 01            [ 1]  720 	ld	a, (0x01, sp)
@@ -733,24 +733,24 @@
       000363 AEr00r0C         [ 2]  733 	ldw	x, #(___str_0+0)
       000366 CDr00r00         [ 4]  734 	call	_assert_failed
       000369                        735 00104$:
-                                    736 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 421: CLK->CKDIVR &= (uint8_t)(~CLK_CKDIVR_HSIDIV);
+                                    736 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 421: CLK->CKDIVR &= (uint8_t)(~CLK_CKDIVR_HSIDIV);
       000369 C6 50 C6         [ 1]  737 	ld	a, 0x50c6
       00036C A4 E7            [ 1]  738 	and	a, #0xe7
       00036E C7 50 C6         [ 1]  739 	ld	0x50c6, a
-                                    740 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 424: CLK->CKDIVR |= (uint8_t)HSIPrescaler;
+                                    740 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 424: CLK->CKDIVR |= (uint8_t)HSIPrescaler;
       000371 C6 50 C6         [ 1]  741 	ld	a, 0x50c6
       000374 1A 01            [ 1]  742 	or	a, (0x01, sp)
       000376 C7 50 C6         [ 1]  743 	ld	0x50c6, a
-                                    744 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 425: }
+                                    744 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 425: }
       000379 84               [ 1]  745 	pop	a
       00037A 81               [ 4]  746 	ret
-                                    747 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 436: void CLK_CCOConfig(CLK_Output_TypeDef CLK_CCO)
+                                    747 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 436: void CLK_CCOConfig(CLK_Output_TypeDef CLK_CCO)
                                     748 ;	-----------------------------------------
                                     749 ;	 function CLK_CCOConfig
                                     750 ;	-----------------------------------------
       00037B                        751 _CLK_CCOConfig:
       00037B 88               [ 1]  752 	push	a
-                                    753 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 439: assert_param(IS_CLK_OUTPUT_OK(CLK_CCO));
+                                    753 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 439: assert_param(IS_CLK_OUTPUT_OK(CLK_CCO));
       00037C 4D               [ 1]  754 	tnz	a
       00037D 27 3E            [ 1]  755 	jreq	00104$
       00037F A1 04            [ 1]  756 	cp	a, #0x04
@@ -786,7 +786,7 @@
       0003B9 CDr00r00         [ 4]  786 	call	_assert_failed
       0003BC 84               [ 1]  787 	pop	a
       0003BD                        788 00104$:
-                                    789 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 442: CLK->CCOR &= (uint8_t)(~CLK_CCOR_CCOSEL);
+                                    789 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 442: CLK->CCOR &= (uint8_t)(~CLK_CCOR_CCOSEL);
       0003BD AE 50 C9         [ 2]  790 	ldw	x, #0x50c9
       0003C0 88               [ 1]  791 	push	a
       0003C1 F6               [ 1]  792 	ld	a, (x)
@@ -798,7 +798,7 @@
       0003CB 7B 02            [ 1]  798 	ld	a, (0x02, sp)
       0003CD F7               [ 1]  799 	ld	(x), a
       0003CE 84               [ 1]  800 	pop	a
-                                    801 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 445: CLK->CCOR |= (uint8_t)CLK_CCO;
+                                    801 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 445: CLK->CCOR |= (uint8_t)CLK_CCO;
       0003CF AE 50 C9         [ 2]  802 	ldw	x, #0x50c9
       0003D2 88               [ 1]  803 	push	a
       0003D3 F6               [ 1]  804 	ld	a, (x)
@@ -806,19 +806,19 @@
       0003D6 84               [ 1]  806 	pop	a
       0003D7 1A 01            [ 1]  807 	or	a, (0x01, sp)
       0003D9 C7 50 C9         [ 1]  808 	ld	0x50c9, a
-                                    809 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 448: CLK->CCOR |= CLK_CCOR_CCOEN;
+                                    809 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 448: CLK->CCOR |= CLK_CCOR_CCOEN;
       0003DC 72 10 50 C9      [ 1]  810 	bset	0x50c9, #0
-                                    811 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 449: }
+                                    811 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 449: }
       0003E0 84               [ 1]  812 	pop	a
       0003E1 81               [ 4]  813 	ret
-                                    814 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 459: void CLK_ITConfig(CLK_IT_TypeDef CLK_IT, FunctionalState NewState)
+                                    814 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 459: void CLK_ITConfig(CLK_IT_TypeDef CLK_IT, FunctionalState NewState)
                                     815 ;	-----------------------------------------
                                     816 ;	 function CLK_ITConfig
                                     817 ;	-----------------------------------------
       0003E2                        818 _CLK_ITConfig:
       0003E2 89               [ 2]  819 	pushw	x
       0003E3 6B 02            [ 1]  820 	ld	(0x02, sp), a
-                                    821 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 462: assert_param(IS_FUNCTIONALSTATE_OK(NewState));
+                                    821 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 462: assert_param(IS_FUNCTIONALSTATE_OK(NewState));
       0003E5 0D 05            [ 1]  822 	tnz	(0x05, sp)
       0003E7 27 11            [ 1]  823 	jreq	00115$
       0003E9 7B 05            [ 1]  824 	ld	a, (0x05, sp)
@@ -831,7 +831,7 @@
       0003F4 AEr00r0C         [ 2]  831 	ldw	x, #(___str_0+0)
       0003F7 CDr00r00         [ 4]  832 	call	_assert_failed
       0003FA                        833 00115$:
-                                    834 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 463: assert_param(IS_CLK_IT_OK(CLK_IT));
+                                    834 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 463: assert_param(IS_CLK_IT_OK(CLK_IT));
       0003FA 7B 02            [ 1]  835 	ld	a, (0x02, sp)
       0003FC A0 0C            [ 1]  836 	sub	a, #0x0c
       0003FE 26 02            [ 1]  837 	jrne	00174$
@@ -866,61 +866,61 @@
       000425 CDr00r00         [ 4]  866 	call	_assert_failed
       000428 84               [ 1]  867 	pop	a
       000429                        868 00120$:
-                                    869 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 465: if (NewState != DISABLE)
+                                    869 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 465: if (NewState != DISABLE)
       000429 0D 05            [ 1]  870 	tnz	(0x05, sp)
       00042B 27 1B            [ 1]  871 	jreq	00110$
-                                    872 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 467: switch (CLK_IT)
+                                    872 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 467: switch (CLK_IT)
       00042D 4D               [ 1]  873 	tnz	a
       00042E 26 0E            [ 1]  874 	jrne	00102$
       000430 7B 01            [ 1]  875 	ld	a, (0x01, sp)
       000432 27 2D            [ 1]  876 	jreq	00112$
-                                    877 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 470: CLK->SWCR |= CLK_SWCR_SWIEN;
+                                    877 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 470: CLK->SWCR |= CLK_SWCR_SWIEN;
       000434 C6 50 C5         [ 1]  878 	ld	a, 0x50c5
       000437 AA 04            [ 1]  879 	or	a, #0x04
       000439 C7 50 C5         [ 1]  880 	ld	0x50c5, a
-                                    881 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 471: break;
+                                    881 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 471: break;
       00043C 20 23            [ 2]  882 	jra	00112$
-                                    883 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 472: case CLK_IT_CSSD: /* Enable the clock security system detection interrupt */
+                                    883 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 472: case CLK_IT_CSSD: /* Enable the clock security system detection interrupt */
       00043E                        884 00102$:
-                                    885 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 473: CLK->CSSR |= CLK_CSSR_CSSDIE;
+                                    885 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 473: CLK->CSSR |= CLK_CSSR_CSSDIE;
       00043E C6 50 C8         [ 1]  886 	ld	a, 0x50c8
       000441 AA 04            [ 1]  887 	or	a, #0x04
       000443 C7 50 C8         [ 1]  888 	ld	0x50c8, a
-                                    889 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 474: break;
+                                    889 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 474: break;
       000446 20 19            [ 2]  890 	jra	00112$
-                                    891 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 477: }
+                                    891 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 477: }
       000448                        892 00110$:
-                                    893 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 481: switch (CLK_IT)
+                                    893 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 481: switch (CLK_IT)
       000448 4D               [ 1]  894 	tnz	a
       000449 26 0E            [ 1]  895 	jrne	00106$
       00044B 7B 01            [ 1]  896 	ld	a, (0x01, sp)
       00044D 27 12            [ 1]  897 	jreq	00112$
-                                    898 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 484: CLK->SWCR  &= (uint8_t)(~CLK_SWCR_SWIEN);
+                                    898 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 484: CLK->SWCR  &= (uint8_t)(~CLK_SWCR_SWIEN);
       00044F C6 50 C5         [ 1]  899 	ld	a, 0x50c5
       000452 A4 FB            [ 1]  900 	and	a, #0xfb
       000454 C7 50 C5         [ 1]  901 	ld	0x50c5, a
-                                    902 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 485: break;
+                                    902 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 485: break;
       000457 20 08            [ 2]  903 	jra	00112$
-                                    904 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 486: case CLK_IT_CSSD: /* Disable the clock security system detection interrupt */
+                                    904 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 486: case CLK_IT_CSSD: /* Disable the clock security system detection interrupt */
       000459                        905 00106$:
-                                    906 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 487: CLK->CSSR &= (uint8_t)(~CLK_CSSR_CSSDIE);
+                                    906 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 487: CLK->CSSR &= (uint8_t)(~CLK_CSSR_CSSDIE);
       000459 C6 50 C8         [ 1]  907 	ld	a, 0x50c8
       00045C A4 FB            [ 1]  908 	and	a, #0xfb
       00045E C7 50 C8         [ 1]  909 	ld	0x50c8, a
-                                    910 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 491: }
+                                    910 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 491: }
       000461                        911 00112$:
-                                    912 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 493: }
+                                    912 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 493: }
       000461 85               [ 2]  913 	popw	x
       000462 85               [ 2]  914 	popw	x
       000463 84               [ 1]  915 	pop	a
       000464 FC               [ 2]  916 	jp	(x)
-                                    917 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 500: void CLK_SYSCLKConfig(CLK_Prescaler_TypeDef CLK_Prescaler)
+                                    917 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 500: void CLK_SYSCLKConfig(CLK_Prescaler_TypeDef CLK_Prescaler)
                                     918 ;	-----------------------------------------
                                     919 ;	 function CLK_SYSCLKConfig
                                     920 ;	-----------------------------------------
       000465                        921 _CLK_SYSCLKConfig:
       000465 88               [ 1]  922 	push	a
-                                    923 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 503: assert_param(IS_CLK_PRESCALER_OK(CLK_Prescaler));
+                                    923 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 503: assert_param(IS_CLK_PRESCALER_OK(CLK_Prescaler));
       000466 95               [ 1]  924 	ld	xh, a
       000467 4D               [ 1]  925 	tnz	a
       000468 27 4A            [ 1]  926 	jreq	00107$
@@ -969,15 +969,15 @@
       0004B2 01               [ 1]  969 	rrwa	x
       0004B3 84               [ 1]  970 	pop	a
       0004B4                        971 00107$:
-                                    972 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 507: CLK->CKDIVR &= (uint8_t)(~CLK_CKDIVR_HSIDIV);
+                                    972 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 507: CLK->CKDIVR &= (uint8_t)(~CLK_CKDIVR_HSIDIV);
       0004B4 C6 50 C6         [ 1]  973 	ld	a, 0x50c6
-                                    974 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 505: if (((uint8_t)CLK_Prescaler & (uint8_t)0x80) == 0x00) /* Bit7 = 0 means HSI divider */
+                                    974 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 505: if (((uint8_t)CLK_Prescaler & (uint8_t)0x80) == 0x00) /* Bit7 = 0 means HSI divider */
       0004B7 5D               [ 2]  975 	tnzw	x
       0004B8 2B 14            [ 1]  976 	jrmi	00102$
-                                    977 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 507: CLK->CKDIVR &= (uint8_t)(~CLK_CKDIVR_HSIDIV);
+                                    977 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 507: CLK->CKDIVR &= (uint8_t)(~CLK_CKDIVR_HSIDIV);
       0004BA A4 E7            [ 1]  978 	and	a, #0xe7
       0004BC C7 50 C6         [ 1]  979 	ld	0x50c6, a
-                                    980 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 508: CLK->CKDIVR |= (uint8_t)((uint8_t)CLK_Prescaler & (uint8_t)CLK_CKDIVR_HSIDIV);
+                                    980 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 508: CLK->CKDIVR |= (uint8_t)((uint8_t)CLK_Prescaler & (uint8_t)CLK_CKDIVR_HSIDIV);
       0004BF C6 50 C6         [ 1]  981 	ld	a, 0x50c6
       0004C2 6B 01            [ 1]  982 	ld	(0x01, sp), a
       0004C4 9E               [ 1]  983 	ld	a, xh
@@ -986,10 +986,10 @@
       0004C9 C7 50 C6         [ 1]  986 	ld	0x50c6, a
       0004CC 20 12            [ 2]  987 	jra	00104$
       0004CE                        988 00102$:
-                                    989 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 512: CLK->CKDIVR &= (uint8_t)(~CLK_CKDIVR_CPUDIV);
+                                    989 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 512: CLK->CKDIVR &= (uint8_t)(~CLK_CKDIVR_CPUDIV);
       0004CE A4 F8            [ 1]  990 	and	a, #0xf8
       0004D0 C7 50 C6         [ 1]  991 	ld	0x50c6, a
-                                    992 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 513: CLK->CKDIVR |= (uint8_t)((uint8_t)CLK_Prescaler & (uint8_t)CLK_CKDIVR_CPUDIV);
+                                    992 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 513: CLK->CKDIVR |= (uint8_t)((uint8_t)CLK_Prescaler & (uint8_t)CLK_CKDIVR_CPUDIV);
       0004D3 C6 50 C6         [ 1]  993 	ld	a, 0x50c6
       0004D6 6B 01            [ 1]  994 	ld	(0x01, sp), a
       0004D8 9E               [ 1]  995 	ld	a, xh
@@ -997,16 +997,16 @@
       0004DB 1A 01            [ 1]  997 	or	a, (0x01, sp)
       0004DD C7 50 C6         [ 1]  998 	ld	0x50c6, a
       0004E0                        999 00104$:
-                                   1000 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 515: }
+                                   1000 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 515: }
       0004E0 84               [ 1] 1001 	pop	a
       0004E1 81               [ 4] 1002 	ret
-                                   1003 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 523: void CLK_SWIMConfig(CLK_SWIMDivider_TypeDef CLK_SWIMDivider)
+                                   1003 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 523: void CLK_SWIMConfig(CLK_SWIMDivider_TypeDef CLK_SWIMDivider)
                                    1004 ;	-----------------------------------------
                                    1005 ;	 function CLK_SWIMConfig
                                    1006 ;	-----------------------------------------
       0004E2                       1007 _CLK_SWIMConfig:
       0004E2 88               [ 1] 1008 	push	a
-                                   1009 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 526: assert_param(IS_CLK_SWIMDIVIDER_OK(CLK_SWIMDivider));
+                                   1009 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 526: assert_param(IS_CLK_SWIMDIVIDER_OK(CLK_SWIMDivider));
       0004E3 6B 01            [ 1] 1010 	ld	(0x01, sp), a
       0004E5 27 11            [ 1] 1011 	jreq	00107$
       0004E7 7B 01            [ 1] 1012 	ld	a, (0x01, sp)
@@ -1019,65 +1019,65 @@
       0004F2 AEr00r0C         [ 2] 1019 	ldw	x, #(___str_0+0)
       0004F5 CDr00r00         [ 4] 1020 	call	_assert_failed
       0004F8                       1021 00107$:
-                                   1022 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 531: CLK->SWIMCCR |= CLK_SWIMCCR_SWIMDIV;
+                                   1022 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 531: CLK->SWIMCCR |= CLK_SWIMCCR_SWIMDIV;
       0004F8 C6 50 CD         [ 1] 1023 	ld	a, 0x50cd
-                                   1024 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 528: if (CLK_SWIMDivider != CLK_SWIMDIVIDER_2)
+                                   1024 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 528: if (CLK_SWIMDivider != CLK_SWIMDIVIDER_2)
       0004FB 0D 01            [ 1] 1025 	tnz	(0x01, sp)
       0004FD 27 07            [ 1] 1026 	jreq	00102$
-                                   1027 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 531: CLK->SWIMCCR |= CLK_SWIMCCR_SWIMDIV;
+                                   1027 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 531: CLK->SWIMCCR |= CLK_SWIMCCR_SWIMDIV;
       0004FF AA 01            [ 1] 1028 	or	a, #0x01
       000501 C7 50 CD         [ 1] 1029 	ld	0x50cd, a
       000504 20 05            [ 2] 1030 	jra	00104$
       000506                       1031 00102$:
-                                   1032 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 536: CLK->SWIMCCR &= (uint8_t)(~CLK_SWIMCCR_SWIMDIV);
+                                   1032 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 536: CLK->SWIMCCR &= (uint8_t)(~CLK_SWIMCCR_SWIMDIV);
       000506 A4 FE            [ 1] 1033 	and	a, #0xfe
       000508 C7 50 CD         [ 1] 1034 	ld	0x50cd, a
       00050B                       1035 00104$:
-                                   1036 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 538: }
+                                   1036 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 538: }
       00050B 84               [ 1] 1037 	pop	a
       00050C 81               [ 4] 1038 	ret
-                                   1039 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 547: void CLK_ClockSecuritySystemEnable(void)
+                                   1039 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 547: void CLK_ClockSecuritySystemEnable(void)
                                    1040 ;	-----------------------------------------
                                    1041 ;	 function CLK_ClockSecuritySystemEnable
                                    1042 ;	-----------------------------------------
       00050D                       1043 _CLK_ClockSecuritySystemEnable:
-                                   1044 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 550: CLK->CSSR |= CLK_CSSR_CSSEN;
+                                   1044 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 550: CLK->CSSR |= CLK_CSSR_CSSEN;
       00050D 72 10 50 C8      [ 1] 1045 	bset	0x50c8, #0
-                                   1046 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 551: }
+                                   1046 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 551: }
       000511 81               [ 4] 1047 	ret
-                                   1048 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 559: CLK_Source_TypeDef CLK_GetSYSCLKSource(void)
+                                   1048 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 559: CLK_Source_TypeDef CLK_GetSYSCLKSource(void)
                                    1049 ;	-----------------------------------------
                                    1050 ;	 function CLK_GetSYSCLKSource
                                    1051 ;	-----------------------------------------
       000512                       1052 _CLK_GetSYSCLKSource:
-                                   1053 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 561: return((CLK_Source_TypeDef)CLK->CMSR);
+                                   1053 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 561: return((CLK_Source_TypeDef)CLK->CMSR);
       000512 C6 50 C3         [ 1] 1054 	ld	a, 0x50c3
-                                   1055 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 562: }
+                                   1055 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 562: }
       000515 81               [ 4] 1056 	ret
-                                   1057 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 569: uint32_t CLK_GetClockFreq(void)
+                                   1057 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 569: uint32_t CLK_GetClockFreq(void)
                                    1058 ;	-----------------------------------------
                                    1059 ;	 function CLK_GetClockFreq
                                    1060 ;	-----------------------------------------
       000516                       1061 _CLK_GetClockFreq:
       000516 52 04            [ 2] 1062 	sub	sp, #4
-                                   1063 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 576: clocksource = (CLK_Source_TypeDef)CLK->CMSR;
+                                   1063 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 576: clocksource = (CLK_Source_TypeDef)CLK->CMSR;
       000518 C6 50 C3         [ 1] 1064 	ld	a, 0x50c3
-                                   1065 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 578: if (clocksource == CLK_SOURCE_HSI)
+                                   1065 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 578: if (clocksource == CLK_SOURCE_HSI)
       00051B 6B 04            [ 1] 1066 	ld	(0x04, sp), a
       00051D A1 E1            [ 1] 1067 	cp	a, #0xe1
       00051F 26 26            [ 1] 1068 	jrne	00105$
-                                   1069 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 580: tmp = (uint8_t)(CLK->CKDIVR & CLK_CKDIVR_HSIDIV);
+                                   1069 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 580: tmp = (uint8_t)(CLK->CKDIVR & CLK_CKDIVR_HSIDIV);
       000521 C6 50 C6         [ 1] 1070 	ld	a, 0x50c6
       000524 A4 18            [ 1] 1071 	and	a, #0x18
-                                   1072 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 581: tmp = (uint8_t)(tmp >> 3);
+                                   1072 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 581: tmp = (uint8_t)(tmp >> 3);
       000526 44               [ 1] 1073 	srl	a
       000527 44               [ 1] 1074 	srl	a
       000528 44               [ 1] 1075 	srl	a
-                                   1076 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 582: presc = HSIDivFactor[tmp];
+                                   1076 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 582: presc = HSIDivFactor[tmp];
       000529 5F               [ 1] 1077 	clrw	x
       00052A 97               [ 1] 1078 	ld	xl, a
       00052B D6u00u00         [ 1] 1079 	ld	a, (_HSIDivFactor+0, x)
-                                   1080 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 583: clockfrequency = HSI_VALUE / presc;
+                                   1080 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 583: clockfrequency = HSI_VALUE / presc;
       00052E 5F               [ 1] 1081 	clrw	x
       00052F 97               [ 1] 1082 	ld	xl, a
       000530 90 5F            [ 1] 1083 	clrw	y
@@ -1093,35 +1093,35 @@
       000543 17 03            [ 2] 1093 	ldw	(0x03, sp), y
       000545 20 17            [ 2] 1094 	jra	00106$
       000547                       1095 00105$:
-                                   1096 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 585: else if ( clocksource == CLK_SOURCE_LSI)
+                                   1096 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 585: else if ( clocksource == CLK_SOURCE_LSI)
       000547 7B 04            [ 1] 1097 	ld	a, (0x04, sp)
       000549 A1 D2            [ 1] 1098 	cp	a, #0xd2
       00054B 26 09            [ 1] 1099 	jrne	00102$
-                                   1100 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 587: clockfrequency = LSI_VALUE;
+                                   1100 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 587: clockfrequency = LSI_VALUE;
       00054D AE F4 00         [ 2] 1101 	ldw	x, #0xf400
       000550 1F 03            [ 2] 1102 	ldw	(0x03, sp), x
       000552 5F               [ 1] 1103 	clrw	x
       000553 5C               [ 1] 1104 	incw	x
       000554 20 08            [ 2] 1105 	jra	00106$
       000556                       1106 00102$:
-                                   1107 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 591: clockfrequency = HSE_VALUE;
+                                   1107 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 591: clockfrequency = HSE_VALUE;
       000556 AE 24 00         [ 2] 1108 	ldw	x, #0x2400
       000559 1F 03            [ 2] 1109 	ldw	(0x03, sp), x
       00055B AE 00 F4         [ 2] 1110 	ldw	x, #0x00f4
       00055E                       1111 00106$:
-                                   1112 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 594: return((uint32_t)clockfrequency);
+                                   1112 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 594: return((uint32_t)clockfrequency);
       00055E 51               [ 1] 1113 	exgw	x, y
       00055F 1E 03            [ 2] 1114 	ldw	x, (0x03, sp)
-                                   1115 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 595: }
+                                   1115 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 595: }
       000561 5B 04            [ 2] 1116 	addw	sp, #4
       000563 81               [ 4] 1117 	ret
-                                   1118 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 604: void CLK_AdjustHSICalibrationValue(CLK_HSITrimValue_TypeDef CLK_HSICalibrationValue)
+                                   1118 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 604: void CLK_AdjustHSICalibrationValue(CLK_HSITrimValue_TypeDef CLK_HSICalibrationValue)
                                    1119 ;	-----------------------------------------
                                    1120 ;	 function CLK_AdjustHSICalibrationValue
                                    1121 ;	-----------------------------------------
       000564                       1122 _CLK_AdjustHSICalibrationValue:
       000564 88               [ 1] 1123 	push	a
-                                   1124 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 607: assert_param(IS_CLK_HSITRIMVALUE_OK(CLK_HSICalibrationValue));
+                                   1124 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 607: assert_param(IS_CLK_HSITRIMVALUE_OK(CLK_HSICalibrationValue));
       000565 4D               [ 1] 1125 	tnz	a
       000566 27 2A            [ 1] 1126 	jreq	00104$
       000568 A1 01            [ 1] 1127 	cp	a, #0x01
@@ -1147,7 +1147,7 @@
       00058E CDr00r00         [ 4] 1147 	call	_assert_failed
       000591 84               [ 1] 1148 	pop	a
       000592                       1149 00104$:
-                                   1150 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 610: CLK->HSITRIMR = (uint8_t)( (uint8_t)(CLK->HSITRIMR & (uint8_t)(~CLK_HSITRIMR_HSITRIM))|((uint8_t)CLK_HSICalibrationValue));
+                                   1150 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 610: CLK->HSITRIMR = (uint8_t)( (uint8_t)(CLK->HSITRIMR & (uint8_t)(~CLK_HSITRIMR_HSITRIM))|((uint8_t)CLK_HSICalibrationValue));
       000592 AE 50 CC         [ 2] 1151 	ldw	x, #0x50cc
       000595 88               [ 1] 1152 	push	a
       000596 F6               [ 1] 1153 	ld	a, (x)
@@ -1156,24 +1156,24 @@
       00059B 84               [ 1] 1156 	pop	a
       00059C 1A 01            [ 1] 1157 	or	a, (0x01, sp)
       00059E C7 50 CC         [ 1] 1158 	ld	0x50cc, a
-                                   1159 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 611: }
+                                   1159 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 611: }
       0005A1 84               [ 1] 1160 	pop	a
       0005A2 81               [ 4] 1161 	ret
-                                   1162 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 622: void CLK_SYSCLKEmergencyClear(void)
+                                   1162 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 622: void CLK_SYSCLKEmergencyClear(void)
                                    1163 ;	-----------------------------------------
                                    1164 ;	 function CLK_SYSCLKEmergencyClear
                                    1165 ;	-----------------------------------------
       0005A3                       1166 _CLK_SYSCLKEmergencyClear:
-                                   1167 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 624: CLK->SWCR &= (uint8_t)(~CLK_SWCR_SWBSY);
+                                   1167 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 624: CLK->SWCR &= (uint8_t)(~CLK_SWCR_SWBSY);
       0005A3 72 11 50 C5      [ 1] 1168 	bres	0x50c5, #0
-                                   1169 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 625: }
+                                   1169 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 625: }
       0005A7 81               [ 4] 1170 	ret
-                                   1171 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 634: FlagStatus CLK_GetFlagStatus(CLK_Flag_TypeDef CLK_FLAG)
+                                   1171 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 634: FlagStatus CLK_GetFlagStatus(CLK_Flag_TypeDef CLK_FLAG)
                                    1172 ;	-----------------------------------------
                                    1173 ;	 function CLK_GetFlagStatus
                                    1174 ;	-----------------------------------------
       0005A8                       1175 _CLK_GetFlagStatus:
-                                   1176 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 641: assert_param(IS_CLK_FLAG_OK(CLK_FLAG));
+                                   1176 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 641: assert_param(IS_CLK_FLAG_OK(CLK_FLAG));
       0005A8 90 93            [ 1] 1177 	ldw	y, x
       0005AA A3 01 10         [ 2] 1178 	cpw	x, #0x0110
       0005AD 27 3C            [ 1] 1179 	jreq	00119$
@@ -1204,63 +1204,63 @@
       0005E8 90 85            [ 2] 1204 	popw	y
       0005EA 85               [ 2] 1205 	popw	x
       0005EB                       1206 00119$:
-                                   1207 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 644: statusreg = (uint16_t)((uint16_t)CLK_FLAG & (uint16_t)0xFF00);
+                                   1207 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 644: statusreg = (uint16_t)((uint16_t)CLK_FLAG & (uint16_t)0xFF00);
       0005EB 4F               [ 1] 1208 	clr	a
-                                   1209 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 647: if (statusreg == 0x0100) /* The flag to check is in ICKRregister */
+                                   1209 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 647: if (statusreg == 0x0100) /* The flag to check is in ICKRregister */
       0005EC 97               [ 1] 1210 	ld	xl, a
       0005ED A3 01 00         [ 2] 1211 	cpw	x, #0x0100
       0005F0 26 05            [ 1] 1212 	jrne	00111$
-                                   1213 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 649: tmpreg = CLK->ICKR;
+                                   1213 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 649: tmpreg = CLK->ICKR;
       0005F2 C6 50 C0         [ 1] 1214 	ld	a, 0x50c0
       0005F5 20 21            [ 2] 1215 	jra	00112$
       0005F7                       1216 00111$:
-                                   1217 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 651: else if (statusreg == 0x0200) /* The flag to check is in ECKRregister */
+                                   1217 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 651: else if (statusreg == 0x0200) /* The flag to check is in ECKRregister */
       0005F7 A3 02 00         [ 2] 1218 	cpw	x, #0x0200
       0005FA 26 05            [ 1] 1219 	jrne	00108$
-                                   1220 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 653: tmpreg = CLK->ECKR;
+                                   1220 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 653: tmpreg = CLK->ECKR;
       0005FC C6 50 C1         [ 1] 1221 	ld	a, 0x50c1
       0005FF 20 17            [ 2] 1222 	jra	00112$
       000601                       1223 00108$:
-                                   1224 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 655: else if (statusreg == 0x0300) /* The flag to check is in SWIC register */
+                                   1224 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 655: else if (statusreg == 0x0300) /* The flag to check is in SWIC register */
       000601 A3 03 00         [ 2] 1225 	cpw	x, #0x0300
       000604 26 05            [ 1] 1226 	jrne	00105$
-                                   1227 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 657: tmpreg = CLK->SWCR;
+                                   1227 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 657: tmpreg = CLK->SWCR;
       000606 C6 50 C5         [ 1] 1228 	ld	a, 0x50c5
       000609 20 0D            [ 2] 1229 	jra	00112$
       00060B                       1230 00105$:
-                                   1231 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 659: else if (statusreg == 0x0400) /* The flag to check is in CSS register */
+                                   1231 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 659: else if (statusreg == 0x0400) /* The flag to check is in CSS register */
       00060B A3 04 00         [ 2] 1232 	cpw	x, #0x0400
       00060E 26 05            [ 1] 1233 	jrne	00102$
-                                   1234 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 661: tmpreg = CLK->CSSR;
+                                   1234 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 661: tmpreg = CLK->CSSR;
       000610 C6 50 C8         [ 1] 1235 	ld	a, 0x50c8
       000613 20 03            [ 2] 1236 	jra	00112$
       000615                       1237 00102$:
-                                   1238 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 665: tmpreg = CLK->CCOR;
+                                   1238 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 665: tmpreg = CLK->CCOR;
       000615 C6 50 C9         [ 1] 1239 	ld	a, 0x50c9
       000618                       1240 00112$:
-                                   1241 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 668: if ((tmpreg & (uint8_t)CLK_FLAG) != (uint8_t)RESET)
+                                   1241 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 668: if ((tmpreg & (uint8_t)CLK_FLAG) != (uint8_t)RESET)
       000618 93               [ 1] 1242 	ldw	x, y
       000619 89               [ 2] 1243 	pushw	x
       00061A 14 02            [ 1] 1244 	and	a, (2, sp)
       00061C 85               [ 2] 1245 	popw	x
       00061D 4D               [ 1] 1246 	tnz	a
       00061E 27 03            [ 1] 1247 	jreq	00114$
-                                   1248 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 670: bitstatus = SET;
+                                   1248 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 670: bitstatus = SET;
       000620 A6 01            [ 1] 1249 	ld	a, #0x01
       000622 81               [ 4] 1250 	ret
       000623                       1251 00114$:
-                                   1252 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 674: bitstatus = RESET;
+                                   1252 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 674: bitstatus = RESET;
       000623 4F               [ 1] 1253 	clr	a
-                                   1254 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 678: return((FlagStatus)bitstatus);
-                                   1255 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 679: }
+                                   1254 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 678: return((FlagStatus)bitstatus);
+                                   1255 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 679: }
       000624 81               [ 4] 1256 	ret
-                                   1257 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 687: ITStatus CLK_GetITStatus(CLK_IT_TypeDef CLK_IT)
+                                   1257 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 687: ITStatus CLK_GetITStatus(CLK_IT_TypeDef CLK_IT)
                                    1258 ;	-----------------------------------------
                                    1259 ;	 function CLK_GetITStatus
                                    1260 ;	-----------------------------------------
       000625                       1261 _CLK_GetITStatus:
       000625 88               [ 1] 1262 	push	a
-                                   1263 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 692: assert_param(IS_CLK_IT_OK(CLK_IT));
+                                   1263 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 692: assert_param(IS_CLK_IT_OK(CLK_IT));
       000626 6B 01            [ 1] 1264 	ld	(0x01, sp), a
       000628 A0 1C            [ 1] 1265 	sub	a, #0x1c
       00062A 26 02            [ 1] 1266 	jrne	00143$
@@ -1285,44 +1285,44 @@
       000644 CDr00r00         [ 4] 1285 	call	_assert_failed
       000647 84               [ 1] 1286 	pop	a
       000648                       1287 00113$:
-                                   1288 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 694: if (CLK_IT == CLK_IT_SWIF)
+                                   1288 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 694: if (CLK_IT == CLK_IT_SWIF)
       000648 4D               [ 1] 1289 	tnz	a
       000649 27 0F            [ 1] 1290 	jreq	00108$
-                                   1291 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 697: if ((CLK->SWCR & (uint8_t)CLK_IT) == (uint8_t)0x0C)
+                                   1291 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 697: if ((CLK->SWCR & (uint8_t)CLK_IT) == (uint8_t)0x0C)
       00064B C6 50 C5         [ 1] 1292 	ld	a, 0x50c5
       00064E 14 01            [ 1] 1293 	and	a, (0x01, sp)
-                                   1294 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 699: bitstatus = SET;
+                                   1294 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 699: bitstatus = SET;
       000650 A0 0C            [ 1] 1295 	sub	a, #0x0c
       000652 26 03            [ 1] 1296 	jrne	00102$
       000654 4C               [ 1] 1297 	inc	a
       000655 20 0F            [ 2] 1298 	jra	00109$
       000657                       1299 00102$:
-                                   1300 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 703: bitstatus = RESET;
+                                   1300 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 703: bitstatus = RESET;
       000657 4F               [ 1] 1301 	clr	a
       000658 20 0C            [ 2] 1302 	jra	00109$
       00065A                       1303 00108$:
-                                   1304 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 709: if ((CLK->CSSR & (uint8_t)CLK_IT) == (uint8_t)0x0C)
+                                   1304 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 709: if ((CLK->CSSR & (uint8_t)CLK_IT) == (uint8_t)0x0C)
       00065A C6 50 C8         [ 1] 1305 	ld	a, 0x50c8
       00065D 14 01            [ 1] 1306 	and	a, (0x01, sp)
-                                   1307 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 711: bitstatus = SET;
+                                   1307 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 711: bitstatus = SET;
       00065F A0 0C            [ 1] 1308 	sub	a, #0x0c
       000661 26 02            [ 1] 1309 	jrne	00105$
       000663 4C               [ 1] 1310 	inc	a
-                                   1311 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 715: bitstatus = RESET;
+                                   1311 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 715: bitstatus = RESET;
       000664 21                    1312 	.byte 0x21
       000665                       1313 00105$:
       000665 4F               [ 1] 1314 	clr	a
       000666                       1315 00109$:
-                                   1316 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 720: return bitstatus;
-                                   1317 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 721: }
+                                   1316 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 720: return bitstatus;
+                                   1317 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 721: }
       000666 5B 01            [ 2] 1318 	addw	sp, #1
       000668 81               [ 4] 1319 	ret
-                                   1320 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 729: void CLK_ClearITPendingBit(CLK_IT_TypeDef CLK_IT)
+                                   1320 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 729: void CLK_ClearITPendingBit(CLK_IT_TypeDef CLK_IT)
                                    1321 ;	-----------------------------------------
                                    1322 ;	 function CLK_ClearITPendingBit
                                    1323 ;	-----------------------------------------
       000669                       1324 _CLK_ClearITPendingBit:
-                                   1325 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 732: assert_param(IS_CLK_IT_OK(CLK_IT));
+                                   1325 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 732: assert_param(IS_CLK_IT_OK(CLK_IT));
       000669 97               [ 1] 1326 	ld	xl, a
       00066A A0 0C            [ 1] 1327 	sub	a, #0x0c
       00066C 26 02            [ 1] 1328 	jrne	00127$
@@ -1347,16 +1347,16 @@
       000685 CDr00r00         [ 4] 1347 	call	_assert_failed
       000688 84               [ 1] 1348 	pop	a
       000689                       1349 00107$:
-                                   1350 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 734: if (CLK_IT == (uint8_t)CLK_IT_CSSD)
+                                   1350 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 734: if (CLK_IT == (uint8_t)CLK_IT_CSSD)
       000689 4D               [ 1] 1351 	tnz	a
       00068A 27 05            [ 1] 1352 	jreq	00102$
-                                   1353 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 737: CLK->CSSR &= (uint8_t)(~CLK_CSSR_CSSD);
+                                   1353 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 737: CLK->CSSR &= (uint8_t)(~CLK_CSSR_CSSD);
       00068C 72 17 50 C8      [ 1] 1354 	bres	0x50c8, #3
       000690 81               [ 4] 1355 	ret
       000691                       1356 00102$:
-                                   1357 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 742: CLK->SWCR &= (uint8_t)(~CLK_SWCR_SWIF);
+                                   1357 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 742: CLK->SWCR &= (uint8_t)(~CLK_SWCR_SWIF);
       000691 72 17 50 C5      [ 1] 1358 	bres	0x50c5, #3
-                                   1359 ;	/Users/alekseydunaev/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c: 745: }
+                                   1359 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_clk.c: 745: }
       000695 81               [ 4] 1360 	ret
                                    1361 	.area CODE
                                    1362 	.area CONST
@@ -1376,24 +1376,35 @@
       00000B 28                    1376 	.db #0x28	; 40
                                    1377 	.area CONST
       00000C                       1378 ___str_0:
-      00000C 2F 55 73 65 72 73 2F  1379 	.ascii "/Users/alekseydunaev/.platformio/packages/framework-ststm8sp"
-             61 6C 65 6B 73 65 79
-             64 75 6E 61 65 76 2F
-             2E 70 6C 61 74 66 6F
-             72 6D 69 6F 2F 70 61
-             63 6B 61 67 65 73 2F
-             66 72 61 6D 65 77 6F
+      00000C 43 3A                 1379 	.ascii "C:"
+      00000E 5C                    1380 	.db 0x5c
+      00000F 55 73 65 72 73        1381 	.ascii "Users"
+      000014 5C                    1382 	.db 0x5c
+      000015 64 69 73 61 6E        1383 	.ascii "disan"
+      00001A 5C                    1384 	.db 0x5c
+      00001B 2E 70 6C 61 74 66 6F  1385 	.ascii ".platformio"
+             72 6D 69 6F
+      000026 5C                    1386 	.db 0x5c
+      000027 70 61 63 6B 61 67 65  1387 	.ascii "packages"
+             73
+      00002F 5C                    1388 	.db 0x5c
+      000030 66 72 61 6D 65 77 6F  1389 	.ascii "framework-ststm8spl"
              72 6B 2D 73 74 73 74
-             6D 38 73 70
-      000048 6C 2F 4C 69 62 72 61  1380 	.ascii "l/Libraries/STM8S_StdPeriph_Driver/src/stm8s_clk.c"
-             72 69 65 73 2F 53 54
-             4D 38 53 5F 53 74 64
-             50 65 72 69 70 68 5F
-             44 72 69 76 65 72 2F
-             73 72 63 2F 73 74 6D
-             38 73 5F 63 6C 6B 2E
-             63
-      00007A 00                    1381 	.db 0x00
-                                   1382 	.area CODE
-                                   1383 	.area INITIALIZER
-                                   1384 	.area CABS (ABS)
+             6D 38 73 70 6C
+      000043 5C                    1390 	.db 0x5c
+      000044 4C 69 62 72 61 72 69  1391 	.ascii "Libraries"
+             65 73
+      00004D 5C                    1392 	.db 0x5c
+      00004E 53 54 4D 38 53 5F 53  1393 	.ascii "STM8S_StdPeriph_Driver"
+             74 64 50 65 72 69 70
+             68 5F 44 72 69 76 65
+             72
+      000064 5C                    1394 	.db 0x5c
+      000065 73 72 63              1395 	.ascii "src"
+      000068 5C                    1396 	.db 0x5c
+      000069 73 74 6D 38 73 5F 63  1397 	.ascii "stm8s_clk.c"
+             6C 6B 2E 63
+      000074 00                    1398 	.db 0x00
+                                   1399 	.area CODE
+                                   1400 	.area INITIALIZER
+                                   1401 	.area CABS (ABS)
