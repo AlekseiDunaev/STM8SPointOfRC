@@ -68,11 +68,11 @@ S _GPIO_WriteHigh Ref000000
 S _DS18X20_Reset Ref000000
 S _BME280_Setup Ref000000
 A _CODE size 0 flags 0 addr 0
-A DATA size DA flags 0 addr 0
+A DATA size 112 flags 0 addr 0
 S _iI2CRead Def00000B
 S _sString Def000012
 S _iI2CWrite Def000008
-S _str1 Def000076
+S _str1 Def000092
 S _iDS18X20RomID Def000000
 A INITIALIZED size C flags 0 addr 0
 S _fBME280Humidity Def000008
@@ -111,9 +111,9 @@ T 00 00 12
 R 00 00 00 01
 T 00 00 12
 R 00 00 00 01
-T 00 00 76
+T 00 00 92
 R 00 00 00 01
-T 00 00 76
+T 00 00 92
 R 00 00 00 01
 T 00 00 00
 R 00 00 00 02

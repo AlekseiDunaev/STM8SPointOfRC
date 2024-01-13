@@ -40,6 +40,20 @@
 /* Private functions ---------------------------------------------------------*/
 /* Public functions ----------------------------------------------------------*/
 
+#define UART_BUF_SIZE 128
+/*
+// Read buffer
+uint8_t read_ok = 0; // read completion flag
+uint8_t read_idx = 0;
+uint8_t read_len = 0;
+NEAR uint8_t read_buffer[UART_BUF_SIZE]; // @near can be placed when the buffer setting is large
+
+// Write buffer
+uint8_t write_ok = 0; // write completion flag
+uint8_t write_idx = 0;
+uint8_t write_len = 0;
+NEAR uint8_t write_buffer[UART_BUF_SIZE]; // @near can be placed when the buffer setting is large
+*/
 
 #ifdef _COSMIC_
 /**
@@ -401,6 +415,19 @@ INTERRUPT_HANDLER(I2C_IRQHandler, 19)
     /* In order to detect unexpected events during development,
        it is recommended to set a breakpoint on the following instruction.
     */
+    /*
+    // Write operation automatically clear the interrupt, so you can not explicitly clear the interrupt
+	  //UART2_ClearITPendingBit(UART2_IT_TXE); 
+	
+	  // Write 1 byte from the write buffer
+	  UART2_SendData8(write_buffer[write_idx++]);
+
+	  // All write, write off interrupt, write completion flag (synchronization processing)
+	  if( write_idx == write_len ) {
+		  UART2_ITConfig(UART2_IT_TXE, DISABLE);
+		write_ok = 1;
+	}
+  */
 }
 
 /**
@@ -413,6 +440,22 @@ INTERRUPT_HANDLER(I2C_IRQHandler, 19)
 {
     /* In order to detect unexpected events during development,
        it is recommended to set a breakpoint on the following instruction.
+    */
+    
+    /*
+    // The read operation automatically clears the interrupt, so there is no need to explicitly clear the interrupt.
+	
+    // Note that the interrupt name here is RXNE, not RXNE_OR
+	  UART2_ClearITPendingBit(UART2_IT_RXNE);
+
+	  // read 1 byte
+	  read_buffer[read_idx++] = UART2_ReceiveData8();
+
+	  // Read all, turn off the interrupt (UART2_IT_RXNE_OR), read completion flag (synchronization processing)
+	  if( read_idx == read_len ) {
+		  UART2_ITConfig(UART2_IT_RXNE_OR, DISABLE);
+		  read_ok = 1;
+	  }
     */
 }
 #endif /* STM8S105*/

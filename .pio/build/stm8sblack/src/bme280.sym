@@ -34,8 +34,10 @@ Symbol Table
     _I2C_Send_Bytes                                                ****** GX
     ___fsdiv                                                       ****** GX
     ___slong2fs                                                    ****** GX
+    ___ulong2fs                                                    ****** GX
     __mullong                                                      ****** GX
   1 _temper_int                                                    000021 GR
+
 
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (STMicroelectronics STM8), page 2.
 Hexadecimal [24-Bits]

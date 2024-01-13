@@ -3,9 +3,9 @@
 
 #include "stm8s.h"
 #include "stm8s_conf.h"
-#include "stdio.h"
-#include "string.h"
-#include "math.h"
+// #include "stdio.h"
+// #include "string.h"
+// #include "math.h"
 #include "config.h"
 
 #define BME280_ADDRESS 0xEE //BME280 I2C ADDRES (0x77<<1)

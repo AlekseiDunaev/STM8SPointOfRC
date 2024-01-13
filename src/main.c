@@ -79,17 +79,13 @@
 */
 
 #define DEBUG
-// #define DEBUG_FLOATTOSTR
 // #define QUICK_CICLE
-#define PRODUCT
 #define DS18X20_ENABLE
 // #define DS18B20_DEBUG
-#define AHTX0_DISABLE
+// #define AHTX0_ENABLE
 // #define AHTX0_DEBUG
 #define BME280_ENABLE
-#define BME280_DEBUG
 
-#define MAX_LENGHT_STRING 100
 
 #if defined(STM8S105) || defined(STM8S005) ||  defined (STM8AF626x)
 #define UART_NAME "UART2"
@@ -124,6 +120,8 @@
 
 // Functions
 void FloatToStr(char *str, float number, uint8_t integer_bit, uint8_t decimal_bit);
+// void uart_send_n_byte(uint8_t* data, uint8_t len);
+// void uart_read_n_byte(uint8_t* data, uint8_t len);
 
 // Variables
 static const char table[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
@@ -135,9 +133,25 @@ float fDS18X20Temperature = -100.0f;
 // float fAHTX0Temperature = 0.0f;
 float fBME280Temperature = 0.0f;
 float fBME280Humidity = 0.0f;
-char sString[MAX_LENGHT_STRING];
-char str1[MAX_LENGHT_STRING];
-extern BME280_CalibData CalibData;
+char sString[UART_BUF_SIZE];
+char str1[UART_BUF_SIZE];
+// extern BME280_CalibData CalibData;
+
+/*
+// Read buffer
+extern uint8_t read_ok;
+extern uint8_t read_idx;
+extern uint8_t read_len;
+extern uint8_t read_buffer[];
+*/
+
+/*
+// Write buffer
+extern uint8_t write_ok;
+extern uint8_t write_idx;
+extern uint8_t write_len;
+extern uint8_t write_buffer[];
+*/
 
 void Clock_Setup(void) {
   CLK_DeInit();
@@ -205,12 +219,17 @@ void main(void) {
     uint8_t integer_bit, decimal_bit;
     uint8_t sizeValueString = 0;
     uint8_t sizeSendUARTString = 0;
+    // static const char preambule[] = { 0x00, 0x00, 0x18 };
     static const char placeholderDS18X20String[] = "{\"topic\" : \"mqtt\/temperature-room\", \"value\" : \"%s\"}";
+    // static const char placeholderDS18X20String_test[] = "{\"topic\" : \"mqtt\/temperature-room\", \"value\" : \"";
     // const char placeholderHumidityAHTX0String[] = "{\"topic\" : \"mqtt\/humidity-aht20\", \"value\": \"%s\"}";
     // const char placeholderTemperatureAHTX0String[] = "{\"topic\" : \"mqtt\/temperature-aht20\", \"value\": \"%s\"}";
     static const char placeholderHumidityBME280String[] = "{\"topic\" : \"mqtt\/humidity-bme280\", \"value\": \"%s\"}";
+    // static const char placeholderHumidityBME280String_test[] = "{\"topic\" : \"mqtt\/humidity-bme280\", \"value\": \"";
     static const char placeholderTemperatureBME280String[] = "{\"topic\" : \"mqtt\/temperature-bme280\", \"value\": \"%s\"}";
-    // static const char placeholderTemperatureBME280String[] = "{\"topic\" : \"mqtt\/pressure-bme280\", \"value\": \"%s\"}";
+    // static const char placeholderTemperatureBME280String_test[] = "{\"topic\" : \"mqtt\/temperature-bme280\", \"value\": \"";
+    // static const char placeholderPressureBME280String[] = "{\"topic\" : \"mqtt\/pressure-bme280\", \"value\": \"%s\"}";
+    // static const char end[] = "\"}\r\n";
 
     LED_ON;
 
@@ -317,7 +336,6 @@ void main(void) {
 #endif
 
 #ifdef BME280_ENABLE
-
     integer_bit = 3;
     decimal_bit = 2;
 
@@ -344,7 +362,7 @@ void main(void) {
 
     fBME280Humidity = BME280_ReadHumidity();
     delay_ms(2000);
-    
+
     sizeValueString = integer_bit + decimal_bit + 1;
     sizeSendUARTString = sizeof(placeholderHumidityBME280String) + sizeValueString;
     stringValue = (char*)malloc(sizeValueString * sizeof(char));
@@ -352,6 +370,10 @@ void main(void) {
 
     FloatToStr(stringValue, fBME280Humidity, integer_bit, decimal_bit);
     sprintf(stringSendUART, placeholderHumidityBME280String, stringValue);
+    // uart_send_n_byte(preambule, sizeof(preambule));
+    // uart_send_n_byte(placeholderHumidityBME280String_test, sizeof(placeholderHumidityBME280String_test));
+    // uart_send_n_byte(stringValue, sizeof(stringValue));
+    // uart_send_n_byte(end, sizeof(end));
     putchar(0x00);
     putchar(0x00);
     putchar(0x18);
@@ -416,11 +438,6 @@ void FloatToStr(char *str, float number, uint8_t integer_bit, uint8_t decimal_bi
           }
         }
         
-        #ifdef DEBUG_FLOATTOSTR
-        sprintf(str1, "%d\r\n", trailing_zero_count);
-        printf("%s", str1);
-        #endif
-
         for (i = minus; i <= trailing_zero_count + minus; i++) {
           str[i] = str[i + trailing_zero_count];
         }
@@ -438,6 +455,55 @@ void FloatToStr(char *str, float number, uint8_t integer_bit, uint8_t decimal_bi
         *(str + integer_bit + 1 + decimal_bit - trailing_zero_count + minus) = '\0';
 }
 
+/*
+// write multiple bytes
+void uart_send_n_byte(uint8_t* data, uint8_t len)
+{
+	uint16_t count = 0;
+	UART2_ITConfig(UART2_IT_TXE, DISABLE);
+
+	 // Prepare to write data buffer (copy from user data area to serial port write buffer, initialize index value, etc.)
+	memcpy(write_buffer, data, len);
+	write_idx = 0;
+	write_len = len;
+
+	 // write interrupt
+	UART2_ITConfig(UART2_IT_TXE, ENABLE);
+	
+	 while(!write_ok) { // Wait for the write to complete (synchronous processing)
+		count++;
+		 if( count >= 10000 ) { // Simple timeout processing, no timeout can be removed
+			write_idx = 0;
+			write_len = 0;
+			break;
+		}
+	}
+	 write_ok = 0; // Write complete, reset write complete flag
+	return;
+}
+*/
+
+/*
+// read multiple bytes
+void  uart_read_n_byte(uint8_t* data, uint8_t len)
+{
+	 // turn off interrupt
+	UART2_ITConfig(UART2_IT_RXNE_OR, DISABLE);
+
+	 // Clear the read buffer (reset the read index value)
+	read_idx = 0;
+	read_len = len;
+
+	 // open read interrupt
+	UART2_ITConfig(UART2_IT_RXNE_OR, ENABLE);
+	
+	 while(!read_ok); // Wait for the read operation to complete (synchronization processing), add timeout processing, refer to the above write operation
+	 read_ok = 0; // write complete, reset write complete flag
+	 memcpy(data, read_buffer, read_len); // copy data to user buffer
+	return;
+}
+*/
+
 /**
   * @brief Retargets the C library printf function to the UART.
   * @param c Character to send
@@ -445,9 +511,9 @@ void FloatToStr(char *str, float number, uint8_t integer_bit, uint8_t decimal_bi
   */
 PUTCHAR_PROTOTYPE
 {
-  /* Write a character to the UART1 */
+  // Write a character to the UART1
   UART_SENDDATA8(c);
-  /* Loop until the end of transmission */
+  // Loop until the end of transmission
   while (UART_GETFLAGSTATUS(UART_FLAG_TXE) == RESET);
 
   return (c);
@@ -465,7 +531,7 @@ GETCHAR_PROTOTYPE
 #else
   int c = 0;
 #endif
-  /* Loop until the Read data register flag is SET */
+  // Loop until the Read data register flag is SET
   while (UART_GETFLAGSTATUS(UART_FLAG_TXE) == RESET);
     c = UART_RECEIVEDATA8();
   return (c);

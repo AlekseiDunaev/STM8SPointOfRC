@@ -75,1281 +75,1281 @@
                                      75 ; code
                                      76 ;--------------------------------------------------------
                                      77 	.area CODE
-                                     78 ;	src\bme280.c: 15: void Error(void) {
+                                     78 ;	src\bme280.c: 16: void Error(void) {
                                      79 ;	-----------------------------------------
                                      80 ;	 function Error
                                      81 ;	-----------------------------------------
-      009A85                         82 _Error:
-                                     83 ;	src\bme280.c: 16: LED_OFF;
-      009A85 A6 20            [ 1]   84 	ld	a, #0x20
-      009A87 AE 50 14         [ 2]   85 	ldw	x, #0x5014
-                                     86 ;	src\bme280.c: 17: }
-      009A8A CC 8A 83         [ 2]   87 	jp	_GPIO_WriteHigh
-                                     88 ;	src\bme280.c: 19: void BME280_Setup(void) {
+      0095B3                         82 _Error:
+                                     83 ;	src\bme280.c: 17: LED_OFF;
+      0095B3 A6 20            [ 1]   84 	ld	a, #0x20
+      0095B5 AE 50 14         [ 2]   85 	ldw	x, #0x5014
+                                     86 ;	src\bme280.c: 18: }
+      0095B8 CC 88 2F         [ 2]   87 	jp	_GPIO_WriteHigh
+                                     88 ;	src\bme280.c: 20: void BME280_Setup(void) {
                                      89 ;	-----------------------------------------
                                      90 ;	 function BME280_Setup
                                      91 ;	-----------------------------------------
-      009A8D                         92 _BME280_Setup:
-                                     93 ;	src\bme280.c: 22: uint8_t res = BME280_ReadReg(BME280_REG_ID);
-      009A8D A6 D0            [ 1]   94 	ld	a, #0xd0
-      009A8F CD 9A EE         [ 4]   95 	call	_BME280_ReadReg
-                                     96 ;	src\bme280.c: 27: if (res != BME280_ID) {
-      009A92 A1 60            [ 1]   97 	cp	a, #0x60
-      009A94 27 03            [ 1]   98 	jreq	00102$
-                                     99 ;	src\bme280.c: 28: Error();
-                                    100 ;	src\bme280.c: 29: return;
-      009A96 CC 9A 85         [ 2]  101 	jp	_Error
-      009A99                        102 00102$:
-                                    103 ;	src\bme280.c: 32: BME280_WriteReg(BME280_REG_SOFTRESET, BME280_SOFTRESET_VALUE);
-      009A99 4B B6            [ 1]  104 	push	#0xb6
-      009A9B A6 E0            [ 1]  105 	ld	a, #0xe0
-      009A9D CD 9A D9         [ 4]  106 	call	_BME280_WriteReg
-                                    107 ;	src\bme280.c: 33: while (BME280_ReadStatus() & BME280_STATUS_IM_UPDATE);
-      009AA0                        108 00103$:
-      009AA0 CD 9C A2         [ 4]  109 	call	_BME280_ReadStatus
-      009AA3 44               [ 1]  110 	srl	a
-      009AA4 25 FA            [ 1]  111 	jrc	00103$
-                                    112 ;	src\bme280.c: 35: BME280_ReadCoefficients();
-      009AA6 CD 9C AA         [ 4]  113 	call	_BME280_ReadCoefficients
-                                    114 ;	src\bme280.c: 36: BME280_SetStandby(BME280_STBY_1000);
-      009AA9 A6 A0            [ 1]  115 	ld	a, #0xa0
-      009AAB CD 9D 6F         [ 4]  116 	call	_BME280_SetStandby
-                                    117 ;	src\bme280.c: 37: BME280_SetFilter(BME280_FILTER_4);
-      009AAE A6 08            [ 1]  118 	ld	a, #0x08
-      009AB0 CD 9D 89         [ 4]  119 	call	_BME280_SetFilter
-                                    120 ;	src\bme280.c: 38: BME280_SetOversamplingTemper(BME280_OSRS_T_x4);
-      009AB3 A6 60            [ 1]  121 	ld	a, #0x60
-      009AB5 CD 9D A3         [ 4]  122 	call	_BME280_SetOversamplingTemper
-                                    123 ;	src\bme280.c: 39: BME280_SetOversamplingPressure(BME280_OSRS_P_x2);
-      009AB8 A6 08            [ 1]  124 	ld	a, #0x08
-      009ABA CD 9D BD         [ 4]  125 	call	_BME280_SetOversamplingPressure
-                                    126 ;	src\bme280.c: 40: BME280_SetOversamplingHum(BME280_OSRS_H_x1);
-      009ABD A6 01            [ 1]  127 	ld	a, #0x01
-      009ABF CD 9D D7         [ 4]  128 	call	_BME280_SetOversamplingHum
-                                    129 ;	src\bme280.c: 42: value32 = BME280_ReadReg(BME280_REG_CTRL_MEAS);
-      009AC2 A6 F4            [ 1]  130 	ld	a, #0xf4
-      009AC4 CD 9A EE         [ 4]  131 	call	_BME280_ReadReg
-                                    132 ;	src\bme280.c: 43: value32 |= BME280_ReadReg(BME280_REG_CTRL_HUM) << 8;
-      009AC7 A6 F2            [ 1]  133 	ld	a, #0xf2
-      009AC9 CD 9A EE         [ 4]  134 	call	_BME280_ReadReg
-                                    135 ;	src\bme280.c: 56: BME280_SetMode(BME280_MODE_NORMAL);
-      009ACC A6 03            [ 1]  136 	ld	a, #0x03
-      009ACE CD 9D FC         [ 4]  137 	call	_BME280_SetMode
-                                    138 ;	src\bme280.c: 58: LED_ON;
-      009AD1 A6 20            [ 1]  139 	ld	a, #0x20
-      009AD3 AE 50 14         [ 2]  140 	ldw	x, #0x5014
-                                    141 ;	src\bme280.c: 59: }
-      009AD6 CC 8A 8C         [ 2]  142 	jp	_GPIO_WriteLow
-                                    143 ;	src\bme280.c: 61: void BME280_WriteReg(uint8_t iReg, uint8_t iValue) {
+      0095BB                         92 _BME280_Setup:
+                                     93 ;	src\bme280.c: 23: uint8_t res = BME280_ReadReg(BME280_REG_ID);
+      0095BB A6 D0            [ 1]   94 	ld	a, #0xd0
+      0095BD CD 96 1C         [ 4]   95 	call	_BME280_ReadReg
+                                     96 ;	src\bme280.c: 28: if (res != BME280_ID) {
+      0095C0 A1 60            [ 1]   97 	cp	a, #0x60
+      0095C2 27 03            [ 1]   98 	jreq	00102$
+                                     99 ;	src\bme280.c: 29: Error();
+                                    100 ;	src\bme280.c: 30: return;
+      0095C4 CC 95 B3         [ 2]  101 	jp	_Error
+      0095C7                        102 00102$:
+                                    103 ;	src\bme280.c: 33: BME280_WriteReg(BME280_REG_SOFTRESET, BME280_SOFTRESET_VALUE);
+      0095C7 4B B6            [ 1]  104 	push	#0xb6
+      0095C9 A6 E0            [ 1]  105 	ld	a, #0xe0
+      0095CB CD 96 07         [ 4]  106 	call	_BME280_WriteReg
+                                    107 ;	src\bme280.c: 34: while (BME280_ReadStatus() & BME280_STATUS_IM_UPDATE);
+      0095CE                        108 00103$:
+      0095CE CD 97 D0         [ 4]  109 	call	_BME280_ReadStatus
+      0095D1 44               [ 1]  110 	srl	a
+      0095D2 25 FA            [ 1]  111 	jrc	00103$
+                                    112 ;	src\bme280.c: 36: BME280_ReadCoefficients();
+      0095D4 CD 97 D8         [ 4]  113 	call	_BME280_ReadCoefficients
+                                    114 ;	src\bme280.c: 37: BME280_SetStandby(BME280_STBY_1000);
+      0095D7 A6 A0            [ 1]  115 	ld	a, #0xa0
+      0095D9 CD 98 9D         [ 4]  116 	call	_BME280_SetStandby
+                                    117 ;	src\bme280.c: 38: BME280_SetFilter(BME280_FILTER_4);
+      0095DC A6 08            [ 1]  118 	ld	a, #0x08
+      0095DE CD 98 B7         [ 4]  119 	call	_BME280_SetFilter
+                                    120 ;	src\bme280.c: 39: BME280_SetOversamplingTemper(BME280_OSRS_T_x4);
+      0095E1 A6 60            [ 1]  121 	ld	a, #0x60
+      0095E3 CD 98 D1         [ 4]  122 	call	_BME280_SetOversamplingTemper
+                                    123 ;	src\bme280.c: 40: BME280_SetOversamplingPressure(BME280_OSRS_P_x2);
+      0095E6 A6 08            [ 1]  124 	ld	a, #0x08
+      0095E8 CD 98 EB         [ 4]  125 	call	_BME280_SetOversamplingPressure
+                                    126 ;	src\bme280.c: 41: BME280_SetOversamplingHum(BME280_OSRS_H_x1);
+      0095EB A6 01            [ 1]  127 	ld	a, #0x01
+      0095ED CD 99 05         [ 4]  128 	call	_BME280_SetOversamplingHum
+                                    129 ;	src\bme280.c: 43: value32 = BME280_ReadReg(BME280_REG_CTRL_MEAS);
+      0095F0 A6 F4            [ 1]  130 	ld	a, #0xf4
+      0095F2 CD 96 1C         [ 4]  131 	call	_BME280_ReadReg
+                                    132 ;	src\bme280.c: 44: value32 |= BME280_ReadReg(BME280_REG_CTRL_HUM) << 8;
+      0095F5 A6 F2            [ 1]  133 	ld	a, #0xf2
+      0095F7 CD 96 1C         [ 4]  134 	call	_BME280_ReadReg
+                                    135 ;	src\bme280.c: 57: BME280_SetMode(BME280_MODE_NORMAL);
+      0095FA A6 03            [ 1]  136 	ld	a, #0x03
+      0095FC CD 99 2A         [ 4]  137 	call	_BME280_SetMode
+                                    138 ;	src\bme280.c: 59: LED_ON;
+      0095FF A6 20            [ 1]  139 	ld	a, #0x20
+      009601 AE 50 14         [ 2]  140 	ldw	x, #0x5014
+                                    141 ;	src\bme280.c: 60: }
+      009604 CC 88 38         [ 2]  142 	jp	_GPIO_WriteLow
+                                    143 ;	src\bme280.c: 62: void BME280_WriteReg(uint8_t iReg, uint8_t iValue) {
                                     144 ;	-----------------------------------------
                                     145 ;	 function BME280_WriteReg
                                     146 ;	-----------------------------------------
-      009AD9                        147 _BME280_WriteReg:
-      009AD9 89               [ 2]  148 	pushw	x
-                                    149 ;	src\bme280.c: 63: iData[0] = iReg;
-      009ADA 96               [ 1]  150 	ldw	x, sp
-      009ADB 5C               [ 1]  151 	incw	x
-      009ADC F7               [ 1]  152 	ld	(x), a
-                                    153 ;	src\bme280.c: 64: iData[1] = iValue;
-      009ADD 7B 05            [ 1]  154 	ld	a, (0x05, sp)
-      009ADF 6B 02            [ 1]  155 	ld	(0x02, sp), a
-                                    156 ;	src\bme280.c: 65: I2C_Send_Bytes((BME280_ADDRESS), sizeof(iData), iData);
-      009AE1 89               [ 2]  157 	pushw	x
-      009AE2 AE 00 02         [ 2]  158 	ldw	x, #0x0002
-      009AE5 A6 EE            [ 1]  159 	ld	a, #0xee
-      009AE7 CD A3 A9         [ 4]  160 	call	_I2C_Send_Bytes
-                                    161 ;	src\bme280.c: 67: }
-      009AEA 85               [ 2]  162 	popw	x
-      009AEB 85               [ 2]  163 	popw	x
-      009AEC 84               [ 1]  164 	pop	a
-      009AED FC               [ 2]  165 	jp	(x)
-                                    166 ;	src\bme280.c: 69: uint8_t BME280_ReadReg(uint8_t iReg) {
+      009607                        147 _BME280_WriteReg:
+      009607 89               [ 2]  148 	pushw	x
+                                    149 ;	src\bme280.c: 64: iData[0] = iReg;
+      009608 96               [ 1]  150 	ldw	x, sp
+      009609 5C               [ 1]  151 	incw	x
+      00960A F7               [ 1]  152 	ld	(x), a
+                                    153 ;	src\bme280.c: 65: iData[1] = iValue;
+      00960B 7B 05            [ 1]  154 	ld	a, (0x05, sp)
+      00960D 6B 02            [ 1]  155 	ld	(0x02, sp), a
+                                    156 ;	src\bme280.c: 66: I2C_Send_Bytes((BME280_ADDRESS), sizeof(iData), iData);
+      00960F 89               [ 2]  157 	pushw	x
+      009610 AE 00 02         [ 2]  158 	ldw	x, #0x0002
+      009613 A6 EE            [ 1]  159 	ld	a, #0xee
+      009615 CD 9E D7         [ 4]  160 	call	_I2C_Send_Bytes
+                                    161 ;	src\bme280.c: 68: }
+      009618 85               [ 2]  162 	popw	x
+      009619 85               [ 2]  163 	popw	x
+      00961A 84               [ 1]  164 	pop	a
+      00961B FC               [ 2]  165 	jp	(x)
+                                    166 ;	src\bme280.c: 70: uint8_t BME280_ReadReg(uint8_t iReg) {
                                     167 ;	-----------------------------------------
                                     168 ;	 function BME280_ReadReg
                                     169 ;	-----------------------------------------
-      009AEE                        170 _BME280_ReadReg:
-      009AEE 88               [ 1]  171 	push	a
-                                    172 ;	src\bme280.c: 71: iData[0] = iReg;
-      009AEF 96               [ 1]  173 	ldw	x, sp
-      009AF0 5C               [ 1]  174 	incw	x
-      009AF1 F7               [ 1]  175 	ld	(x), a
-                                    176 ;	src\bme280.c: 72: I2C_Send_Bytes((BME280_ADDRESS), sizeof(iData), iData);
-      009AF2 89               [ 2]  177 	pushw	x
-      009AF3 5F               [ 1]  178 	clrw	x
-      009AF4 5C               [ 1]  179 	incw	x
-      009AF5 A6 EE            [ 1]  180 	ld	a, #0xee
-      009AF7 CD A3 A9         [ 4]  181 	call	_I2C_Send_Bytes
-                                    182 ;	src\bme280.c: 74: return I2C_Read_Byte(BME280_ADDRESS);
-      009AFA A6 EE            [ 1]  183 	ld	a, #0xee
-      009AFC CD A4 EA         [ 4]  184 	call	_I2C_Read_Byte
-                                    185 ;	src\bme280.c: 76: }
-      009AFF 5B 01            [ 2]  186 	addw	sp, #1
-      009B01 81               [ 4]  187 	ret
-                                    188 ;	src\bme280.c: 78: void BME280_ReadReg_U16(uint8_t iReg, uint16_t *iValue) {
+      00961C                        170 _BME280_ReadReg:
+      00961C 88               [ 1]  171 	push	a
+                                    172 ;	src\bme280.c: 72: iData[0] = iReg;
+      00961D 96               [ 1]  173 	ldw	x, sp
+      00961E 5C               [ 1]  174 	incw	x
+      00961F F7               [ 1]  175 	ld	(x), a
+                                    176 ;	src\bme280.c: 73: I2C_Send_Bytes((BME280_ADDRESS), sizeof(iData), iData);
+      009620 89               [ 2]  177 	pushw	x
+      009621 5F               [ 1]  178 	clrw	x
+      009622 5C               [ 1]  179 	incw	x
+      009623 A6 EE            [ 1]  180 	ld	a, #0xee
+      009625 CD 9E D7         [ 4]  181 	call	_I2C_Send_Bytes
+                                    182 ;	src\bme280.c: 75: return I2C_Read_Byte(BME280_ADDRESS);
+      009628 A6 EE            [ 1]  183 	ld	a, #0xee
+      00962A CD A0 18         [ 4]  184 	call	_I2C_Read_Byte
+                                    185 ;	src\bme280.c: 77: }
+      00962D 5B 01            [ 2]  186 	addw	sp, #1
+      00962F 81               [ 4]  187 	ret
+                                    188 ;	src\bme280.c: 79: void BME280_ReadReg_U16(uint8_t iReg, uint16_t *iValue) {
                                     189 ;	-----------------------------------------
                                     190 ;	 function BME280_ReadReg_U16
                                     191 ;	-----------------------------------------
-      009B02                        192 _BME280_ReadReg_U16:
-      009B02 52 07            [ 2]  193 	sub	sp, #7
-      009B04 1F 06            [ 2]  194 	ldw	(0x06, sp), x
-                                    195 ;	src\bme280.c: 81: iData[0] = iReg;
-      009B06 96               [ 1]  196 	ldw	x, sp
-      009B07 5C               [ 1]  197 	incw	x
-      009B08 F7               [ 1]  198 	ld	(x), a
-                                    199 ;	src\bme280.c: 82: I2C_Send_Bytes((BME280_ADDRESS), sizeof(iData), iData);
-      009B09 89               [ 2]  200 	pushw	x
-      009B0A 5F               [ 1]  201 	clrw	x
-      009B0B 5C               [ 1]  202 	incw	x
-      009B0C A6 EE            [ 1]  203 	ld	a, #0xee
-      009B0E CD A3 A9         [ 4]  204 	call	_I2C_Send_Bytes
-                                    205 ;	src\bme280.c: 84: I2C_Read_Bytes((BME280_ADDRESS), sizeof(iRes), iRes);
-      009B11 96               [ 1]  206 	ldw	x, sp
-      009B12 5C               [ 1]  207 	incw	x
-      009B13 5C               [ 1]  208 	incw	x
-      009B14 89               [ 2]  209 	pushw	x
-      009B15 AE 00 02         [ 2]  210 	ldw	x, #0x0002
-      009B18 A6 EE            [ 1]  211 	ld	a, #0xee
-      009B1A CD A5 E9         [ 4]  212 	call	_I2C_Read_Bytes
-                                    213 ;	src\bme280.c: 86: *iValue = iRes[0];
-      009B1D 7B 02            [ 1]  214 	ld	a, (0x02, sp)
-      009B1F 90 5F            [ 1]  215 	clrw	y
-      009B21 90 97            [ 1]  216 	ld	yl, a
-      009B23 1E 06            [ 2]  217 	ldw	x, (0x06, sp)
-      009B25 FF               [ 2]  218 	ldw	(x), y
-                                    219 ;	src\bme280.c: 87: *iValue <<= 8;
-      009B26 4F               [ 1]  220 	clr	a
-      009B27 90 02            [ 1]  221 	rlwa	y
-      009B29 1E 06            [ 2]  222 	ldw	x, (0x06, sp)
-      009B2B FF               [ 2]  223 	ldw	(x), y
-                                    224 ;	src\bme280.c: 88: *iValue += iRes[1];
-      009B2C 7B 03            [ 1]  225 	ld	a, (0x03, sp)
-      009B2E 5F               [ 1]  226 	clrw	x
-      009B2F 97               [ 1]  227 	ld	xl, a
-      009B30 1F 04            [ 2]  228 	ldw	(0x04, sp), x
-      009B32 72 F9 04         [ 2]  229 	addw	y, (0x04, sp)
-      009B35 1E 06            [ 2]  230 	ldw	x, (0x06, sp)
-      009B37 FF               [ 2]  231 	ldw	(x), y
-                                    232 ;	src\bme280.c: 89: }
-      009B38 5B 07            [ 2]  233 	addw	sp, #7
-      009B3A 81               [ 4]  234 	ret
-                                    235 ;	src\bme280.c: 91: void BME280_ReadReg_LE_U16(uint8_t iReg, uint16_t *iValue) {
+      009630                        192 _BME280_ReadReg_U16:
+      009630 52 07            [ 2]  193 	sub	sp, #7
+      009632 1F 06            [ 2]  194 	ldw	(0x06, sp), x
+                                    195 ;	src\bme280.c: 82: iData[0] = iReg;
+      009634 96               [ 1]  196 	ldw	x, sp
+      009635 5C               [ 1]  197 	incw	x
+      009636 F7               [ 1]  198 	ld	(x), a
+                                    199 ;	src\bme280.c: 83: I2C_Send_Bytes((BME280_ADDRESS), sizeof(iData), iData);
+      009637 89               [ 2]  200 	pushw	x
+      009638 5F               [ 1]  201 	clrw	x
+      009639 5C               [ 1]  202 	incw	x
+      00963A A6 EE            [ 1]  203 	ld	a, #0xee
+      00963C CD 9E D7         [ 4]  204 	call	_I2C_Send_Bytes
+                                    205 ;	src\bme280.c: 85: I2C_Read_Bytes((BME280_ADDRESS), sizeof(iRes), iRes);
+      00963F 96               [ 1]  206 	ldw	x, sp
+      009640 5C               [ 1]  207 	incw	x
+      009641 5C               [ 1]  208 	incw	x
+      009642 89               [ 2]  209 	pushw	x
+      009643 AE 00 02         [ 2]  210 	ldw	x, #0x0002
+      009646 A6 EE            [ 1]  211 	ld	a, #0xee
+      009648 CD A1 17         [ 4]  212 	call	_I2C_Read_Bytes
+                                    213 ;	src\bme280.c: 87: *iValue = iRes[0];
+      00964B 7B 02            [ 1]  214 	ld	a, (0x02, sp)
+      00964D 90 5F            [ 1]  215 	clrw	y
+      00964F 90 97            [ 1]  216 	ld	yl, a
+      009651 1E 06            [ 2]  217 	ldw	x, (0x06, sp)
+      009653 FF               [ 2]  218 	ldw	(x), y
+                                    219 ;	src\bme280.c: 88: *iValue <<= 8;
+      009654 4F               [ 1]  220 	clr	a
+      009655 90 02            [ 1]  221 	rlwa	y
+      009657 1E 06            [ 2]  222 	ldw	x, (0x06, sp)
+      009659 FF               [ 2]  223 	ldw	(x), y
+                                    224 ;	src\bme280.c: 89: *iValue += iRes[1];
+      00965A 7B 03            [ 1]  225 	ld	a, (0x03, sp)
+      00965C 5F               [ 1]  226 	clrw	x
+      00965D 97               [ 1]  227 	ld	xl, a
+      00965E 1F 04            [ 2]  228 	ldw	(0x04, sp), x
+      009660 72 F9 04         [ 2]  229 	addw	y, (0x04, sp)
+      009663 1E 06            [ 2]  230 	ldw	x, (0x06, sp)
+      009665 FF               [ 2]  231 	ldw	(x), y
+                                    232 ;	src\bme280.c: 90: }
+      009666 5B 07            [ 2]  233 	addw	sp, #7
+      009668 81               [ 4]  234 	ret
+                                    235 ;	src\bme280.c: 92: void BME280_ReadReg_LE_U16(uint8_t iReg, uint16_t *iValue) {
                                     236 ;	-----------------------------------------
                                     237 ;	 function BME280_ReadReg_LE_U16
                                     238 ;	-----------------------------------------
-      009B3B                        239 _BME280_ReadReg_LE_U16:
-      009B3B 52 09            [ 2]  240 	sub	sp, #9
-      009B3D 1F 08            [ 2]  241 	ldw	(0x08, sp), x
-                                    242 ;	src\bme280.c: 94: iData[0] = iReg;
-      009B3F 96               [ 1]  243 	ldw	x, sp
-      009B40 5C               [ 1]  244 	incw	x
-      009B41 F7               [ 1]  245 	ld	(x), a
-                                    246 ;	src\bme280.c: 95: I2C_Send_Bytes((BME280_ADDRESS), sizeof(iData), iData);
-      009B42 89               [ 2]  247 	pushw	x
-      009B43 5F               [ 1]  248 	clrw	x
-      009B44 5C               [ 1]  249 	incw	x
-      009B45 A6 EE            [ 1]  250 	ld	a, #0xee
-      009B47 CD A3 A9         [ 4]  251 	call	_I2C_Send_Bytes
-                                    252 ;	src\bme280.c: 97: I2C_Read_Bytes((BME280_ADDRESS), sizeof(iRes), iRes);
-      009B4A 96               [ 1]  253 	ldw	x, sp
-      009B4B 5C               [ 1]  254 	incw	x
-      009B4C 5C               [ 1]  255 	incw	x
-      009B4D 89               [ 2]  256 	pushw	x
-      009B4E AE 00 02         [ 2]  257 	ldw	x, #0x0002
-      009B51 A6 EE            [ 1]  258 	ld	a, #0xee
-      009B53 CD A5 E9         [ 4]  259 	call	_I2C_Read_Bytes
-                                    260 ;	src\bme280.c: 99: *iValue = iRes[0];
-      009B56 7B 02            [ 1]  261 	ld	a, (0x02, sp)
-      009B58 90 5F            [ 1]  262 	clrw	y
-      009B5A 90 97            [ 1]  263 	ld	yl, a
-      009B5C 1E 08            [ 2]  264 	ldw	x, (0x08, sp)
-      009B5E FF               [ 2]  265 	ldw	(x), y
-                                    266 ;	src\bme280.c: 100: *iValue <<= 8;
-      009B5F 4F               [ 1]  267 	clr	a
-      009B60 90 02            [ 1]  268 	rlwa	y
-      009B62 1E 08            [ 2]  269 	ldw	x, (0x08, sp)
-      009B64 FF               [ 2]  270 	ldw	(x), y
-                                    271 ;	src\bme280.c: 101: *iValue += iRes[1];
-      009B65 7B 03            [ 1]  272 	ld	a, (0x03, sp)
-      009B67 5F               [ 1]  273 	clrw	x
-      009B68 97               [ 1]  274 	ld	xl, a
-      009B69 1F 06            [ 2]  275 	ldw	(0x06, sp), x
-      009B6B 72 F9 06         [ 2]  276 	addw	y, (0x06, sp)
-      009B6E 1E 08            [ 2]  277 	ldw	x, (0x08, sp)
-      009B70 FF               [ 2]  278 	ldw	(x), y
-                                    279 ;	src\bme280.c: 102: *(uint16_t *)iValue = be16toword(*(uint16_t *) iValue);
-      009B71 93               [ 1]  280 	ldw	x, y
-      009B72 0F 05            [ 1]  281 	clr	(0x05, sp)
-      009B74 90 9F            [ 1]  282 	ld	a, yl
-      009B76 0F 06            [ 1]  283 	clr	(0x06, sp)
-      009B78 1A 06            [ 1]  284 	or	a, (0x06, sp)
-      009B7A 90 95            [ 1]  285 	ld	yh, a
-      009B7C 9E               [ 1]  286 	ld	a, xh
-      009B7D 1A 05            [ 1]  287 	or	a, (0x05, sp)
-      009B7F 90 97            [ 1]  288 	ld	yl, a
-      009B81 1E 08            [ 2]  289 	ldw	x, (0x08, sp)
-      009B83 FF               [ 2]  290 	ldw	(x), y
-                                    291 ;	src\bme280.c: 103: }
-      009B84 5B 09            [ 2]  292 	addw	sp, #9
-      009B86 81               [ 4]  293 	ret
-                                    294 ;	src\bme280.c: 105: void BME280_ReadReg_U24(uint8_t iReg, uint32_t *iValue) {
+      009669                        239 _BME280_ReadReg_LE_U16:
+      009669 52 09            [ 2]  240 	sub	sp, #9
+      00966B 1F 08            [ 2]  241 	ldw	(0x08, sp), x
+                                    242 ;	src\bme280.c: 95: iData[0] = iReg;
+      00966D 96               [ 1]  243 	ldw	x, sp
+      00966E 5C               [ 1]  244 	incw	x
+      00966F F7               [ 1]  245 	ld	(x), a
+                                    246 ;	src\bme280.c: 96: I2C_Send_Bytes((BME280_ADDRESS), sizeof(iData), iData);
+      009670 89               [ 2]  247 	pushw	x
+      009671 5F               [ 1]  248 	clrw	x
+      009672 5C               [ 1]  249 	incw	x
+      009673 A6 EE            [ 1]  250 	ld	a, #0xee
+      009675 CD 9E D7         [ 4]  251 	call	_I2C_Send_Bytes
+                                    252 ;	src\bme280.c: 98: I2C_Read_Bytes((BME280_ADDRESS), sizeof(iRes), iRes);
+      009678 96               [ 1]  253 	ldw	x, sp
+      009679 5C               [ 1]  254 	incw	x
+      00967A 5C               [ 1]  255 	incw	x
+      00967B 89               [ 2]  256 	pushw	x
+      00967C AE 00 02         [ 2]  257 	ldw	x, #0x0002
+      00967F A6 EE            [ 1]  258 	ld	a, #0xee
+      009681 CD A1 17         [ 4]  259 	call	_I2C_Read_Bytes
+                                    260 ;	src\bme280.c: 100: *iValue = iRes[0];
+      009684 7B 02            [ 1]  261 	ld	a, (0x02, sp)
+      009686 90 5F            [ 1]  262 	clrw	y
+      009688 90 97            [ 1]  263 	ld	yl, a
+      00968A 1E 08            [ 2]  264 	ldw	x, (0x08, sp)
+      00968C FF               [ 2]  265 	ldw	(x), y
+                                    266 ;	src\bme280.c: 101: *iValue <<= 8;
+      00968D 4F               [ 1]  267 	clr	a
+      00968E 90 02            [ 1]  268 	rlwa	y
+      009690 1E 08            [ 2]  269 	ldw	x, (0x08, sp)
+      009692 FF               [ 2]  270 	ldw	(x), y
+                                    271 ;	src\bme280.c: 102: *iValue += iRes[1];
+      009693 7B 03            [ 1]  272 	ld	a, (0x03, sp)
+      009695 5F               [ 1]  273 	clrw	x
+      009696 97               [ 1]  274 	ld	xl, a
+      009697 1F 06            [ 2]  275 	ldw	(0x06, sp), x
+      009699 72 F9 06         [ 2]  276 	addw	y, (0x06, sp)
+      00969C 1E 08            [ 2]  277 	ldw	x, (0x08, sp)
+      00969E FF               [ 2]  278 	ldw	(x), y
+                                    279 ;	src\bme280.c: 103: *(uint16_t *)iValue = be16toword(*(uint16_t *) iValue);
+      00969F 93               [ 1]  280 	ldw	x, y
+      0096A0 0F 05            [ 1]  281 	clr	(0x05, sp)
+      0096A2 90 9F            [ 1]  282 	ld	a, yl
+      0096A4 0F 06            [ 1]  283 	clr	(0x06, sp)
+      0096A6 1A 06            [ 1]  284 	or	a, (0x06, sp)
+      0096A8 90 95            [ 1]  285 	ld	yh, a
+      0096AA 9E               [ 1]  286 	ld	a, xh
+      0096AB 1A 05            [ 1]  287 	or	a, (0x05, sp)
+      0096AD 90 97            [ 1]  288 	ld	yl, a
+      0096AF 1E 08            [ 2]  289 	ldw	x, (0x08, sp)
+      0096B1 FF               [ 2]  290 	ldw	(x), y
+                                    291 ;	src\bme280.c: 104: }
+      0096B2 5B 09            [ 2]  292 	addw	sp, #9
+      0096B4 81               [ 4]  293 	ret
+                                    294 ;	src\bme280.c: 106: void BME280_ReadReg_U24(uint8_t iReg, uint32_t *iValue) {
                                     295 ;	-----------------------------------------
                                     296 ;	 function BME280_ReadReg_U24
                                     297 ;	-----------------------------------------
-      009B87                        298 _BME280_ReadReg_U24:
-      009B87 52 0E            [ 2]  299 	sub	sp, #14
-      009B89 1F 0D            [ 2]  300 	ldw	(0x0d, sp), x
-                                    301 ;	src\bme280.c: 108: iData[0] = iReg;
-      009B8B 96               [ 1]  302 	ldw	x, sp
-      009B8C 5C               [ 1]  303 	incw	x
-      009B8D F7               [ 1]  304 	ld	(x), a
-                                    305 ;	src\bme280.c: 109: I2C_Send_Bytes((BME280_ADDRESS), sizeof(iData), iData);
-      009B8E 89               [ 2]  306 	pushw	x
-      009B8F 5F               [ 1]  307 	clrw	x
-      009B90 5C               [ 1]  308 	incw	x
-      009B91 A6 EE            [ 1]  309 	ld	a, #0xee
-      009B93 CD A3 A9         [ 4]  310 	call	_I2C_Send_Bytes
-                                    311 ;	src\bme280.c: 111: I2C_Read_Bytes((BME280_ADDRESS), sizeof(iRes), iRes);
-      009B96 96               [ 1]  312 	ldw	x, sp
-      009B97 5C               [ 1]  313 	incw	x
-      009B98 5C               [ 1]  314 	incw	x
-      009B99 89               [ 2]  315 	pushw	x
-      009B9A AE 00 03         [ 2]  316 	ldw	x, #0x0003
-      009B9D A6 EE            [ 1]  317 	ld	a, #0xee
-      009B9F CD A5 E9         [ 4]  318 	call	_I2C_Read_Bytes
-                                    319 ;	src\bme280.c: 113: *iValue = iRes[0];
-      009BA2 7B 02            [ 1]  320 	ld	a, (0x02, sp)
-      009BA4 90 5F            [ 1]  321 	clrw	y
-      009BA6 0F 05            [ 1]  322 	clr	(0x05, sp)
-      009BA8 1E 0D            [ 2]  323 	ldw	x, (0x0d, sp)
-      009BAA E7 03            [ 1]  324 	ld	(0x3, x), a
-      009BAC EF 01            [ 2]  325 	ldw	(0x1, x), y
-      009BAE 88               [ 1]  326 	push	a
-      009BAF 7B 06            [ 1]  327 	ld	a, (0x06, sp)
-      009BB1 F7               [ 1]  328 	ld	(x), a
-      009BB2 84               [ 1]  329 	pop	a
-                                    330 ;	src\bme280.c: 114: *iValue <<= 8;
-      009BB3 6B 0B            [ 1]  331 	ld	(0x0b, sp), a
-      009BB5 17 09            [ 2]  332 	ldw	(0x09, sp), y
-      009BB7 0F 0C            [ 1]  333 	clr	(0x0c, sp)
-      009BB9 1E 0D            [ 2]  334 	ldw	x, (0x0d, sp)
-      009BBB 16 0B            [ 2]  335 	ldw	y, (0x0b, sp)
-      009BBD EF 02            [ 2]  336 	ldw	(0x2, x), y
-      009BBF 16 09            [ 2]  337 	ldw	y, (0x09, sp)
-      009BC1 FF               [ 2]  338 	ldw	(x), y
-                                    339 ;	src\bme280.c: 115: *iValue += iRes[1];
-      009BC2 7B 03            [ 1]  340 	ld	a, (0x03, sp)
-      009BC4 90 5F            [ 1]  341 	clrw	y
-      009BC6 5F               [ 1]  342 	clrw	x
-      009BC7 90 97            [ 1]  343 	ld	yl, a
-      009BC9 72 F9 0B         [ 2]  344 	addw	y, (0x0b, sp)
-      009BCC 9F               [ 1]  345 	ld	a, xl
-      009BCD 19 0A            [ 1]  346 	adc	a, (0x0a, sp)
-      009BCF 88               [ 1]  347 	push	a
-      009BD0 9E               [ 1]  348 	ld	a, xh
-      009BD1 19 0A            [ 1]  349 	adc	a, (0x0a, sp)
-      009BD3 6B 06            [ 1]  350 	ld	(0x06, sp), a
-      009BD5 84               [ 1]  351 	pop	a
-      009BD6 1E 0D            [ 2]  352 	ldw	x, (0x0d, sp)
-      009BD8 EF 02            [ 2]  353 	ldw	(0x2, x), y
-      009BDA E7 01            [ 1]  354 	ld	(0x1, x), a
-      009BDC 88               [ 1]  355 	push	a
-      009BDD 7B 06            [ 1]  356 	ld	a, (0x06, sp)
-      009BDF F7               [ 1]  357 	ld	(x), a
-      009BE0 84               [ 1]  358 	pop	a
-                                    359 ;	src\bme280.c: 116: *iValue <<= 8;
-      009BE1 17 0A            [ 2]  360 	ldw	(0x0a, sp), y
-      009BE3 6B 09            [ 1]  361 	ld	(0x09, sp), a
-      009BE5 0F 0C            [ 1]  362 	clr	(0x0c, sp)
-      009BE7 1E 0D            [ 2]  363 	ldw	x, (0x0d, sp)
-      009BE9 16 0B            [ 2]  364 	ldw	y, (0x0b, sp)
-      009BEB EF 02            [ 2]  365 	ldw	(0x2, x), y
-      009BED 16 09            [ 2]  366 	ldw	y, (0x09, sp)
-      009BEF FF               [ 2]  367 	ldw	(x), y
-                                    368 ;	src\bme280.c: 117: *iValue += iRes[2];
-      009BF0 7B 04            [ 1]  369 	ld	a, (0x04, sp)
-      009BF2 90 5F            [ 1]  370 	clrw	y
-      009BF4 5F               [ 1]  371 	clrw	x
-      009BF5 90 97            [ 1]  372 	ld	yl, a
-      009BF7 72 F9 0B         [ 2]  373 	addw	y, (0x0b, sp)
-      009BFA 9F               [ 1]  374 	ld	a, xl
-      009BFB 19 0A            [ 1]  375 	adc	a, (0x0a, sp)
-      009BFD 88               [ 1]  376 	push	a
-      009BFE 9E               [ 1]  377 	ld	a, xh
-      009BFF 19 0A            [ 1]  378 	adc	a, (0x0a, sp)
-      009C01 6B 06            [ 1]  379 	ld	(0x06, sp), a
-      009C03 84               [ 1]  380 	pop	a
-      009C04 1E 0D            [ 2]  381 	ldw	x, (0x0d, sp)
-      009C06 EF 02            [ 2]  382 	ldw	(0x2, x), y
-      009C08 E7 01            [ 1]  383 	ld	(0x1, x), a
-      009C0A 88               [ 1]  384 	push	a
-      009C0B 7B 06            [ 1]  385 	ld	a, (0x06, sp)
-      009C0D F7               [ 1]  386 	ld	(x), a
-      009C0E 84               [ 1]  387 	pop	a
-                                    388 ;	src\bme280.c: 118: *(uint32_t*)iValue &= 0x00FFFFFF;
-      009C0F 6B 0A            [ 1]  389 	ld	(0x0a, sp), a
-      009C11 0F 09            [ 1]  390 	clr	(0x09, sp)
-      009C13 1E 0D            [ 2]  391 	ldw	x, (0x0d, sp)
-      009C15 EF 02            [ 2]  392 	ldw	(0x2, x), y
-      009C17 16 09            [ 2]  393 	ldw	y, (0x09, sp)
-      009C19 FF               [ 2]  394 	ldw	(x), y
-                                    395 ;	src\bme280.c: 119: }
-      009C1A 5B 0E            [ 2]  396 	addw	sp, #14
-      009C1C 81               [ 4]  397 	ret
-                                    398 ;	src\bme280.c: 139: void BME280_ReadReg_S16(uint8_t iReg, int16_t *iValue) {
+      0096B5                        298 _BME280_ReadReg_U24:
+      0096B5 52 0E            [ 2]  299 	sub	sp, #14
+      0096B7 1F 0D            [ 2]  300 	ldw	(0x0d, sp), x
+                                    301 ;	src\bme280.c: 109: iData[0] = iReg;
+      0096B9 96               [ 1]  302 	ldw	x, sp
+      0096BA 5C               [ 1]  303 	incw	x
+      0096BB F7               [ 1]  304 	ld	(x), a
+                                    305 ;	src\bme280.c: 110: I2C_Send_Bytes((BME280_ADDRESS), sizeof(iData), iData);
+      0096BC 89               [ 2]  306 	pushw	x
+      0096BD 5F               [ 1]  307 	clrw	x
+      0096BE 5C               [ 1]  308 	incw	x
+      0096BF A6 EE            [ 1]  309 	ld	a, #0xee
+      0096C1 CD 9E D7         [ 4]  310 	call	_I2C_Send_Bytes
+                                    311 ;	src\bme280.c: 112: I2C_Read_Bytes((BME280_ADDRESS), sizeof(iRes), iRes);
+      0096C4 96               [ 1]  312 	ldw	x, sp
+      0096C5 5C               [ 1]  313 	incw	x
+      0096C6 5C               [ 1]  314 	incw	x
+      0096C7 89               [ 2]  315 	pushw	x
+      0096C8 AE 00 03         [ 2]  316 	ldw	x, #0x0003
+      0096CB A6 EE            [ 1]  317 	ld	a, #0xee
+      0096CD CD A1 17         [ 4]  318 	call	_I2C_Read_Bytes
+                                    319 ;	src\bme280.c: 114: *iValue = iRes[0];
+      0096D0 7B 02            [ 1]  320 	ld	a, (0x02, sp)
+      0096D2 90 5F            [ 1]  321 	clrw	y
+      0096D4 0F 05            [ 1]  322 	clr	(0x05, sp)
+      0096D6 1E 0D            [ 2]  323 	ldw	x, (0x0d, sp)
+      0096D8 E7 03            [ 1]  324 	ld	(0x3, x), a
+      0096DA EF 01            [ 2]  325 	ldw	(0x1, x), y
+      0096DC 88               [ 1]  326 	push	a
+      0096DD 7B 06            [ 1]  327 	ld	a, (0x06, sp)
+      0096DF F7               [ 1]  328 	ld	(x), a
+      0096E0 84               [ 1]  329 	pop	a
+                                    330 ;	src\bme280.c: 115: *iValue <<= 8;
+      0096E1 6B 0B            [ 1]  331 	ld	(0x0b, sp), a
+      0096E3 17 09            [ 2]  332 	ldw	(0x09, sp), y
+      0096E5 0F 0C            [ 1]  333 	clr	(0x0c, sp)
+      0096E7 1E 0D            [ 2]  334 	ldw	x, (0x0d, sp)
+      0096E9 16 0B            [ 2]  335 	ldw	y, (0x0b, sp)
+      0096EB EF 02            [ 2]  336 	ldw	(0x2, x), y
+      0096ED 16 09            [ 2]  337 	ldw	y, (0x09, sp)
+      0096EF FF               [ 2]  338 	ldw	(x), y
+                                    339 ;	src\bme280.c: 116: *iValue += iRes[1];
+      0096F0 7B 03            [ 1]  340 	ld	a, (0x03, sp)
+      0096F2 90 5F            [ 1]  341 	clrw	y
+      0096F4 5F               [ 1]  342 	clrw	x
+      0096F5 90 97            [ 1]  343 	ld	yl, a
+      0096F7 72 F9 0B         [ 2]  344 	addw	y, (0x0b, sp)
+      0096FA 9F               [ 1]  345 	ld	a, xl
+      0096FB 19 0A            [ 1]  346 	adc	a, (0x0a, sp)
+      0096FD 88               [ 1]  347 	push	a
+      0096FE 9E               [ 1]  348 	ld	a, xh
+      0096FF 19 0A            [ 1]  349 	adc	a, (0x0a, sp)
+      009701 6B 06            [ 1]  350 	ld	(0x06, sp), a
+      009703 84               [ 1]  351 	pop	a
+      009704 1E 0D            [ 2]  352 	ldw	x, (0x0d, sp)
+      009706 EF 02            [ 2]  353 	ldw	(0x2, x), y
+      009708 E7 01            [ 1]  354 	ld	(0x1, x), a
+      00970A 88               [ 1]  355 	push	a
+      00970B 7B 06            [ 1]  356 	ld	a, (0x06, sp)
+      00970D F7               [ 1]  357 	ld	(x), a
+      00970E 84               [ 1]  358 	pop	a
+                                    359 ;	src\bme280.c: 117: *iValue <<= 8;
+      00970F 17 0A            [ 2]  360 	ldw	(0x0a, sp), y
+      009711 6B 09            [ 1]  361 	ld	(0x09, sp), a
+      009713 0F 0C            [ 1]  362 	clr	(0x0c, sp)
+      009715 1E 0D            [ 2]  363 	ldw	x, (0x0d, sp)
+      009717 16 0B            [ 2]  364 	ldw	y, (0x0b, sp)
+      009719 EF 02            [ 2]  365 	ldw	(0x2, x), y
+      00971B 16 09            [ 2]  366 	ldw	y, (0x09, sp)
+      00971D FF               [ 2]  367 	ldw	(x), y
+                                    368 ;	src\bme280.c: 118: *iValue += iRes[2];
+      00971E 7B 04            [ 1]  369 	ld	a, (0x04, sp)
+      009720 90 5F            [ 1]  370 	clrw	y
+      009722 5F               [ 1]  371 	clrw	x
+      009723 90 97            [ 1]  372 	ld	yl, a
+      009725 72 F9 0B         [ 2]  373 	addw	y, (0x0b, sp)
+      009728 9F               [ 1]  374 	ld	a, xl
+      009729 19 0A            [ 1]  375 	adc	a, (0x0a, sp)
+      00972B 88               [ 1]  376 	push	a
+      00972C 9E               [ 1]  377 	ld	a, xh
+      00972D 19 0A            [ 1]  378 	adc	a, (0x0a, sp)
+      00972F 6B 06            [ 1]  379 	ld	(0x06, sp), a
+      009731 84               [ 1]  380 	pop	a
+      009732 1E 0D            [ 2]  381 	ldw	x, (0x0d, sp)
+      009734 EF 02            [ 2]  382 	ldw	(0x2, x), y
+      009736 E7 01            [ 1]  383 	ld	(0x1, x), a
+      009738 88               [ 1]  384 	push	a
+      009739 7B 06            [ 1]  385 	ld	a, (0x06, sp)
+      00973B F7               [ 1]  386 	ld	(x), a
+      00973C 84               [ 1]  387 	pop	a
+                                    388 ;	src\bme280.c: 119: *(uint32_t*)iValue &= 0x00FFFFFF;
+      00973D 6B 0A            [ 1]  389 	ld	(0x0a, sp), a
+      00973F 0F 09            [ 1]  390 	clr	(0x09, sp)
+      009741 1E 0D            [ 2]  391 	ldw	x, (0x0d, sp)
+      009743 EF 02            [ 2]  392 	ldw	(0x2, x), y
+      009745 16 09            [ 2]  393 	ldw	y, (0x09, sp)
+      009747 FF               [ 2]  394 	ldw	(x), y
+                                    395 ;	src\bme280.c: 120: }
+      009748 5B 0E            [ 2]  396 	addw	sp, #14
+      00974A 81               [ 4]  397 	ret
+                                    398 ;	src\bme280.c: 140: void BME280_ReadReg_S16(uint8_t iReg, int16_t *iValue) {
                                     399 ;	-----------------------------------------
                                     400 ;	 function BME280_ReadReg_S16
                                     401 ;	-----------------------------------------
-      009C1D                        402 _BME280_ReadReg_S16:
-      009C1D 52 07            [ 2]  403 	sub	sp, #7
-      009C1F 1F 06            [ 2]  404 	ldw	(0x06, sp), x
-                                    405 ;	src\bme280.c: 142: iData[0] = iReg;
-      009C21 96               [ 1]  406 	ldw	x, sp
-      009C22 5C               [ 1]  407 	incw	x
-      009C23 F7               [ 1]  408 	ld	(x), a
-                                    409 ;	src\bme280.c: 143: I2C_Send_Bytes((BME280_ADDRESS), sizeof(iData), iData);
-      009C24 89               [ 2]  410 	pushw	x
-      009C25 5F               [ 1]  411 	clrw	x
-      009C26 5C               [ 1]  412 	incw	x
-      009C27 A6 EE            [ 1]  413 	ld	a, #0xee
-      009C29 CD A3 A9         [ 4]  414 	call	_I2C_Send_Bytes
-                                    415 ;	src\bme280.c: 145: I2C_Read_Bytes((BME280_ADDRESS), sizeof(iRes), iRes);
-      009C2C 96               [ 1]  416 	ldw	x, sp
-      009C2D 5C               [ 1]  417 	incw	x
-      009C2E 5C               [ 1]  418 	incw	x
-      009C2F 89               [ 2]  419 	pushw	x
-      009C30 AE 00 02         [ 2]  420 	ldw	x, #0x0002
-      009C33 A6 EE            [ 1]  421 	ld	a, #0xee
-      009C35 CD A5 E9         [ 4]  422 	call	_I2C_Read_Bytes
-                                    423 ;	src\bme280.c: 147: *iValue = iRes[0];
-      009C38 7B 02            [ 1]  424 	ld	a, (0x02, sp)
-      009C3A 5F               [ 1]  425 	clrw	x
-      009C3B 97               [ 1]  426 	ld	xl, a
-      009C3C 16 06            [ 2]  427 	ldw	y, (0x06, sp)
-      009C3E 90 FF            [ 2]  428 	ldw	(y), x
-                                    429 ;	src\bme280.c: 148: *iValue <<= 8;
-      009C40 4F               [ 1]  430 	clr	a
-      009C41 02               [ 1]  431 	rlwa	x
-      009C42 16 06            [ 2]  432 	ldw	y, (0x06, sp)
-      009C44 90 FF            [ 2]  433 	ldw	(y), x
-                                    434 ;	src\bme280.c: 149: *iValue += iRes[1];
-      009C46 7B 03            [ 1]  435 	ld	a, (0x03, sp)
-      009C48 6B 05            [ 1]  436 	ld	(0x05, sp), a
-      009C4A 0F 04            [ 1]  437 	clr	(0x04, sp)
-      009C4C 72 FB 04         [ 2]  438 	addw	x, (0x04, sp)
-      009C4F 16 06            [ 2]  439 	ldw	y, (0x06, sp)
-      009C51 90 FF            [ 2]  440 	ldw	(y), x
-                                    441 ;	src\bme280.c: 150: }
-      009C53 5B 07            [ 2]  442 	addw	sp, #7
-      009C55 81               [ 4]  443 	ret
-                                    444 ;	src\bme280.c: 152: void BME280_ReadReg_LE_S16(uint8_t iReg, int16_t *iValue) {
+      00974B                        402 _BME280_ReadReg_S16:
+      00974B 52 07            [ 2]  403 	sub	sp, #7
+      00974D 1F 06            [ 2]  404 	ldw	(0x06, sp), x
+                                    405 ;	src\bme280.c: 143: iData[0] = iReg;
+      00974F 96               [ 1]  406 	ldw	x, sp
+      009750 5C               [ 1]  407 	incw	x
+      009751 F7               [ 1]  408 	ld	(x), a
+                                    409 ;	src\bme280.c: 144: I2C_Send_Bytes((BME280_ADDRESS), sizeof(iData), iData);
+      009752 89               [ 2]  410 	pushw	x
+      009753 5F               [ 1]  411 	clrw	x
+      009754 5C               [ 1]  412 	incw	x
+      009755 A6 EE            [ 1]  413 	ld	a, #0xee
+      009757 CD 9E D7         [ 4]  414 	call	_I2C_Send_Bytes
+                                    415 ;	src\bme280.c: 146: I2C_Read_Bytes((BME280_ADDRESS), sizeof(iRes), iRes);
+      00975A 96               [ 1]  416 	ldw	x, sp
+      00975B 5C               [ 1]  417 	incw	x
+      00975C 5C               [ 1]  418 	incw	x
+      00975D 89               [ 2]  419 	pushw	x
+      00975E AE 00 02         [ 2]  420 	ldw	x, #0x0002
+      009761 A6 EE            [ 1]  421 	ld	a, #0xee
+      009763 CD A1 17         [ 4]  422 	call	_I2C_Read_Bytes
+                                    423 ;	src\bme280.c: 148: *iValue = iRes[0];
+      009766 7B 02            [ 1]  424 	ld	a, (0x02, sp)
+      009768 5F               [ 1]  425 	clrw	x
+      009769 97               [ 1]  426 	ld	xl, a
+      00976A 16 06            [ 2]  427 	ldw	y, (0x06, sp)
+      00976C 90 FF            [ 2]  428 	ldw	(y), x
+                                    429 ;	src\bme280.c: 149: *iValue <<= 8;
+      00976E 4F               [ 1]  430 	clr	a
+      00976F 02               [ 1]  431 	rlwa	x
+      009770 16 06            [ 2]  432 	ldw	y, (0x06, sp)
+      009772 90 FF            [ 2]  433 	ldw	(y), x
+                                    434 ;	src\bme280.c: 150: *iValue += iRes[1];
+      009774 7B 03            [ 1]  435 	ld	a, (0x03, sp)
+      009776 6B 05            [ 1]  436 	ld	(0x05, sp), a
+      009778 0F 04            [ 1]  437 	clr	(0x04, sp)
+      00977A 72 FB 04         [ 2]  438 	addw	x, (0x04, sp)
+      00977D 16 06            [ 2]  439 	ldw	y, (0x06, sp)
+      00977F 90 FF            [ 2]  440 	ldw	(y), x
+                                    441 ;	src\bme280.c: 151: }
+      009781 5B 07            [ 2]  442 	addw	sp, #7
+      009783 81               [ 4]  443 	ret
+                                    444 ;	src\bme280.c: 153: void BME280_ReadReg_LE_S16(uint8_t iReg, int16_t *iValue) {
                                     445 ;	-----------------------------------------
                                     446 ;	 function BME280_ReadReg_LE_S16
                                     447 ;	-----------------------------------------
-      009C56                        448 _BME280_ReadReg_LE_S16:
-      009C56 52 09            [ 2]  449 	sub	sp, #9
-      009C58 1F 08            [ 2]  450 	ldw	(0x08, sp), x
-                                    451 ;	src\bme280.c: 155: iData[0] = iReg;
-      009C5A 96               [ 1]  452 	ldw	x, sp
-      009C5B 5C               [ 1]  453 	incw	x
-      009C5C F7               [ 1]  454 	ld	(x), a
-                                    455 ;	src\bme280.c: 156: I2C_Send_Bytes((BME280_ADDRESS), sizeof(iData), iData);
-      009C5D 89               [ 2]  456 	pushw	x
-      009C5E 5F               [ 1]  457 	clrw	x
-      009C5F 5C               [ 1]  458 	incw	x
-      009C60 A6 EE            [ 1]  459 	ld	a, #0xee
-      009C62 CD A3 A9         [ 4]  460 	call	_I2C_Send_Bytes
-                                    461 ;	src\bme280.c: 158: I2C_Read_Bytes((BME280_ADDRESS), sizeof(iRes), iRes);
-      009C65 96               [ 1]  462 	ldw	x, sp
-      009C66 5C               [ 1]  463 	incw	x
-      009C67 5C               [ 1]  464 	incw	x
-      009C68 89               [ 2]  465 	pushw	x
-      009C69 AE 00 02         [ 2]  466 	ldw	x, #0x0002
-      009C6C A6 EE            [ 1]  467 	ld	a, #0xee
-      009C6E CD A5 E9         [ 4]  468 	call	_I2C_Read_Bytes
-                                    469 ;	src\bme280.c: 160: *iValue = iRes[0];
-      009C71 7B 02            [ 1]  470 	ld	a, (0x02, sp)
-      009C73 5F               [ 1]  471 	clrw	x
-      009C74 97               [ 1]  472 	ld	xl, a
-      009C75 16 08            [ 2]  473 	ldw	y, (0x08, sp)
-      009C77 90 FF            [ 2]  474 	ldw	(y), x
-                                    475 ;	src\bme280.c: 161: *iValue <<= 8;
-      009C79 4F               [ 1]  476 	clr	a
-      009C7A 02               [ 1]  477 	rlwa	x
-      009C7B 16 08            [ 2]  478 	ldw	y, (0x08, sp)
-      009C7D 90 FF            [ 2]  479 	ldw	(y), x
-                                    480 ;	src\bme280.c: 162: *iValue += iRes[1];
-      009C7F 7B 03            [ 1]  481 	ld	a, (0x03, sp)
-      009C81 6B 07            [ 1]  482 	ld	(0x07, sp), a
-      009C83 0F 06            [ 1]  483 	clr	(0x06, sp)
-      009C85 72 FB 06         [ 2]  484 	addw	x, (0x06, sp)
-      009C88 16 08            [ 2]  485 	ldw	y, (0x08, sp)
-      009C8A 90 FF            [ 2]  486 	ldw	(y), x
-                                    487 ;	src\bme280.c: 163: *(int16_t *)iValue = be16toword(*(int16_t *) iValue);
-      009C8C 90 93            [ 1]  488 	ldw	y, x
-      009C8E 0F 05            [ 1]  489 	clr	(0x05, sp)
-      009C90 9F               [ 1]  490 	ld	a, xl
-      009C91 0F 06            [ 1]  491 	clr	(0x06, sp)
-      009C93 1A 06            [ 1]  492 	or	a, (0x06, sp)
-      009C95 95               [ 1]  493 	ld	xh, a
-      009C96 90 9E            [ 1]  494 	ld	a, yh
-      009C98 1A 05            [ 1]  495 	or	a, (0x05, sp)
-      009C9A 97               [ 1]  496 	ld	xl, a
-      009C9B 16 08            [ 2]  497 	ldw	y, (0x08, sp)
-      009C9D 90 FF            [ 2]  498 	ldw	(y), x
-                                    499 ;	src\bme280.c: 164: }
-      009C9F 5B 09            [ 2]  500 	addw	sp, #9
-      009CA1 81               [ 4]  501 	ret
-                                    502 ;	src\bme280.c: 166: uint8_t BME280_ReadStatus(void) {
+      009784                        448 _BME280_ReadReg_LE_S16:
+      009784 52 09            [ 2]  449 	sub	sp, #9
+      009786 1F 08            [ 2]  450 	ldw	(0x08, sp), x
+                                    451 ;	src\bme280.c: 156: iData[0] = iReg;
+      009788 96               [ 1]  452 	ldw	x, sp
+      009789 5C               [ 1]  453 	incw	x
+      00978A F7               [ 1]  454 	ld	(x), a
+                                    455 ;	src\bme280.c: 157: I2C_Send_Bytes((BME280_ADDRESS), sizeof(iData), iData);
+      00978B 89               [ 2]  456 	pushw	x
+      00978C 5F               [ 1]  457 	clrw	x
+      00978D 5C               [ 1]  458 	incw	x
+      00978E A6 EE            [ 1]  459 	ld	a, #0xee
+      009790 CD 9E D7         [ 4]  460 	call	_I2C_Send_Bytes
+                                    461 ;	src\bme280.c: 159: I2C_Read_Bytes((BME280_ADDRESS), sizeof(iRes), iRes);
+      009793 96               [ 1]  462 	ldw	x, sp
+      009794 5C               [ 1]  463 	incw	x
+      009795 5C               [ 1]  464 	incw	x
+      009796 89               [ 2]  465 	pushw	x
+      009797 AE 00 02         [ 2]  466 	ldw	x, #0x0002
+      00979A A6 EE            [ 1]  467 	ld	a, #0xee
+      00979C CD A1 17         [ 4]  468 	call	_I2C_Read_Bytes
+                                    469 ;	src\bme280.c: 161: *iValue = iRes[0];
+      00979F 7B 02            [ 1]  470 	ld	a, (0x02, sp)
+      0097A1 5F               [ 1]  471 	clrw	x
+      0097A2 97               [ 1]  472 	ld	xl, a
+      0097A3 16 08            [ 2]  473 	ldw	y, (0x08, sp)
+      0097A5 90 FF            [ 2]  474 	ldw	(y), x
+                                    475 ;	src\bme280.c: 162: *iValue <<= 8;
+      0097A7 4F               [ 1]  476 	clr	a
+      0097A8 02               [ 1]  477 	rlwa	x
+      0097A9 16 08            [ 2]  478 	ldw	y, (0x08, sp)
+      0097AB 90 FF            [ 2]  479 	ldw	(y), x
+                                    480 ;	src\bme280.c: 163: *iValue += iRes[1];
+      0097AD 7B 03            [ 1]  481 	ld	a, (0x03, sp)
+      0097AF 6B 07            [ 1]  482 	ld	(0x07, sp), a
+      0097B1 0F 06            [ 1]  483 	clr	(0x06, sp)
+      0097B3 72 FB 06         [ 2]  484 	addw	x, (0x06, sp)
+      0097B6 16 08            [ 2]  485 	ldw	y, (0x08, sp)
+      0097B8 90 FF            [ 2]  486 	ldw	(y), x
+                                    487 ;	src\bme280.c: 164: *(int16_t *)iValue = be16toword(*(int16_t *) iValue);
+      0097BA 90 93            [ 1]  488 	ldw	y, x
+      0097BC 0F 05            [ 1]  489 	clr	(0x05, sp)
+      0097BE 9F               [ 1]  490 	ld	a, xl
+      0097BF 0F 06            [ 1]  491 	clr	(0x06, sp)
+      0097C1 1A 06            [ 1]  492 	or	a, (0x06, sp)
+      0097C3 95               [ 1]  493 	ld	xh, a
+      0097C4 90 9E            [ 1]  494 	ld	a, yh
+      0097C6 1A 05            [ 1]  495 	or	a, (0x05, sp)
+      0097C8 97               [ 1]  496 	ld	xl, a
+      0097C9 16 08            [ 2]  497 	ldw	y, (0x08, sp)
+      0097CB 90 FF            [ 2]  498 	ldw	(y), x
+                                    499 ;	src\bme280.c: 165: }
+      0097CD 5B 09            [ 2]  500 	addw	sp, #9
+      0097CF 81               [ 4]  501 	ret
+                                    502 ;	src\bme280.c: 167: uint8_t BME280_ReadStatus(void) {
                                     503 ;	-----------------------------------------
                                     504 ;	 function BME280_ReadStatus
                                     505 ;	-----------------------------------------
-      009CA2                        506 _BME280_ReadStatus:
-                                    507 ;	src\bme280.c: 168: uint8_t res = BME280_ReadReg(BME280_REGISTER_STATUS) & 0x09;
-      009CA2 A6 F3            [ 1]  508 	ld	a, #0xf3
-      009CA4 CD 9A EE         [ 4]  509 	call	_BME280_ReadReg
-      009CA7 A4 09            [ 1]  510 	and	a, #0x09
-                                    511 ;	src\bme280.c: 169: return res;
-                                    512 ;	src\bme280.c: 170: }
-      009CA9 81               [ 4]  513 	ret
-                                    514 ;	src\bme280.c: 172: void BME280_ReadCoefficients(void) {
+      0097D0                        506 _BME280_ReadStatus:
+                                    507 ;	src\bme280.c: 169: uint8_t res = BME280_ReadReg(BME280_REGISTER_STATUS) & 0x09;
+      0097D0 A6 F3            [ 1]  508 	ld	a, #0xf3
+      0097D2 CD 96 1C         [ 4]  509 	call	_BME280_ReadReg
+      0097D5 A4 09            [ 1]  510 	and	a, #0x09
+                                    511 ;	src\bme280.c: 170: return res;
+                                    512 ;	src\bme280.c: 171: }
+      0097D7 81               [ 4]  513 	ret
+                                    514 ;	src\bme280.c: 173: void BME280_ReadCoefficients(void) {
                                     515 ;	-----------------------------------------
                                     516 ;	 function BME280_ReadCoefficients
                                     517 ;	-----------------------------------------
-      009CAA                        518 _BME280_ReadCoefficients:
-      009CAA 52 04            [ 2]  519 	sub	sp, #4
-                                    520 ;	src\bme280.c: 173: BME280_ReadReg_LE_U16(BME280_REGISTER_DIG_T1, &CalibData.dig_T1);
-      009CAC AE 00 01         [ 2]  521 	ldw	x, #(_CalibData+0)
-      009CAF A6 88            [ 1]  522 	ld	a, #0x88
-      009CB1 CD 9B 3B         [ 4]  523 	call	_BME280_ReadReg_LE_U16
-                                    524 ;	src\bme280.c: 174: BME280_ReadReg_LE_S16(BME280_REGISTER_DIG_T2, &CalibData.dig_T2);
-      009CB4 AE 00 03         [ 2]  525 	ldw	x, #(_CalibData+2)
-      009CB7 A6 8A            [ 1]  526 	ld	a, #0x8a
-      009CB9 CD 9C 56         [ 4]  527 	call	_BME280_ReadReg_LE_S16
-                                    528 ;	src\bme280.c: 175: BME280_ReadReg_LE_S16(BME280_REGISTER_DIG_T3, &CalibData.dig_T3);
-      009CBC AE 00 05         [ 2]  529 	ldw	x, #(_CalibData+4)
-      009CBF A6 8C            [ 1]  530 	ld	a, #0x8c
-      009CC1 CD 9C 56         [ 4]  531 	call	_BME280_ReadReg_LE_S16
-                                    532 ;	src\bme280.c: 176: BME280_ReadReg_LE_U16(BME280_REGISTER_DIG_P1, &CalibData.dig_P1);
-      009CC4 AE 00 07         [ 2]  533 	ldw	x, #(_CalibData+6)
-      009CC7 A6 8E            [ 1]  534 	ld	a, #0x8e
-      009CC9 CD 9B 3B         [ 4]  535 	call	_BME280_ReadReg_LE_U16
-                                    536 ;	src\bme280.c: 177: BME280_ReadReg_LE_S16(BME280_REGISTER_DIG_P2, &CalibData.dig_P2);
-      009CCC AE 00 09         [ 2]  537 	ldw	x, #(_CalibData+8)
-      009CCF A6 90            [ 1]  538 	ld	a, #0x90
-      009CD1 CD 9C 56         [ 4]  539 	call	_BME280_ReadReg_LE_S16
-                                    540 ;	src\bme280.c: 178: BME280_ReadReg_LE_S16(BME280_REGISTER_DIG_P3, &CalibData.dig_P3);
-      009CD4 AE 00 0B         [ 2]  541 	ldw	x, #(_CalibData+10)
-      009CD7 A6 92            [ 1]  542 	ld	a, #0x92
-      009CD9 CD 9C 56         [ 4]  543 	call	_BME280_ReadReg_LE_S16
-                                    544 ;	src\bme280.c: 179: BME280_ReadReg_LE_S16(BME280_REGISTER_DIG_P4, &CalibData.dig_P4);
-      009CDC AE 00 0D         [ 2]  545 	ldw	x, #(_CalibData+12)
-      009CDF A6 94            [ 1]  546 	ld	a, #0x94
-      009CE1 CD 9C 56         [ 4]  547 	call	_BME280_ReadReg_LE_S16
-                                    548 ;	src\bme280.c: 180: BME280_ReadReg_LE_S16(BME280_REGISTER_DIG_P5, &CalibData.dig_P5);
-      009CE4 AE 00 0F         [ 2]  549 	ldw	x, #(_CalibData+14)
-      009CE7 A6 96            [ 1]  550 	ld	a, #0x96
-      009CE9 CD 9C 56         [ 4]  551 	call	_BME280_ReadReg_LE_S16
-                                    552 ;	src\bme280.c: 181: BME280_ReadReg_LE_S16(BME280_REGISTER_DIG_P6, &CalibData.dig_P6);
-      009CEC AE 00 11         [ 2]  553 	ldw	x, #(_CalibData+16)
-      009CEF A6 98            [ 1]  554 	ld	a, #0x98
-      009CF1 CD 9C 56         [ 4]  555 	call	_BME280_ReadReg_LE_S16
-                                    556 ;	src\bme280.c: 182: BME280_ReadReg_LE_S16(BME280_REGISTER_DIG_P7, &CalibData.dig_P7);
-      009CF4 AE 00 13         [ 2]  557 	ldw	x, #(_CalibData+18)
-      009CF7 A6 9A            [ 1]  558 	ld	a, #0x9a
-      009CF9 CD 9C 56         [ 4]  559 	call	_BME280_ReadReg_LE_S16
-                                    560 ;	src\bme280.c: 183: BME280_ReadReg_LE_S16(BME280_REGISTER_DIG_P8, &CalibData.dig_P8);
-      009CFC AE 00 15         [ 2]  561 	ldw	x, #(_CalibData+20)
-      009CFF A6 9C            [ 1]  562 	ld	a, #0x9c
-      009D01 CD 9C 56         [ 4]  563 	call	_BME280_ReadReg_LE_S16
-                                    564 ;	src\bme280.c: 184: BME280_ReadReg_LE_S16(BME280_REGISTER_DIG_P9, &CalibData.dig_P9);
-      009D04 AE 00 17         [ 2]  565 	ldw	x, #(_CalibData+22)
-      009D07 A6 9E            [ 1]  566 	ld	a, #0x9e
-      009D09 CD 9C 56         [ 4]  567 	call	_BME280_ReadReg_LE_S16
-                                    568 ;	src\bme280.c: 185: CalibData.dig_H1 = BME280_ReadReg(BME280_REGISTER_DIG_H1);
-      009D0C A6 A1            [ 1]  569 	ld	a, #0xa1
-      009D0E CD 9A EE         [ 4]  570 	call	_BME280_ReadReg
-      009D11 C7 00 19         [ 1]  571 	ld	_CalibData+24, a
-                                    572 ;	src\bme280.c: 186: BME280_ReadReg_LE_S16(BME280_REGISTER_DIG_H2, &CalibData.dig_H2);
-      009D14 AE 00 1A         [ 2]  573 	ldw	x, #(_CalibData+25)
-      009D17 A6 E1            [ 1]  574 	ld	a, #0xe1
-      009D19 CD 9C 56         [ 4]  575 	call	_BME280_ReadReg_LE_S16
-                                    576 ;	src\bme280.c: 187: CalibData.dig_H3 = BME280_ReadReg(BME280_REGISTER_DIG_H3);
-      009D1C A6 E3            [ 1]  577 	ld	a, #0xe3
-      009D1E CD 9A EE         [ 4]  578 	call	_BME280_ReadReg
-      009D21 C7 00 1C         [ 1]  579 	ld	_CalibData+27, a
-                                    580 ;	src\bme280.c: 188: CalibData.dig_H4 = (BME280_ReadReg(BME280_REGISTER_DIG_H4) << 4) | (BME280_ReadReg(BME280_REGISTER_DIG_H4+1) & 0xF);
-      009D24 A6 E4            [ 1]  581 	ld	a, #0xe4
-      009D26 CD 9A EE         [ 4]  582 	call	_BME280_ReadReg
-      009D29 5F               [ 1]  583 	clrw	x
-      009D2A 97               [ 1]  584 	ld	xl, a
-      009D2B 58               [ 2]  585 	sllw	x
-      009D2C 58               [ 2]  586 	sllw	x
-      009D2D 58               [ 2]  587 	sllw	x
-      009D2E 58               [ 2]  588 	sllw	x
-      009D2F 1F 01            [ 2]  589 	ldw	(0x01, sp), x
-      009D31 A6 E5            [ 1]  590 	ld	a, #0xe5
-      009D33 CD 9A EE         [ 4]  591 	call	_BME280_ReadReg
-      009D36 A4 0F            [ 1]  592 	and	a, #0x0f
-      009D38 6B 04            [ 1]  593 	ld	(0x04, sp), a
-      009D3A 7B 01            [ 1]  594 	ld	a, (0x01, sp)
-      009D3C 95               [ 1]  595 	ld	xh, a
-      009D3D 7B 02            [ 1]  596 	ld	a, (0x02, sp)
-      009D3F 1A 04            [ 1]  597 	or	a, (0x04, sp)
-      009D41 97               [ 1]  598 	ld	xl, a
-      009D42 CF 00 1D         [ 2]  599 	ldw	_CalibData+28, x
-                                    600 ;	src\bme280.c: 189: CalibData.dig_H5 = (BME280_ReadReg(BME280_REGISTER_DIG_H5+1) << 4) | (BME280_ReadReg(BME280_REGISTER_DIG_H5) >> 4);
-      009D45 A6 E6            [ 1]  601 	ld	a, #0xe6
-      009D47 CD 9A EE         [ 4]  602 	call	_BME280_ReadReg
-      009D4A 5F               [ 1]  603 	clrw	x
-      009D4B 97               [ 1]  604 	ld	xl, a
-      009D4C 58               [ 2]  605 	sllw	x
-      009D4D 58               [ 2]  606 	sllw	x
-      009D4E 58               [ 2]  607 	sllw	x
-      009D4F 58               [ 2]  608 	sllw	x
-      009D50 1F 03            [ 2]  609 	ldw	(0x03, sp), x
-      009D52 A6 E5            [ 1]  610 	ld	a, #0xe5
-      009D54 CD 9A EE         [ 4]  611 	call	_BME280_ReadReg
-      009D57 4E               [ 1]  612 	swap	a
-      009D58 A4 0F            [ 1]  613 	and	a, #0x0f
-      009D5A 5F               [ 1]  614 	clrw	x
-      009D5B 1A 04            [ 1]  615 	or	a, (0x04, sp)
-      009D5D 02               [ 1]  616 	rlwa	x
-      009D5E 1A 03            [ 1]  617 	or	a, (0x03, sp)
-      009D60 95               [ 1]  618 	ld	xh, a
-      009D61 CF 00 1F         [ 2]  619 	ldw	_CalibData+30, x
-                                    620 ;	src\bme280.c: 190: CalibData.dig_H6 = (int8_t)BME280_ReadReg(BME280_REGISTER_DIG_H6);
-      009D64 A6 E7            [ 1]  621 	ld	a, #0xe7
-      009D66 CD 9A EE         [ 4]  622 	call	_BME280_ReadReg
-      009D69 C7 00 21         [ 1]  623 	ld	_CalibData+32, a
-                                    624 ;	src\bme280.c: 230: }
-      009D6C 5B 04            [ 2]  625 	addw	sp, #4
-      009D6E 81               [ 4]  626 	ret
-                                    627 ;	src\bme280.c: 232: void BME280_SetStandby(uint8_t tsb) {
+      0097D8                        518 _BME280_ReadCoefficients:
+      0097D8 52 04            [ 2]  519 	sub	sp, #4
+                                    520 ;	src\bme280.c: 174: BME280_ReadReg_LE_U16(BME280_REGISTER_DIG_T1, &CalibData.dig_T1);
+      0097DA AE 00 01         [ 2]  521 	ldw	x, #(_CalibData+0)
+      0097DD A6 88            [ 1]  522 	ld	a, #0x88
+      0097DF CD 96 69         [ 4]  523 	call	_BME280_ReadReg_LE_U16
+                                    524 ;	src\bme280.c: 175: BME280_ReadReg_LE_S16(BME280_REGISTER_DIG_T2, &CalibData.dig_T2);
+      0097E2 AE 00 03         [ 2]  525 	ldw	x, #(_CalibData+2)
+      0097E5 A6 8A            [ 1]  526 	ld	a, #0x8a
+      0097E7 CD 97 84         [ 4]  527 	call	_BME280_ReadReg_LE_S16
+                                    528 ;	src\bme280.c: 176: BME280_ReadReg_LE_S16(BME280_REGISTER_DIG_T3, &CalibData.dig_T3);
+      0097EA AE 00 05         [ 2]  529 	ldw	x, #(_CalibData+4)
+      0097ED A6 8C            [ 1]  530 	ld	a, #0x8c
+      0097EF CD 97 84         [ 4]  531 	call	_BME280_ReadReg_LE_S16
+                                    532 ;	src\bme280.c: 177: BME280_ReadReg_LE_U16(BME280_REGISTER_DIG_P1, &CalibData.dig_P1);
+      0097F2 AE 00 07         [ 2]  533 	ldw	x, #(_CalibData+6)
+      0097F5 A6 8E            [ 1]  534 	ld	a, #0x8e
+      0097F7 CD 96 69         [ 4]  535 	call	_BME280_ReadReg_LE_U16
+                                    536 ;	src\bme280.c: 178: BME280_ReadReg_LE_S16(BME280_REGISTER_DIG_P2, &CalibData.dig_P2);
+      0097FA AE 00 09         [ 2]  537 	ldw	x, #(_CalibData+8)
+      0097FD A6 90            [ 1]  538 	ld	a, #0x90
+      0097FF CD 97 84         [ 4]  539 	call	_BME280_ReadReg_LE_S16
+                                    540 ;	src\bme280.c: 179: BME280_ReadReg_LE_S16(BME280_REGISTER_DIG_P3, &CalibData.dig_P3);
+      009802 AE 00 0B         [ 2]  541 	ldw	x, #(_CalibData+10)
+      009805 A6 92            [ 1]  542 	ld	a, #0x92
+      009807 CD 97 84         [ 4]  543 	call	_BME280_ReadReg_LE_S16
+                                    544 ;	src\bme280.c: 180: BME280_ReadReg_LE_S16(BME280_REGISTER_DIG_P4, &CalibData.dig_P4);
+      00980A AE 00 0D         [ 2]  545 	ldw	x, #(_CalibData+12)
+      00980D A6 94            [ 1]  546 	ld	a, #0x94
+      00980F CD 97 84         [ 4]  547 	call	_BME280_ReadReg_LE_S16
+                                    548 ;	src\bme280.c: 181: BME280_ReadReg_LE_S16(BME280_REGISTER_DIG_P5, &CalibData.dig_P5);
+      009812 AE 00 0F         [ 2]  549 	ldw	x, #(_CalibData+14)
+      009815 A6 96            [ 1]  550 	ld	a, #0x96
+      009817 CD 97 84         [ 4]  551 	call	_BME280_ReadReg_LE_S16
+                                    552 ;	src\bme280.c: 182: BME280_ReadReg_LE_S16(BME280_REGISTER_DIG_P6, &CalibData.dig_P6);
+      00981A AE 00 11         [ 2]  553 	ldw	x, #(_CalibData+16)
+      00981D A6 98            [ 1]  554 	ld	a, #0x98
+      00981F CD 97 84         [ 4]  555 	call	_BME280_ReadReg_LE_S16
+                                    556 ;	src\bme280.c: 183: BME280_ReadReg_LE_S16(BME280_REGISTER_DIG_P7, &CalibData.dig_P7);
+      009822 AE 00 13         [ 2]  557 	ldw	x, #(_CalibData+18)
+      009825 A6 9A            [ 1]  558 	ld	a, #0x9a
+      009827 CD 97 84         [ 4]  559 	call	_BME280_ReadReg_LE_S16
+                                    560 ;	src\bme280.c: 184: BME280_ReadReg_LE_S16(BME280_REGISTER_DIG_P8, &CalibData.dig_P8);
+      00982A AE 00 15         [ 2]  561 	ldw	x, #(_CalibData+20)
+      00982D A6 9C            [ 1]  562 	ld	a, #0x9c
+      00982F CD 97 84         [ 4]  563 	call	_BME280_ReadReg_LE_S16
+                                    564 ;	src\bme280.c: 185: BME280_ReadReg_LE_S16(BME280_REGISTER_DIG_P9, &CalibData.dig_P9);
+      009832 AE 00 17         [ 2]  565 	ldw	x, #(_CalibData+22)
+      009835 A6 9E            [ 1]  566 	ld	a, #0x9e
+      009837 CD 97 84         [ 4]  567 	call	_BME280_ReadReg_LE_S16
+                                    568 ;	src\bme280.c: 186: CalibData.dig_H1 = BME280_ReadReg(BME280_REGISTER_DIG_H1);
+      00983A A6 A1            [ 1]  569 	ld	a, #0xa1
+      00983C CD 96 1C         [ 4]  570 	call	_BME280_ReadReg
+      00983F C7 00 19         [ 1]  571 	ld	_CalibData+24, a
+                                    572 ;	src\bme280.c: 187: BME280_ReadReg_LE_S16(BME280_REGISTER_DIG_H2, &CalibData.dig_H2);
+      009842 AE 00 1A         [ 2]  573 	ldw	x, #(_CalibData+25)
+      009845 A6 E1            [ 1]  574 	ld	a, #0xe1
+      009847 CD 97 84         [ 4]  575 	call	_BME280_ReadReg_LE_S16
+                                    576 ;	src\bme280.c: 188: CalibData.dig_H3 = BME280_ReadReg(BME280_REGISTER_DIG_H3);
+      00984A A6 E3            [ 1]  577 	ld	a, #0xe3
+      00984C CD 96 1C         [ 4]  578 	call	_BME280_ReadReg
+      00984F C7 00 1C         [ 1]  579 	ld	_CalibData+27, a
+                                    580 ;	src\bme280.c: 189: CalibData.dig_H4 = (BME280_ReadReg(BME280_REGISTER_DIG_H4) << 4) | (BME280_ReadReg(BME280_REGISTER_DIG_H4+1) & 0xF);
+      009852 A6 E4            [ 1]  581 	ld	a, #0xe4
+      009854 CD 96 1C         [ 4]  582 	call	_BME280_ReadReg
+      009857 5F               [ 1]  583 	clrw	x
+      009858 97               [ 1]  584 	ld	xl, a
+      009859 58               [ 2]  585 	sllw	x
+      00985A 58               [ 2]  586 	sllw	x
+      00985B 58               [ 2]  587 	sllw	x
+      00985C 58               [ 2]  588 	sllw	x
+      00985D 1F 01            [ 2]  589 	ldw	(0x01, sp), x
+      00985F A6 E5            [ 1]  590 	ld	a, #0xe5
+      009861 CD 96 1C         [ 4]  591 	call	_BME280_ReadReg
+      009864 A4 0F            [ 1]  592 	and	a, #0x0f
+      009866 6B 04            [ 1]  593 	ld	(0x04, sp), a
+      009868 7B 01            [ 1]  594 	ld	a, (0x01, sp)
+      00986A 95               [ 1]  595 	ld	xh, a
+      00986B 7B 02            [ 1]  596 	ld	a, (0x02, sp)
+      00986D 1A 04            [ 1]  597 	or	a, (0x04, sp)
+      00986F 97               [ 1]  598 	ld	xl, a
+      009870 CF 00 1D         [ 2]  599 	ldw	_CalibData+28, x
+                                    600 ;	src\bme280.c: 190: CalibData.dig_H5 = (BME280_ReadReg(BME280_REGISTER_DIG_H5+1) << 4) | (BME280_ReadReg(BME280_REGISTER_DIG_H5) >> 4);
+      009873 A6 E6            [ 1]  601 	ld	a, #0xe6
+      009875 CD 96 1C         [ 4]  602 	call	_BME280_ReadReg
+      009878 5F               [ 1]  603 	clrw	x
+      009879 97               [ 1]  604 	ld	xl, a
+      00987A 58               [ 2]  605 	sllw	x
+      00987B 58               [ 2]  606 	sllw	x
+      00987C 58               [ 2]  607 	sllw	x
+      00987D 58               [ 2]  608 	sllw	x
+      00987E 1F 03            [ 2]  609 	ldw	(0x03, sp), x
+      009880 A6 E5            [ 1]  610 	ld	a, #0xe5
+      009882 CD 96 1C         [ 4]  611 	call	_BME280_ReadReg
+      009885 4E               [ 1]  612 	swap	a
+      009886 A4 0F            [ 1]  613 	and	a, #0x0f
+      009888 5F               [ 1]  614 	clrw	x
+      009889 1A 04            [ 1]  615 	or	a, (0x04, sp)
+      00988B 02               [ 1]  616 	rlwa	x
+      00988C 1A 03            [ 1]  617 	or	a, (0x03, sp)
+      00988E 95               [ 1]  618 	ld	xh, a
+      00988F CF 00 1F         [ 2]  619 	ldw	_CalibData+30, x
+                                    620 ;	src\bme280.c: 191: CalibData.dig_H6 = (int8_t)BME280_ReadReg(BME280_REGISTER_DIG_H6);
+      009892 A6 E7            [ 1]  621 	ld	a, #0xe7
+      009894 CD 96 1C         [ 4]  622 	call	_BME280_ReadReg
+      009897 C7 00 21         [ 1]  623 	ld	_CalibData+32, a
+                                    624 ;	src\bme280.c: 231: }
+      00989A 5B 04            [ 2]  625 	addw	sp, #4
+      00989C 81               [ 4]  626 	ret
+                                    627 ;	src\bme280.c: 233: void BME280_SetStandby(uint8_t tsb) {
                                     628 ;	-----------------------------------------
                                     629 ;	 function BME280_SetStandby
                                     630 ;	-----------------------------------------
-      009D6F                        631 _BME280_SetStandby:
-      009D6F 89               [ 2]  632 	pushw	x
-      009D70 6B 02            [ 1]  633 	ld	(0x02, sp), a
-                                    634 ;	src\bme280.c: 234: reg = BME280_ReadReg(BME280_REG_CONFIG) & ~BME280_STBY_MSK;
-      009D72 A6 F5            [ 1]  635 	ld	a, #0xf5
-      009D74 CD 9A EE         [ 4]  636 	call	_BME280_ReadReg
-      009D77 A4 1F            [ 1]  637 	and	a, #0x1f
-      009D79 6B 01            [ 1]  638 	ld	(0x01, sp), a
-                                    639 ;	src\bme280.c: 235: reg |= tsb & BME280_STBY_MSK;
-      009D7B 7B 02            [ 1]  640 	ld	a, (0x02, sp)
-      009D7D A4 E0            [ 1]  641 	and	a, #0xe0
-      009D7F 1A 01            [ 1]  642 	or	a, (0x01, sp)
-                                    643 ;	src\bme280.c: 236: BME280_WriteReg(BME280_REG_CONFIG,reg);
-      009D81 88               [ 1]  644 	push	a
-      009D82 A6 F5            [ 1]  645 	ld	a, #0xf5
-      009D84 CD 9A D9         [ 4]  646 	call	_BME280_WriteReg
-                                    647 ;	src\bme280.c: 237: }
-      009D87 85               [ 2]  648 	popw	x
-      009D88 81               [ 4]  649 	ret
-                                    650 ;	src\bme280.c: 239: void BME280_SetFilter(uint8_t filter) {
+      00989D                        631 _BME280_SetStandby:
+      00989D 89               [ 2]  632 	pushw	x
+      00989E 6B 02            [ 1]  633 	ld	(0x02, sp), a
+                                    634 ;	src\bme280.c: 235: reg = BME280_ReadReg(BME280_REG_CONFIG) & ~BME280_STBY_MSK;
+      0098A0 A6 F5            [ 1]  635 	ld	a, #0xf5
+      0098A2 CD 96 1C         [ 4]  636 	call	_BME280_ReadReg
+      0098A5 A4 1F            [ 1]  637 	and	a, #0x1f
+      0098A7 6B 01            [ 1]  638 	ld	(0x01, sp), a
+                                    639 ;	src\bme280.c: 236: reg |= tsb & BME280_STBY_MSK;
+      0098A9 7B 02            [ 1]  640 	ld	a, (0x02, sp)
+      0098AB A4 E0            [ 1]  641 	and	a, #0xe0
+      0098AD 1A 01            [ 1]  642 	or	a, (0x01, sp)
+                                    643 ;	src\bme280.c: 237: BME280_WriteReg(BME280_REG_CONFIG,reg);
+      0098AF 88               [ 1]  644 	push	a
+      0098B0 A6 F5            [ 1]  645 	ld	a, #0xf5
+      0098B2 CD 96 07         [ 4]  646 	call	_BME280_WriteReg
+                                    647 ;	src\bme280.c: 238: }
+      0098B5 85               [ 2]  648 	popw	x
+      0098B6 81               [ 4]  649 	ret
+                                    650 ;	src\bme280.c: 240: void BME280_SetFilter(uint8_t filter) {
                                     651 ;	-----------------------------------------
                                     652 ;	 function BME280_SetFilter
                                     653 ;	-----------------------------------------
-      009D89                        654 _BME280_SetFilter:
-      009D89 89               [ 2]  655 	pushw	x
-      009D8A 6B 02            [ 1]  656 	ld	(0x02, sp), a
-                                    657 ;	src\bme280.c: 241: reg = BME280_ReadReg(BME280_REG_CONFIG) & ~BME280_FILTER_MSK;
-      009D8C A6 F5            [ 1]  658 	ld	a, #0xf5
-      009D8E CD 9A EE         [ 4]  659 	call	_BME280_ReadReg
-      009D91 A4 E3            [ 1]  660 	and	a, #0xe3
-      009D93 6B 01            [ 1]  661 	ld	(0x01, sp), a
-                                    662 ;	src\bme280.c: 242: reg |= filter & BME280_FILTER_MSK;
-      009D95 7B 02            [ 1]  663 	ld	a, (0x02, sp)
-      009D97 A4 1C            [ 1]  664 	and	a, #0x1c
-      009D99 1A 01            [ 1]  665 	or	a, (0x01, sp)
-                                    666 ;	src\bme280.c: 243: BME280_WriteReg(BME280_REG_CONFIG,reg);
-      009D9B 88               [ 1]  667 	push	a
-      009D9C A6 F5            [ 1]  668 	ld	a, #0xf5
-      009D9E CD 9A D9         [ 4]  669 	call	_BME280_WriteReg
-                                    670 ;	src\bme280.c: 244: }
-      009DA1 85               [ 2]  671 	popw	x
-      009DA2 81               [ 4]  672 	ret
-                                    673 ;	src\bme280.c: 246: void BME280_SetOversamplingTemper(uint8_t osrs) {
+      0098B7                        654 _BME280_SetFilter:
+      0098B7 89               [ 2]  655 	pushw	x
+      0098B8 6B 02            [ 1]  656 	ld	(0x02, sp), a
+                                    657 ;	src\bme280.c: 242: reg = BME280_ReadReg(BME280_REG_CONFIG) & ~BME280_FILTER_MSK;
+      0098BA A6 F5            [ 1]  658 	ld	a, #0xf5
+      0098BC CD 96 1C         [ 4]  659 	call	_BME280_ReadReg
+      0098BF A4 E3            [ 1]  660 	and	a, #0xe3
+      0098C1 6B 01            [ 1]  661 	ld	(0x01, sp), a
+                                    662 ;	src\bme280.c: 243: reg |= filter & BME280_FILTER_MSK;
+      0098C3 7B 02            [ 1]  663 	ld	a, (0x02, sp)
+      0098C5 A4 1C            [ 1]  664 	and	a, #0x1c
+      0098C7 1A 01            [ 1]  665 	or	a, (0x01, sp)
+                                    666 ;	src\bme280.c: 244: BME280_WriteReg(BME280_REG_CONFIG,reg);
+      0098C9 88               [ 1]  667 	push	a
+      0098CA A6 F5            [ 1]  668 	ld	a, #0xf5
+      0098CC CD 96 07         [ 4]  669 	call	_BME280_WriteReg
+                                    670 ;	src\bme280.c: 245: }
+      0098CF 85               [ 2]  671 	popw	x
+      0098D0 81               [ 4]  672 	ret
+                                    673 ;	src\bme280.c: 247: void BME280_SetOversamplingTemper(uint8_t osrs) {
                                     674 ;	-----------------------------------------
                                     675 ;	 function BME280_SetOversamplingTemper
                                     676 ;	-----------------------------------------
-      009DA3                        677 _BME280_SetOversamplingTemper:
-      009DA3 89               [ 2]  678 	pushw	x
-      009DA4 6B 02            [ 1]  679 	ld	(0x02, sp), a
-                                    680 ;	src\bme280.c: 248: reg = BME280_ReadReg(BME280_REG_CTRL_MEAS) & ~BME280_OSRS_T_MSK;
-      009DA6 A6 F4            [ 1]  681 	ld	a, #0xf4
-      009DA8 CD 9A EE         [ 4]  682 	call	_BME280_ReadReg
-      009DAB A4 1F            [ 1]  683 	and	a, #0x1f
-      009DAD 6B 01            [ 1]  684 	ld	(0x01, sp), a
-                                    685 ;	src\bme280.c: 249: reg |= osrs & BME280_OSRS_T_MSK;
-      009DAF 7B 02            [ 1]  686 	ld	a, (0x02, sp)
-      009DB1 A4 E0            [ 1]  687 	and	a, #0xe0
-      009DB3 1A 01            [ 1]  688 	or	a, (0x01, sp)
-                                    689 ;	src\bme280.c: 250: BME280_WriteReg(BME280_REG_CTRL_MEAS,reg);
-      009DB5 88               [ 1]  690 	push	a
-      009DB6 A6 F4            [ 1]  691 	ld	a, #0xf4
-      009DB8 CD 9A D9         [ 4]  692 	call	_BME280_WriteReg
-                                    693 ;	src\bme280.c: 251: }
-      009DBB 85               [ 2]  694 	popw	x
-      009DBC 81               [ 4]  695 	ret
-                                    696 ;	src\bme280.c: 253: void BME280_SetOversamplingPressure(uint8_t osrs) {
+      0098D1                        677 _BME280_SetOversamplingTemper:
+      0098D1 89               [ 2]  678 	pushw	x
+      0098D2 6B 02            [ 1]  679 	ld	(0x02, sp), a
+                                    680 ;	src\bme280.c: 249: reg = BME280_ReadReg(BME280_REG_CTRL_MEAS) & ~BME280_OSRS_T_MSK;
+      0098D4 A6 F4            [ 1]  681 	ld	a, #0xf4
+      0098D6 CD 96 1C         [ 4]  682 	call	_BME280_ReadReg
+      0098D9 A4 1F            [ 1]  683 	and	a, #0x1f
+      0098DB 6B 01            [ 1]  684 	ld	(0x01, sp), a
+                                    685 ;	src\bme280.c: 250: reg |= osrs & BME280_OSRS_T_MSK;
+      0098DD 7B 02            [ 1]  686 	ld	a, (0x02, sp)
+      0098DF A4 E0            [ 1]  687 	and	a, #0xe0
+      0098E1 1A 01            [ 1]  688 	or	a, (0x01, sp)
+                                    689 ;	src\bme280.c: 251: BME280_WriteReg(BME280_REG_CTRL_MEAS,reg);
+      0098E3 88               [ 1]  690 	push	a
+      0098E4 A6 F4            [ 1]  691 	ld	a, #0xf4
+      0098E6 CD 96 07         [ 4]  692 	call	_BME280_WriteReg
+                                    693 ;	src\bme280.c: 252: }
+      0098E9 85               [ 2]  694 	popw	x
+      0098EA 81               [ 4]  695 	ret
+                                    696 ;	src\bme280.c: 254: void BME280_SetOversamplingPressure(uint8_t osrs) {
                                     697 ;	-----------------------------------------
                                     698 ;	 function BME280_SetOversamplingPressure
                                     699 ;	-----------------------------------------
-      009DBD                        700 _BME280_SetOversamplingPressure:
-      009DBD 89               [ 2]  701 	pushw	x
-      009DBE 6B 02            [ 1]  702 	ld	(0x02, sp), a
-                                    703 ;	src\bme280.c: 255: reg = BME280_ReadReg(BME280_REG_CTRL_MEAS) & ~BME280_OSRS_P_MSK;
-      009DC0 A6 F4            [ 1]  704 	ld	a, #0xf4
-      009DC2 CD 9A EE         [ 4]  705 	call	_BME280_ReadReg
-      009DC5 A4 E3            [ 1]  706 	and	a, #0xe3
-      009DC7 6B 01            [ 1]  707 	ld	(0x01, sp), a
-                                    708 ;	src\bme280.c: 256: reg |= osrs & BME280_OSRS_P_MSK;
-      009DC9 7B 02            [ 1]  709 	ld	a, (0x02, sp)
-      009DCB A4 1C            [ 1]  710 	and	a, #0x1c
-      009DCD 1A 01            [ 1]  711 	or	a, (0x01, sp)
-                                    712 ;	src\bme280.c: 257: BME280_WriteReg(BME280_REG_CTRL_MEAS,reg);
-      009DCF 88               [ 1]  713 	push	a
-      009DD0 A6 F4            [ 1]  714 	ld	a, #0xf4
-      009DD2 CD 9A D9         [ 4]  715 	call	_BME280_WriteReg
-                                    716 ;	src\bme280.c: 258: }
-      009DD5 85               [ 2]  717 	popw	x
-      009DD6 81               [ 4]  718 	ret
-                                    719 ;	src\bme280.c: 260: void BME280_SetOversamplingHum(uint8_t osrs) {
+      0098EB                        700 _BME280_SetOversamplingPressure:
+      0098EB 89               [ 2]  701 	pushw	x
+      0098EC 6B 02            [ 1]  702 	ld	(0x02, sp), a
+                                    703 ;	src\bme280.c: 256: reg = BME280_ReadReg(BME280_REG_CTRL_MEAS) & ~BME280_OSRS_P_MSK;
+      0098EE A6 F4            [ 1]  704 	ld	a, #0xf4
+      0098F0 CD 96 1C         [ 4]  705 	call	_BME280_ReadReg
+      0098F3 A4 E3            [ 1]  706 	and	a, #0xe3
+      0098F5 6B 01            [ 1]  707 	ld	(0x01, sp), a
+                                    708 ;	src\bme280.c: 257: reg |= osrs & BME280_OSRS_P_MSK;
+      0098F7 7B 02            [ 1]  709 	ld	a, (0x02, sp)
+      0098F9 A4 1C            [ 1]  710 	and	a, #0x1c
+      0098FB 1A 01            [ 1]  711 	or	a, (0x01, sp)
+                                    712 ;	src\bme280.c: 258: BME280_WriteReg(BME280_REG_CTRL_MEAS,reg);
+      0098FD 88               [ 1]  713 	push	a
+      0098FE A6 F4            [ 1]  714 	ld	a, #0xf4
+      009900 CD 96 07         [ 4]  715 	call	_BME280_WriteReg
+                                    716 ;	src\bme280.c: 259: }
+      009903 85               [ 2]  717 	popw	x
+      009904 81               [ 4]  718 	ret
+                                    719 ;	src\bme280.c: 261: void BME280_SetOversamplingHum(uint8_t osrs) {
                                     720 ;	-----------------------------------------
                                     721 ;	 function BME280_SetOversamplingHum
                                     722 ;	-----------------------------------------
-      009DD7                        723 _BME280_SetOversamplingHum:
-      009DD7 89               [ 2]  724 	pushw	x
-      009DD8 6B 02            [ 1]  725 	ld	(0x02, sp), a
-                                    726 ;	src\bme280.c: 262: reg = BME280_ReadReg(BME280_REG_CTRL_HUM) & ~BME280_OSRS_H_MSK;
-      009DDA A6 F2            [ 1]  727 	ld	a, #0xf2
-      009DDC CD 9A EE         [ 4]  728 	call	_BME280_ReadReg
-      009DDF A4 F8            [ 1]  729 	and	a, #0xf8
-      009DE1 6B 01            [ 1]  730 	ld	(0x01, sp), a
-                                    731 ;	src\bme280.c: 263: reg |= osrs & BME280_OSRS_H_MSK;
-      009DE3 7B 02            [ 1]  732 	ld	a, (0x02, sp)
-      009DE5 A4 07            [ 1]  733 	and	a, #0x07
-      009DE7 1A 01            [ 1]  734 	or	a, (0x01, sp)
-                                    735 ;	src\bme280.c: 264: BME280_WriteReg(BME280_REG_CTRL_HUM,reg);
-      009DE9 88               [ 1]  736 	push	a
-      009DEA A6 F2            [ 1]  737 	ld	a, #0xf2
-      009DEC CD 9A D9         [ 4]  738 	call	_BME280_WriteReg
-                                    739 ;	src\bme280.c: 267: reg = BME280_ReadReg(BME280_REG_CTRL_MEAS);
-      009DEF A6 F4            [ 1]  740 	ld	a, #0xf4
-      009DF1 CD 9A EE         [ 4]  741 	call	_BME280_ReadReg
-                                    742 ;	src\bme280.c: 268: BME280_WriteReg(BME280_REG_CTRL_MEAS,reg);
-      009DF4 88               [ 1]  743 	push	a
-      009DF5 A6 F4            [ 1]  744 	ld	a, #0xf4
-      009DF7 CD 9A D9         [ 4]  745 	call	_BME280_WriteReg
-                                    746 ;	src\bme280.c: 269: }
-      009DFA 85               [ 2]  747 	popw	x
-      009DFB 81               [ 4]  748 	ret
-                                    749 ;	src\bme280.c: 271: void BME280_SetMode(uint8_t mode) {
+      009905                        723 _BME280_SetOversamplingHum:
+      009905 89               [ 2]  724 	pushw	x
+      009906 6B 02            [ 1]  725 	ld	(0x02, sp), a
+                                    726 ;	src\bme280.c: 263: reg = BME280_ReadReg(BME280_REG_CTRL_HUM) & ~BME280_OSRS_H_MSK;
+      009908 A6 F2            [ 1]  727 	ld	a, #0xf2
+      00990A CD 96 1C         [ 4]  728 	call	_BME280_ReadReg
+      00990D A4 F8            [ 1]  729 	and	a, #0xf8
+      00990F 6B 01            [ 1]  730 	ld	(0x01, sp), a
+                                    731 ;	src\bme280.c: 264: reg |= osrs & BME280_OSRS_H_MSK;
+      009911 7B 02            [ 1]  732 	ld	a, (0x02, sp)
+      009913 A4 07            [ 1]  733 	and	a, #0x07
+      009915 1A 01            [ 1]  734 	or	a, (0x01, sp)
+                                    735 ;	src\bme280.c: 265: BME280_WriteReg(BME280_REG_CTRL_HUM,reg);
+      009917 88               [ 1]  736 	push	a
+      009918 A6 F2            [ 1]  737 	ld	a, #0xf2
+      00991A CD 96 07         [ 4]  738 	call	_BME280_WriteReg
+                                    739 ;	src\bme280.c: 268: reg = BME280_ReadReg(BME280_REG_CTRL_MEAS);
+      00991D A6 F4            [ 1]  740 	ld	a, #0xf4
+      00991F CD 96 1C         [ 4]  741 	call	_BME280_ReadReg
+                                    742 ;	src\bme280.c: 269: BME280_WriteReg(BME280_REG_CTRL_MEAS,reg);
+      009922 88               [ 1]  743 	push	a
+      009923 A6 F4            [ 1]  744 	ld	a, #0xf4
+      009925 CD 96 07         [ 4]  745 	call	_BME280_WriteReg
+                                    746 ;	src\bme280.c: 270: }
+      009928 85               [ 2]  747 	popw	x
+      009929 81               [ 4]  748 	ret
+                                    749 ;	src\bme280.c: 272: void BME280_SetMode(uint8_t mode) {
                                     750 ;	-----------------------------------------
                                     751 ;	 function BME280_SetMode
                                     752 ;	-----------------------------------------
-      009DFC                        753 _BME280_SetMode:
-      009DFC 89               [ 2]  754 	pushw	x
-      009DFD 6B 02            [ 1]  755 	ld	(0x02, sp), a
-                                    756 ;	src\bme280.c: 273: reg = BME280_ReadReg(BME280_REG_CTRL_MEAS) & ~BME280_MODE_MSK;
-      009DFF A6 F4            [ 1]  757 	ld	a, #0xf4
-      009E01 CD 9A EE         [ 4]  758 	call	_BME280_ReadReg
-      009E04 A4 FC            [ 1]  759 	and	a, #0xfc
-      009E06 6B 01            [ 1]  760 	ld	(0x01, sp), a
-                                    761 ;	src\bme280.c: 274: reg |= mode & BME280_MODE_MSK;
-      009E08 7B 02            [ 1]  762 	ld	a, (0x02, sp)
-      009E0A A4 03            [ 1]  763 	and	a, #0x03
-      009E0C 1A 01            [ 1]  764 	or	a, (0x01, sp)
-                                    765 ;	src\bme280.c: 275: BME280_WriteReg(BME280_REG_CTRL_MEAS,reg);
-      009E0E 88               [ 1]  766 	push	a
-      009E0F A6 F4            [ 1]  767 	ld	a, #0xf4
-      009E11 CD 9A D9         [ 4]  768 	call	_BME280_WriteReg
-                                    769 ;	src\bme280.c: 276: }
-      009E14 85               [ 2]  770 	popw	x
-      009E15 81               [ 4]  771 	ret
-                                    772 ;	src\bme280.c: 278: float BME280_ReadTemperature(void) {
+      00992A                        753 _BME280_SetMode:
+      00992A 89               [ 2]  754 	pushw	x
+      00992B 6B 02            [ 1]  755 	ld	(0x02, sp), a
+                                    756 ;	src\bme280.c: 274: reg = BME280_ReadReg(BME280_REG_CTRL_MEAS) & ~BME280_MODE_MSK;
+      00992D A6 F4            [ 1]  757 	ld	a, #0xf4
+      00992F CD 96 1C         [ 4]  758 	call	_BME280_ReadReg
+      009932 A4 FC            [ 1]  759 	and	a, #0xfc
+      009934 6B 01            [ 1]  760 	ld	(0x01, sp), a
+                                    761 ;	src\bme280.c: 275: reg |= mode & BME280_MODE_MSK;
+      009936 7B 02            [ 1]  762 	ld	a, (0x02, sp)
+      009938 A4 03            [ 1]  763 	and	a, #0x03
+      00993A 1A 01            [ 1]  764 	or	a, (0x01, sp)
+                                    765 ;	src\bme280.c: 276: BME280_WriteReg(BME280_REG_CTRL_MEAS,reg);
+      00993C 88               [ 1]  766 	push	a
+      00993D A6 F4            [ 1]  767 	ld	a, #0xf4
+      00993F CD 96 07         [ 4]  768 	call	_BME280_WriteReg
+                                    769 ;	src\bme280.c: 277: }
+      009942 85               [ 2]  770 	popw	x
+      009943 81               [ 4]  771 	ret
+                                    772 ;	src\bme280.c: 279: float BME280_ReadTemperature(void) {
                                     773 ;	-----------------------------------------
                                     774 ;	 function BME280_ReadTemperature
                                     775 ;	-----------------------------------------
-      009E16                        776 _BME280_ReadTemperature:
-      009E16 52 10            [ 2]  777 	sub	sp, #16
-                                    778 ;	src\bme280.c: 284: BME280_ReadReg_U24(BME280_REGISTER_TEMPDATA, &temper_raw);
-      009E18 96               [ 1]  779 	ldw	x, sp
-      009E19 5C               [ 1]  780 	incw	x
-      009E1A A6 FA            [ 1]  781 	ld	a, #0xfa
-      009E1C CD 9B 87         [ 4]  782 	call	_BME280_ReadReg_U24
-                                    783 ;	src\bme280.c: 290: temper_raw >>= 4;
-      009E1F 1E 03            [ 2]  784 	ldw	x, (0x03, sp)
-      009E21 16 01            [ 2]  785 	ldw	y, (0x01, sp)
-      009E23 90 57            [ 2]  786 	sraw	y
-      009E25 56               [ 2]  787 	rrcw	x
-      009E26 90 57            [ 2]  788 	sraw	y
-      009E28 56               [ 2]  789 	rrcw	x
-      009E29 90 57            [ 2]  790 	sraw	y
-      009E2B 56               [ 2]  791 	rrcw	x
-      009E2C 90 57            [ 2]  792 	sraw	y
-      009E2E 56               [ 2]  793 	rrcw	x
-      009E2F 1F 03            [ 2]  794 	ldw	(0x03, sp), x
-      009E31 17 01            [ 2]  795 	ldw	(0x01, sp), y
-                                    796 ;	src\bme280.c: 294: val1 = ((((temper_raw>>3) - ((int32_t)CalibData.dig_T1<<1))) * ((int32_t)CalibData.dig_T2)) >> 11;
-      009E33 16 03            [ 2]  797 	ldw	y, (0x03, sp)
-      009E35 1E 01            [ 2]  798 	ldw	x, (0x01, sp)
-      009E37 57               [ 2]  799 	sraw	x
-      009E38 90 56            [ 2]  800 	rrcw	y
-      009E3A 57               [ 2]  801 	sraw	x
-      009E3B 90 56            [ 2]  802 	rrcw	y
-      009E3D 57               [ 2]  803 	sraw	x
-      009E3E 90 56            [ 2]  804 	rrcw	y
-      009E40 1F 05            [ 2]  805 	ldw	(0x05, sp), x
-      009E42 CE 00 01         [ 2]  806 	ldw	x, _CalibData+0
-      009E45 0F 0E            [ 1]  807 	clr	(0x0e, sp)
-      009E47 4F               [ 1]  808 	clr	a
-      009E48 6B 09            [ 1]  809 	ld	(0x09, sp), a
-      009E4A 7B 0E            [ 1]  810 	ld	a, (0x0e, sp)
-      009E4C 58               [ 2]  811 	sllw	x
-      009E4D 49               [ 1]  812 	rlc	a
-      009E4E 09 09            [ 1]  813 	rlc	(0x09, sp)
-      009E50 1F 0B            [ 2]  814 	ldw	(0x0b, sp), x
-      009E52 72 F2 0B         [ 2]  815 	subw	y, (0x0b, sp)
-      009E55 88               [ 1]  816 	push	a
-      009E56 7B 07            [ 1]  817 	ld	a, (0x07, sp)
-      009E58 12 01            [ 1]  818 	sbc	a, (1, sp)
-      009E5A 6B 0F            [ 1]  819 	ld	(0x0f, sp), a
-      009E5C 7B 06            [ 1]  820 	ld	a, (0x06, sp)
-      009E5E 12 0A            [ 1]  821 	sbc	a, (0x0a, sp)
-      009E60 6B 0E            [ 1]  822 	ld	(0x0e, sp), a
-      009E62 84               [ 1]  823 	pop	a
-      009E63 CE 00 03         [ 2]  824 	ldw	x, _CalibData+2
-      009E66 9E               [ 1]  825 	ld	a, xh
-      009E67 49               [ 1]  826 	rlc	a
-      009E68 4F               [ 1]  827 	clr	a
-      009E69 A2 00            [ 1]  828 	sbc	a, #0x00
-      009E6B 6B 0A            [ 1]  829 	ld	(0x0a, sp), a
-      009E6D 6B 09            [ 1]  830 	ld	(0x09, sp), a
-      009E6F 89               [ 2]  831 	pushw	x
-      009E70 1E 0B            [ 2]  832 	ldw	x, (0x0b, sp)
-      009E72 89               [ 2]  833 	pushw	x
-      009E73 90 89            [ 2]  834 	pushw	y
-      009E75 1E 13            [ 2]  835 	ldw	x, (0x13, sp)
-      009E77 89               [ 2]  836 	pushw	x
-      009E78 CD B5 9E         [ 4]  837 	call	__mullong
-      009E7B 5B 08            [ 2]  838 	addw	sp, #8
-      009E7D A6 0B            [ 1]  839 	ld	a, #0x0b
-      009E7F                        840 00103$:
-      009E7F 90 57            [ 2]  841 	sraw	y
-      009E81 56               [ 2]  842 	rrcw	x
-      009E82 4A               [ 1]  843 	dec	a
-      009E83 26 FA            [ 1]  844 	jrne	00103$
-      009E85 1F 07            [ 2]  845 	ldw	(0x07, sp), x
-      009E87 17 05            [ 2]  846 	ldw	(0x05, sp), y
-                                    847 ;	src\bme280.c: 305: val2 = (((((temper_raw>>4) - ((int32_t)CalibData.dig_T1)) * ((temper_raw>>4) - ((int32_t)CalibData.dig_T1)))>>12) * ((int32_t)CalibData.dig_T3)) >> 14;
-      009E89 16 03            [ 2]  848 	ldw	y, (0x03, sp)
-      009E8B 1E 01            [ 2]  849 	ldw	x, (0x01, sp)
-      009E8D 57               [ 2]  850 	sraw	x
-      009E8E 90 56            [ 2]  851 	rrcw	y
-      009E90 57               [ 2]  852 	sraw	x
-      009E91 90 56            [ 2]  853 	rrcw	y
-      009E93 57               [ 2]  854 	sraw	x
-      009E94 90 56            [ 2]  855 	rrcw	y
-      009E96 57               [ 2]  856 	sraw	x
-      009E97 90 56            [ 2]  857 	rrcw	y
-      009E99 1F 09            [ 2]  858 	ldw	(0x09, sp), x
-      009E9B CE 00 01         [ 2]  859 	ldw	x, _CalibData+0
-      009E9E 1F 0F            [ 2]  860 	ldw	(0x0f, sp), x
-      009EA0 5F               [ 1]  861 	clrw	x
-      009EA1 72 F2 0F         [ 2]  862 	subw	y, (0x0f, sp)
-      009EA4 7B 0A            [ 1]  863 	ld	a, (0x0a, sp)
-      009EA6 89               [ 2]  864 	pushw	x
-      009EA7 12 02            [ 1]  865 	sbc	a, (2, sp)
-      009EA9 85               [ 2]  866 	popw	x
-      009EAA 97               [ 1]  867 	ld	xl, a
-      009EAB 7B 09            [ 1]  868 	ld	a, (0x09, sp)
-      009EAD 89               [ 2]  869 	pushw	x
-      009EAE 12 01            [ 1]  870 	sbc	a, (1, sp)
-      009EB0 85               [ 2]  871 	popw	x
-      009EB1 95               [ 1]  872 	ld	xh, a
-      009EB2 90 89            [ 2]  873 	pushw	y
-      009EB4 89               [ 2]  874 	pushw	x
-      009EB5 90 89            [ 2]  875 	pushw	y
-      009EB7 89               [ 2]  876 	pushw	x
-      009EB8 CD B5 9E         [ 4]  877 	call	__mullong
-      009EBB 5B 08            [ 2]  878 	addw	sp, #8
-      009EBD A6 0C            [ 1]  879 	ld	a, #0x0c
-      009EBF                        880 00105$:
-      009EBF 90 57            [ 2]  881 	sraw	y
-      009EC1 56               [ 2]  882 	rrcw	x
-      009EC2 4A               [ 1]  883 	dec	a
-      009EC3 26 FA            [ 1]  884 	jrne	00105$
-      009EC5 1F 0B            [ 2]  885 	ldw	(0x0b, sp), x
-      009EC7 CE 00 05         [ 2]  886 	ldw	x, _CalibData+4
-      009ECA 9E               [ 1]  887 	ld	a, xh
-      009ECB 49               [ 1]  888 	rlc	a
-      009ECC 4F               [ 1]  889 	clr	a
-      009ECD A2 00            [ 1]  890 	sbc	a, #0x00
-      009ECF 6B 0E            [ 1]  891 	ld	(0x0e, sp), a
-      009ED1 6B 0D            [ 1]  892 	ld	(0x0d, sp), a
-      009ED3 89               [ 2]  893 	pushw	x
-      009ED4 1E 0F            [ 2]  894 	ldw	x, (0x0f, sp)
-      009ED6 89               [ 2]  895 	pushw	x
-      009ED7 1E 0F            [ 2]  896 	ldw	x, (0x0f, sp)
-      009ED9 89               [ 2]  897 	pushw	x
-      009EDA 90 89            [ 2]  898 	pushw	y
-      009EDC CD B5 9E         [ 4]  899 	call	__mullong
-      009EDF 5B 08            [ 2]  900 	addw	sp, #8
-      009EE1 51               [ 1]  901 	exgw	x, y
-      009EE2 A6 0E            [ 1]  902 	ld	a, #0x0e
-      009EE4                        903 00107$:
-      009EE4 57               [ 2]  904 	sraw	x
-      009EE5 90 56            [ 2]  905 	rrcw	y
-      009EE7 4A               [ 1]  906 	dec	a
-      009EE8 26 FA            [ 1]  907 	jrne	00107$
-                                    908 ;	src\bme280.c: 314: temper_int = val1 + val2;
-      009EEA 72 F9 07         [ 2]  909 	addw	y, (0x07, sp)
-      009EED 9F               [ 1]  910 	ld	a, xl
-      009EEE 19 06            [ 1]  911 	adc	a, (0x06, sp)
-      009EF0 02               [ 1]  912 	rlwa	x
-      009EF1 19 05            [ 1]  913 	adc	a, (0x05, sp)
-      009EF3 95               [ 1]  914 	ld	xh, a
-      009EF4 90 CF 00 24      [ 2]  915 	ldw	_temper_int+2, y
-      009EF8 CF 00 22         [ 2]  916 	ldw	_temper_int+0, x
-                                    917 ;	src\bme280.c: 320: temper_float = ((temper_int * 5 + 128) >> 8);
-      009EFB CE 00 24         [ 2]  918 	ldw	x, _temper_int+2
-      009EFE 89               [ 2]  919 	pushw	x
-      009EFF CE 00 22         [ 2]  920 	ldw	x, _temper_int+0
-      009F02 89               [ 2]  921 	pushw	x
-      009F03 4B 05            [ 1]  922 	push	#0x05
-      009F05 5F               [ 1]  923 	clrw	x
-      009F06 89               [ 2]  924 	pushw	x
-      009F07 4B 00            [ 1]  925 	push	#0x00
-      009F09 CD B5 9E         [ 4]  926 	call	__mullong
-      009F0C 5B 08            [ 2]  927 	addw	sp, #8
-      009F0E 17 0D            [ 2]  928 	ldw	(0x0d, sp), y
-      009F10 1C 00 80         [ 2]  929 	addw	x, #0x0080
-      009F13 51               [ 1]  930 	exgw	x, y
-      009F14 1E 0D            [ 2]  931 	ldw	x, (0x0d, sp)
-      009F16 24 01            [ 1]  932 	jrnc	00109$
-      009F18 5C               [ 1]  933 	incw	x
-      009F19                        934 00109$:
-      009F19 4F               [ 1]  935 	clr	a
-      009F1A 5D               [ 2]  936 	tnzw	x
-      009F1B 2A 01            [ 1]  937 	jrpl	00110$
-      009F1D 4A               [ 1]  938 	dec	a
-      009F1E                        939 00110$:
-      009F1E 01               [ 1]  940 	rrwa	x
-      009F1F 90 01            [ 1]  941 	rrwa	y
-      009F21 90 89            [ 2]  942 	pushw	y
-      009F23 89               [ 2]  943 	pushw	x
-      009F24 CD AD 98         [ 4]  944 	call	___slong2fs
-      009F27 5B 04            [ 2]  945 	addw	sp, #4
-                                    946 ;	src\bme280.c: 321: temper_float /= 100.0f;
-      009F29 4B 00            [ 1]  947 	push	#0x00
-      009F2B 4B 00            [ 1]  948 	push	#0x00
-      009F2D 4B C8            [ 1]  949 	push	#0xc8
-      009F2F 4B 42            [ 1]  950 	push	#0x42
-      009F31 89               [ 2]  951 	pushw	x
-      009F32 90 89            [ 2]  952 	pushw	y
-      009F34 CD B5 18         [ 4]  953 	call	___fsdiv
-                                    954 ;	src\bme280.c: 323: return temper_float;
-                                    955 ;	src\bme280.c: 324: }
-      009F37 5B 10            [ 2]  956 	addw	sp, #16
-      009F39 81               [ 4]  957 	ret
-                                    958 ;	src\bme280.c: 355: float BME280_ReadHumidity(void) {
+      009944                        776 _BME280_ReadTemperature:
+      009944 52 10            [ 2]  777 	sub	sp, #16
+                                    778 ;	src\bme280.c: 285: BME280_ReadReg_U24(BME280_REGISTER_TEMPDATA, &temper_raw);
+      009946 96               [ 1]  779 	ldw	x, sp
+      009947 5C               [ 1]  780 	incw	x
+      009948 A6 FA            [ 1]  781 	ld	a, #0xfa
+      00994A CD 96 B5         [ 4]  782 	call	_BME280_ReadReg_U24
+                                    783 ;	src\bme280.c: 291: temper_raw >>= 4;
+      00994D 1E 03            [ 2]  784 	ldw	x, (0x03, sp)
+      00994F 16 01            [ 2]  785 	ldw	y, (0x01, sp)
+      009951 90 57            [ 2]  786 	sraw	y
+      009953 56               [ 2]  787 	rrcw	x
+      009954 90 57            [ 2]  788 	sraw	y
+      009956 56               [ 2]  789 	rrcw	x
+      009957 90 57            [ 2]  790 	sraw	y
+      009959 56               [ 2]  791 	rrcw	x
+      00995A 90 57            [ 2]  792 	sraw	y
+      00995C 56               [ 2]  793 	rrcw	x
+      00995D 1F 03            [ 2]  794 	ldw	(0x03, sp), x
+      00995F 17 01            [ 2]  795 	ldw	(0x01, sp), y
+                                    796 ;	src\bme280.c: 295: val1 = ((((temper_raw>>3) - ((int32_t)CalibData.dig_T1<<1))) * ((int32_t)CalibData.dig_T2)) >> 11;
+      009961 16 03            [ 2]  797 	ldw	y, (0x03, sp)
+      009963 1E 01            [ 2]  798 	ldw	x, (0x01, sp)
+      009965 57               [ 2]  799 	sraw	x
+      009966 90 56            [ 2]  800 	rrcw	y
+      009968 57               [ 2]  801 	sraw	x
+      009969 90 56            [ 2]  802 	rrcw	y
+      00996B 57               [ 2]  803 	sraw	x
+      00996C 90 56            [ 2]  804 	rrcw	y
+      00996E 1F 05            [ 2]  805 	ldw	(0x05, sp), x
+      009970 CE 00 01         [ 2]  806 	ldw	x, _CalibData+0
+      009973 0F 0E            [ 1]  807 	clr	(0x0e, sp)
+      009975 4F               [ 1]  808 	clr	a
+      009976 6B 09            [ 1]  809 	ld	(0x09, sp), a
+      009978 7B 0E            [ 1]  810 	ld	a, (0x0e, sp)
+      00997A 58               [ 2]  811 	sllw	x
+      00997B 49               [ 1]  812 	rlc	a
+      00997C 09 09            [ 1]  813 	rlc	(0x09, sp)
+      00997E 1F 0B            [ 2]  814 	ldw	(0x0b, sp), x
+      009980 72 F2 0B         [ 2]  815 	subw	y, (0x0b, sp)
+      009983 88               [ 1]  816 	push	a
+      009984 7B 07            [ 1]  817 	ld	a, (0x07, sp)
+      009986 12 01            [ 1]  818 	sbc	a, (1, sp)
+      009988 6B 0F            [ 1]  819 	ld	(0x0f, sp), a
+      00998A 7B 06            [ 1]  820 	ld	a, (0x06, sp)
+      00998C 12 0A            [ 1]  821 	sbc	a, (0x0a, sp)
+      00998E 6B 0E            [ 1]  822 	ld	(0x0e, sp), a
+      009990 84               [ 1]  823 	pop	a
+      009991 CE 00 03         [ 2]  824 	ldw	x, _CalibData+2
+      009994 9E               [ 1]  825 	ld	a, xh
+      009995 49               [ 1]  826 	rlc	a
+      009996 4F               [ 1]  827 	clr	a
+      009997 A2 00            [ 1]  828 	sbc	a, #0x00
+      009999 6B 0A            [ 1]  829 	ld	(0x0a, sp), a
+      00999B 6B 09            [ 1]  830 	ld	(0x09, sp), a
+      00999D 89               [ 2]  831 	pushw	x
+      00999E 1E 0B            [ 2]  832 	ldw	x, (0x0b, sp)
+      0099A0 89               [ 2]  833 	pushw	x
+      0099A1 90 89            [ 2]  834 	pushw	y
+      0099A3 1E 13            [ 2]  835 	ldw	x, (0x13, sp)
+      0099A5 89               [ 2]  836 	pushw	x
+      0099A6 CD B0 CC         [ 4]  837 	call	__mullong
+      0099A9 5B 08            [ 2]  838 	addw	sp, #8
+      0099AB A6 0B            [ 1]  839 	ld	a, #0x0b
+      0099AD                        840 00103$:
+      0099AD 90 57            [ 2]  841 	sraw	y
+      0099AF 56               [ 2]  842 	rrcw	x
+      0099B0 4A               [ 1]  843 	dec	a
+      0099B1 26 FA            [ 1]  844 	jrne	00103$
+      0099B3 1F 07            [ 2]  845 	ldw	(0x07, sp), x
+      0099B5 17 05            [ 2]  846 	ldw	(0x05, sp), y
+                                    847 ;	src\bme280.c: 306: val2 = (((((temper_raw>>4) - ((int32_t)CalibData.dig_T1)) * ((temper_raw>>4) - ((int32_t)CalibData.dig_T1)))>>12) * ((int32_t)CalibData.dig_T3)) >> 14;
+      0099B7 16 03            [ 2]  848 	ldw	y, (0x03, sp)
+      0099B9 1E 01            [ 2]  849 	ldw	x, (0x01, sp)
+      0099BB 57               [ 2]  850 	sraw	x
+      0099BC 90 56            [ 2]  851 	rrcw	y
+      0099BE 57               [ 2]  852 	sraw	x
+      0099BF 90 56            [ 2]  853 	rrcw	y
+      0099C1 57               [ 2]  854 	sraw	x
+      0099C2 90 56            [ 2]  855 	rrcw	y
+      0099C4 57               [ 2]  856 	sraw	x
+      0099C5 90 56            [ 2]  857 	rrcw	y
+      0099C7 1F 09            [ 2]  858 	ldw	(0x09, sp), x
+      0099C9 CE 00 01         [ 2]  859 	ldw	x, _CalibData+0
+      0099CC 1F 0F            [ 2]  860 	ldw	(0x0f, sp), x
+      0099CE 5F               [ 1]  861 	clrw	x
+      0099CF 72 F2 0F         [ 2]  862 	subw	y, (0x0f, sp)
+      0099D2 7B 0A            [ 1]  863 	ld	a, (0x0a, sp)
+      0099D4 89               [ 2]  864 	pushw	x
+      0099D5 12 02            [ 1]  865 	sbc	a, (2, sp)
+      0099D7 85               [ 2]  866 	popw	x
+      0099D8 97               [ 1]  867 	ld	xl, a
+      0099D9 7B 09            [ 1]  868 	ld	a, (0x09, sp)
+      0099DB 89               [ 2]  869 	pushw	x
+      0099DC 12 01            [ 1]  870 	sbc	a, (1, sp)
+      0099DE 85               [ 2]  871 	popw	x
+      0099DF 95               [ 1]  872 	ld	xh, a
+      0099E0 90 89            [ 2]  873 	pushw	y
+      0099E2 89               [ 2]  874 	pushw	x
+      0099E3 90 89            [ 2]  875 	pushw	y
+      0099E5 89               [ 2]  876 	pushw	x
+      0099E6 CD B0 CC         [ 4]  877 	call	__mullong
+      0099E9 5B 08            [ 2]  878 	addw	sp, #8
+      0099EB A6 0C            [ 1]  879 	ld	a, #0x0c
+      0099ED                        880 00105$:
+      0099ED 90 57            [ 2]  881 	sraw	y
+      0099EF 56               [ 2]  882 	rrcw	x
+      0099F0 4A               [ 1]  883 	dec	a
+      0099F1 26 FA            [ 1]  884 	jrne	00105$
+      0099F3 1F 0B            [ 2]  885 	ldw	(0x0b, sp), x
+      0099F5 CE 00 05         [ 2]  886 	ldw	x, _CalibData+4
+      0099F8 9E               [ 1]  887 	ld	a, xh
+      0099F9 49               [ 1]  888 	rlc	a
+      0099FA 4F               [ 1]  889 	clr	a
+      0099FB A2 00            [ 1]  890 	sbc	a, #0x00
+      0099FD 6B 0E            [ 1]  891 	ld	(0x0e, sp), a
+      0099FF 6B 0D            [ 1]  892 	ld	(0x0d, sp), a
+      009A01 89               [ 2]  893 	pushw	x
+      009A02 1E 0F            [ 2]  894 	ldw	x, (0x0f, sp)
+      009A04 89               [ 2]  895 	pushw	x
+      009A05 1E 0F            [ 2]  896 	ldw	x, (0x0f, sp)
+      009A07 89               [ 2]  897 	pushw	x
+      009A08 90 89            [ 2]  898 	pushw	y
+      009A0A CD B0 CC         [ 4]  899 	call	__mullong
+      009A0D 5B 08            [ 2]  900 	addw	sp, #8
+      009A0F 51               [ 1]  901 	exgw	x, y
+      009A10 A6 0E            [ 1]  902 	ld	a, #0x0e
+      009A12                        903 00107$:
+      009A12 57               [ 2]  904 	sraw	x
+      009A13 90 56            [ 2]  905 	rrcw	y
+      009A15 4A               [ 1]  906 	dec	a
+      009A16 26 FA            [ 1]  907 	jrne	00107$
+                                    908 ;	src\bme280.c: 315: temper_int = val1 + val2;
+      009A18 72 F9 07         [ 2]  909 	addw	y, (0x07, sp)
+      009A1B 9F               [ 1]  910 	ld	a, xl
+      009A1C 19 06            [ 1]  911 	adc	a, (0x06, sp)
+      009A1E 02               [ 1]  912 	rlwa	x
+      009A1F 19 05            [ 1]  913 	adc	a, (0x05, sp)
+      009A21 95               [ 1]  914 	ld	xh, a
+      009A22 90 CF 00 24      [ 2]  915 	ldw	_temper_int+2, y
+      009A26 CF 00 22         [ 2]  916 	ldw	_temper_int+0, x
+                                    917 ;	src\bme280.c: 321: temper_float = ((temper_int * 5 + 128) >> 8);
+      009A29 CE 00 24         [ 2]  918 	ldw	x, _temper_int+2
+      009A2C 89               [ 2]  919 	pushw	x
+      009A2D CE 00 22         [ 2]  920 	ldw	x, _temper_int+0
+      009A30 89               [ 2]  921 	pushw	x
+      009A31 4B 05            [ 1]  922 	push	#0x05
+      009A33 5F               [ 1]  923 	clrw	x
+      009A34 89               [ 2]  924 	pushw	x
+      009A35 4B 00            [ 1]  925 	push	#0x00
+      009A37 CD B0 CC         [ 4]  926 	call	__mullong
+      009A3A 5B 08            [ 2]  927 	addw	sp, #8
+      009A3C 17 0D            [ 2]  928 	ldw	(0x0d, sp), y
+      009A3E 1C 00 80         [ 2]  929 	addw	x, #0x0080
+      009A41 51               [ 1]  930 	exgw	x, y
+      009A42 1E 0D            [ 2]  931 	ldw	x, (0x0d, sp)
+      009A44 24 01            [ 1]  932 	jrnc	00109$
+      009A46 5C               [ 1]  933 	incw	x
+      009A47                        934 00109$:
+      009A47 4F               [ 1]  935 	clr	a
+      009A48 5D               [ 2]  936 	tnzw	x
+      009A49 2A 01            [ 1]  937 	jrpl	00110$
+      009A4B 4A               [ 1]  938 	dec	a
+      009A4C                        939 00110$:
+      009A4C 01               [ 1]  940 	rrwa	x
+      009A4D 90 01            [ 1]  941 	rrwa	y
+      009A4F 90 89            [ 2]  942 	pushw	y
+      009A51 89               [ 2]  943 	pushw	x
+      009A52 CD A8 C6         [ 4]  944 	call	___slong2fs
+      009A55 5B 04            [ 2]  945 	addw	sp, #4
+                                    946 ;	src\bme280.c: 322: temper_float /= 100.0f;
+      009A57 4B 00            [ 1]  947 	push	#0x00
+      009A59 4B 00            [ 1]  948 	push	#0x00
+      009A5B 4B C8            [ 1]  949 	push	#0xc8
+      009A5D 4B 42            [ 1]  950 	push	#0x42
+      009A5F 89               [ 2]  951 	pushw	x
+      009A60 90 89            [ 2]  952 	pushw	y
+      009A62 CD B0 46         [ 4]  953 	call	___fsdiv
+                                    954 ;	src\bme280.c: 324: return temper_float;
+                                    955 ;	src\bme280.c: 325: }
+      009A65 5B 10            [ 2]  956 	addw	sp, #16
+      009A67 81               [ 4]  957 	ret
+                                    958 ;	src\bme280.c: 356: float BME280_ReadHumidity(void) {
                                     959 ;	-----------------------------------------
                                     960 ;	 function BME280_ReadHumidity
                                     961 ;	-----------------------------------------
-      009F3A                        962 _BME280_ReadHumidity:
-      009F3A 52 12            [ 2]  963 	sub	sp, #18
-                                    964 ;	src\bme280.c: 359: BME280_ReadTemperature(); // must be done first to get t_fine
-      009F3C CD 9E 16         [ 4]  965 	call	_BME280_ReadTemperature
-                                    966 ;	src\bme280.c: 360: BME280_ReadReg_S16(BME280_REGISTER_HUMIDDATA, &hum_raw);
-      009F3F 96               [ 1]  967 	ldw	x, sp
-      009F40 5C               [ 1]  968 	incw	x
-      009F41 A6 FD            [ 1]  969 	ld	a, #0xfd
-      009F43 CD 9C 1D         [ 4]  970 	call	_BME280_ReadReg_S16
-                                    971 ;	src\bme280.c: 367: hum_raw_sign = ((int32_t)hum_raw)&0x0000FFFF;
-      009F46 16 01            [ 2]  972 	ldw	y, (0x01, sp)
-      009F48 5F               [ 1]  973 	clrw	x
-      009F49 90 5D            [ 2]  974 	tnzw	y
-      009F4B 2A 01            [ 1]  975 	jrpl	00117$
-      009F4D 5A               [ 2]  976 	decw	x
-      009F4E                        977 00117$:
-      009F4E 0F 10            [ 1]  978 	clr	(0x10, sp)
-      009F50 0F 0F            [ 1]  979 	clr	(0x0f, sp)
-                                    980 ;	src\bme280.c: 368: v_x1_u32r = (temper_int - ((int32_t)76800));
-      009F52 CE 00 24         [ 2]  981 	ldw	x, _temper_int+2
-      009F55 1D 2C 00         [ 2]  982 	subw	x, #0x2c00
-      009F58 1F 05            [ 2]  983 	ldw	(0x05, sp), x
-      009F5A C6 00 23         [ 1]  984 	ld	a, _temper_int+1
-      009F5D A2 01            [ 1]  985 	sbc	a, #0x01
-      009F5F 6B 04            [ 1]  986 	ld	(0x04, sp), a
-      009F61 C6 00 22         [ 1]  987 	ld	a, _temper_int+0
-      009F64 A2 00            [ 1]  988 	sbc	a, #0x00
-                                    989 ;	src\bme280.c: 369: v_x1_u32r = (((((hum_raw_sign << 14) - (((int32_t)CalibData.dig_H4) << 20) - \
-      009F66 88               [ 1]  990 	push	a
-      009F67 1E 10            [ 2]  991 	ldw	x, (0x10, sp)
-      009F69 A6 0E            [ 1]  992 	ld	a, #0x0e
-      009F6B                        993 00118$:
-      009F6B 90 58            [ 2]  994 	sllw	y
-      009F6D 59               [ 2]  995 	rlcw	x
-      009F6E 4A               [ 1]  996 	dec	a
-      009F6F 26 FA            [ 1]  997 	jrne	00118$
-      009F71 1F 0C            [ 2]  998 	ldw	(0x0c, sp), x
-      009F73 84               [ 1]  999 	pop	a
-      009F74 CE 00 1D         [ 2] 1000 	ldw	x, _CalibData+28
-      009F77 1F 09            [ 2] 1001 	ldw	(0x09, sp), x
-      009F79 5F               [ 1] 1002 	clrw	x
-      009F7A 0D 09            [ 1] 1003 	tnz	(0x09, sp)
-      009F7C 2A 01            [ 1] 1004 	jrpl	00120$
-      009F7E 5A               [ 2] 1005 	decw	x
-      009F7F                       1006 00120$:
-      009F7F 88               [ 1] 1007 	push	a
-      009F80 1E 0A            [ 2] 1008 	ldw	x, (0x0a, sp)
-      009F82 0F 13            [ 1] 1009 	clr	(0x13, sp)
-      009F84 0F 12            [ 1] 1010 	clr	(0x12, sp)
-      009F86 A6 04            [ 1] 1011 	ld	a, #0x04
-      009F88                       1012 00121$:
-      009F88 58               [ 2] 1013 	sllw	x
-      009F89 4A               [ 1] 1014 	dec	a
-      009F8A 26 FC            [ 1] 1015 	jrne	00121$
-      009F8C 84               [ 1] 1016 	pop	a
-      009F8D 72 F2 11         [ 2] 1017 	subw	y, (0x11, sp)
-      009F90 17 09            [ 2] 1018 	ldw	(0x09, sp), y
-      009F92 88               [ 1] 1019 	push	a
-      009F93 7B 0D            [ 1] 1020 	ld	a, (0x0d, sp)
-      009F95 89               [ 2] 1021 	pushw	x
-      009F96 12 02            [ 1] 1022 	sbc	a, (2, sp)
-      009F98 85               [ 2] 1023 	popw	x
-      009F99 6B 09            [ 1] 1024 	ld	(0x09, sp), a
-      009F9B 7B 0C            [ 1] 1025 	ld	a, (0x0c, sp)
-      009F9D 89               [ 2] 1026 	pushw	x
-      009F9E 12 01            [ 1] 1027 	sbc	a, (1, sp)
-      009FA0 85               [ 2] 1028 	popw	x
-      009FA1 6B 08            [ 1] 1029 	ld	(0x08, sp), a
-      009FA3 84               [ 1] 1030 	pop	a
-      009FA4 CE 00 1F         [ 2] 1031 	ldw	x, _CalibData+30
-      009FA7 1F 11            [ 2] 1032 	ldw	(0x11, sp), x
-      009FA9 5F               [ 1] 1033 	clrw	x
-      009FAA 0D 11            [ 1] 1034 	tnz	(0x11, sp)
-      009FAC 2A 01            [ 1] 1035 	jrpl	00123$
-      009FAE 5A               [ 2] 1036 	decw	x
-      009FAF                       1037 00123$:
-      009FAF 88               [ 1] 1038 	push	a
-      009FB0 16 06            [ 2] 1039 	ldw	y, (0x06, sp)
-      009FB2 90 89            [ 2] 1040 	pushw	y
-      009FB4 61               [ 1] 1041 	exg	a, yl
-      009FB5 7B 07            [ 1] 1042 	ld	a, (0x07, sp)
-      009FB7 61               [ 1] 1043 	exg	a, yl
-      009FB8 90 89            [ 2] 1044 	pushw	y
-      009FBA 5B 01            [ 2] 1045 	addw	sp, #1
-      009FBC 88               [ 1] 1046 	push	a
-      009FBD 16 16            [ 2] 1047 	ldw	y, (0x16, sp)
-      009FBF 90 89            [ 2] 1048 	pushw	y
-      009FC1 89               [ 2] 1049 	pushw	x
-      009FC2 CD B5 9E         [ 4] 1050 	call	__mullong
-      009FC5 5B 08            [ 2] 1051 	addw	sp, #8
-      009FC7 1F 0E            [ 2] 1052 	ldw	(0x0e, sp), x
-      009FC9 17 0C            [ 2] 1053 	ldw	(0x0c, sp), y
-      009FCB 84               [ 1] 1054 	pop	a
-      009FCC 1E 09            [ 2] 1055 	ldw	x, (0x09, sp)
-      009FCE 72 F0 0D         [ 2] 1056 	subw	x, (0x0d, sp)
-      009FD1 88               [ 1] 1057 	push	a
-      009FD2 7B 09            [ 1] 1058 	ld	a, (0x09, sp)
-      009FD4 12 0D            [ 1] 1059 	sbc	a, (0x0d, sp)
-      009FD6 6B 11            [ 1] 1060 	ld	(0x11, sp), a
-      009FD8 7B 08            [ 1] 1061 	ld	a, (0x08, sp)
-      009FDA 12 0C            [ 1] 1062 	sbc	a, (0x0c, sp)
-      009FDC 6B 10            [ 1] 1063 	ld	(0x10, sp), a
-      009FDE 84               [ 1] 1064 	pop	a
-      009FDF 1C 40 00         [ 2] 1065 	addw	x, #0x4000
-      009FE2 16 0F            [ 2] 1066 	ldw	y, (0x0f, sp)
-      009FE4 24 02            [ 1] 1067 	jrnc	00124$
-      009FE6 90 5C            [ 1] 1068 	incw	y
-      009FE8                       1069 00124$:
-      009FE8 88               [ 1] 1070 	push	a
-      009FE9 A6 0F            [ 1] 1071 	ld	a, #0x0f
-      009FEB                       1072 00125$:
-      009FEB 90 57            [ 2] 1073 	sraw	y
-      009FED 56               [ 2] 1074 	rrcw	x
-      009FEE 4A               [ 1] 1075 	dec	a
-      009FEF 26 FA            [ 1] 1076 	jrne	00125$
-      009FF1 1F 0A            [ 2] 1077 	ldw	(0x0a, sp), x
-      009FF3 17 08            [ 2] 1078 	ldw	(0x08, sp), y
-      009FF5 84               [ 1] 1079 	pop	a
-      009FF6 AE 00 01         [ 2] 1080 	ldw	x, #(_CalibData+0)
-      009FF9 88               [ 1] 1081 	push	a
-      009FFA E6 20            [ 1] 1082 	ld	a, (0x20, x)
-      009FFC 97               [ 1] 1083 	ld	xl, a
-      009FFD 49               [ 1] 1084 	rlc	a
-      009FFE 4F               [ 1] 1085 	clr	a
-      009FFF A2 00            [ 1] 1086 	sbc	a, #0x00
-      00A001 95               [ 1] 1087 	ld	xh, a
-      00A002 6B 11            [ 1] 1088 	ld	(0x11, sp), a
-      00A004 6B 10            [ 1] 1089 	ld	(0x10, sp), a
-      00A006 84               [ 1] 1090 	pop	a
-      00A007 88               [ 1] 1091 	push	a
-      00A008 89               [ 2] 1092 	pushw	x
-      00A009 1E 12            [ 2] 1093 	ldw	x, (0x12, sp)
-      00A00B 89               [ 2] 1094 	pushw	x
-      00A00C 1E 0A            [ 2] 1095 	ldw	x, (0x0a, sp)
-      00A00E 89               [ 2] 1096 	pushw	x
-      00A00F 41               [ 1] 1097 	exg	a, xl
-      00A010 7B 0B            [ 1] 1098 	ld	a, (0x0b, sp)
-      00A012 41               [ 1] 1099 	exg	a, xl
-      00A013 89               [ 2] 1100 	pushw	x
-      00A014 5B 01            [ 2] 1101 	addw	sp, #1
-      00A016 88               [ 1] 1102 	push	a
-      00A017 CD B5 9E         [ 4] 1103 	call	__mullong
-      00A01A 5B 08            [ 2] 1104 	addw	sp, #8
-      00A01C 4F               [ 1] 1105 	clr	a
-      00A01D 90 5D            [ 2] 1106 	tnzw	y
-      00A01F 2A 01            [ 1] 1107 	jrpl	00127$
-      00A021 4A               [ 1] 1108 	dec	a
-      00A022                       1109 00127$:
-      00A022 90 01            [ 1] 1110 	rrwa	y
-      00A024 01               [ 1] 1111 	rrwa	x
-      00A025 84               [ 1] 1112 	pop	a
-      00A026 90 57            [ 2] 1113 	sraw	y
-      00A028 56               [ 2] 1114 	rrcw	x
-      00A029 90 57            [ 2] 1115 	sraw	y
-      00A02B 56               [ 2] 1116 	rrcw	x
-      00A02C 1F 0D            [ 2] 1117 	ldw	(0x0d, sp), x
-      00A02E 17 0B            [ 2] 1118 	ldw	(0x0b, sp), y
-      00A030 AE 00 01         [ 2] 1119 	ldw	x, #(_CalibData+0)
-      00A033 88               [ 1] 1120 	push	a
-      00A034 E6 1B            [ 1] 1121 	ld	a, (0x1b, x)
-      00A036 97               [ 1] 1122 	ld	xl, a
-      00A037 84               [ 1] 1123 	pop	a
-      00A038 02               [ 1] 1124 	rlwa	x
-      00A039 4F               [ 1] 1125 	clr	a
-      00A03A 01               [ 1] 1126 	rrwa	x
-      00A03B 0F 10            [ 1] 1127 	clr	(0x10, sp)
-      00A03D 0F 0F            [ 1] 1128 	clr	(0x0f, sp)
-      00A03F 89               [ 2] 1129 	pushw	x
-      00A040 1E 11            [ 2] 1130 	ldw	x, (0x11, sp)
-      00A042 89               [ 2] 1131 	pushw	x
-      00A043 1E 09            [ 2] 1132 	ldw	x, (0x09, sp)
-      00A045 89               [ 2] 1133 	pushw	x
-      00A046 41               [ 1] 1134 	exg	a, xl
-      00A047 7B 0A            [ 1] 1135 	ld	a, (0x0a, sp)
-      00A049 41               [ 1] 1136 	exg	a, xl
-      00A04A 89               [ 2] 1137 	pushw	x
-      00A04B 5B 01            [ 2] 1138 	addw	sp, #1
-      00A04D 88               [ 1] 1139 	push	a
-      00A04E CD B5 9E         [ 4] 1140 	call	__mullong
-      00A051 5B 08            [ 2] 1141 	addw	sp, #8
-      00A053 A6 0B            [ 1] 1142 	ld	a, #0x0b
-      00A055                       1143 00128$:
-      00A055 90 57            [ 2] 1144 	sraw	y
-      00A057 56               [ 2] 1145 	rrcw	x
-      00A058 4A               [ 1] 1146 	dec	a
-      00A059 26 FA            [ 1] 1147 	jrne	00128$
-      00A05B 17 0F            [ 2] 1148 	ldw	(0x0f, sp), y
-      00A05D 1C 80 00         [ 2] 1149 	addw	x, #0x8000
-      00A060 16 0F            [ 2] 1150 	ldw	y, (0x0f, sp)
-      00A062 24 02            [ 1] 1151 	jrnc	00130$
-      00A064 90 5C            [ 1] 1152 	incw	y
-      00A066                       1153 00130$:
-      00A066 89               [ 2] 1154 	pushw	x
-      00A067 90 89            [ 2] 1155 	pushw	y
-      00A069 1E 11            [ 2] 1156 	ldw	x, (0x11, sp)
-      00A06B 89               [ 2] 1157 	pushw	x
-      00A06C 1E 11            [ 2] 1158 	ldw	x, (0x11, sp)
-      00A06E 89               [ 2] 1159 	pushw	x
-      00A06F CD B5 9E         [ 4] 1160 	call	__mullong
-      00A072 5B 08            [ 2] 1161 	addw	sp, #8
-      00A074 51               [ 1] 1162 	exgw	x, y
-      00A075 4F               [ 1] 1163 	clr	a
-      00A076 5D               [ 2] 1164 	tnzw	x
-      00A077 2A 01            [ 1] 1165 	jrpl	00131$
-      00A079 4A               [ 1] 1166 	dec	a
-      00A07A                       1167 00131$:
-      00A07A 01               [ 1] 1168 	rrwa	x
-      00A07B 90 01            [ 1] 1169 	rrwa	y
-      00A07D 57               [ 2] 1170 	sraw	x
-      00A07E 90 56            [ 2] 1171 	rrcw	y
-      00A080 57               [ 2] 1172 	sraw	x
-      00A081 90 56            [ 2] 1173 	rrcw	y
-      00A083 1C 00 20         [ 2] 1174 	addw	x, #0x0020
-      00A086 1F 0B            [ 2] 1175 	ldw	(0x0b, sp), x
-      00A088 CE 00 1A         [ 2] 1176 	ldw	x, _CalibData+25
-      00A08B 9E               [ 1] 1177 	ld	a, xh
-      00A08C 49               [ 1] 1178 	rlc	a
-      00A08D 4F               [ 1] 1179 	clr	a
-      00A08E A2 00            [ 1] 1180 	sbc	a, #0x00
-      00A090 6B 10            [ 1] 1181 	ld	(0x10, sp), a
-      00A092 6B 0F            [ 1] 1182 	ld	(0x0f, sp), a
-      00A094 89               [ 2] 1183 	pushw	x
-      00A095 1E 11            [ 2] 1184 	ldw	x, (0x11, sp)
-      00A097 89               [ 2] 1185 	pushw	x
-      00A098 90 89            [ 2] 1186 	pushw	y
-      00A09A 1E 11            [ 2] 1187 	ldw	x, (0x11, sp)
-      00A09C 89               [ 2] 1188 	pushw	x
-      00A09D CD B5 9E         [ 4] 1189 	call	__mullong
-      00A0A0 5B 08            [ 2] 1190 	addw	sp, #8
-      00A0A2 17 0F            [ 2] 1191 	ldw	(0x0f, sp), y
-      00A0A4 1C 20 00         [ 2] 1192 	addw	x, #0x2000
-      00A0A7 16 0F            [ 2] 1193 	ldw	y, (0x0f, sp)
-      00A0A9 24 02            [ 1] 1194 	jrnc	00132$
-      00A0AB 90 5C            [ 1] 1195 	incw	y
-      00A0AD                       1196 00132$:
-      00A0AD A6 0E            [ 1] 1197 	ld	a, #0x0e
-      00A0AF                       1198 00133$:
-      00A0AF 90 57            [ 2] 1199 	sraw	y
-      00A0B1 56               [ 2] 1200 	rrcw	x
-      00A0B2 4A               [ 1] 1201 	dec	a
-      00A0B3 26 FA            [ 1] 1202 	jrne	00133$
-      00A0B5 89               [ 2] 1203 	pushw	x
-      00A0B6 90 89            [ 2] 1204 	pushw	y
-      00A0B8 1E 0D            [ 2] 1205 	ldw	x, (0x0d, sp)
-      00A0BA 89               [ 2] 1206 	pushw	x
-      00A0BB 1E 0D            [ 2] 1207 	ldw	x, (0x0d, sp)
-      00A0BD 89               [ 2] 1208 	pushw	x
-      00A0BE CD B5 9E         [ 4] 1209 	call	__mullong
-      00A0C1 5B 08            [ 2] 1210 	addw	sp, #8
-      00A0C3 1F 0D            [ 2] 1211 	ldw	(0x0d, sp), x
-                                   1212 ;	src\bme280.c: 374: v_x1_u32r = (v_x1_u32r - (((((v_x1_u32r >> 15) * (v_x1_u32r >> 15)) >> 7) * \
-      00A0C5 17 0F            [ 2] 1213 	ldw	(0x0f, sp), y
-      00A0C7 1E 0D            [ 2] 1214 	ldw	x, (0x0d, sp)
-      00A0C9 A6 0F            [ 1] 1215 	ld	a, #0x0f
-      00A0CB                       1216 00135$:
-      00A0CB 07 0F            [ 1] 1217 	sra	(0x0f, sp)
-      00A0CD 06 10            [ 1] 1218 	rrc	(0x10, sp)
-      00A0CF 56               [ 2] 1219 	rrcw	x
-      00A0D0 4A               [ 1] 1220 	dec	a
-      00A0D1 26 F8            [ 1] 1221 	jrne	00135$
-      00A0D3 90 89            [ 2] 1222 	pushw	y
-      00A0D5 89               [ 2] 1223 	pushw	x
-      00A0D6 7B 14            [ 1] 1224 	ld	a, (0x14, sp)
-      00A0D8 88               [ 1] 1225 	push	a
-      00A0D9 7B 14            [ 1] 1226 	ld	a, (0x14, sp)
-      00A0DB 88               [ 1] 1227 	push	a
-      00A0DC 89               [ 2] 1228 	pushw	x
-      00A0DD 1E 17            [ 2] 1229 	ldw	x, (0x17, sp)
-      00A0DF 89               [ 2] 1230 	pushw	x
-      00A0E0 CD B5 9E         [ 4] 1231 	call	__mullong
-      00A0E3 5B 08            [ 2] 1232 	addw	sp, #8
-      00A0E5 61               [ 1] 1233 	exg	a, yl
-      00A0E6 6B 12            [ 1] 1234 	ld	(0x12, sp), a
-      00A0E8 61               [ 1] 1235 	exg	a, yl
-      00A0E9 90 9E            [ 1] 1236 	ld	a, yh
-      00A0EB 90 85            [ 2] 1237 	popw	y
-      00A0ED 88               [ 1] 1238 	push	a
-      00A0EE 7B 11            [ 1] 1239 	ld	a, (0x11, sp)
-      00A0F0 6B 09            [ 1] 1240 	ld	(0x09, sp), a
-      00A0F2 84               [ 1] 1241 	pop	a
-      00A0F3 47               [ 1] 1242 	sra	a
-      00A0F4 06 08            [ 1] 1243 	rrc	(0x08, sp)
-      00A0F6 56               [ 2] 1244 	rrcw	x
-      00A0F7 47               [ 1] 1245 	sra	a
-      00A0F8 06 08            [ 1] 1246 	rrc	(0x08, sp)
-      00A0FA 56               [ 2] 1247 	rrcw	x
-      00A0FB 47               [ 1] 1248 	sra	a
-      00A0FC 06 08            [ 1] 1249 	rrc	(0x08, sp)
-      00A0FE 56               [ 2] 1250 	rrcw	x
-      00A0FF 47               [ 1] 1251 	sra	a
-      00A100 06 08            [ 1] 1252 	rrc	(0x08, sp)
-      00A102 56               [ 2] 1253 	rrcw	x
-      00A103 47               [ 1] 1254 	sra	a
-      00A104 06 08            [ 1] 1255 	rrc	(0x08, sp)
-      00A106 56               [ 2] 1256 	rrcw	x
-      00A107 47               [ 1] 1257 	sra	a
-      00A108 06 08            [ 1] 1258 	rrc	(0x08, sp)
-      00A10A 56               [ 2] 1259 	rrcw	x
-      00A10B 47               [ 1] 1260 	sra	a
-      00A10C 06 08            [ 1] 1261 	rrc	(0x08, sp)
-      00A10E 56               [ 2] 1262 	rrcw	x
-      00A10F 1F 09            [ 2] 1263 	ldw	(0x09, sp), x
-      00A111 6B 07            [ 1] 1264 	ld	(0x07, sp), a
-      00A113 C6 00 19         [ 1] 1265 	ld	a, _CalibData+24
-      00A116 5F               [ 1] 1266 	clrw	x
-      00A117 1F 0F            [ 2] 1267 	ldw	(0x0f, sp), x
-      00A119 90 89            [ 2] 1268 	pushw	y
-      00A11B 88               [ 1] 1269 	push	a
-      00A11C 9E               [ 1] 1270 	ld	a, xh
-      00A11D 88               [ 1] 1271 	push	a
-      00A11E 1E 13            [ 2] 1272 	ldw	x, (0x13, sp)
-      00A120 89               [ 2] 1273 	pushw	x
-      00A121 1E 0F            [ 2] 1274 	ldw	x, (0x0f, sp)
-      00A123 89               [ 2] 1275 	pushw	x
-      00A124 1E 0F            [ 2] 1276 	ldw	x, (0x0f, sp)
-      00A126 89               [ 2] 1277 	pushw	x
-      00A127 CD B5 9E         [ 4] 1278 	call	__mullong
-      00A12A 5B 08            [ 2] 1279 	addw	sp, #8
-      00A12C 17 11            [ 2] 1280 	ldw	(0x11, sp), y
-      00A12E 90 85            [ 2] 1281 	popw	y
-      00A130 7B 10            [ 1] 1282 	ld	a, (0x10, sp)
-      00A132 07 0F            [ 1] 1283 	sra	(0x0f, sp)
-      00A134 46               [ 1] 1284 	rrc	a
-      00A135 56               [ 2] 1285 	rrcw	x
-      00A136 07 0F            [ 1] 1286 	sra	(0x0f, sp)
-      00A138 46               [ 1] 1287 	rrc	a
-      00A139 56               [ 2] 1288 	rrcw	x
-      00A13A 07 0F            [ 1] 1289 	sra	(0x0f, sp)
-      00A13C 46               [ 1] 1290 	rrc	a
-      00A13D 56               [ 2] 1291 	rrcw	x
-      00A13E 07 0F            [ 1] 1292 	sra	(0x0f, sp)
-      00A140 46               [ 1] 1293 	rrc	a
-      00A141 56               [ 2] 1294 	rrcw	x
-      00A142 1F 11            [ 2] 1295 	ldw	(0x11, sp), x
-      00A144 1E 0D            [ 2] 1296 	ldw	x, (0x0d, sp)
-      00A146 72 F0 11         [ 2] 1297 	subw	x, (0x11, sp)
-      00A149 88               [ 1] 1298 	push	a
-      00A14A 90 9F            [ 1] 1299 	ld	a, yl
-      00A14C 12 01            [ 1] 1300 	sbc	a, (1, sp)
-      00A14E 90 02            [ 1] 1301 	rlwa	y
-      00A150 12 10            [ 1] 1302 	sbc	a, (0x10, sp)
-      00A152 90 95            [ 1] 1303 	ld	yh, a
-      00A154 84               [ 1] 1304 	pop	a
-      00A155 1F 11            [ 2] 1305 	ldw	(0x11, sp), x
-      00A157 17 0F            [ 2] 1306 	ldw	(0x0f, sp), y
-                                   1307 ;	src\bme280.c: 376: v_x1_u32r = (v_x1_u32r < 0) ? 0 : v_x1_u32r;
-      00A159 0D 0F            [ 1] 1308 	tnz	(0x0f, sp)
-      00A15B 2A 05            [ 1] 1309 	jrpl	00103$
-      00A15D 5F               [ 1] 1310 	clrw	x
-      00A15E 1F 11            [ 2] 1311 	ldw	(0x11, sp), x
-      00A160 1F 0F            [ 2] 1312 	ldw	(0x0f, sp), x
-      00A162                       1313 00103$:
-                                   1314 ;	src\bme280.c: 377: v_x1_u32r = (v_x1_u32r > 419430400) ? 419430400 : v_x1_u32r;
-      00A162 5F               [ 1] 1315 	clrw	x
-      00A163 13 11            [ 2] 1316 	cpw	x, (0x11, sp)
-      00A165 4F               [ 1] 1317 	clr	a
-      00A166 12 10            [ 1] 1318 	sbc	a, (0x10, sp)
-      00A168 A6 19            [ 1] 1319 	ld	a, #0x19
-      00A16A 12 0F            [ 1] 1320 	sbc	a, (0x0f, sp)
-      00A16C 2E 07            [ 1] 1321 	jrsge	00105$
-      00A16E 5F               [ 1] 1322 	clrw	x
-      00A16F 1F 11            [ 2] 1323 	ldw	(0x11, sp), x
-      00A171 AE 19 00         [ 2] 1324 	ldw	x, #0x1900
-      00A174 C5                    1325 	.byte 0xc5
-      00A175                       1326 00105$:
-      00A175 1E 0F            [ 2] 1327 	ldw	x, (0x0f, sp)
-      00A177                       1328 00106$:
-      00A177 16 11            [ 2] 1329 	ldw	y, (0x11, sp)
-                                   1330 ;	src\bme280.c: 378: hum_float = (v_x1_u32r >> 12);
-      00A179 A6 0C            [ 1] 1331 	ld	a, #0x0c
-      00A17B                       1332 00139$:
-      00A17B 57               [ 2] 1333 	sraw	x
-      00A17C 90 56            [ 2] 1334 	rrcw	y
-      00A17E 4A               [ 1] 1335 	dec	a
-      00A17F 26 FA            [ 1] 1336 	jrne	00139$
-      00A181 90 89            [ 2] 1337 	pushw	y
-      00A183 89               [ 2] 1338 	pushw	x
-      00A184 CD AD 98         [ 4] 1339 	call	___slong2fs
-      00A187 5B 04            [ 2] 1340 	addw	sp, #4
-                                   1341 ;	src\bme280.c: 379: hum_float /= 1024.0f;
-      00A189 4B 00            [ 1] 1342 	push	#0x00
-      00A18B 4B 00            [ 1] 1343 	push	#0x00
-      00A18D 4B 80            [ 1] 1344 	push	#0x80
-      00A18F 4B 44            [ 1] 1345 	push	#0x44
-      00A191 89               [ 2] 1346 	pushw	x
-      00A192 90 89            [ 2] 1347 	pushw	y
-      00A194 CD B5 18         [ 4] 1348 	call	___fsdiv
-                                   1349 ;	src\bme280.c: 380: return hum_float;
-                                   1350 ;	src\bme280.c: 381: }
-      00A197 5B 12            [ 2] 1351 	addw	sp, #18
-      00A199 81               [ 4] 1352 	ret
+      009A68                        962 _BME280_ReadHumidity:
+      009A68 52 12            [ 2]  963 	sub	sp, #18
+                                    964 ;	src\bme280.c: 360: BME280_ReadTemperature(); // must be done first to get t_fine
+      009A6A CD 99 44         [ 4]  965 	call	_BME280_ReadTemperature
+                                    966 ;	src\bme280.c: 361: BME280_ReadReg_S16(BME280_REGISTER_HUMIDDATA, &hum_raw);
+      009A6D 96               [ 1]  967 	ldw	x, sp
+      009A6E 5C               [ 1]  968 	incw	x
+      009A6F A6 FD            [ 1]  969 	ld	a, #0xfd
+      009A71 CD 97 4B         [ 4]  970 	call	_BME280_ReadReg_S16
+                                    971 ;	src\bme280.c: 368: hum_raw_sign = ((int32_t)hum_raw)&0x0000FFFF;
+      009A74 16 01            [ 2]  972 	ldw	y, (0x01, sp)
+      009A76 5F               [ 1]  973 	clrw	x
+      009A77 90 5D            [ 2]  974 	tnzw	y
+      009A79 2A 01            [ 1]  975 	jrpl	00117$
+      009A7B 5A               [ 2]  976 	decw	x
+      009A7C                        977 00117$:
+      009A7C 0F 10            [ 1]  978 	clr	(0x10, sp)
+      009A7E 0F 0F            [ 1]  979 	clr	(0x0f, sp)
+                                    980 ;	src\bme280.c: 369: v_x1_u32r = (temper_int - ((int32_t)76800));
+      009A80 CE 00 24         [ 2]  981 	ldw	x, _temper_int+2
+      009A83 1D 2C 00         [ 2]  982 	subw	x, #0x2c00
+      009A86 1F 05            [ 2]  983 	ldw	(0x05, sp), x
+      009A88 C6 00 23         [ 1]  984 	ld	a, _temper_int+1
+      009A8B A2 01            [ 1]  985 	sbc	a, #0x01
+      009A8D 6B 04            [ 1]  986 	ld	(0x04, sp), a
+      009A8F C6 00 22         [ 1]  987 	ld	a, _temper_int+0
+      009A92 A2 00            [ 1]  988 	sbc	a, #0x00
+                                    989 ;	src\bme280.c: 370: v_x1_u32r = (((((hum_raw_sign << 14) - (((int32_t)CalibData.dig_H4) << 20) - \
+      009A94 88               [ 1]  990 	push	a
+      009A95 1E 10            [ 2]  991 	ldw	x, (0x10, sp)
+      009A97 A6 0E            [ 1]  992 	ld	a, #0x0e
+      009A99                        993 00118$:
+      009A99 90 58            [ 2]  994 	sllw	y
+      009A9B 59               [ 2]  995 	rlcw	x
+      009A9C 4A               [ 1]  996 	dec	a
+      009A9D 26 FA            [ 1]  997 	jrne	00118$
+      009A9F 1F 0C            [ 2]  998 	ldw	(0x0c, sp), x
+      009AA1 84               [ 1]  999 	pop	a
+      009AA2 CE 00 1D         [ 2] 1000 	ldw	x, _CalibData+28
+      009AA5 1F 09            [ 2] 1001 	ldw	(0x09, sp), x
+      009AA7 5F               [ 1] 1002 	clrw	x
+      009AA8 0D 09            [ 1] 1003 	tnz	(0x09, sp)
+      009AAA 2A 01            [ 1] 1004 	jrpl	00120$
+      009AAC 5A               [ 2] 1005 	decw	x
+      009AAD                       1006 00120$:
+      009AAD 88               [ 1] 1007 	push	a
+      009AAE 1E 0A            [ 2] 1008 	ldw	x, (0x0a, sp)
+      009AB0 0F 13            [ 1] 1009 	clr	(0x13, sp)
+      009AB2 0F 12            [ 1] 1010 	clr	(0x12, sp)
+      009AB4 A6 04            [ 1] 1011 	ld	a, #0x04
+      009AB6                       1012 00121$:
+      009AB6 58               [ 2] 1013 	sllw	x
+      009AB7 4A               [ 1] 1014 	dec	a
+      009AB8 26 FC            [ 1] 1015 	jrne	00121$
+      009ABA 84               [ 1] 1016 	pop	a
+      009ABB 72 F2 11         [ 2] 1017 	subw	y, (0x11, sp)
+      009ABE 17 09            [ 2] 1018 	ldw	(0x09, sp), y
+      009AC0 88               [ 1] 1019 	push	a
+      009AC1 7B 0D            [ 1] 1020 	ld	a, (0x0d, sp)
+      009AC3 89               [ 2] 1021 	pushw	x
+      009AC4 12 02            [ 1] 1022 	sbc	a, (2, sp)
+      009AC6 85               [ 2] 1023 	popw	x
+      009AC7 6B 09            [ 1] 1024 	ld	(0x09, sp), a
+      009AC9 7B 0C            [ 1] 1025 	ld	a, (0x0c, sp)
+      009ACB 89               [ 2] 1026 	pushw	x
+      009ACC 12 01            [ 1] 1027 	sbc	a, (1, sp)
+      009ACE 85               [ 2] 1028 	popw	x
+      009ACF 6B 08            [ 1] 1029 	ld	(0x08, sp), a
+      009AD1 84               [ 1] 1030 	pop	a
+      009AD2 CE 00 1F         [ 2] 1031 	ldw	x, _CalibData+30
+      009AD5 1F 11            [ 2] 1032 	ldw	(0x11, sp), x
+      009AD7 5F               [ 1] 1033 	clrw	x
+      009AD8 0D 11            [ 1] 1034 	tnz	(0x11, sp)
+      009ADA 2A 01            [ 1] 1035 	jrpl	00123$
+      009ADC 5A               [ 2] 1036 	decw	x
+      009ADD                       1037 00123$:
+      009ADD 88               [ 1] 1038 	push	a
+      009ADE 16 06            [ 2] 1039 	ldw	y, (0x06, sp)
+      009AE0 90 89            [ 2] 1040 	pushw	y
+      009AE2 61               [ 1] 1041 	exg	a, yl
+      009AE3 7B 07            [ 1] 1042 	ld	a, (0x07, sp)
+      009AE5 61               [ 1] 1043 	exg	a, yl
+      009AE6 90 89            [ 2] 1044 	pushw	y
+      009AE8 5B 01            [ 2] 1045 	addw	sp, #1
+      009AEA 88               [ 1] 1046 	push	a
+      009AEB 16 16            [ 2] 1047 	ldw	y, (0x16, sp)
+      009AED 90 89            [ 2] 1048 	pushw	y
+      009AEF 89               [ 2] 1049 	pushw	x
+      009AF0 CD B0 CC         [ 4] 1050 	call	__mullong
+      009AF3 5B 08            [ 2] 1051 	addw	sp, #8
+      009AF5 1F 0E            [ 2] 1052 	ldw	(0x0e, sp), x
+      009AF7 17 0C            [ 2] 1053 	ldw	(0x0c, sp), y
+      009AF9 84               [ 1] 1054 	pop	a
+      009AFA 1E 09            [ 2] 1055 	ldw	x, (0x09, sp)
+      009AFC 72 F0 0D         [ 2] 1056 	subw	x, (0x0d, sp)
+      009AFF 88               [ 1] 1057 	push	a
+      009B00 7B 09            [ 1] 1058 	ld	a, (0x09, sp)
+      009B02 12 0D            [ 1] 1059 	sbc	a, (0x0d, sp)
+      009B04 6B 11            [ 1] 1060 	ld	(0x11, sp), a
+      009B06 7B 08            [ 1] 1061 	ld	a, (0x08, sp)
+      009B08 12 0C            [ 1] 1062 	sbc	a, (0x0c, sp)
+      009B0A 6B 10            [ 1] 1063 	ld	(0x10, sp), a
+      009B0C 84               [ 1] 1064 	pop	a
+      009B0D 1C 40 00         [ 2] 1065 	addw	x, #0x4000
+      009B10 16 0F            [ 2] 1066 	ldw	y, (0x0f, sp)
+      009B12 24 02            [ 1] 1067 	jrnc	00124$
+      009B14 90 5C            [ 1] 1068 	incw	y
+      009B16                       1069 00124$:
+      009B16 88               [ 1] 1070 	push	a
+      009B17 A6 0F            [ 1] 1071 	ld	a, #0x0f
+      009B19                       1072 00125$:
+      009B19 90 57            [ 2] 1073 	sraw	y
+      009B1B 56               [ 2] 1074 	rrcw	x
+      009B1C 4A               [ 1] 1075 	dec	a
+      009B1D 26 FA            [ 1] 1076 	jrne	00125$
+      009B1F 1F 0A            [ 2] 1077 	ldw	(0x0a, sp), x
+      009B21 17 08            [ 2] 1078 	ldw	(0x08, sp), y
+      009B23 84               [ 1] 1079 	pop	a
+      009B24 AE 00 01         [ 2] 1080 	ldw	x, #(_CalibData+0)
+      009B27 88               [ 1] 1081 	push	a
+      009B28 E6 20            [ 1] 1082 	ld	a, (0x20, x)
+      009B2A 97               [ 1] 1083 	ld	xl, a
+      009B2B 49               [ 1] 1084 	rlc	a
+      009B2C 4F               [ 1] 1085 	clr	a
+      009B2D A2 00            [ 1] 1086 	sbc	a, #0x00
+      009B2F 95               [ 1] 1087 	ld	xh, a
+      009B30 6B 11            [ 1] 1088 	ld	(0x11, sp), a
+      009B32 6B 10            [ 1] 1089 	ld	(0x10, sp), a
+      009B34 84               [ 1] 1090 	pop	a
+      009B35 88               [ 1] 1091 	push	a
+      009B36 89               [ 2] 1092 	pushw	x
+      009B37 1E 12            [ 2] 1093 	ldw	x, (0x12, sp)
+      009B39 89               [ 2] 1094 	pushw	x
+      009B3A 1E 0A            [ 2] 1095 	ldw	x, (0x0a, sp)
+      009B3C 89               [ 2] 1096 	pushw	x
+      009B3D 41               [ 1] 1097 	exg	a, xl
+      009B3E 7B 0B            [ 1] 1098 	ld	a, (0x0b, sp)
+      009B40 41               [ 1] 1099 	exg	a, xl
+      009B41 89               [ 2] 1100 	pushw	x
+      009B42 5B 01            [ 2] 1101 	addw	sp, #1
+      009B44 88               [ 1] 1102 	push	a
+      009B45 CD B0 CC         [ 4] 1103 	call	__mullong
+      009B48 5B 08            [ 2] 1104 	addw	sp, #8
+      009B4A 4F               [ 1] 1105 	clr	a
+      009B4B 90 5D            [ 2] 1106 	tnzw	y
+      009B4D 2A 01            [ 1] 1107 	jrpl	00127$
+      009B4F 4A               [ 1] 1108 	dec	a
+      009B50                       1109 00127$:
+      009B50 90 01            [ 1] 1110 	rrwa	y
+      009B52 01               [ 1] 1111 	rrwa	x
+      009B53 84               [ 1] 1112 	pop	a
+      009B54 90 57            [ 2] 1113 	sraw	y
+      009B56 56               [ 2] 1114 	rrcw	x
+      009B57 90 57            [ 2] 1115 	sraw	y
+      009B59 56               [ 2] 1116 	rrcw	x
+      009B5A 1F 0D            [ 2] 1117 	ldw	(0x0d, sp), x
+      009B5C 17 0B            [ 2] 1118 	ldw	(0x0b, sp), y
+      009B5E AE 00 01         [ 2] 1119 	ldw	x, #(_CalibData+0)
+      009B61 88               [ 1] 1120 	push	a
+      009B62 E6 1B            [ 1] 1121 	ld	a, (0x1b, x)
+      009B64 97               [ 1] 1122 	ld	xl, a
+      009B65 84               [ 1] 1123 	pop	a
+      009B66 02               [ 1] 1124 	rlwa	x
+      009B67 4F               [ 1] 1125 	clr	a
+      009B68 01               [ 1] 1126 	rrwa	x
+      009B69 0F 10            [ 1] 1127 	clr	(0x10, sp)
+      009B6B 0F 0F            [ 1] 1128 	clr	(0x0f, sp)
+      009B6D 89               [ 2] 1129 	pushw	x
+      009B6E 1E 11            [ 2] 1130 	ldw	x, (0x11, sp)
+      009B70 89               [ 2] 1131 	pushw	x
+      009B71 1E 09            [ 2] 1132 	ldw	x, (0x09, sp)
+      009B73 89               [ 2] 1133 	pushw	x
+      009B74 41               [ 1] 1134 	exg	a, xl
+      009B75 7B 0A            [ 1] 1135 	ld	a, (0x0a, sp)
+      009B77 41               [ 1] 1136 	exg	a, xl
+      009B78 89               [ 2] 1137 	pushw	x
+      009B79 5B 01            [ 2] 1138 	addw	sp, #1
+      009B7B 88               [ 1] 1139 	push	a
+      009B7C CD B0 CC         [ 4] 1140 	call	__mullong
+      009B7F 5B 08            [ 2] 1141 	addw	sp, #8
+      009B81 A6 0B            [ 1] 1142 	ld	a, #0x0b
+      009B83                       1143 00128$:
+      009B83 90 57            [ 2] 1144 	sraw	y
+      009B85 56               [ 2] 1145 	rrcw	x
+      009B86 4A               [ 1] 1146 	dec	a
+      009B87 26 FA            [ 1] 1147 	jrne	00128$
+      009B89 17 0F            [ 2] 1148 	ldw	(0x0f, sp), y
+      009B8B 1C 80 00         [ 2] 1149 	addw	x, #0x8000
+      009B8E 16 0F            [ 2] 1150 	ldw	y, (0x0f, sp)
+      009B90 24 02            [ 1] 1151 	jrnc	00130$
+      009B92 90 5C            [ 1] 1152 	incw	y
+      009B94                       1153 00130$:
+      009B94 89               [ 2] 1154 	pushw	x
+      009B95 90 89            [ 2] 1155 	pushw	y
+      009B97 1E 11            [ 2] 1156 	ldw	x, (0x11, sp)
+      009B99 89               [ 2] 1157 	pushw	x
+      009B9A 1E 11            [ 2] 1158 	ldw	x, (0x11, sp)
+      009B9C 89               [ 2] 1159 	pushw	x
+      009B9D CD B0 CC         [ 4] 1160 	call	__mullong
+      009BA0 5B 08            [ 2] 1161 	addw	sp, #8
+      009BA2 51               [ 1] 1162 	exgw	x, y
+      009BA3 4F               [ 1] 1163 	clr	a
+      009BA4 5D               [ 2] 1164 	tnzw	x
+      009BA5 2A 01            [ 1] 1165 	jrpl	00131$
+      009BA7 4A               [ 1] 1166 	dec	a
+      009BA8                       1167 00131$:
+      009BA8 01               [ 1] 1168 	rrwa	x
+      009BA9 90 01            [ 1] 1169 	rrwa	y
+      009BAB 57               [ 2] 1170 	sraw	x
+      009BAC 90 56            [ 2] 1171 	rrcw	y
+      009BAE 57               [ 2] 1172 	sraw	x
+      009BAF 90 56            [ 2] 1173 	rrcw	y
+      009BB1 1C 00 20         [ 2] 1174 	addw	x, #0x0020
+      009BB4 1F 0B            [ 2] 1175 	ldw	(0x0b, sp), x
+      009BB6 CE 00 1A         [ 2] 1176 	ldw	x, _CalibData+25
+      009BB9 9E               [ 1] 1177 	ld	a, xh
+      009BBA 49               [ 1] 1178 	rlc	a
+      009BBB 4F               [ 1] 1179 	clr	a
+      009BBC A2 00            [ 1] 1180 	sbc	a, #0x00
+      009BBE 6B 10            [ 1] 1181 	ld	(0x10, sp), a
+      009BC0 6B 0F            [ 1] 1182 	ld	(0x0f, sp), a
+      009BC2 89               [ 2] 1183 	pushw	x
+      009BC3 1E 11            [ 2] 1184 	ldw	x, (0x11, sp)
+      009BC5 89               [ 2] 1185 	pushw	x
+      009BC6 90 89            [ 2] 1186 	pushw	y
+      009BC8 1E 11            [ 2] 1187 	ldw	x, (0x11, sp)
+      009BCA 89               [ 2] 1188 	pushw	x
+      009BCB CD B0 CC         [ 4] 1189 	call	__mullong
+      009BCE 5B 08            [ 2] 1190 	addw	sp, #8
+      009BD0 17 0F            [ 2] 1191 	ldw	(0x0f, sp), y
+      009BD2 1C 20 00         [ 2] 1192 	addw	x, #0x2000
+      009BD5 16 0F            [ 2] 1193 	ldw	y, (0x0f, sp)
+      009BD7 24 02            [ 1] 1194 	jrnc	00132$
+      009BD9 90 5C            [ 1] 1195 	incw	y
+      009BDB                       1196 00132$:
+      009BDB A6 0E            [ 1] 1197 	ld	a, #0x0e
+      009BDD                       1198 00133$:
+      009BDD 90 57            [ 2] 1199 	sraw	y
+      009BDF 56               [ 2] 1200 	rrcw	x
+      009BE0 4A               [ 1] 1201 	dec	a
+      009BE1 26 FA            [ 1] 1202 	jrne	00133$
+      009BE3 89               [ 2] 1203 	pushw	x
+      009BE4 90 89            [ 2] 1204 	pushw	y
+      009BE6 1E 0D            [ 2] 1205 	ldw	x, (0x0d, sp)
+      009BE8 89               [ 2] 1206 	pushw	x
+      009BE9 1E 0D            [ 2] 1207 	ldw	x, (0x0d, sp)
+      009BEB 89               [ 2] 1208 	pushw	x
+      009BEC CD B0 CC         [ 4] 1209 	call	__mullong
+      009BEF 5B 08            [ 2] 1210 	addw	sp, #8
+      009BF1 1F 0D            [ 2] 1211 	ldw	(0x0d, sp), x
+                                   1212 ;	src\bme280.c: 375: v_x1_u32r = (v_x1_u32r - (((((v_x1_u32r >> 15) * (v_x1_u32r >> 15)) >> 7) * \
+      009BF3 17 0F            [ 2] 1213 	ldw	(0x0f, sp), y
+      009BF5 1E 0D            [ 2] 1214 	ldw	x, (0x0d, sp)
+      009BF7 A6 0F            [ 1] 1215 	ld	a, #0x0f
+      009BF9                       1216 00135$:
+      009BF9 07 0F            [ 1] 1217 	sra	(0x0f, sp)
+      009BFB 06 10            [ 1] 1218 	rrc	(0x10, sp)
+      009BFD 56               [ 2] 1219 	rrcw	x
+      009BFE 4A               [ 1] 1220 	dec	a
+      009BFF 26 F8            [ 1] 1221 	jrne	00135$
+      009C01 90 89            [ 2] 1222 	pushw	y
+      009C03 89               [ 2] 1223 	pushw	x
+      009C04 7B 14            [ 1] 1224 	ld	a, (0x14, sp)
+      009C06 88               [ 1] 1225 	push	a
+      009C07 7B 14            [ 1] 1226 	ld	a, (0x14, sp)
+      009C09 88               [ 1] 1227 	push	a
+      009C0A 89               [ 2] 1228 	pushw	x
+      009C0B 1E 17            [ 2] 1229 	ldw	x, (0x17, sp)
+      009C0D 89               [ 2] 1230 	pushw	x
+      009C0E CD B0 CC         [ 4] 1231 	call	__mullong
+      009C11 5B 08            [ 2] 1232 	addw	sp, #8
+      009C13 61               [ 1] 1233 	exg	a, yl
+      009C14 6B 12            [ 1] 1234 	ld	(0x12, sp), a
+      009C16 61               [ 1] 1235 	exg	a, yl
+      009C17 90 9E            [ 1] 1236 	ld	a, yh
+      009C19 90 85            [ 2] 1237 	popw	y
+      009C1B 88               [ 1] 1238 	push	a
+      009C1C 7B 11            [ 1] 1239 	ld	a, (0x11, sp)
+      009C1E 6B 09            [ 1] 1240 	ld	(0x09, sp), a
+      009C20 84               [ 1] 1241 	pop	a
+      009C21 47               [ 1] 1242 	sra	a
+      009C22 06 08            [ 1] 1243 	rrc	(0x08, sp)
+      009C24 56               [ 2] 1244 	rrcw	x
+      009C25 47               [ 1] 1245 	sra	a
+      009C26 06 08            [ 1] 1246 	rrc	(0x08, sp)
+      009C28 56               [ 2] 1247 	rrcw	x
+      009C29 47               [ 1] 1248 	sra	a
+      009C2A 06 08            [ 1] 1249 	rrc	(0x08, sp)
+      009C2C 56               [ 2] 1250 	rrcw	x
+      009C2D 47               [ 1] 1251 	sra	a
+      009C2E 06 08            [ 1] 1252 	rrc	(0x08, sp)
+      009C30 56               [ 2] 1253 	rrcw	x
+      009C31 47               [ 1] 1254 	sra	a
+      009C32 06 08            [ 1] 1255 	rrc	(0x08, sp)
+      009C34 56               [ 2] 1256 	rrcw	x
+      009C35 47               [ 1] 1257 	sra	a
+      009C36 06 08            [ 1] 1258 	rrc	(0x08, sp)
+      009C38 56               [ 2] 1259 	rrcw	x
+      009C39 47               [ 1] 1260 	sra	a
+      009C3A 06 08            [ 1] 1261 	rrc	(0x08, sp)
+      009C3C 56               [ 2] 1262 	rrcw	x
+      009C3D 1F 09            [ 2] 1263 	ldw	(0x09, sp), x
+      009C3F 6B 07            [ 1] 1264 	ld	(0x07, sp), a
+      009C41 C6 00 19         [ 1] 1265 	ld	a, _CalibData+24
+      009C44 5F               [ 1] 1266 	clrw	x
+      009C45 1F 0F            [ 2] 1267 	ldw	(0x0f, sp), x
+      009C47 90 89            [ 2] 1268 	pushw	y
+      009C49 88               [ 1] 1269 	push	a
+      009C4A 9E               [ 1] 1270 	ld	a, xh
+      009C4B 88               [ 1] 1271 	push	a
+      009C4C 1E 13            [ 2] 1272 	ldw	x, (0x13, sp)
+      009C4E 89               [ 2] 1273 	pushw	x
+      009C4F 1E 0F            [ 2] 1274 	ldw	x, (0x0f, sp)
+      009C51 89               [ 2] 1275 	pushw	x
+      009C52 1E 0F            [ 2] 1276 	ldw	x, (0x0f, sp)
+      009C54 89               [ 2] 1277 	pushw	x
+      009C55 CD B0 CC         [ 4] 1278 	call	__mullong
+      009C58 5B 08            [ 2] 1279 	addw	sp, #8
+      009C5A 17 11            [ 2] 1280 	ldw	(0x11, sp), y
+      009C5C 90 85            [ 2] 1281 	popw	y
+      009C5E 7B 10            [ 1] 1282 	ld	a, (0x10, sp)
+      009C60 07 0F            [ 1] 1283 	sra	(0x0f, sp)
+      009C62 46               [ 1] 1284 	rrc	a
+      009C63 56               [ 2] 1285 	rrcw	x
+      009C64 07 0F            [ 1] 1286 	sra	(0x0f, sp)
+      009C66 46               [ 1] 1287 	rrc	a
+      009C67 56               [ 2] 1288 	rrcw	x
+      009C68 07 0F            [ 1] 1289 	sra	(0x0f, sp)
+      009C6A 46               [ 1] 1290 	rrc	a
+      009C6B 56               [ 2] 1291 	rrcw	x
+      009C6C 07 0F            [ 1] 1292 	sra	(0x0f, sp)
+      009C6E 46               [ 1] 1293 	rrc	a
+      009C6F 56               [ 2] 1294 	rrcw	x
+      009C70 1F 11            [ 2] 1295 	ldw	(0x11, sp), x
+      009C72 1E 0D            [ 2] 1296 	ldw	x, (0x0d, sp)
+      009C74 72 F0 11         [ 2] 1297 	subw	x, (0x11, sp)
+      009C77 88               [ 1] 1298 	push	a
+      009C78 90 9F            [ 1] 1299 	ld	a, yl
+      009C7A 12 01            [ 1] 1300 	sbc	a, (1, sp)
+      009C7C 90 02            [ 1] 1301 	rlwa	y
+      009C7E 12 10            [ 1] 1302 	sbc	a, (0x10, sp)
+      009C80 90 95            [ 1] 1303 	ld	yh, a
+      009C82 84               [ 1] 1304 	pop	a
+      009C83 1F 11            [ 2] 1305 	ldw	(0x11, sp), x
+      009C85 17 0F            [ 2] 1306 	ldw	(0x0f, sp), y
+                                   1307 ;	src\bme280.c: 377: v_x1_u32r = (v_x1_u32r < 0) ? 0 : v_x1_u32r;
+      009C87 0D 0F            [ 1] 1308 	tnz	(0x0f, sp)
+      009C89 2A 05            [ 1] 1309 	jrpl	00103$
+      009C8B 5F               [ 1] 1310 	clrw	x
+      009C8C 1F 11            [ 2] 1311 	ldw	(0x11, sp), x
+      009C8E 1F 0F            [ 2] 1312 	ldw	(0x0f, sp), x
+      009C90                       1313 00103$:
+                                   1314 ;	src\bme280.c: 378: v_x1_u32r = (v_x1_u32r > 419430400) ? 419430400 : v_x1_u32r;
+      009C90 5F               [ 1] 1315 	clrw	x
+      009C91 13 11            [ 2] 1316 	cpw	x, (0x11, sp)
+      009C93 4F               [ 1] 1317 	clr	a
+      009C94 12 10            [ 1] 1318 	sbc	a, (0x10, sp)
+      009C96 A6 19            [ 1] 1319 	ld	a, #0x19
+      009C98 12 0F            [ 1] 1320 	sbc	a, (0x0f, sp)
+      009C9A 2E 07            [ 1] 1321 	jrsge	00105$
+      009C9C 5F               [ 1] 1322 	clrw	x
+      009C9D 1F 11            [ 2] 1323 	ldw	(0x11, sp), x
+      009C9F AE 19 00         [ 2] 1324 	ldw	x, #0x1900
+      009CA2 C5                    1325 	.byte 0xc5
+      009CA3                       1326 00105$:
+      009CA3 1E 0F            [ 2] 1327 	ldw	x, (0x0f, sp)
+      009CA5                       1328 00106$:
+      009CA5 16 11            [ 2] 1329 	ldw	y, (0x11, sp)
+                                   1330 ;	src\bme280.c: 379: hum_float = (uint32_t)(v_x1_u32r >> 12);
+      009CA7 A6 0C            [ 1] 1331 	ld	a, #0x0c
+      009CA9                       1332 00139$:
+      009CA9 57               [ 2] 1333 	sraw	x
+      009CAA 90 56            [ 2] 1334 	rrcw	y
+      009CAC 4A               [ 1] 1335 	dec	a
+      009CAD 26 FA            [ 1] 1336 	jrne	00139$
+      009CAF 90 89            [ 2] 1337 	pushw	y
+      009CB1 89               [ 2] 1338 	pushw	x
+      009CB2 CD A9 B5         [ 4] 1339 	call	___ulong2fs
+      009CB5 5B 04            [ 2] 1340 	addw	sp, #4
+                                   1341 ;	src\bme280.c: 380: hum_float /= 1024.0f;
+      009CB7 4B 00            [ 1] 1342 	push	#0x00
+      009CB9 4B 00            [ 1] 1343 	push	#0x00
+      009CBB 4B 80            [ 1] 1344 	push	#0x80
+      009CBD 4B 44            [ 1] 1345 	push	#0x44
+      009CBF 89               [ 2] 1346 	pushw	x
+      009CC0 90 89            [ 2] 1347 	pushw	y
+      009CC2 CD B0 46         [ 4] 1348 	call	___fsdiv
+                                   1349 ;	src\bme280.c: 381: return hum_float;
+                                   1350 ;	src\bme280.c: 382: }
+      009CC5 5B 12            [ 2] 1351 	addw	sp, #18
+      009CC7 81               [ 4] 1352 	ret
                                    1353 	.area CODE
                                    1354 	.area CONST
                                    1355 	.area INITIALIZER

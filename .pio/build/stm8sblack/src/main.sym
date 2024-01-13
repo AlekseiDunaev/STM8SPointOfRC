@@ -88,15 +88,15 @@ Symbol Table
   1 _iI2CRead                                                      00000B GR
   1 _iI2CWrite                                                     000008 GR
   A _main                                                          00007E GR
-  8 _main_placeholderDS18X20String_131072_214                      00000A R
-  8 _main_placeholderHumidityBME280String_131072_214               00003E R
-  8 _main_placeholderTemperatureBME280String_131072_214            000070 R
+  8 _main_placeholderDS18X20String_131072_190                      00000A R
+  8 _main_placeholderHumidityBME280String_131072_190               00003E R
+  8 _main_placeholderTemperatureBME280String_131072_190            000070 R
     _malloc                                                        ****** GX
     _printf                                                        ****** GX
   A _putchar                                                       000374 GR
   1 _sString                                                       000012 GR
     _sprintf                                                       ****** GX
-  1 _str1                                                          000076 GR
+  1 _str1                                                          000092 GR
   8 _table                                                         000000 R
     l_DATA                                                         ****** GX
     l_INITIALIZER                                                  ****** GX
@@ -111,7 +111,7 @@ Hexadecimal [24-Bits]
 Area Table
 
    0 _CODE                                      size      0   flags    0
-   1 DATA                                       size     DA   flags    0
+   1 DATA                                       size    112   flags    0
    2 INITIALIZED                                size      C   flags    0
    3 SSEG                                       size      1   flags    0
    4 DABS                                       size      0   flags    8

@@ -6,6 +6,7 @@
 /* Board LED
 PD0: Port D0 / Timer 1 - break input / Configurable clock output [AFR5]
 */
+#define UART_BUF_SIZE 128
 
 #define LED_PORT  GPIOE
 #define LED_PIN   GPIO_PIN_5

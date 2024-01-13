@@ -1,4 +1,5 @@
 #include "bme280.h"
+#include "config.h"
 #include "i2c.h"
 
 //------------------------------------------------
@@ -8,7 +9,7 @@
 // #define BMT280_DEBUG
 // #define BMT280_DEBUG_CALIBRATE
 
-extern char str1[100];
+extern char str1[UART_BUF_SIZE];
 BME280_CalibData CalibData;
 int32_t temper_int;
 
@@ -375,7 +376,7 @@ sprintf(str1, "hum_raw: 0x%04X\r\n", hum_raw);
     ((int32_t)CalibData.dig_H1)) >> 4));
 	v_x1_u32r = (v_x1_u32r < 0) ? 0 : v_x1_u32r;
 	v_x1_u32r = (v_x1_u32r > 419430400) ? 419430400 : v_x1_u32r;
-	hum_float = (v_x1_u32r >> 12);
+	hum_float = (uint32_t)(v_x1_u32r >> 12);
 	hum_float /= 1024.0f;
   return hum_float;
 }

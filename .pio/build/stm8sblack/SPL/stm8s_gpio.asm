@@ -14,11 +14,7 @@
 	.globl _GPIO_Write
 	.globl _GPIO_WriteHigh
 	.globl _GPIO_WriteLow
-	.globl _GPIO_WriteReverse
-	.globl _GPIO_ReadOutputData
-	.globl _GPIO_ReadInputData
 	.globl _GPIO_ReadInputPin
-	.globl _GPIO_ExternalPullUpConfig
 ;--------------------------------------------------------
 ; ram data
 ;--------------------------------------------------------
@@ -273,107 +269,19 @@ _GPIO_WriteLow:
 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_gpio.c: 170: }
 	pop	a
 	ret
-;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_gpio.c: 180: void GPIO_WriteReverse(GPIO_TypeDef* GPIOx, GPIO_Pin_TypeDef PortPins)
-;	-----------------------------------------
-;	 function GPIO_WriteReverse
-;	-----------------------------------------
-_GPIO_WriteReverse:
-	push	a
-	ld	(0x01, sp), a
-;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_gpio.c: 182: GPIOx->ODR ^= (uint8_t)PortPins;
-	ld	a, (x)
-	xor	a, (0x01, sp)
-	ld	(x), a
-;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_gpio.c: 183: }
-	pop	a
-	ret
-;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_gpio.c: 191: uint8_t GPIO_ReadOutputData(GPIO_TypeDef* GPIOx)
-;	-----------------------------------------
-;	 function GPIO_ReadOutputData
-;	-----------------------------------------
-_GPIO_ReadOutputData:
-;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_gpio.c: 193: return ((uint8_t)GPIOx->ODR);
-	ld	a, (x)
-;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_gpio.c: 194: }
-	ret
-;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_gpio.c: 202: uint8_t GPIO_ReadInputData(GPIO_TypeDef* GPIOx)
-;	-----------------------------------------
-;	 function GPIO_ReadInputData
-;	-----------------------------------------
-_GPIO_ReadInputData:
-;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_gpio.c: 204: return ((uint8_t)GPIOx->IDR);
-	ld	a, (0x1, x)
-;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_gpio.c: 205: }
-	ret
-;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_gpio.c: 213: BitStatus GPIO_ReadInputPin(GPIO_TypeDef* GPIOx, GPIO_Pin_TypeDef GPIO_Pin)
+;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_gpio.c: 219: BitStatus GPIO_ReadInputPin(GPIO_TypeDef* GPIOx, GPIO_Pin_TypeDef GPIO_Pin)
 ;	-----------------------------------------
 ;	 function GPIO_ReadInputPin
 ;	-----------------------------------------
 _GPIO_ReadInputPin:
 	push	a
 	ld	(0x01, sp), a
-;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_gpio.c: 215: return ((BitStatus)(GPIOx->IDR & (uint8_t)GPIO_Pin));
+;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_gpio.c: 221: return ((BitStatus)(GPIOx->IDR & (uint8_t)GPIO_Pin));
 	ld	a, (0x1, x)
 	and	a, (0x01, sp)
-;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_gpio.c: 216: }
+;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_gpio.c: 222: }
 	addw	sp, #1
 	ret
-;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_gpio.c: 225: void GPIO_ExternalPullUpConfig(GPIO_TypeDef* GPIOx, GPIO_Pin_TypeDef GPIO_Pin, FunctionalState NewState)
-;	-----------------------------------------
-;	 function GPIO_ExternalPullUpConfig
-;	-----------------------------------------
-_GPIO_ExternalPullUpConfig:
-	sub	sp, #4
-	ldw	(0x03, sp), x
-;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_gpio.c: 228: assert_param(IS_GPIO_PIN_OK(GPIO_Pin));
-	ld	(0x02, sp), a
-	jrne	00107$
-	push	#0xe4
-	clrw	x
-	pushw	x
-	push	#0x00
-	ldw	x, #(___str_0+0)
-	call	_assert_failed
-00107$:
-;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_gpio.c: 229: assert_param(IS_FUNCTIONALSTATE_OK(NewState));
-	tnz	(0x07, sp)
-	jreq	00109$
-	ld	a, (0x07, sp)
-	dec	a
-	jreq	00109$
-	push	#0xe5
-	clrw	x
-	pushw	x
-	push	#0x00
-	ldw	x, #(___str_0+0)
-	call	_assert_failed
-00109$:
-;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_gpio.c: 233: GPIOx->CR1 |= (uint8_t)GPIO_Pin;
-	ldw	x, (0x03, sp)
-	addw	x, #0x0003
-	ld	a, (x)
-;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_gpio.c: 231: if (NewState != DISABLE) /* External Pull-Up Set*/
-	tnz	(0x07, sp)
-	jreq	00102$
-;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_gpio.c: 233: GPIOx->CR1 |= (uint8_t)GPIO_Pin;
-	or	a, (0x02, sp)
-	ld	(x), a
-	jra	00104$
-00102$:
-;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_gpio.c: 236: GPIOx->CR1 &= (uint8_t)(~(GPIO_Pin));
-	push	a
-	ld	a, (0x03, sp)
-	cpl	a
-	ld	(0x02, sp), a
-	pop	a
-	and	a, (0x01, sp)
-	ld	(x), a
-00104$:
-;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_gpio.c: 238: }
-	addw	sp, #4
-	popw	x
-	pop	a
-	jp	(x)
 	.area CODE
 	.area CONST
 	.area CONST
