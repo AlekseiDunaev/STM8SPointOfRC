@@ -51,46 +51,46 @@
                                      51 ;	-----------------------------------------
                                      52 ;	 function delay_us
                                      53 ;	-----------------------------------------
-      009CC8                         54 _delay_us:
+      009F8A                         54 _delay_us:
                                      55 ;	src\delay.c: 4: register unsigned int loops = (dly_const * value) ;
-      009CC8 CD AE 5A         [ 4]   56 	call	___uint2fs
-      009CCB 89               [ 2]   57 	pushw	x
-      009CCC 90 89            [ 2]   58 	pushw	y
-      009CCE CD AE 65         [ 4]   59 	call	___fs2uint
+      009F8A CD B2 36         [ 4]   56 	call	___uint2fs
+      009F8D 89               [ 2]   57 	pushw	x
+      009F8E 90 89            [ 2]   58 	pushw	y
+      009F90 CD B2 16         [ 4]   59 	call	___fs2uint
                                      60 ;	src\delay.c: 6: while(loops) {
-      009CD1                         61 00101$:
-      009CD1 5D               [ 2]   62 	tnzw	x
-      009CD2 26 01            [ 1]   63 	jrne	00117$
-      009CD4 81               [ 4]   64 	ret
-      009CD5                         65 00117$:
+      009F93                         61 00101$:
+      009F93 5D               [ 2]   62 	tnzw	x
+      009F94 26 01            [ 1]   63 	jrne	00117$
+      009F96 81               [ 4]   64 	ret
+      009F97                         65 00117$:
                                      66 ;	src\delay.c: 7: __asm__ ("nop");
-      009CD5 9D               [ 1]   67 	nop
+      009F97 9D               [ 1]   67 	nop
                                      68 ;	src\delay.c: 8: loops--;
-      009CD6 5A               [ 2]   69 	decw	x
-      009CD7 20 F8            [ 2]   70 	jra	00101$
+      009F98 5A               [ 2]   69 	decw	x
+      009F99 20 F8            [ 2]   70 	jra	00101$
                                      71 ;	src\delay.c: 10: }
-      009CD9 81               [ 4]   72 	ret
+      009F9B 81               [ 4]   72 	ret
                                      73 ;	src\delay.c: 12: void delay_ms(uint16_t value) {
                                      74 ;	-----------------------------------------
                                      75 ;	 function delay_ms
                                      76 ;	-----------------------------------------
-      009CDA                         77 _delay_ms:
+      009F9C                         77 _delay_ms:
                                      78 ;	src\delay.c: 13: while(value)
-      009CDA                         79 00101$:
-      009CDA 5D               [ 2]   80 	tnzw	x
-      009CDB 26 01            [ 1]   81 	jrne	00117$
-      009CDD 81               [ 4]   82 	ret
-      009CDE                         83 00117$:
+      009F9C                         79 00101$:
+      009F9C 5D               [ 2]   80 	tnzw	x
+      009F9D 26 01            [ 1]   81 	jrne	00117$
+      009F9F 81               [ 4]   82 	ret
+      009FA0                         83 00117$:
                                      84 ;	src\delay.c: 15: delay_us(1000);
-      009CDE 89               [ 2]   85 	pushw	x
-      009CDF AE 03 E8         [ 2]   86 	ldw	x, #0x03e8
-      009CE2 CD 9C C8         [ 4]   87 	call	_delay_us
-      009CE5 85               [ 2]   88 	popw	x
+      009FA0 89               [ 2]   85 	pushw	x
+      009FA1 AE 03 E8         [ 2]   86 	ldw	x, #0x03e8
+      009FA4 CD 9F 8A         [ 4]   87 	call	_delay_us
+      009FA7 85               [ 2]   88 	popw	x
                                      89 ;	src\delay.c: 16: value--;
-      009CE6 5A               [ 2]   90 	decw	x
-      009CE7 20 F1            [ 2]   91 	jra	00101$
+      009FA8 5A               [ 2]   90 	decw	x
+      009FA9 20 F1            [ 2]   91 	jra	00101$
                                      92 ;	src\delay.c: 18: }
-      009CE9 81               [ 4]   93 	ret
+      009FAB 81               [ 4]   93 	ret
                                      94 	.area CODE
                                      95 	.area CONST
                                      96 	.area INITIALIZER

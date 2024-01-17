@@ -53,3 +53,9 @@ dkms.conf
 
 # vim
 tags
+
+# PlatformIO
+.pio
+
+# vs code
+.vscode

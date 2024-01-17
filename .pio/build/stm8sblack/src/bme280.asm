@@ -22,6 +22,7 @@
 	.globl _BME280_ReadReg_U16
 	.globl _BME280_ReadReg_LE_U16
 	.globl _BME280_ReadReg_U24
+	.globl _BME280_ReadReg_LE_U24
 	.globl _BME280_ReadReg_S16
 	.globl _BME280_ReadReg_LE_S16
 	.globl _BME280_ReadStatus
@@ -33,6 +34,7 @@
 	.globl _BME280_SetOversamplingHum
 	.globl _BME280_SetMode
 	.globl _BME280_ReadTemperature
+	.globl _BME280_ReadPressure
 	.globl _BME280_ReadHumidity
 ;--------------------------------------------------------
 ; ram data
@@ -158,51 +160,51 @@ _BME280_WriteReg:
 	ldw	x, #0x0002
 	ld	a, #0xee
 	call	_I2C_Send_Bytes
-;	src\bme280.c: 68: }
+;	src\bme280.c: 67: }
 	popw	x
 	popw	x
 	pop	a
 	jp	(x)
-;	src\bme280.c: 70: uint8_t BME280_ReadReg(uint8_t iReg) {
+;	src\bme280.c: 69: uint8_t BME280_ReadReg(uint8_t iReg) {
 ;	-----------------------------------------
 ;	 function BME280_ReadReg
 ;	-----------------------------------------
 _BME280_ReadReg:
 	push	a
-;	src\bme280.c: 72: iData[0] = iReg;
+;	src\bme280.c: 71: iData[0] = iReg;
 	ldw	x, sp
 	incw	x
 	ld	(x), a
-;	src\bme280.c: 73: I2C_Send_Bytes((BME280_ADDRESS), sizeof(iData), iData);
+;	src\bme280.c: 72: I2C_Send_Bytes((BME280_ADDRESS), sizeof(iData), iData);
 	pushw	x
 	clrw	x
 	incw	x
 	ld	a, #0xee
 	call	_I2C_Send_Bytes
-;	src\bme280.c: 75: return I2C_Read_Byte(BME280_ADDRESS);
+;	src\bme280.c: 73: return I2C_Read_Byte(BME280_ADDRESS);
 	ld	a, #0xee
 	call	_I2C_Read_Byte
-;	src\bme280.c: 77: }
+;	src\bme280.c: 74: }
 	addw	sp, #1
 	ret
-;	src\bme280.c: 79: void BME280_ReadReg_U16(uint8_t iReg, uint16_t *iValue) {
+;	src\bme280.c: 76: void BME280_ReadReg_U16(uint8_t iReg, uint16_t *iValue) {
 ;	-----------------------------------------
 ;	 function BME280_ReadReg_U16
 ;	-----------------------------------------
 _BME280_ReadReg_U16:
 	sub	sp, #7
 	ldw	(0x06, sp), x
-;	src\bme280.c: 82: iData[0] = iReg;
+;	src\bme280.c: 79: iData[0] = iReg;
 	ldw	x, sp
 	incw	x
 	ld	(x), a
-;	src\bme280.c: 83: I2C_Send_Bytes((BME280_ADDRESS), sizeof(iData), iData);
+;	src\bme280.c: 80: I2C_Send_Bytes((BME280_ADDRESS), sizeof(iData), iData);
 	pushw	x
 	clrw	x
 	incw	x
 	ld	a, #0xee
 	call	_I2C_Send_Bytes
-;	src\bme280.c: 85: I2C_Read_Bytes((BME280_ADDRESS), sizeof(iRes), iRes);
+;	src\bme280.c: 81: I2C_Read_Bytes((BME280_ADDRESS), sizeof(iRes), iRes);
 	ldw	x, sp
 	incw	x
 	incw	x
@@ -210,18 +212,18 @@ _BME280_ReadReg_U16:
 	ldw	x, #0x0002
 	ld	a, #0xee
 	call	_I2C_Read_Bytes
-;	src\bme280.c: 87: *iValue = iRes[0];
+;	src\bme280.c: 82: *iValue = iRes[0];
 	ld	a, (0x02, sp)
 	clrw	y
 	ld	yl, a
 	ldw	x, (0x06, sp)
 	ldw	(x), y
-;	src\bme280.c: 88: *iValue <<= 8;
+;	src\bme280.c: 83: *iValue <<= 8;
 	clr	a
 	rlwa	y
 	ldw	x, (0x06, sp)
 	ldw	(x), y
-;	src\bme280.c: 89: *iValue += iRes[1];
+;	src\bme280.c: 84: *iValue += iRes[1];
 	ld	a, (0x03, sp)
 	clrw	x
 	ld	xl, a
@@ -229,27 +231,27 @@ _BME280_ReadReg_U16:
 	addw	y, (0x04, sp)
 	ldw	x, (0x06, sp)
 	ldw	(x), y
-;	src\bme280.c: 90: }
+;	src\bme280.c: 85: }
 	addw	sp, #7
 	ret
-;	src\bme280.c: 92: void BME280_ReadReg_LE_U16(uint8_t iReg, uint16_t *iValue) {
+;	src\bme280.c: 87: void BME280_ReadReg_LE_U16(uint8_t iReg, uint16_t *iValue) {
 ;	-----------------------------------------
 ;	 function BME280_ReadReg_LE_U16
 ;	-----------------------------------------
 _BME280_ReadReg_LE_U16:
 	sub	sp, #9
 	ldw	(0x08, sp), x
-;	src\bme280.c: 95: iData[0] = iReg;
+;	src\bme280.c: 90: iData[0] = iReg;
 	ldw	x, sp
 	incw	x
 	ld	(x), a
-;	src\bme280.c: 96: I2C_Send_Bytes((BME280_ADDRESS), sizeof(iData), iData);
+;	src\bme280.c: 91: I2C_Send_Bytes((BME280_ADDRESS), sizeof(iData), iData);
 	pushw	x
 	clrw	x
 	incw	x
 	ld	a, #0xee
 	call	_I2C_Send_Bytes
-;	src\bme280.c: 98: I2C_Read_Bytes((BME280_ADDRESS), sizeof(iRes), iRes);
+;	src\bme280.c: 92: I2C_Read_Bytes((BME280_ADDRESS), sizeof(iRes), iRes);
 	ldw	x, sp
 	incw	x
 	incw	x
@@ -257,18 +259,18 @@ _BME280_ReadReg_LE_U16:
 	ldw	x, #0x0002
 	ld	a, #0xee
 	call	_I2C_Read_Bytes
-;	src\bme280.c: 100: *iValue = iRes[0];
+;	src\bme280.c: 93: *iValue = iRes[0];
 	ld	a, (0x02, sp)
 	clrw	y
 	ld	yl, a
 	ldw	x, (0x08, sp)
 	ldw	(x), y
-;	src\bme280.c: 101: *iValue <<= 8;
+;	src\bme280.c: 94: *iValue <<= 8;
 	clr	a
 	rlwa	y
 	ldw	x, (0x08, sp)
 	ldw	(x), y
-;	src\bme280.c: 102: *iValue += iRes[1];
+;	src\bme280.c: 95: *iValue += iRes[1];
 	ld	a, (0x03, sp)
 	clrw	x
 	ld	xl, a
@@ -276,7 +278,7 @@ _BME280_ReadReg_LE_U16:
 	addw	y, (0x06, sp)
 	ldw	x, (0x08, sp)
 	ldw	(x), y
-;	src\bme280.c: 103: *(uint16_t *)iValue = be16toword(*(uint16_t *) iValue);
+;	src\bme280.c: 96: *(uint16_t *)iValue = be16toword(*(uint16_t *) iValue);
 	ldw	x, y
 	clr	(0x05, sp)
 	ld	a, yl
@@ -288,27 +290,27 @@ _BME280_ReadReg_LE_U16:
 	ld	yl, a
 	ldw	x, (0x08, sp)
 	ldw	(x), y
-;	src\bme280.c: 104: }
+;	src\bme280.c: 97: }
 	addw	sp, #9
 	ret
-;	src\bme280.c: 106: void BME280_ReadReg_U24(uint8_t iReg, uint32_t *iValue) {
+;	src\bme280.c: 99: void BME280_ReadReg_U24(uint8_t iReg, uint32_t *iValue) {
 ;	-----------------------------------------
 ;	 function BME280_ReadReg_U24
 ;	-----------------------------------------
 _BME280_ReadReg_U24:
 	sub	sp, #14
 	ldw	(0x0d, sp), x
-;	src\bme280.c: 109: iData[0] = iReg;
+;	src\bme280.c: 102: iData[0] = iReg;
 	ldw	x, sp
 	incw	x
 	ld	(x), a
-;	src\bme280.c: 110: I2C_Send_Bytes((BME280_ADDRESS), sizeof(iData), iData);
+;	src\bme280.c: 103: I2C_Send_Bytes((BME280_ADDRESS), sizeof(iData), iData);
 	pushw	x
 	clrw	x
 	incw	x
 	ld	a, #0xee
 	call	_I2C_Send_Bytes
-;	src\bme280.c: 112: I2C_Read_Bytes((BME280_ADDRESS), sizeof(iRes), iRes);
+;	src\bme280.c: 104: I2C_Read_Bytes((BME280_ADDRESS), sizeof(iRes), iRes);
 	ldw	x, sp
 	incw	x
 	incw	x
@@ -316,7 +318,7 @@ _BME280_ReadReg_U24:
 	ldw	x, #0x0003
 	ld	a, #0xee
 	call	_I2C_Read_Bytes
-;	src\bme280.c: 114: *iValue = iRes[0];
+;	src\bme280.c: 105: *iValue = iRes[0];
 	ld	a, (0x02, sp)
 	clrw	y
 	clr	(0x05, sp)
@@ -327,7 +329,7 @@ _BME280_ReadReg_U24:
 	ld	a, (0x06, sp)
 	ld	(x), a
 	pop	a
-;	src\bme280.c: 115: *iValue <<= 8;
+;	src\bme280.c: 106: *iValue <<= 8;
 	ld	(0x0b, sp), a
 	ldw	(0x09, sp), y
 	clr	(0x0c, sp)
@@ -336,7 +338,7 @@ _BME280_ReadReg_U24:
 	ldw	(0x2, x), y
 	ldw	y, (0x09, sp)
 	ldw	(x), y
-;	src\bme280.c: 116: *iValue += iRes[1];
+;	src\bme280.c: 107: *iValue += iRes[1];
 	ld	a, (0x03, sp)
 	clrw	y
 	clrw	x
@@ -356,7 +358,7 @@ _BME280_ReadReg_U24:
 	ld	a, (0x06, sp)
 	ld	(x), a
 	pop	a
-;	src\bme280.c: 117: *iValue <<= 8;
+;	src\bme280.c: 108: *iValue <<= 8;
 	ldw	(0x0a, sp), y
 	ld	(0x09, sp), a
 	clr	(0x0c, sp)
@@ -365,7 +367,7 @@ _BME280_ReadReg_U24:
 	ldw	(0x2, x), y
 	ldw	y, (0x09, sp)
 	ldw	(x), y
-;	src\bme280.c: 118: *iValue += iRes[2];
+;	src\bme280.c: 109: *iValue += iRes[2];
 	ld	a, (0x04, sp)
 	clrw	y
 	clrw	x
@@ -385,34 +387,178 @@ _BME280_ReadReg_U24:
 	ld	a, (0x06, sp)
 	ld	(x), a
 	pop	a
-;	src\bme280.c: 119: *(uint32_t*)iValue &= 0x00FFFFFF;
+;	src\bme280.c: 110: *(uint32_t*)iValue &= 0x00FFFFFF;
 	ld	(0x0a, sp), a
 	clr	(0x09, sp)
 	ldw	x, (0x0d, sp)
 	ldw	(0x2, x), y
 	ldw	y, (0x09, sp)
 	ldw	(x), y
-;	src\bme280.c: 120: }
+;	src\bme280.c: 111: }
 	addw	sp, #14
 	ret
-;	src\bme280.c: 140: void BME280_ReadReg_S16(uint8_t iReg, int16_t *iValue) {
+;	src\bme280.c: 113: void BME280_ReadReg_LE_U24(uint8_t iReg, uint32_t *iValue) {
+;	-----------------------------------------
+;	 function BME280_ReadReg_LE_U24
+;	-----------------------------------------
+_BME280_ReadReg_LE_U24:
+	sub	sp, #22
+	ldw	(0x15, sp), x
+;	src\bme280.c: 116: iData[0] = iReg;
+	ldw	x, sp
+	incw	x
+	ld	(x), a
+;	src\bme280.c: 117: I2C_Send_Bytes((BME280_ADDRESS), sizeof(iData), iData);
+	pushw	x
+	clrw	x
+	incw	x
+	ld	a, #0xee
+	call	_I2C_Send_Bytes
+;	src\bme280.c: 118: I2C_Read_Bytes((BME280_ADDRESS), sizeof(iRes), iRes);
+	ldw	x, sp
+	incw	x
+	incw	x
+	pushw	x
+	ldw	x, #0x0003
+	ld	a, #0xee
+	call	_I2C_Read_Bytes
+;	src\bme280.c: 119: *iValue = iRes[0];
+	ld	a, (0x02, sp)
+	clrw	y
+	clr	(0x0d, sp)
+	ldw	x, (0x15, sp)
+	ld	(0x3, x), a
+	ldw	(0x1, x), y
+	push	a
+	ld	a, (0x0e, sp)
+	ld	(x), a
+	pop	a
+;	src\bme280.c: 120: *iValue <<= 8;
+	ld	(0x13, sp), a
+	ldw	(0x11, sp), y
+	clr	(0x14, sp)
+	ldw	x, (0x15, sp)
+	ldw	y, (0x13, sp)
+	ldw	(0x2, x), y
+	ldw	y, (0x11, sp)
+	ldw	(x), y
+;	src\bme280.c: 121: *iValue += iRes[1];
+	ld	a, (0x03, sp)
+	clrw	y
+	clrw	x
+	ld	yl, a
+	addw	y, (0x13, sp)
+	ld	a, xl
+	adc	a, (0x12, sp)
+	push	a
+	ld	a, xh
+	adc	a, (0x12, sp)
+	ld	(0x0e, sp), a
+	pop	a
+	ldw	x, (0x15, sp)
+	ldw	(0x2, x), y
+	ld	(0x1, x), a
+	push	a
+	ld	a, (0x0e, sp)
+	ld	(x), a
+	pop	a
+;	src\bme280.c: 122: *iValue <<= 8;
+	ldw	(0x12, sp), y
+	ld	(0x11, sp), a
+	clr	(0x14, sp)
+	ldw	x, (0x15, sp)
+	ldw	y, (0x13, sp)
+	ldw	(0x2, x), y
+	ldw	y, (0x11, sp)
+	ldw	(x), y
+;	src\bme280.c: 123: *iValue += iRes[2];
+	ld	a, (0x04, sp)
+	clrw	y
+	clrw	x
+	ld	yl, a
+	addw	y, (0x13, sp)
+	ld	a, xl
+	adc	a, (0x12, sp)
+	ld	(0x06, sp), a
+	ld	a, xh
+	adc	a, (0x11, sp)
+	ld	(0x05, sp), a
+	ldw	x, (0x15, sp)
+	ldw	(0x2, x), y
+	ld	a, (0x06, sp)
+	ld	(0x1, x), a
+	ld	a, (0x05, sp)
+	ld	(x), a
+;	src\bme280.c: 124: *(uint32_t*)iValue = be24toword(*(uint32_t *)iValue) & 0x00FFFFFF;
+	ld	a, (0x06, sp)
+	ld	xl, a
+	clr	(0x0c, sp)
+	rlwa	x
+	ld	a, yh
+	rrwa	x
+	clr	a
+	clr	(0x09, sp)
+	clr	(0x0f, sp)
+	clr	(0x0e, sp)
+	clr	(0x0d, sp)
+	or	a, (0x0e, sp)
+	ld	(0x12, sp), a
+	ld	a, xl
+	or	a, (0x0c, sp)
+	ld	xl, a
+	pushw	x
+	ld	a, (0x11, sp)
+	or	a, (1, sp)
+	popw	x
+	ld	xh, a
+	ld	a, (0x0d, sp)
+	or	a, (0x09, sp)
+	clr	(0x10, sp)
+	clr	(0x0f, sp)
+	push	a
+	clr	(0x0d, sp)
+	clr	(0x0c, sp)
+	clr	(0x0a, sp)
+	pop	a
+	or	a, (0x09, sp)
+	ld	yh, a
+	ld	a, xl
+	or	a, (0x0c, sp)
+	rlwa	x
+	or	a, (0x0b, sp)
+	ld	xh, a
+	pushw	y
+	ld	a, (0x14, sp)
+	or	a, (2, sp)
+	popw	y
+	ld	(0x0e, sp), a
+	ld	(0x12, sp), a
+	clr	(0x11, sp)
+	ldw	y, (0x15, sp)
+	ldw	(0x2, y), x
+	ldw	x, (0x11, sp)
+	ldw	(y), x
+;	src\bme280.c: 125: }
+	addw	sp, #22
+	ret
+;	src\bme280.c: 127: void BME280_ReadReg_S16(uint8_t iReg, int16_t *iValue) {
 ;	-----------------------------------------
 ;	 function BME280_ReadReg_S16
 ;	-----------------------------------------
 _BME280_ReadReg_S16:
 	sub	sp, #7
 	ldw	(0x06, sp), x
-;	src\bme280.c: 143: iData[0] = iReg;
+;	src\bme280.c: 130: iData[0] = iReg;
 	ldw	x, sp
 	incw	x
 	ld	(x), a
-;	src\bme280.c: 144: I2C_Send_Bytes((BME280_ADDRESS), sizeof(iData), iData);
+;	src\bme280.c: 131: I2C_Send_Bytes((BME280_ADDRESS), sizeof(iData), iData);
 	pushw	x
 	clrw	x
 	incw	x
 	ld	a, #0xee
 	call	_I2C_Send_Bytes
-;	src\bme280.c: 146: I2C_Read_Bytes((BME280_ADDRESS), sizeof(iRes), iRes);
+;	src\bme280.c: 132: I2C_Read_Bytes((BME280_ADDRESS), sizeof(iRes), iRes);
 	ldw	x, sp
 	incw	x
 	incw	x
@@ -420,45 +566,45 @@ _BME280_ReadReg_S16:
 	ldw	x, #0x0002
 	ld	a, #0xee
 	call	_I2C_Read_Bytes
-;	src\bme280.c: 148: *iValue = iRes[0];
+;	src\bme280.c: 133: *iValue = iRes[0];
 	ld	a, (0x02, sp)
 	clrw	x
 	ld	xl, a
 	ldw	y, (0x06, sp)
 	ldw	(y), x
-;	src\bme280.c: 149: *iValue <<= 8;
+;	src\bme280.c: 134: *iValue <<= 8;
 	clr	a
 	rlwa	x
 	ldw	y, (0x06, sp)
 	ldw	(y), x
-;	src\bme280.c: 150: *iValue += iRes[1];
+;	src\bme280.c: 135: *iValue += iRes[1];
 	ld	a, (0x03, sp)
 	ld	(0x05, sp), a
 	clr	(0x04, sp)
 	addw	x, (0x04, sp)
 	ldw	y, (0x06, sp)
 	ldw	(y), x
-;	src\bme280.c: 151: }
+;	src\bme280.c: 136: }
 	addw	sp, #7
 	ret
-;	src\bme280.c: 153: void BME280_ReadReg_LE_S16(uint8_t iReg, int16_t *iValue) {
+;	src\bme280.c: 138: void BME280_ReadReg_LE_S16(uint8_t iReg, int16_t *iValue) {
 ;	-----------------------------------------
 ;	 function BME280_ReadReg_LE_S16
 ;	-----------------------------------------
 _BME280_ReadReg_LE_S16:
 	sub	sp, #9
 	ldw	(0x08, sp), x
-;	src\bme280.c: 156: iData[0] = iReg;
+;	src\bme280.c: 141: iData[0] = iReg;
 	ldw	x, sp
 	incw	x
 	ld	(x), a
-;	src\bme280.c: 157: I2C_Send_Bytes((BME280_ADDRESS), sizeof(iData), iData);
+;	src\bme280.c: 142: I2C_Send_Bytes((BME280_ADDRESS), sizeof(iData), iData);
 	pushw	x
 	clrw	x
 	incw	x
 	ld	a, #0xee
 	call	_I2C_Send_Bytes
-;	src\bme280.c: 159: I2C_Read_Bytes((BME280_ADDRESS), sizeof(iRes), iRes);
+;	src\bme280.c: 143: I2C_Read_Bytes((BME280_ADDRESS), sizeof(iRes), iRes);
 	ldw	x, sp
 	incw	x
 	incw	x
@@ -466,25 +612,25 @@ _BME280_ReadReg_LE_S16:
 	ldw	x, #0x0002
 	ld	a, #0xee
 	call	_I2C_Read_Bytes
-;	src\bme280.c: 161: *iValue = iRes[0];
+;	src\bme280.c: 144: *iValue = iRes[0];
 	ld	a, (0x02, sp)
 	clrw	x
 	ld	xl, a
 	ldw	y, (0x08, sp)
 	ldw	(y), x
-;	src\bme280.c: 162: *iValue <<= 8;
+;	src\bme280.c: 145: *iValue <<= 8;
 	clr	a
 	rlwa	x
 	ldw	y, (0x08, sp)
 	ldw	(y), x
-;	src\bme280.c: 163: *iValue += iRes[1];
+;	src\bme280.c: 146: *iValue += iRes[1];
 	ld	a, (0x03, sp)
 	ld	(0x07, sp), a
 	clr	(0x06, sp)
 	addw	x, (0x06, sp)
 	ldw	y, (0x08, sp)
 	ldw	(y), x
-;	src\bme280.c: 164: *(int16_t *)iValue = be16toword(*(int16_t *) iValue);
+;	src\bme280.c: 147: *(int16_t *)iValue = be16toword(*(int16_t *) iValue);
 	ldw	y, x
 	clr	(0x05, sp)
 	ld	a, xl
@@ -496,88 +642,88 @@ _BME280_ReadReg_LE_S16:
 	ld	xl, a
 	ldw	y, (0x08, sp)
 	ldw	(y), x
-;	src\bme280.c: 165: }
+;	src\bme280.c: 148: }
 	addw	sp, #9
 	ret
-;	src\bme280.c: 167: uint8_t BME280_ReadStatus(void) {
+;	src\bme280.c: 150: uint8_t BME280_ReadStatus(void) {
 ;	-----------------------------------------
 ;	 function BME280_ReadStatus
 ;	-----------------------------------------
 _BME280_ReadStatus:
-;	src\bme280.c: 169: uint8_t res = BME280_ReadReg(BME280_REGISTER_STATUS) & 0x09;
+;	src\bme280.c: 152: uint8_t res = BME280_ReadReg(BME280_REGISTER_STATUS) & 0x09;
 	ld	a, #0xf3
 	call	_BME280_ReadReg
 	and	a, #0x09
-;	src\bme280.c: 170: return res;
-;	src\bme280.c: 171: }
+;	src\bme280.c: 153: return res;
+;	src\bme280.c: 154: }
 	ret
-;	src\bme280.c: 173: void BME280_ReadCoefficients(void) {
+;	src\bme280.c: 156: void BME280_ReadCoefficients(void) {
 ;	-----------------------------------------
 ;	 function BME280_ReadCoefficients
 ;	-----------------------------------------
 _BME280_ReadCoefficients:
 	sub	sp, #4
-;	src\bme280.c: 174: BME280_ReadReg_LE_U16(BME280_REGISTER_DIG_T1, &CalibData.dig_T1);
+;	src\bme280.c: 157: BME280_ReadReg_LE_U16(BME280_REGISTER_DIG_T1, &CalibData.dig_T1);
 	ldw	x, #(_CalibData+0)
 	ld	a, #0x88
 	call	_BME280_ReadReg_LE_U16
-;	src\bme280.c: 175: BME280_ReadReg_LE_S16(BME280_REGISTER_DIG_T2, &CalibData.dig_T2);
+;	src\bme280.c: 158: BME280_ReadReg_LE_S16(BME280_REGISTER_DIG_T2, &CalibData.dig_T2);
 	ldw	x, #(_CalibData+2)
 	ld	a, #0x8a
 	call	_BME280_ReadReg_LE_S16
-;	src\bme280.c: 176: BME280_ReadReg_LE_S16(BME280_REGISTER_DIG_T3, &CalibData.dig_T3);
+;	src\bme280.c: 159: BME280_ReadReg_LE_S16(BME280_REGISTER_DIG_T3, &CalibData.dig_T3);
 	ldw	x, #(_CalibData+4)
 	ld	a, #0x8c
 	call	_BME280_ReadReg_LE_S16
-;	src\bme280.c: 177: BME280_ReadReg_LE_U16(BME280_REGISTER_DIG_P1, &CalibData.dig_P1);
+;	src\bme280.c: 160: BME280_ReadReg_LE_U16(BME280_REGISTER_DIG_P1, &CalibData.dig_P1);
 	ldw	x, #(_CalibData+6)
 	ld	a, #0x8e
 	call	_BME280_ReadReg_LE_U16
-;	src\bme280.c: 178: BME280_ReadReg_LE_S16(BME280_REGISTER_DIG_P2, &CalibData.dig_P2);
+;	src\bme280.c: 161: BME280_ReadReg_LE_S16(BME280_REGISTER_DIG_P2, &CalibData.dig_P2);
 	ldw	x, #(_CalibData+8)
 	ld	a, #0x90
 	call	_BME280_ReadReg_LE_S16
-;	src\bme280.c: 179: BME280_ReadReg_LE_S16(BME280_REGISTER_DIG_P3, &CalibData.dig_P3);
+;	src\bme280.c: 162: BME280_ReadReg_LE_S16(BME280_REGISTER_DIG_P3, &CalibData.dig_P3);
 	ldw	x, #(_CalibData+10)
 	ld	a, #0x92
 	call	_BME280_ReadReg_LE_S16
-;	src\bme280.c: 180: BME280_ReadReg_LE_S16(BME280_REGISTER_DIG_P4, &CalibData.dig_P4);
+;	src\bme280.c: 163: BME280_ReadReg_LE_S16(BME280_REGISTER_DIG_P4, &CalibData.dig_P4);
 	ldw	x, #(_CalibData+12)
 	ld	a, #0x94
 	call	_BME280_ReadReg_LE_S16
-;	src\bme280.c: 181: BME280_ReadReg_LE_S16(BME280_REGISTER_DIG_P5, &CalibData.dig_P5);
+;	src\bme280.c: 164: BME280_ReadReg_LE_S16(BME280_REGISTER_DIG_P5, &CalibData.dig_P5);
 	ldw	x, #(_CalibData+14)
 	ld	a, #0x96
 	call	_BME280_ReadReg_LE_S16
-;	src\bme280.c: 182: BME280_ReadReg_LE_S16(BME280_REGISTER_DIG_P6, &CalibData.dig_P6);
+;	src\bme280.c: 165: BME280_ReadReg_LE_S16(BME280_REGISTER_DIG_P6, &CalibData.dig_P6);
 	ldw	x, #(_CalibData+16)
 	ld	a, #0x98
 	call	_BME280_ReadReg_LE_S16
-;	src\bme280.c: 183: BME280_ReadReg_LE_S16(BME280_REGISTER_DIG_P7, &CalibData.dig_P7);
+;	src\bme280.c: 166: BME280_ReadReg_LE_S16(BME280_REGISTER_DIG_P7, &CalibData.dig_P7);
 	ldw	x, #(_CalibData+18)
 	ld	a, #0x9a
 	call	_BME280_ReadReg_LE_S16
-;	src\bme280.c: 184: BME280_ReadReg_LE_S16(BME280_REGISTER_DIG_P8, &CalibData.dig_P8);
+;	src\bme280.c: 167: BME280_ReadReg_LE_S16(BME280_REGISTER_DIG_P8, &CalibData.dig_P8);
 	ldw	x, #(_CalibData+20)
 	ld	a, #0x9c
 	call	_BME280_ReadReg_LE_S16
-;	src\bme280.c: 185: BME280_ReadReg_LE_S16(BME280_REGISTER_DIG_P9, &CalibData.dig_P9);
+;	src\bme280.c: 168: BME280_ReadReg_LE_S16(BME280_REGISTER_DIG_P9, &CalibData.dig_P9);
 	ldw	x, #(_CalibData+22)
 	ld	a, #0x9e
 	call	_BME280_ReadReg_LE_S16
-;	src\bme280.c: 186: CalibData.dig_H1 = BME280_ReadReg(BME280_REGISTER_DIG_H1);
+;	src\bme280.c: 169: CalibData.dig_H1 = BME280_ReadReg(BME280_REGISTER_DIG_H1);
 	ld	a, #0xa1
 	call	_BME280_ReadReg
 	ld	_CalibData+24, a
-;	src\bme280.c: 187: BME280_ReadReg_LE_S16(BME280_REGISTER_DIG_H2, &CalibData.dig_H2);
+;	src\bme280.c: 170: BME280_ReadReg_LE_S16(BME280_REGISTER_DIG_H2, &CalibData.dig_H2);
 	ldw	x, #(_CalibData+25)
 	ld	a, #0xe1
 	call	_BME280_ReadReg_LE_S16
-;	src\bme280.c: 188: CalibData.dig_H3 = BME280_ReadReg(BME280_REGISTER_DIG_H3);
+;	src\bme280.c: 171: CalibData.dig_H3 = BME280_ReadReg(BME280_REGISTER_DIG_H3);
 	ld	a, #0xe3
 	call	_BME280_ReadReg
 	ld	_CalibData+27, a
-;	src\bme280.c: 189: CalibData.dig_H4 = (BME280_ReadReg(BME280_REGISTER_DIG_H4) << 4) | (BME280_ReadReg(BME280_REGISTER_DIG_H4+1) & 0xF);
+;	src\bme280.c: 172: CalibData.dig_H4 = (BME280_ReadReg(BME280_REGISTER_DIG_H4) << 4) | (BME280_ReadReg(BME280_REGISTER_DIG_H4+1) & 0xF);
 	ld	a, #0xe4
 	call	_BME280_ReadReg
 	clrw	x
@@ -597,7 +743,7 @@ _BME280_ReadCoefficients:
 	or	a, (0x04, sp)
 	ld	xl, a
 	ldw	_CalibData+28, x
-;	src\bme280.c: 190: CalibData.dig_H5 = (BME280_ReadReg(BME280_REGISTER_DIG_H5+1) << 4) | (BME280_ReadReg(BME280_REGISTER_DIG_H5) >> 4);
+;	src\bme280.c: 173: CalibData.dig_H5 = (BME280_ReadReg(BME280_REGISTER_DIG_H5+1) << 4) | (BME280_ReadReg(BME280_REGISTER_DIG_H5) >> 4);
 	ld	a, #0xe6
 	call	_BME280_ReadReg
 	clrw	x
@@ -617,170 +763,170 @@ _BME280_ReadCoefficients:
 	or	a, (0x03, sp)
 	ld	xh, a
 	ldw	_CalibData+30, x
-;	src\bme280.c: 191: CalibData.dig_H6 = (int8_t)BME280_ReadReg(BME280_REGISTER_DIG_H6);
+;	src\bme280.c: 174: CalibData.dig_H6 = (int8_t)BME280_ReadReg(BME280_REGISTER_DIG_H6);
 	ld	a, #0xe7
 	call	_BME280_ReadReg
 	ld	_CalibData+32, a
-;	src\bme280.c: 231: }
+;	src\bme280.c: 214: }
 	addw	sp, #4
 	ret
-;	src\bme280.c: 233: void BME280_SetStandby(uint8_t tsb) {
+;	src\bme280.c: 216: void BME280_SetStandby(uint8_t tsb) {
 ;	-----------------------------------------
 ;	 function BME280_SetStandby
 ;	-----------------------------------------
 _BME280_SetStandby:
 	pushw	x
 	ld	(0x02, sp), a
-;	src\bme280.c: 235: reg = BME280_ReadReg(BME280_REG_CONFIG) & ~BME280_STBY_MSK;
+;	src\bme280.c: 218: reg = BME280_ReadReg(BME280_REG_CONFIG) & ~BME280_STBY_MSK;
 	ld	a, #0xf5
 	call	_BME280_ReadReg
 	and	a, #0x1f
 	ld	(0x01, sp), a
-;	src\bme280.c: 236: reg |= tsb & BME280_STBY_MSK;
+;	src\bme280.c: 219: reg |= tsb & BME280_STBY_MSK;
 	ld	a, (0x02, sp)
 	and	a, #0xe0
 	or	a, (0x01, sp)
-;	src\bme280.c: 237: BME280_WriteReg(BME280_REG_CONFIG,reg);
+;	src\bme280.c: 220: BME280_WriteReg(BME280_REG_CONFIG,reg);
 	push	a
 	ld	a, #0xf5
 	call	_BME280_WriteReg
-;	src\bme280.c: 238: }
+;	src\bme280.c: 221: }
 	popw	x
 	ret
-;	src\bme280.c: 240: void BME280_SetFilter(uint8_t filter) {
+;	src\bme280.c: 223: void BME280_SetFilter(uint8_t filter) {
 ;	-----------------------------------------
 ;	 function BME280_SetFilter
 ;	-----------------------------------------
 _BME280_SetFilter:
 	pushw	x
 	ld	(0x02, sp), a
-;	src\bme280.c: 242: reg = BME280_ReadReg(BME280_REG_CONFIG) & ~BME280_FILTER_MSK;
+;	src\bme280.c: 225: reg = BME280_ReadReg(BME280_REG_CONFIG) & ~BME280_FILTER_MSK;
 	ld	a, #0xf5
 	call	_BME280_ReadReg
 	and	a, #0xe3
 	ld	(0x01, sp), a
-;	src\bme280.c: 243: reg |= filter & BME280_FILTER_MSK;
+;	src\bme280.c: 226: reg |= filter & BME280_FILTER_MSK;
 	ld	a, (0x02, sp)
 	and	a, #0x1c
 	or	a, (0x01, sp)
-;	src\bme280.c: 244: BME280_WriteReg(BME280_REG_CONFIG,reg);
+;	src\bme280.c: 227: BME280_WriteReg(BME280_REG_CONFIG,reg);
 	push	a
 	ld	a, #0xf5
 	call	_BME280_WriteReg
-;	src\bme280.c: 245: }
+;	src\bme280.c: 228: }
 	popw	x
 	ret
-;	src\bme280.c: 247: void BME280_SetOversamplingTemper(uint8_t osrs) {
+;	src\bme280.c: 230: void BME280_SetOversamplingTemper(uint8_t osrs) {
 ;	-----------------------------------------
 ;	 function BME280_SetOversamplingTemper
 ;	-----------------------------------------
 _BME280_SetOversamplingTemper:
 	pushw	x
 	ld	(0x02, sp), a
-;	src\bme280.c: 249: reg = BME280_ReadReg(BME280_REG_CTRL_MEAS) & ~BME280_OSRS_T_MSK;
+;	src\bme280.c: 232: reg = BME280_ReadReg(BME280_REG_CTRL_MEAS) & ~BME280_OSRS_T_MSK;
 	ld	a, #0xf4
 	call	_BME280_ReadReg
 	and	a, #0x1f
 	ld	(0x01, sp), a
-;	src\bme280.c: 250: reg |= osrs & BME280_OSRS_T_MSK;
+;	src\bme280.c: 233: reg |= osrs & BME280_OSRS_T_MSK;
 	ld	a, (0x02, sp)
 	and	a, #0xe0
 	or	a, (0x01, sp)
-;	src\bme280.c: 251: BME280_WriteReg(BME280_REG_CTRL_MEAS,reg);
+;	src\bme280.c: 234: BME280_WriteReg(BME280_REG_CTRL_MEAS,reg);
 	push	a
 	ld	a, #0xf4
 	call	_BME280_WriteReg
-;	src\bme280.c: 252: }
+;	src\bme280.c: 235: }
 	popw	x
 	ret
-;	src\bme280.c: 254: void BME280_SetOversamplingPressure(uint8_t osrs) {
+;	src\bme280.c: 237: void BME280_SetOversamplingPressure(uint8_t osrs) {
 ;	-----------------------------------------
 ;	 function BME280_SetOversamplingPressure
 ;	-----------------------------------------
 _BME280_SetOversamplingPressure:
 	pushw	x
 	ld	(0x02, sp), a
-;	src\bme280.c: 256: reg = BME280_ReadReg(BME280_REG_CTRL_MEAS) & ~BME280_OSRS_P_MSK;
+;	src\bme280.c: 239: reg = BME280_ReadReg(BME280_REG_CTRL_MEAS) & ~BME280_OSRS_P_MSK;
 	ld	a, #0xf4
 	call	_BME280_ReadReg
 	and	a, #0xe3
 	ld	(0x01, sp), a
-;	src\bme280.c: 257: reg |= osrs & BME280_OSRS_P_MSK;
+;	src\bme280.c: 240: reg |= osrs & BME280_OSRS_P_MSK;
 	ld	a, (0x02, sp)
 	and	a, #0x1c
 	or	a, (0x01, sp)
-;	src\bme280.c: 258: BME280_WriteReg(BME280_REG_CTRL_MEAS,reg);
+;	src\bme280.c: 241: BME280_WriteReg(BME280_REG_CTRL_MEAS,reg);
 	push	a
 	ld	a, #0xf4
 	call	_BME280_WriteReg
-;	src\bme280.c: 259: }
+;	src\bme280.c: 242: }
 	popw	x
 	ret
-;	src\bme280.c: 261: void BME280_SetOversamplingHum(uint8_t osrs) {
+;	src\bme280.c: 244: void BME280_SetOversamplingHum(uint8_t osrs) {
 ;	-----------------------------------------
 ;	 function BME280_SetOversamplingHum
 ;	-----------------------------------------
 _BME280_SetOversamplingHum:
 	pushw	x
 	ld	(0x02, sp), a
-;	src\bme280.c: 263: reg = BME280_ReadReg(BME280_REG_CTRL_HUM) & ~BME280_OSRS_H_MSK;
+;	src\bme280.c: 246: reg = BME280_ReadReg(BME280_REG_CTRL_HUM) & ~BME280_OSRS_H_MSK;
 	ld	a, #0xf2
 	call	_BME280_ReadReg
 	and	a, #0xf8
 	ld	(0x01, sp), a
-;	src\bme280.c: 264: reg |= osrs & BME280_OSRS_H_MSK;
+;	src\bme280.c: 247: reg |= osrs & BME280_OSRS_H_MSK;
 	ld	a, (0x02, sp)
 	and	a, #0x07
 	or	a, (0x01, sp)
-;	src\bme280.c: 265: BME280_WriteReg(BME280_REG_CTRL_HUM,reg);
+;	src\bme280.c: 248: BME280_WriteReg(BME280_REG_CTRL_HUM,reg);
 	push	a
 	ld	a, #0xf2
 	call	_BME280_WriteReg
-;	src\bme280.c: 268: reg = BME280_ReadReg(BME280_REG_CTRL_MEAS);
+;	src\bme280.c: 251: reg = BME280_ReadReg(BME280_REG_CTRL_MEAS);
 	ld	a, #0xf4
 	call	_BME280_ReadReg
-;	src\bme280.c: 269: BME280_WriteReg(BME280_REG_CTRL_MEAS,reg);
+;	src\bme280.c: 252: BME280_WriteReg(BME280_REG_CTRL_MEAS,reg);
 	push	a
 	ld	a, #0xf4
 	call	_BME280_WriteReg
-;	src\bme280.c: 270: }
+;	src\bme280.c: 253: }
 	popw	x
 	ret
-;	src\bme280.c: 272: void BME280_SetMode(uint8_t mode) {
+;	src\bme280.c: 255: void BME280_SetMode(uint8_t mode) {
 ;	-----------------------------------------
 ;	 function BME280_SetMode
 ;	-----------------------------------------
 _BME280_SetMode:
 	pushw	x
 	ld	(0x02, sp), a
-;	src\bme280.c: 274: reg = BME280_ReadReg(BME280_REG_CTRL_MEAS) & ~BME280_MODE_MSK;
+;	src\bme280.c: 257: reg = BME280_ReadReg(BME280_REG_CTRL_MEAS) & ~BME280_MODE_MSK;
 	ld	a, #0xf4
 	call	_BME280_ReadReg
 	and	a, #0xfc
 	ld	(0x01, sp), a
-;	src\bme280.c: 275: reg |= mode & BME280_MODE_MSK;
+;	src\bme280.c: 258: reg |= mode & BME280_MODE_MSK;
 	ld	a, (0x02, sp)
 	and	a, #0x03
 	or	a, (0x01, sp)
-;	src\bme280.c: 276: BME280_WriteReg(BME280_REG_CTRL_MEAS,reg);
+;	src\bme280.c: 259: BME280_WriteReg(BME280_REG_CTRL_MEAS,reg);
 	push	a
 	ld	a, #0xf4
 	call	_BME280_WriteReg
-;	src\bme280.c: 277: }
+;	src\bme280.c: 260: }
 	popw	x
 	ret
-;	src\bme280.c: 279: float BME280_ReadTemperature(void) {
+;	src\bme280.c: 262: float BME280_ReadTemperature(void) {
 ;	-----------------------------------------
 ;	 function BME280_ReadTemperature
 ;	-----------------------------------------
 _BME280_ReadTemperature:
 	sub	sp, #16
-;	src\bme280.c: 285: BME280_ReadReg_U24(BME280_REGISTER_TEMPDATA, &temper_raw);
+;	src\bme280.c: 268: BME280_ReadReg_U24(BME280_REGISTER_TEMPDATA, &temper_raw);
 	ldw	x, sp
 	incw	x
 	ld	a, #0xfa
 	call	_BME280_ReadReg_U24
-;	src\bme280.c: 291: temper_raw >>= 4;
+;	src\bme280.c: 277: temper_raw >>= 4;
 	ldw	x, (0x03, sp)
 	ldw	y, (0x01, sp)
 	sraw	y
@@ -793,7 +939,7 @@ _BME280_ReadTemperature:
 	rrcw	x
 	ldw	(0x03, sp), x
 	ldw	(0x01, sp), y
-;	src\bme280.c: 295: val1 = ((((temper_raw>>3) - ((int32_t)CalibData.dig_T1<<1))) * ((int32_t)CalibData.dig_T2)) >> 11;
+;	src\bme280.c: 286: val1 = ((((temper_raw>>3) - ((int32_t)CalibData.dig_T1<<1))) * ((int32_t)CalibData.dig_T2)) >> 11;
 	ldw	y, (0x03, sp)
 	ldw	x, (0x01, sp)
 	sraw	x
@@ -844,7 +990,7 @@ _BME280_ReadTemperature:
 	jrne	00103$
 	ldw	(0x07, sp), x
 	ldw	(0x05, sp), y
-;	src\bme280.c: 306: val2 = (((((temper_raw>>4) - ((int32_t)CalibData.dig_T1)) * ((temper_raw>>4) - ((int32_t)CalibData.dig_T1)))>>12) * ((int32_t)CalibData.dig_T3)) >> 14;
+;	src\bme280.c: 287: val2 = (((((temper_raw>>4) - ((int32_t)CalibData.dig_T1)) * ((temper_raw>>4) - ((int32_t)CalibData.dig_T1)))>>12) * ((int32_t)CalibData.dig_T3)) >> 14;
 	ldw	y, (0x03, sp)
 	ldw	x, (0x01, sp)
 	sraw	x
@@ -905,7 +1051,7 @@ _BME280_ReadTemperature:
 	rrcw	y
 	dec	a
 	jrne	00107$
-;	src\bme280.c: 315: temper_int = val1 + val2;
+;	src\bme280.c: 288: temper_int = val1 + val2;
 	addw	y, (0x07, sp)
 	ld	a, xl
 	adc	a, (0x06, sp)
@@ -914,7 +1060,7 @@ _BME280_ReadTemperature:
 	ld	xh, a
 	ldw	_temper_int+2, y
 	ldw	_temper_int+0, x
-;	src\bme280.c: 321: temper_float = ((temper_int * 5 + 128) >> 8);
+;	src\bme280.c: 299: temper_float = ((temper_int * 5 + 128) >> 8);
 	ldw	x, _temper_int+2
 	pushw	x
 	ldw	x, _temper_int+0
@@ -943,7 +1089,7 @@ _BME280_ReadTemperature:
 	pushw	x
 	call	___slong2fs
 	addw	sp, #4
-;	src\bme280.c: 322: temper_float /= 100.0f;
+;	src\bme280.c: 300: temper_float /= 100.0f;
 	push	#0x00
 	push	#0x00
 	push	#0xc8
@@ -951,24 +1097,269 @@ _BME280_ReadTemperature:
 	pushw	x
 	pushw	y
 	call	___fsdiv
-;	src\bme280.c: 324: return temper_float;
-;	src\bme280.c: 325: }
+;	src\bme280.c: 302: return temper_float;
+;	src\bme280.c: 303: }
 	addw	sp, #16
 	ret
-;	src\bme280.c: 356: float BME280_ReadHumidity(void) {
+;	src\bme280.c: 305: float BME280_ReadPressure(void) {
+;	-----------------------------------------
+;	 function BME280_ReadPressure
+;	-----------------------------------------
+_BME280_ReadPressure:
+	sub	sp, #16
+;	src\bme280.c: 312: BME280_ReadTemperature(); // must be done first to get t_fine
+	call	_BME280_ReadTemperature
+;	src\bme280.c: 313: BME280_ReadReg_U24(BME280_REGISTER_PRESSUREDATA, &press_raw);
+	ldw	x, sp
+	incw	x
+	ld	a, #0xf7
+	call	_BME280_ReadReg_U24
+;	src\bme280.c: 322: press_raw >>= 4;
+	ldw	x, (0x03, sp)
+	ldw	y, (0x01, sp)
+	sraw	y
+	rrcw	x
+	sraw	y
+	rrcw	x
+	sraw	y
+	rrcw	x
+	sraw	y
+	rrcw	x
+	ldw	(0x03, sp), x
+	ldw	(0x01, sp), y
+;	src\bme280.c: 331: val1 = (float)temper_int/2 - 64000.0;
+	ldw	x, _temper_int+2
+	pushw	x
+	ldw	x, _temper_int+0
+	pushw	x
+	call	___slong2fs
+	addw	sp, #4
+	push	#0x00
+	push	#0x00
+	push	#0x00
+	push	#0x40
+	pushw	x
+	pushw	y
+	call	___fsdiv
+	push	#0x00
+	push	#0x00
+	push	#0x7a
+	push	#0x47
+	pushw	x
+	pushw	y
+	call	___fssub
+	ldw	(0x0f, sp), x
+	ldw	(0x0d, sp), y
+;	src\bme280.c: 350: val2 = (val1/4.0) + CalibData.dig_P4 * 65536;
+	clrw	x
+	pushw	x
+	push	#0x80
+	push	#0x40
+	ldw	x, (0x13, sp)
+	pushw	x
+	ldw	x, (0x13, sp)
+	pushw	x
+	call	___fsdiv
+	ldw	(0x0b, sp), x
+	ldw	(0x09, sp), y
+	ldw	x, _CalibData+12
+	ld	a, xh
+	rlc	a
+	clr	a
+	sbc	a, #0x00
+	clrw	y
+	pushw	y
+	pushw	x
+	call	___slong2fs
+	addw	sp, #4
+	pushw	x
+	pushw	y
+	ldw	x, (0x0f, sp)
+	pushw	x
+	ldw	x, (0x0f, sp)
+	pushw	x
+	call	___fsadd
+	ldw	(0x07, sp), x
+	ldw	(0x05, sp), y
+;	src\bme280.c: 351: val1 = (1 + val1 / 32768) * (float)CalibData.dig_P1;
+	clrw	x
+	pushw	x
+	push	#0x00
+	push	#0x47
+	ldw	x, (0x13, sp)
+	pushw	x
+	ldw	x, (0x13, sp)
+	pushw	x
+	call	___fsdiv
+	push	#0x00
+	push	#0x00
+	push	#0x80
+	push	#0x3f
+	pushw	x
+	pushw	y
+	call	___fsadd
+	ldw	(0x0f, sp), x
+	ldw	(0x0d, sp), y
+	ldw	x, _CalibData+6
+	call	___uint2fs
+	pushw	x
+	pushw	y
+	ldw	x, (0x13, sp)
+	pushw	x
+	ldw	x, (0x13, sp)
+	pushw	x
+	call	___fsmul
+	ldw	(0x0b, sp), x
+	ldw	(0x09, sp), y
+;	src\bme280.c: 352: p = 1048576.0 - (float)press_raw;
+	ldw	x, (0x03, sp)
+	pushw	x
+	ldw	x, (0x03, sp)
+	pushw	x
+	call	___slong2fs
+	addw	sp, #4
+	pushw	x
+	pushw	y
+	clrw	x
+	pushw	x
+	push	#0x80
+	push	#0x49
+	call	___fssub
+	ldw	(0x0f, sp), x
+	ldw	(0x0d, sp), y
+;	src\bme280.c: 353: p = (p -(val2/4096)) * 6250 / val1;
+	clrw	x
+	pushw	x
+	push	#0x80
+	push	#0x45
+	ldw	x, (0x0b, sp)
+	pushw	x
+	ldw	x, (0x0b, sp)
+	pushw	x
+	call	___fsdiv
+	pushw	x
+	pushw	y
+	ldw	x, (0x13, sp)
+	pushw	x
+	ldw	x, (0x13, sp)
+	pushw	x
+	call	___fssub
+	pushw	x
+	pushw	y
+	push	#0x00
+	push	#0x50
+	push	#0xc3
+	push	#0x45
+	call	___fsmul
+	ldw	(0x0f, sp), x
+	ldw	x, (0x0b, sp)
+	pushw	x
+	ldw	x, (0x0b, sp)
+	pushw	x
+	ldw	x, (0x13, sp)
+	pushw	x
+	pushw	y
+	call	___fsdiv
+	ldw	(0x0b, sp), x
+	ldw	(0x09, sp), y
+;	src\bme280.c: 354: val1 = (float)CalibData.dig_P9 * p * p / 2147483648;
+	ldw	x, _CalibData+22
+	call	___sint2fs
+	ldw	(0x0f, sp), x
+	ldw	x, (0x0b, sp)
+	pushw	x
+	ldw	x, (0x0b, sp)
+	pushw	x
+	ldw	x, (0x13, sp)
+	pushw	x
+	pushw	y
+	call	___fsmul
+	ldw	(0x0f, sp), x
+	ldw	x, (0x0b, sp)
+	pushw	x
+	ldw	x, (0x0b, sp)
+	pushw	x
+	ldw	x, (0x13, sp)
+	pushw	x
+	pushw	y
+	call	___fsmul
+	push	#0x00
+	push	#0x00
+	push	#0x00
+	push	#0x4f
+	pushw	x
+	pushw	y
+	call	___fsdiv
+	ldw	(0x0f, sp), x
+	ldw	(0x0d, sp), y
+;	src\bme280.c: 355: val2 = p * (float)CalibData.dig_P8 / 32768.0;
+	ldw	x, _CalibData+20
+	call	___sint2fs
+	pushw	x
+	pushw	y
+	ldw	x, (0x0f, sp)
+	pushw	x
+	ldw	x, (0x0f, sp)
+	pushw	x
+	call	___fsmul
+	push	#0x00
+	push	#0x00
+	push	#0x00
+	push	#0x47
+	pushw	x
+	pushw	y
+	call	___fsdiv
+;	src\bme280.c: 356: p = p + (val1 + val2 + (float)CalibData.dig_P7)/16.0;
+	pushw	x
+	pushw	y
+	ldw	x, (0x13, sp)
+	pushw	x
+	ldw	x, (0x13, sp)
+	pushw	x
+	call	___fsadd
+	ldw	(0x0f, sp), x
+	ldw	(0x0d, sp), y
+	ldw	x, _CalibData+18
+	call	___sint2fs
+	pushw	x
+	pushw	y
+	ldw	x, (0x13, sp)
+	pushw	x
+	ldw	x, (0x13, sp)
+	pushw	x
+	call	___fsadd
+	push	#0x00
+	push	#0x00
+	push	#0x80
+	push	#0x41
+	pushw	x
+	pushw	y
+	call	___fsdiv
+	pushw	x
+	pushw	y
+	ldw	x, (0x0f, sp)
+	pushw	x
+	ldw	x, (0x0f, sp)
+	pushw	x
+	call	___fsadd
+;	src\bme280.c: 380: return p;
+;	src\bme280.c: 381: }
+	addw	sp, #16
+	ret
+;	src\bme280.c: 383: float BME280_ReadHumidity(void) {
 ;	-----------------------------------------
 ;	 function BME280_ReadHumidity
 ;	-----------------------------------------
 _BME280_ReadHumidity:
 	sub	sp, #18
-;	src\bme280.c: 360: BME280_ReadTemperature(); // must be done first to get t_fine
+;	src\bme280.c: 387: BME280_ReadTemperature(); // must be done first to get t_fine
 	call	_BME280_ReadTemperature
-;	src\bme280.c: 361: BME280_ReadReg_S16(BME280_REGISTER_HUMIDDATA, &hum_raw);
+;	src\bme280.c: 388: BME280_ReadReg_S16(BME280_REGISTER_HUMIDDATA, &hum_raw);
 	ldw	x, sp
 	incw	x
 	ld	a, #0xfd
 	call	_BME280_ReadReg_S16
-;	src\bme280.c: 368: hum_raw_sign = ((int32_t)hum_raw)&0x0000FFFF;
+;	src\bme280.c: 393: hum_raw_sign = ((int32_t)hum_raw)&0x0000FFFF;
 	ldw	y, (0x01, sp)
 	clrw	x
 	tnzw	y
@@ -977,7 +1368,7 @@ _BME280_ReadHumidity:
 00117$:
 	clr	(0x10, sp)
 	clr	(0x0f, sp)
-;	src\bme280.c: 369: v_x1_u32r = (temper_int - ((int32_t)76800));
+;	src\bme280.c: 394: v_x1_u32r = (temper_int - ((int32_t)76800));
 	ldw	x, _temper_int+2
 	subw	x, #0x2c00
 	ldw	(0x05, sp), x
@@ -986,7 +1377,7 @@ _BME280_ReadHumidity:
 	ld	(0x04, sp), a
 	ld	a, _temper_int+0
 	sbc	a, #0x00
-;	src\bme280.c: 370: v_x1_u32r = (((((hum_raw_sign << 14) - (((int32_t)CalibData.dig_H4) << 20) - \
+;	src\bme280.c: 395: v_x1_u32r = (((((hum_raw_sign << 14) - (((int32_t)CalibData.dig_H4) << 20) - \
 	push	a
 	ldw	x, (0x10, sp)
 	ld	a, #0x0e
@@ -1209,7 +1600,7 @@ _BME280_ReadHumidity:
 	call	__mullong
 	addw	sp, #8
 	ldw	(0x0d, sp), x
-;	src\bme280.c: 375: v_x1_u32r = (v_x1_u32r - (((((v_x1_u32r >> 15) * (v_x1_u32r >> 15)) >> 7) * \
+;	src\bme280.c: 400: v_x1_u32r = (v_x1_u32r - (((((v_x1_u32r >> 15) * (v_x1_u32r >> 15)) >> 7) * \
 	ldw	(0x0f, sp), y
 	ldw	x, (0x0d, sp)
 	ld	a, #0x0f
@@ -1304,14 +1695,14 @@ _BME280_ReadHumidity:
 	pop	a
 	ldw	(0x11, sp), x
 	ldw	(0x0f, sp), y
-;	src\bme280.c: 377: v_x1_u32r = (v_x1_u32r < 0) ? 0 : v_x1_u32r;
+;	src\bme280.c: 402: v_x1_u32r = (v_x1_u32r < 0) ? 0 : v_x1_u32r;
 	tnz	(0x0f, sp)
 	jrpl	00103$
 	clrw	x
 	ldw	(0x11, sp), x
 	ldw	(0x0f, sp), x
 00103$:
-;	src\bme280.c: 378: v_x1_u32r = (v_x1_u32r > 419430400) ? 419430400 : v_x1_u32r;
+;	src\bme280.c: 403: v_x1_u32r = (v_x1_u32r > 419430400) ? 419430400 : v_x1_u32r;
 	clrw	x
 	cpw	x, (0x11, sp)
 	clr	a
@@ -1327,7 +1718,7 @@ _BME280_ReadHumidity:
 	ldw	x, (0x0f, sp)
 00106$:
 	ldw	y, (0x11, sp)
-;	src\bme280.c: 379: hum_float = (uint32_t)(v_x1_u32r >> 12);
+;	src\bme280.c: 404: hum_float = (uint32_t)(v_x1_u32r >> 12);
 	ld	a, #0x0c
 00139$:
 	sraw	x
@@ -1338,7 +1729,7 @@ _BME280_ReadHumidity:
 	pushw	x
 	call	___ulong2fs
 	addw	sp, #4
-;	src\bme280.c: 380: hum_float /= 1024.0f;
+;	src\bme280.c: 405: hum_float /= 1024.0f;
 	push	#0x00
 	push	#0x00
 	push	#0x80
@@ -1346,8 +1737,8 @@ _BME280_ReadHumidity:
 	pushw	x
 	pushw	y
 	call	___fsdiv
-;	src\bme280.c: 381: return hum_float;
-;	src\bme280.c: 382: }
+;	src\bme280.c: 406: return hum_float;
+;	src\bme280.c: 407: }
 	addw	sp, #18
 	ret
 	.area CODE

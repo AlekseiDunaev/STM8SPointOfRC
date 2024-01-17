@@ -64,16 +64,13 @@ void BME280_WriteReg(uint8_t iReg, uint8_t iValue) {
     iData[0] = iReg;
     iData[1] = iValue;
     I2C_Send_Bytes((BME280_ADDRESS), sizeof(iData), iData);
-    // I2C_Send_Bytes((BME280_ADDRESS << 1), sizeof(iData), iData);
 }
 
 uint8_t BME280_ReadReg(uint8_t iReg) {
     uint8_t iData[1];
     iData[0] = iReg;
     I2C_Send_Bytes((BME280_ADDRESS), sizeof(iData), iData);
-    // I2C_Send_Bytes((BME280_ADDRESS << 1), sizeof(iData), iData);
     return I2C_Read_Byte(BME280_ADDRESS);
-    // return I2C_Read_Byte(BME280_ADDRESS << 1);
 }
 
 void BME280_ReadReg_U16(uint8_t iReg, uint16_t *iValue) {
@@ -81,9 +78,7 @@ void BME280_ReadReg_U16(uint8_t iReg, uint16_t *iValue) {
     uint8_t iRes[2];
     iData[0] = iReg;
     I2C_Send_Bytes((BME280_ADDRESS), sizeof(iData), iData);
-    // I2C_Send_Bytes((BME280_ADDRESS << 1), sizeof(iData), iData);
     I2C_Read_Bytes((BME280_ADDRESS), sizeof(iRes), iRes);
-    // I2C_Read_Bytes((BME280_ADDRESS << 1), sizeof(iRes), iRes);
     *iValue = iRes[0];
     *iValue <<= 8;
     *iValue += iRes[1];
@@ -94,9 +89,7 @@ void BME280_ReadReg_LE_U16(uint8_t iReg, uint16_t *iValue) {
     uint8_t iRes[2];
     iData[0] = iReg;
     I2C_Send_Bytes((BME280_ADDRESS), sizeof(iData), iData);
-    // I2C_Send_Bytes((BME280_ADDRESS << 1), sizeof(iData), iData);
     I2C_Read_Bytes((BME280_ADDRESS), sizeof(iRes), iRes);
-    // I2C_Read_Bytes((BME280_ADDRESS << 1), sizeof(iRes), iRes);
     *iValue = iRes[0];
     *iValue <<= 8;
     *iValue += iRes[1];
@@ -108,9 +101,7 @@ void BME280_ReadReg_U24(uint8_t iReg, uint32_t *iValue) {
     uint8_t iRes[3];
     iData[0] = iReg;
     I2C_Send_Bytes((BME280_ADDRESS), sizeof(iData), iData);
-    // I2C_Send_Bytes((BME280_ADDRESS << 1), sizeof(iData), iData);
     I2C_Read_Bytes((BME280_ADDRESS), sizeof(iRes), iRes);
-    // I2C_Read_Bytes((BME280_ADDRESS << 1), sizeof(iRes), iRes);
     *iValue = iRes[0];
     *iValue <<= 8;
     *iValue += iRes[1];
@@ -119,15 +110,12 @@ void BME280_ReadReg_U24(uint8_t iReg, uint32_t *iValue) {
     *(uint32_t*)iValue &= 0x00FFFFFF;
 }
 
-/*
 void BME280_ReadReg_LE_U24(uint8_t iReg, uint32_t *iValue) {
     uint8_t iData[1];
     uint8_t iRes[3];
     iData[0] = iReg;
     I2C_Send_Bytes((BME280_ADDRESS), sizeof(iData), iData);
-    // I2C_Send_Bytes((BME280_ADDRESS << 1), sizeof(iData), iData);
     I2C_Read_Bytes((BME280_ADDRESS), sizeof(iRes), iRes);
-    // I2C_Read_Bytes((BME280_ADDRESS << 1), sizeof(iRes), iRes);
     *iValue = iRes[0];
     *iValue <<= 8;
     *iValue += iRes[1];
@@ -135,16 +123,13 @@ void BME280_ReadReg_LE_U24(uint8_t iReg, uint32_t *iValue) {
     *iValue += iRes[2];
     *(uint32_t*)iValue = be24toword(*(uint32_t *)iValue) & 0x00FFFFFF;
 }
-*/
 
 void BME280_ReadReg_S16(uint8_t iReg, int16_t *iValue) {
   uint8_t iData[1];
   uint8_t iRes[2];
   iData[0] = iReg;
   I2C_Send_Bytes((BME280_ADDRESS), sizeof(iData), iData);
-  // I2C_Send_Bytes((BME280_ADDRESS << 1), sizeof(iData), iData);
   I2C_Read_Bytes((BME280_ADDRESS), sizeof(iRes), iRes);
-  // I2C_Read_Bytes((BME280_ADDRESS << 1), sizeof(iRes), iRes);
   *iValue = iRes[0];
   *iValue <<= 8;
   *iValue += iRes[1];
@@ -155,9 +140,7 @@ void BME280_ReadReg_LE_S16(uint8_t iReg, int16_t *iValue) {
   uint8_t iRes[2];
   iData[0] = iReg;
   I2C_Send_Bytes((BME280_ADDRESS), sizeof(iData), iData);
-  // I2C_Send_Bytes((BME280_ADDRESS << 1), sizeof(iData), iData);
   I2C_Read_Bytes((BME280_ADDRESS), sizeof(iRes), iRes);
-  // I2C_Read_Bytes((BME280_ADDRESS << 1), sizeof(iRes), iRes);
   *iValue = iRes[0];
   *iValue <<= 8;
   *iValue += iRes[1];
@@ -285,35 +268,30 @@ float BME280_ReadTemperature(void) {
   BME280_ReadReg_U24(BME280_REGISTER_TEMPDATA, &temper_raw);
 
 #ifdef BMT280_DEBUG
-  sprintf(str1, "Temperature RAW: 0x%04X%04X\r\n", (uint16_t)(temper_raw >> 16), (uint16_t)temper_raw); 
+  sprintf(str1, "Temperature RAW: 0x%04X%04X\r\n", (uint16_t)temper_raw >> 16, (uint16_t)temper_raw); 
+  printf("%s", str1);  
+  sprintf(str1, "Temperature RAW: %lu\r\n", temper_raw); 
   printf("%s", str1);  
 #endif
-  temper_raw >>= 4;
-  // sprintf(str1, "Temperature RAW: %lu\r\n", temper_raw); 
-  // printf("%s", str1);  
+
+	temper_raw >>= 4;
+
+#ifdef BMT280_DEBUG
+  sprintf(str1, "Temperature RAW after right shift: 0x%04X%04X\r\n", (uint16_t)temper_raw >> 16, (uint16_t)temper_raw); 
+  printf("%s", str1);  
+  sprintf(str1, "Temperature RAW: %lu\r\n", temper_raw); 
+  printf("%s", str1);  
+#endif
 
   val1 = ((((temper_raw>>3) - ((int32_t)CalibData.dig_T1<<1))) * ((int32_t)CalibData.dig_T2)) >> 11;
+  val2 = (((((temper_raw>>4) - ((int32_t)CalibData.dig_T1)) * ((temper_raw>>4) - ((int32_t)CalibData.dig_T1)))>>12) * ((int32_t)CalibData.dig_T3)) >> 14;
+  temper_int = val1 + val2;
 
 #ifdef BMT280_DEBUG  
-  sprintf(str1, "CalibData.dig_T1: 0x%04X%04X\r\n", (uint16_t)(CalibData.dig_T1>>8), (uint16_t)CalibData.dig_T1); 
+  sprintf(str1, "val1: 0x%04X\r\n", (uint16_t)val1); 
   printf("%s", str1);
-  sprintf(str1, "CalibData.dig_T2: 0x%04X%04X\r\n", (uint16_t)(CalibData.dig_T2>>8), (uint16_t)CalibData.dig_T2); 
+  sprintf(str1, "val2: 0x%04X\r\n", (uint16_t)val2); 
   printf("%s", str1);
-  sprintf(str1, "val1: 0x%04X%04X\r\n", (uint16_t)(val1>>16), (uint16_t)val1); 
-  printf("%s", str1);
-#endif
-  
-  val2 = (((((temper_raw>>4) - ((int32_t)CalibData.dig_T1)) * ((temper_raw>>4) - ((int32_t)CalibData.dig_T1)))>>12) * ((int32_t)CalibData.dig_T3)) >> 14;
-  
-#ifdef BMT280_DEBUG  
-  sprintf(str1, "CalibData.dig_T3: 0x%04X%04X\r\n", (uint16_t)(CalibData.dig_T3>>16), (uint16_t)CalibData.dig_T3); 
-  printf("%s", str1);
-  sprintf(str1, "val2: 0x%04X%04X\r\n", (uint16_t)(val2>>16), (uint16_t)val2); 
-  printf("%s", str1);
-#endif
-  
-  temper_int = val1 + val2;
-#ifdef BMT280_DEBUG  
   sprintf(str1, "temper_int: 0x%04X%04X\r\n", (int16_t)(temper_int>>16), (int16_t)temper_int); 
   printf("%s", str1);
 #endif
@@ -324,34 +302,83 @@ float BME280_ReadTemperature(void) {
   return temper_float;
 }
 
-/*
 float BME280_ReadPressure(void) {
-  float press_float = 0.0f;
-	uint32_t press_raw, pres_int;
-	int64_t val1, val2, p;
+	float val1, val2;
+	// int32_t val1, val2;
+  // uint32_t p;
+  int32_t press_raw;
+  float p;
+  // float p_float;
 	BME280_ReadTemperature(); // must be done first to get t_fine
 	BME280_ReadReg_U24(BME280_REGISTER_PRESSUREDATA, &press_raw);
-	// BME280_ReadReg_BE_U24(BME280_REGISTER_PRESSUREDATA, &press_raw);
-	press_raw >>= 4;
-	val1 = ((int64_t)temper_int) - 128000;
-	val2 = val1 * val1 * (int64_t)CalibData.dig_P6;
-	val2 = val2 + ((val1 * (int64_t)CalibData.dig_P5) << 17);
-	val2 = val2 + ((int64_t)CalibData.dig_P4 << 35);
-	val1 = ((val1 * val1 * (int64_t)CalibData.dig_P3) >> 8) + ((val1 * (int64_t)CalibData.dig_P2) << 12);
-	val1 = (((((int64_t)1) << 47) + val1)) * ((int64_t)CalibData.dig_P1) >> 33;
+	
+#ifdef BMT280_DEBUG
+  sprintf(str1, "Pressure RAW after: 0x%04X%04X\r\n", (uint16_t)press_raw >> 16, (uint16_t)press_raw); 
+  printf("%s", str1);  
+  sprintf(str1, "Pressure RAW: %lu\r\n", press_raw); 
+  printf("%s", str1);  
+#endif
+
+  press_raw >>= 4;
+  
+#ifdef BMT280_DEBUG
+  sprintf(str1, "Pressure RAW after right shift: 0x%04X%04X\r\n", (uint16_t)press_raw >> 16, (uint16_t)press_raw); 
+  printf("%s", str1);  
+  sprintf(str1, "Pressure RAW after right shift: %lu\r\n", press_raw); 
+  printf("%s", str1);  
+#endif
+
+  val1 = (float)temper_int/2 - 64000.0;
+  
+#ifdef BMT280_DEBUG
+  int8_t integer_bit  = 10;
+  int8_t decimal_bit = 10;
+  
+  int8_t sizeValueString = integer_bit + decimal_bit + 1;
+  int8_t sizeSendUARTString = sizeof("val1") + sizeValueString;
+  char *stringValue = (char*)malloc(sizeValueString * sizeof(char));
+  char *stringSendUART = (char*)malloc(sizeSendUARTString * sizeof(char));
+
+  floatToStr(stringValue, val1, integer_bit, decimal_bit);
+  sprintf(stringSendUART, "val1", stringValue);
+  printf("%s\r\n", stringSendUART);
+#endif
+
+  val2= val1 * val1 * (float)CalibData.dig_P6 / 32768.0;
+  
+  val2 = val2 + val1 * (float)CalibData.dig_P5 * 2;
+  val2 = (val1/4.0) + CalibData.dig_P4 * 65536;
+  val1 = (1 + val1 / 32768) * (float)CalibData.dig_P1;
+  p = 1048576.0 - (float)press_raw;
+  p = (p -(val2/4096)) * 6250 / val1;
+  val1 = (float)CalibData.dig_P9 * p * p / 2147483648;
+  val2 = p * (float)CalibData.dig_P8 / 32768.0;
+  p = p + (val1 + val2 + (float)CalibData.dig_P7)/16.0;
+  /*
+  val1 = (((int32_t)temper_int) >> 1) - (int32_t)64000;
+	val2 = (((val1 >> 2) * (val1 >> 2)) >> 11) * (int32_t)CalibData.dig_P6;
+	val2 = val2 + ((val1 * ((int32_t)CalibData.dig_P5)) << 1);
+	val2 = (val2>>2) + ((int32_t)CalibData.dig_P4) << 16;
+	val1 = (((CalibData.dig_P3 * (((val1 >> 2) * (val1 >> 2)) >> 13)) >> 3) + (((int32_t)CalibData.dig_P2) * val1) >> 1) >> 18;
+	val1 = (((32768 + val1) * ((int32_t)CalibData.dig_P1)) >> 15);
 	if (val1 == 0) {
 		return 0; // avoid exception caused by division by zero
 	}
-	p = 1048576 - press_raw;
-	p = (((p << 31) - val2) * 3125) / val1;
-	val1 = (((int64_t)CalibData.dig_P9) * (p >> 13) * (p >> 13)) >> 25;
-	val2 = (((int64_t)CalibData.dig_P8) * p) >> 19;
-	p = ((p + val1 + val2) >> 8) + ((int64_t)CalibData.dig_P7 << 4);
-	pres_int = ((p >> 8) * 1000) + (((p & 0xff) * 390625) / 100000);
-	press_float = pres_int / 100.0f;
-  return press_float;
+	p = (((uint32_t)(((int32_t)1048576) - press_raw) - (val2 >> 12))) * 3125;
+  if (p < 0x80000000) {
+    p = (p<<1) / ((uint32_t)val1);
+  } else {
+    p =(p/(uint32_t)val1) * 2;
+  }
+	val1 = (((int32_t)CalibData.dig_P9) * ((int32_t)(((p >> 3) * (p >> 3)) >> 13))) >> 12;
+	val2 = (((int32_t)(p >> 2)) * ((int32_t)CalibData.dig_P8)) >> 13;
+	p = (uint32_t)((int32_t)p + ((val1 + val2 + CalibData.dig_P7) >> 4));
+  */
+
+  // p_float = p * 1.0;
+  // return p_float;
+  return p;
 }
-*/
 
 float BME280_ReadHumidity(void) {
   float hum_float = 0.0f;
@@ -360,9 +387,7 @@ float BME280_ReadHumidity(void) {
 	BME280_ReadTemperature(); // must be done first to get t_fine
 	BME280_ReadReg_S16(BME280_REGISTER_HUMIDDATA, &hum_raw);
 #ifdef BMT280_DEBUG
-sprintf(str1, "hum_raw: 0x%04X\r\n", hum_raw); 
-  printf("%s", str1);
-  sprintf(str1, "Humidity temper_int: 0x%04X%04X\r\n", (int16_t)(temper_int>>16), (int16_t)temper_int); 
+  sprintf(str1, "hum_raw: 0x%04X\r\n", hum_raw); 
   printf("%s", str1);
 #endif
 	hum_raw_sign = ((int32_t)hum_raw)&0x0000FFFF;

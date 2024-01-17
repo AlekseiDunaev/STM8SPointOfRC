@@ -119,7 +119,7 @@
 #endif
 
 // Functions
-void FloatToStr(char *str, float number, uint8_t integer_bit, uint8_t decimal_bit);
+void floatToStr(char *str, float number, uint8_t integer_bit, uint8_t decimal_bit);
 // void uart_send_n_byte(uint8_t* data, uint8_t len);
 // void uart_read_n_byte(uint8_t* data, uint8_t len);
 
@@ -133,9 +133,15 @@ float fDS18X20Temperature = -100.0f;
 // float fAHTX0Temperature = 0.0f;
 float fBME280Temperature = 0.0f;
 float fBME280Humidity = 0.0f;
+uint32_t fBME280Pressure = 0;
 char sString[UART_BUF_SIZE];
 char str1[UART_BUF_SIZE];
 // extern BME280_CalibData CalibData;
+char *stringSendUART = NULL;
+char *stringValue = NULL;
+uint8_t integer_bit, decimal_bit;
+uint8_t sizeValueString = 0;
+uint8_t sizeSendUARTString = 0;
 
 /*
 // Read buffer
@@ -213,25 +219,22 @@ void main(void) {
   BME280_Setup();
 #endif
 
-  while (1) {
-    char *stringSendUART = NULL;
-    char *stringValue = NULL;
-    uint8_t integer_bit, decimal_bit;
-    uint8_t sizeValueString = 0;
-    uint8_t sizeSendUARTString = 0;
-    // static const char preambule[] = { 0x00, 0x00, 0x18 };
-    static const char placeholderDS18X20String[] = "{\"topic\" : \"mqtt\/temperature-room\", \"value\" : \"%s\"}";
-    // static const char placeholderDS18X20String_test[] = "{\"topic\" : \"mqtt\/temperature-room\", \"value\" : \"";
-    // const char placeholderHumidityAHTX0String[] = "{\"topic\" : \"mqtt\/humidity-aht20\", \"value\": \"%s\"}";
-    // const char placeholderTemperatureAHTX0String[] = "{\"topic\" : \"mqtt\/temperature-aht20\", \"value\": \"%s\"}";
-    static const char placeholderHumidityBME280String[] = "{\"topic\" : \"mqtt\/humidity-bme280\", \"value\": \"%s\"}";
-    // static const char placeholderHumidityBME280String_test[] = "{\"topic\" : \"mqtt\/humidity-bme280\", \"value\": \"";
-    static const char placeholderTemperatureBME280String[] = "{\"topic\" : \"mqtt\/temperature-bme280\", \"value\": \"%s\"}";
-    // static const char placeholderTemperatureBME280String_test[] = "{\"topic\" : \"mqtt\/temperature-bme280\", \"value\": \"";
-    // static const char placeholderPressureBME280String[] = "{\"topic\" : \"mqtt\/pressure-bme280\", \"value\": \"%s\"}";
-    // static const char end[] = "\"}\r\n";
+  // static const char preambule[] = { 0x00, 0x00, 0x18 };
+  static const char placeholderDS18X20String[] = "{\"topic\" : \"mqtt\/temperature-room\", \"value\" : \"%s\"}";
+  // static const char placeholderDS18X20String_test[] = "{\"topic\" : \"mqtt\/temperature-room\", \"value\" : \"";
+  // const char placeholderHumidityAHTX0String[] = "{\"topic\" : \"mqtt\/humidity-aht20\", \"value\": \"%s\"}";
+  // const char placeholderTemperatureAHTX0String[] = "{\"topic\" : \"mqtt\/temperature-aht20\", \"value\": \"%s\"}";
+  static const char placeholderTemperatureBME280String[] = "{\"topic\" : \"mqtt\/temperature-bme280\", \"value\": \"%s\"}";
+  // static const char placeholderTemperatureBME280String_test[] = "{\"topic\" : \"mqtt\/temperature-bme280\", \"value\": \"";
+  static const char placeholderHumidityBME280String[] = "{\"topic\" : \"mqtt\/humidity-bme280\", \"value\": \"%s\"}";
+  // static const char placeholderHumidityBME280String_test[] = "{\"topic\" : \"mqtt\/humidity-bme280\", \"value\": \"";
+  static const char placeholderPressureBME280String[] = "{\"topic\" : \"mqtt\/pressure-bme280\", \"value\": \"%s\"}";
+  // static const char placeholderPressureBME280String[] = "{\"topic\" : \"mqtt\/pressure-bme280\", \"value\": \"%s\"}";
+  // static const char end[] = "\"}\r\n";
 
-    LED_ON;
+  LED_ON;
+
+  while (1) {
 
 #ifdef DS18X20_ENABLE
     DS18X20_Reset();
@@ -243,6 +246,7 @@ void main(void) {
         iDS18X20RomID[i] = 0;
       }
     };
+
     fDS18X20Temperature = DS18X20_Get_Temperature();
     integer_bit = 2;
     decimal_bit = 2;
@@ -257,7 +261,7 @@ void main(void) {
 
     printf("\r\n");
 
-    FloatToStr(sString, fDS18X20Temperature, integer_bit, decimal_bit);
+    floatToStr(sString, fDS18X20Temperature, integer_bit, decimal_bit);
     printf("DS18X20 temperature: %s\r\n", sString);
 #endif
 
@@ -266,7 +270,7 @@ void main(void) {
     stringValue = (char*)malloc(sizeValueString * sizeof(char));
     stringSendUART = (char*)malloc(sizeSendUARTString * sizeof(char));
     
-    FloatToStr(stringValue, fDS18X20Temperature, integer_bit, decimal_bit);
+    floatToStr(stringValue, fDS18X20Temperature, integer_bit, decimal_bit);
 
     sprintf(stringSendUART, placeholderDS18X20String, stringValue);
     putchar(0x00);
@@ -293,9 +297,9 @@ void main(void) {
     fAHTX0Temperature = ATHX0ConvertTemperature(iI2CRead);
     
 #ifdef AHTX0_DEBUG
-    FloatToStr(sString, fAHTX0Humidity, 2, 2);
+    floatToStr(sString, fAHTX0Humidity, 2, 2);
     printf("ATHX0 humidity: %s\r\n", sString);
-    FloatToStr(sString, fAHTX0Temperature, 2, 2);
+    floatToStr(sString, fAHTX0Temperature, 2, 2);
     printf("AHTX0 temperature: %s\r\n", sString);
 #endif
 
@@ -307,7 +311,7 @@ void main(void) {
     stringValue = (char*)malloc(sizeValueString * sizeof(char));
     stringSendUART = (char*)malloc(sizeSendUARTString * sizeof(char));
     
-    FloatToStr(stringValue, fAHTX0Humidity, integer_bit, decimal_bit);
+    floatToStr(stringValue, fAHTX0Humidity, integer_bit, decimal_bit);
 
     sprintf(stringSendUART, placeholderHumidityAHTX0String, stringValue);
     printf("%s\r\n", stringSendUART);
@@ -325,7 +329,7 @@ void main(void) {
     stringValue = (char*)malloc(sizeValueString * sizeof(char));
     stringSendUART = (char*)malloc(sizeSendUARTString * sizeof(char));
     
-    FloatToStr(stringValue, fAHTX0Temperature, integer_bit, decimal_bit);
+    floatToStr(stringValue, fAHTX0Temperature, integer_bit, decimal_bit);
 
     sprintf(stringSendUART, placeholderTemperatureAHTX0String, stringValue);
     printf("%s\r\n", stringSendUART);
@@ -347,7 +351,7 @@ void main(void) {
     sizeSendUARTString = sizeof(placeholderTemperatureBME280String) + sizeValueString;
     stringSendUART = (char*)malloc(sizeSendUARTString * sizeof(char));
     
-    FloatToStr(stringValue, fBME280Temperature, integer_bit, decimal_bit);
+    floatToStr(stringValue, fBME280Temperature, integer_bit, decimal_bit);
     sprintf(stringSendUART, placeholderTemperatureBME280String, stringValue);
     putchar(0x00);
     putchar(0x00);
@@ -368,7 +372,7 @@ void main(void) {
     stringValue = (char*)malloc(sizeValueString * sizeof(char));
     stringSendUART = (char*)malloc(sizeSendUARTString * sizeof(char));
 
-    FloatToStr(stringValue, fBME280Humidity, integer_bit, decimal_bit);
+    floatToStr(stringValue, fBME280Humidity, integer_bit, decimal_bit);
     sprintf(stringSendUART, placeholderHumidityBME280String, stringValue);
     // uart_send_n_byte(preambule, sizeof(preambule));
     // uart_send_n_byte(placeholderHumidityBME280String_test, sizeof(placeholderHumidityBME280String_test));
@@ -381,6 +385,32 @@ void main(void) {
     
     free(stringSendUART);
     free(stringValue);
+
+    integer_bit = 5;
+    decimal_bit = 1;
+
+    fBME280Pressure = BME280_ReadPressure();
+    delay_ms(2000);
+
+    sizeValueString = integer_bit + decimal_bit + 1;
+    sizeSendUARTString = sizeof(placeholderPressureBME280String) + sizeValueString;
+    stringValue = (char*)malloc(sizeValueString * sizeof(char));
+    stringSendUART = (char*)malloc(sizeSendUARTString * sizeof(char));
+
+    floatToStr(stringValue, (float)fBME280Pressure, integer_bit, decimal_bit);
+    sprintf(stringSendUART, placeholderPressureBME280String, stringValue);
+    // uart_send_n_byte(preambule, sizeof(preambule));
+    // uart_send_n_byte(placeholderHumidityBME280String_test, sizeof(placeholderHumidityBME280String_test));
+    // uart_send_n_byte(stringValue, sizeof(stringValue));
+    // uart_send_n_byte(end, sizeof(end));
+    putchar(0x00);
+    putchar(0x00);
+    putchar(0x18);
+    printf("%s\r\n", stringSendUART);
+    
+    free(stringSendUART);
+    free(stringValue);
+
 
 #endif
     
@@ -406,7 +436,7 @@ void main(void) {
   }
 }
 
-void FloatToStr(char *str, float number, uint8_t integer_bit, uint8_t decimal_bit) {
+void floatToStr(char *str, float number, uint8_t integer_bit, uint8_t decimal_bit) {
         uint8_t i;
         uint8_t minus = 0;
         float t2 = 0.0;

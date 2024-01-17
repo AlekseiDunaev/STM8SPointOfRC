@@ -3,8 +3,9 @@
 
 #include "stm8s.h"
 #include "stm8s_conf.h"
-// #include "stdio.h"
-// #include "string.h"
+#include "stdio.h"
+#include "stdlib.h"
+#include "string.h"
 // #include "math.h"
 #include "config.h"
 
@@ -119,11 +120,11 @@ void BME280_Setup(void);
 void BME280_WriteReg(uint8_t Reg, uint8_t Value);
 uint8_t BME280_ReadReg(uint8_t Reg);
 void BME280_ReadReg_U16(uint8_t iReg, uint16_t *iValue);
-void BME280_ReadReg_S16(uint8_t iReg, int16_t *iValue);
 void BME280_ReadReg_LE_U16(uint8_t iReg, uint16_t *iValue);
+void BME280_ReadReg_S16(uint8_t iReg, int16_t *iValue);
 void BME280_ReadReg_LE_S16(uint8_t iReg, int16_t *iValue);
 void BME280_ReadReg_U24(uint8_t iReg, uint32_t *iValue);
-// void BME280_ReadReg_LE_U24(uint8_t iReg, uint32_t *iValue);
+void BME280_ReadReg_LE_U24(uint8_t iReg, uint32_t *iValue);
 uint8_t BME280_ReadStatus(void);
 void BME280_ReadCoefficients(void);
 void BME280_SetStandby(uint8_t tsb);
@@ -133,7 +134,7 @@ void BME280_SetOversamplingPressure(uint8_t osrs);
 void BME280_SetOversamplingHum(uint8_t osrs);
 void BME280_SetMode(uint8_t mode);
 float BME280_ReadTemperature(void);
-// float BME280_ReadPressure(void);
+float BME280_ReadPressure(void);
 float BME280_ReadHumidity(void);
 // float BME280_ReadAltitude(float seaLevel);
 

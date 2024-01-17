@@ -7,22 +7,24 @@ Symbol Table
     .__.ABS.                                                    =  000000 G
     .__.CPU.                                                    =  000000 L
     .__.H$L.                                                    =  000001 L
-  9 _BME280_ReadCoefficients                                       000225 GR
-  9 _BME280_ReadHumidity                                           0004B5 GR
+  9 _BME280_ReadCoefficients                                       000303 GR
+  9 _BME280_ReadHumidity                                           00073B GR
+  9 _BME280_ReadPressure                                           000593 GR
   9 _BME280_ReadReg                                                000069 GR
-  9 _BME280_ReadReg_LE_S16                                         0001D1 GR
+  9 _BME280_ReadReg_LE_S16                                         0002AF GR
   9 _BME280_ReadReg_LE_U16                                         0000B6 GR
-  9 _BME280_ReadReg_S16                                            000198 GR
+  9 _BME280_ReadReg_LE_U24                                         000198 GR
+  9 _BME280_ReadReg_S16                                            000276 GR
   9 _BME280_ReadReg_U16                                            00007D GR
   9 _BME280_ReadReg_U24                                            000102 GR
-  9 _BME280_ReadStatus                                             00021D GR
-  9 _BME280_ReadTemperature                                        000391 GR
-  9 _BME280_SetFilter                                              000304 GR
-  9 _BME280_SetMode                                                000377 GR
-  9 _BME280_SetOversamplingHum                                     000352 GR
-  9 _BME280_SetOversamplingPressure                                000338 GR
-  9 _BME280_SetOversamplingTemper                                  00031E GR
-  9 _BME280_SetStandby                                             0002EA GR
+  9 _BME280_ReadStatus                                             0002FB GR
+  9 _BME280_ReadTemperature                                        00046F GR
+  9 _BME280_SetFilter                                              0003E2 GR
+  9 _BME280_SetMode                                                000455 GR
+  9 _BME280_SetOversamplingHum                                     000430 GR
+  9 _BME280_SetOversamplingPressure                                000416 GR
+  9 _BME280_SetOversamplingTemper                                  0003FC GR
+  9 _BME280_SetStandby                                             0003C8 GR
   9 _BME280_Setup                                                  000008 GR
   9 _BME280_WriteReg                                               000054 GR
   1 _CalibData                                                     000000 GR
@@ -32,8 +34,13 @@ Symbol Table
     _I2C_Read_Byte                                                 ****** GX
     _I2C_Read_Bytes                                                ****** GX
     _I2C_Send_Bytes                                                ****** GX
+    ___fsadd                                                       ****** GX
     ___fsdiv                                                       ****** GX
+    ___fsmul                                                       ****** GX
+    ___fssub                                                       ****** GX
+    ___sint2fs                                                     ****** GX
     ___slong2fs                                                    ****** GX
+    ___uint2fs                                                     ****** GX
     ___ulong2fs                                                    ****** GX
     __mullong                                                      ****** GX
   1 _temper_int                                                    000021 GR
@@ -53,6 +60,6 @@ Area Table
    6 GSFINAL                                    size      0   flags    0
    7 CONST                                      size      0   flags    0
    8 INITIALIZER                                size      0   flags    0
-   9 CODE                                       size    715   flags    0
+   9 CODE                                       size    99B   flags    0
    A CABS                                       size      0   flags    8
 
