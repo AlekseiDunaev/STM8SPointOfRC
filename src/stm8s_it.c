@@ -40,21 +40,6 @@
 /* Private functions ---------------------------------------------------------*/
 /* Public functions ----------------------------------------------------------*/
 
-#define UART_BUF_SIZE 128
-/*
-// Read buffer
-uint8_t read_ok = 0; // read completion flag
-uint8_t read_idx = 0;
-uint8_t read_len = 0;
-NEAR uint8_t read_buffer[UART_BUF_SIZE]; // @near can be placed when the buffer setting is large
-
-// Write buffer
-uint8_t write_ok = 0; // write completion flag
-uint8_t write_idx = 0;
-uint8_t write_len = 0;
-NEAR uint8_t write_buffer[UART_BUF_SIZE]; // @near can be placed when the buffer setting is large
-*/
-
 #ifdef _COSMIC_
 /**
   * @brief  Dummy interrupt routine

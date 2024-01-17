@@ -1,6 +1,7 @@
 #include "bme280.h"
 #include "config.h"
 #include "i2c.h"
+#include "output.h"
 
 //------------------------------------------------
 
@@ -11,6 +12,7 @@
 
 extern char str1[UART_BUF_SIZE];
 BME280_CalibData CalibData;
+BME280_Registers Registers;
 int32_t temper_int;
 
 void Error(void) {
@@ -54,7 +56,8 @@ void BME280_Setup(void) {
   printf("%s", str1);
 #endif
 
-  BME280_SetMode(BME280_MODE_NORMAL);
+  BME280_SetMode(BME280_MODE_FORCED);
+  // BME280_SetMode(BME280_MODE_NORMAL);
 
   LED_ON;
 }
@@ -145,6 +148,28 @@ void BME280_ReadReg_LE_S16(uint8_t iReg, int16_t *iValue) {
   *iValue <<= 8;
   *iValue += iRes[1];
   *(int16_t *)iValue = be16toword(*(int16_t *) iValue);
+}
+
+void BME280_ReadRegisters() {
+  uint8_t iData[1] = { BME280_REGISTER_PRESSUREDATA };
+  uint8_t iRes[8];
+  I2C_Send_Bytes((BME280_ADDRESS), sizeof(iData), iData);
+  I2C_Read_Bytes((BME280_ADDRESS), sizeof(iRes), iRes);
+  Registers.pressure = iRes[0];
+  Registers.pressure << 8;
+  Registers.pressure += iRes[1];
+  Registers.pressure << 8;
+  Registers.pressure += iRes[2];
+  Registers.pressure &= 0x00FFFFFF;
+  Registers.temperature = iRes[3];
+  Registers.pressure << 8;
+  Registers.pressure += iRes[4];
+  Registers.pressure << 8;
+  Registers.pressure += iRes[5];
+  Registers.pressure &= 0x00FFFFFF;
+  Registers.humidity = iRes[6];
+  Registers.humidity << 8;
+  Registers.humidity = iRes[7];
 }
 
 uint8_t BME280_ReadStatus(void) {
@@ -265,7 +290,8 @@ float BME280_ReadTemperature(void) {
   // В руководстве переменная temper_raw со знаком 
   int32_t temper_raw;
  
-  BME280_ReadReg_U24(BME280_REGISTER_TEMPDATA, &temper_raw);
+  temper_raw = Registers.temperature;
+  // BME280_ReadReg_U24(BME280_REGISTER_TEMPDATA, &temper_raw);
 
 #ifdef BMT280_DEBUG
   sprintf(str1, "Temperature RAW: 0x%04X%04X\r\n", (uint16_t)temper_raw >> 16, (uint16_t)temper_raw); 
@@ -309,8 +335,9 @@ float BME280_ReadPressure(void) {
   int32_t press_raw;
   float p;
   // float p_float;
-	BME280_ReadTemperature(); // must be done first to get t_fine
-	BME280_ReadReg_U24(BME280_REGISTER_PRESSUREDATA, &press_raw);
+	// BME280_ReadTemperature(); // must be done first to get t_fine
+	// BME280_ReadReg_U24(BME280_REGISTER_PRESSUREDATA, &press_raw);
+  press_raw = Registers.pressure;
 	
 #ifdef BMT280_DEBUG
   sprintf(str1, "Pressure RAW after: 0x%04X%04X\r\n", (uint16_t)press_raw >> 16, (uint16_t)press_raw); 
@@ -384,8 +411,10 @@ float BME280_ReadHumidity(void) {
   float hum_float = 0.0f;
 	int16_t hum_raw;
 	int32_t hum_raw_sign, v_x1_u32r;
-	BME280_ReadTemperature(); // must be done first to get t_fine
-	BME280_ReadReg_S16(BME280_REGISTER_HUMIDDATA, &hum_raw);
+	// BME280_ReadTemperature(); // must be done first to get t_fine
+	// BME280_ReadReg_S16(BME280_REGISTER_HUMIDDATA, &hum_raw);
+  hum_raw = Registers.humidity;
+
 #ifdef BMT280_DEBUG
   sprintf(str1, "hum_raw: 0x%04X\r\n", hum_raw); 
   printf("%s", str1);
@@ -406,11 +435,9 @@ float BME280_ReadHumidity(void) {
   return hum_float;
 }
 
-/*
 float BME280_ReadAltitude(float seaLevel) {
   float att = 0.0f;
 	float atm = BME280_ReadPressure();
-	att = 44330.0 * (1.0 - pow(atm / seaLevel, 0.1903));
+	// att = 44330.0 * (1.0 - pow(atm / seaLevel, 0.1903));
   return att;
 }
-*/

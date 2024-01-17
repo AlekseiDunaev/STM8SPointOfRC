@@ -12,1055 +12,801 @@
                                      12 	.globl _UART_Setup
                                      13 	.globl _GPIO_Setup
                                      14 	.globl _Clock_Setup
-                                     15 	.globl _BME280_ReadHumidity
-                                     16 	.globl _BME280_ReadPressure
-                                     17 	.globl _BME280_ReadTemperature
-                                     18 	.globl _BME280_Setup
-                                     19 	.globl _DS18X20_Setup
-                                     20 	.globl _DS18X20_Get_Temperature
-                                     21 	.globl _DS18X20_Read_ID
-                                     22 	.globl _DS18X20_Reset
-                                     23 	.globl _I2C_Setup
-                                     24 	.globl _delay_ms
-                                     25 	.globl _free
-                                     26 	.globl _malloc
-                                     27 	.globl _sprintf
-                                     28 	.globl _printf
-                                     29 	.globl _UART2_GetFlagStatus
-                                     30 	.globl _UART2_SendData8
-                                     31 	.globl _UART2_ReceiveData8
-                                     32 	.globl _UART2_Init
-                                     33 	.globl _UART2_DeInit
-                                     34 	.globl _GPIO_WriteLow
-                                     35 	.globl _GPIO_WriteHigh
-                                     36 	.globl _GPIO_Init
-                                     37 	.globl _GPIO_DeInit
-                                     38 	.globl _CLK_GetFlagStatus
-                                     39 	.globl _CLK_SYSCLKConfig
-                                     40 	.globl _CLK_HSIPrescalerConfig
-                                     41 	.globl _CLK_ClockSwitchConfig
-                                     42 	.globl _CLK_PeripheralClockConfig
-                                     43 	.globl _CLK_ClockSwitchCmd
-                                     44 	.globl _CLK_LSICmd
-                                     45 	.globl _CLK_HSICmd
-                                     46 	.globl _CLK_HSECmd
-                                     47 	.globl _CLK_DeInit
-                                     48 	.globl _sizeSendUARTString
-                                     49 	.globl _sizeValueString
-                                     50 	.globl _stringValue
-                                     51 	.globl _stringSendUART
-                                     52 	.globl _fBME280Pressure
-                                     53 	.globl _fBME280Humidity
-                                     54 	.globl _fBME280Temperature
-                                     55 	.globl _fDS18X20Temperature
-                                     56 	.globl _decimal_bit
-                                     57 	.globl _integer_bit
-                                     58 	.globl _str1
-                                     59 	.globl _sString
-                                     60 	.globl _iI2CRead
-                                     61 	.globl _iI2CWrite
-                                     62 	.globl _iDS18X20RomID
-                                     63 	.globl _floatToStr
-                                     64 	.globl _putchar
-                                     65 	.globl _getchar
-                                     66 	.globl _assert_failed
-                                     67 ;--------------------------------------------------------
-                                     68 ; ram data
+                                     15 	.globl _floatToStr
+                                     16 	.globl _BME280_ReadHumidity
+                                     17 	.globl _BME280_ReadPressure
+                                     18 	.globl _BME280_ReadTemperature
+                                     19 	.globl _BME280_SetMode
+                                     20 	.globl _BME280_ReadRegisters
+                                     21 	.globl _BME280_Setup
+                                     22 	.globl _DS18X20_Setup
+                                     23 	.globl _DS18X20_Get_Temperature
+                                     24 	.globl _DS18X20_Read_ID
+                                     25 	.globl _DS18X20_Reset
+                                     26 	.globl _I2C_Setup
+                                     27 	.globl _delay_ms
+                                     28 	.globl _free
+                                     29 	.globl _malloc
+                                     30 	.globl _sprintf
+                                     31 	.globl _printf
+                                     32 	.globl _UART2_GetFlagStatus
+                                     33 	.globl _UART2_SendData8
+                                     34 	.globl _UART2_ReceiveData8
+                                     35 	.globl _UART2_Init
+                                     36 	.globl _UART2_DeInit
+                                     37 	.globl _GPIO_WriteLow
+                                     38 	.globl _GPIO_WriteHigh
+                                     39 	.globl _GPIO_Init
+                                     40 	.globl _GPIO_DeInit
+                                     41 	.globl _CLK_GetFlagStatus
+                                     42 	.globl _CLK_SYSCLKConfig
+                                     43 	.globl _CLK_HSIPrescalerConfig
+                                     44 	.globl _CLK_ClockSwitchConfig
+                                     45 	.globl _CLK_PeripheralClockConfig
+                                     46 	.globl _CLK_ClockSwitchCmd
+                                     47 	.globl _CLK_LSICmd
+                                     48 	.globl _CLK_HSICmd
+                                     49 	.globl _CLK_HSECmd
+                                     50 	.globl _CLK_DeInit
+                                     51 	.globl _sizeSendUARTString
+                                     52 	.globl _sizeValueString
+                                     53 	.globl _stringValue
+                                     54 	.globl _stringSendUART
+                                     55 	.globl _fBME280Pressure
+                                     56 	.globl _fBME280Humidity
+                                     57 	.globl _fBME280Temperature
+                                     58 	.globl _fDS18X20Temperature
+                                     59 	.globl _decimal_bit
+                                     60 	.globl _integer_bit
+                                     61 	.globl _str1
+                                     62 	.globl _sString
+                                     63 	.globl _iI2CRead
+                                     64 	.globl _iI2CWrite
+                                     65 	.globl _iDS18X20RomID
+                                     66 	.globl _putchar
+                                     67 	.globl _getchar
+                                     68 	.globl _assert_failed
                                      69 ;--------------------------------------------------------
-                                     70 	.area DATA
-      000000                         71 _iDS18X20RomID::
-      000000                         72 	.ds 8
-      000008                         73 _iI2CWrite::
-      000008                         74 	.ds 3
-      00000B                         75 _iI2CRead::
-      00000B                         76 	.ds 7
-      000012                         77 _sString::
-      000012                         78 	.ds 128
-      000092                         79 _str1::
-      000092                         80 	.ds 128
-      000112                         81 _integer_bit::
-      000112                         82 	.ds 1
-      000113                         83 _decimal_bit::
-      000113                         84 	.ds 1
-                                     85 ;--------------------------------------------------------
-                                     86 ; ram data
+                                     70 ; ram data
+                                     71 ;--------------------------------------------------------
+                                     72 	.area DATA
+      000000                         73 _iDS18X20RomID::
+      000000                         74 	.ds 8
+      000008                         75 _iI2CWrite::
+      000008                         76 	.ds 3
+      00000B                         77 _iI2CRead::
+      00000B                         78 	.ds 7
+      000012                         79 _sString::
+      000012                         80 	.ds 128
+      000092                         81 _str1::
+      000092                         82 	.ds 128
+      000112                         83 _integer_bit::
+      000112                         84 	.ds 1
+      000113                         85 _decimal_bit::
+      000113                         86 	.ds 1
                                      87 ;--------------------------------------------------------
-                                     88 	.area INITIALIZED
-      000000                         89 _fDS18X20Temperature::
-      000000                         90 	.ds 4
-      000004                         91 _fBME280Temperature::
-      000004                         92 	.ds 4
-      000008                         93 _fBME280Humidity::
-      000008                         94 	.ds 4
-      00000C                         95 _fBME280Pressure::
-      00000C                         96 	.ds 4
-      000010                         97 _stringSendUART::
-      000010                         98 	.ds 2
-      000012                         99 _stringValue::
-      000012                        100 	.ds 2
-      000014                        101 _sizeValueString::
-      000014                        102 	.ds 1
-      000015                        103 _sizeSendUARTString::
-      000015                        104 	.ds 1
-                                    105 ;--------------------------------------------------------
-                                    106 ; Stack segment in internal ram
+                                     88 ; ram data
+                                     89 ;--------------------------------------------------------
+                                     90 	.area INITIALIZED
+      000000                         91 _fDS18X20Temperature::
+      000000                         92 	.ds 4
+      000004                         93 _fBME280Temperature::
+      000004                         94 	.ds 4
+      000008                         95 _fBME280Humidity::
+      000008                         96 	.ds 4
+      00000C                         97 _fBME280Pressure::
+      00000C                         98 	.ds 4
+      000010                         99 _stringSendUART::
+      000010                        100 	.ds 2
+      000012                        101 _stringValue::
+      000012                        102 	.ds 2
+      000014                        103 _sizeValueString::
+      000014                        104 	.ds 1
+      000015                        105 _sizeSendUARTString::
+      000015                        106 	.ds 1
                                     107 ;--------------------------------------------------------
-                                    108 	.area	SSEG
-      000000                        109 __start__stack:
-      000000                        110 	.ds	1
-                                    111 
-                                    112 ;--------------------------------------------------------
-                                    113 ; absolute external ram data
+                                    108 ; Stack segment in internal ram
+                                    109 ;--------------------------------------------------------
+                                    110 	.area	SSEG
+      000000                        111 __start__stack:
+      000000                        112 	.ds	1
+                                    113 
                                     114 ;--------------------------------------------------------
-                                    115 	.area DABS (ABS)
-                                    116 
-                                    117 ; default segment ordering for linker
-                                    118 	.area HOME
-                                    119 	.area GSINIT
-                                    120 	.area GSFINAL
-                                    121 	.area CONST
-                                    122 	.area INITIALIZER
-                                    123 	.area CODE
-                                    124 
-                                    125 ;--------------------------------------------------------
-                                    126 ; interrupt vector
+                                    115 ; absolute external ram data
+                                    116 ;--------------------------------------------------------
+                                    117 	.area DABS (ABS)
+                                    118 
+                                    119 ; default segment ordering for linker
+                                    120 	.area HOME
+                                    121 	.area GSINIT
+                                    122 	.area GSFINAL
+                                    123 	.area CONST
+                                    124 	.area INITIALIZER
+                                    125 	.area CODE
+                                    126 
                                     127 ;--------------------------------------------------------
-                                    128 	.area HOME
-      000000                        129 __interrupt_vect:
-      000000 82v00u00u00            130 	int s_GSINIT ; reset
-      000004 82v00u00u00            131 	int _TRAP_IRQHandler ; trap
-      000008 82v00u00u00            132 	int _TLI_IRQHandler ; int0
-      00000C 82v00u00u00            133 	int _AWU_IRQHandler ; int1
-      000010 82v00u00u00            134 	int _CLK_IRQHandler ; int2
-      000014 82v00u00u00            135 	int _EXTI_PORTA_IRQHandler ; int3
-      000018 82v00u00u00            136 	int _EXTI_PORTB_IRQHandler ; int4
-      00001C 82v00u00u00            137 	int _EXTI_PORTC_IRQHandler ; int5
-      000020 82v00u00u00            138 	int _EXTI_PORTD_IRQHandler ; int6
-      000024 82v00u00u00            139 	int _EXTI_PORTE_IRQHandler ; int7
-      000028 82 00 00 00            140 	int 0x000000 ; int8
-      00002C 82 00 00 00            141 	int 0x000000 ; int9
-      000030 82v00u00u00            142 	int _SPI_IRQHandler ; int10
-      000034 82v00u00u00            143 	int _TIM1_UPD_OVF_TRG_BRK_IRQHandler ; int11
-      000038 82v00u00u00            144 	int _TIM1_CAP_COM_IRQHandler ; int12
-      00003C 82v00u00u00            145 	int _TIM2_UPD_OVF_BRK_IRQHandler ; int13
-      000040 82v00u00u00            146 	int _TIM2_CAP_COM_IRQHandler ; int14
-      000044 82v00u00u00            147 	int _TIM3_UPD_OVF_BRK_IRQHandler ; int15
-      000048 82v00u00u00            148 	int _TIM3_CAP_COM_IRQHandler ; int16
-      00004C 82 00 00 00            149 	int 0x000000 ; int17
-      000050 82 00 00 00            150 	int 0x000000 ; int18
-      000054 82v00u00u00            151 	int _I2C_IRQHandler ; int19
-      000058 82v00u00u00            152 	int _UART2_TX_IRQHandler ; int20
-      00005C 82v00u00u00            153 	int _UART2_RX_IRQHandler ; int21
-      000060 82v00u00u00            154 	int _ADC1_IRQHandler ; int22
-      000064 82v00u00u00            155 	int _TIM4_UPD_OVF_IRQHandler ; int23
-      000068 82v00u00u00            156 	int _EEPROM_EEC_IRQHandler ; int24
-                                    157 ;--------------------------------------------------------
-                                    158 ; global & static initialisations
+                                    128 ; interrupt vector
+                                    129 ;--------------------------------------------------------
+                                    130 	.area HOME
+      000000                        131 __interrupt_vect:
+      000000 82v00u00u00            132 	int s_GSINIT ; reset
+      000004 82v00u00u00            133 	int _TRAP_IRQHandler ; trap
+      000008 82v00u00u00            134 	int _TLI_IRQHandler ; int0
+      00000C 82v00u00u00            135 	int _AWU_IRQHandler ; int1
+      000010 82v00u00u00            136 	int _CLK_IRQHandler ; int2
+      000014 82v00u00u00            137 	int _EXTI_PORTA_IRQHandler ; int3
+      000018 82v00u00u00            138 	int _EXTI_PORTB_IRQHandler ; int4
+      00001C 82v00u00u00            139 	int _EXTI_PORTC_IRQHandler ; int5
+      000020 82v00u00u00            140 	int _EXTI_PORTD_IRQHandler ; int6
+      000024 82v00u00u00            141 	int _EXTI_PORTE_IRQHandler ; int7
+      000028 82 00 00 00            142 	int 0x000000 ; int8
+      00002C 82 00 00 00            143 	int 0x000000 ; int9
+      000030 82v00u00u00            144 	int _SPI_IRQHandler ; int10
+      000034 82v00u00u00            145 	int _TIM1_UPD_OVF_TRG_BRK_IRQHandler ; int11
+      000038 82v00u00u00            146 	int _TIM1_CAP_COM_IRQHandler ; int12
+      00003C 82v00u00u00            147 	int _TIM2_UPD_OVF_BRK_IRQHandler ; int13
+      000040 82v00u00u00            148 	int _TIM2_CAP_COM_IRQHandler ; int14
+      000044 82v00u00u00            149 	int _TIM3_UPD_OVF_BRK_IRQHandler ; int15
+      000048 82v00u00u00            150 	int _TIM3_CAP_COM_IRQHandler ; int16
+      00004C 82 00 00 00            151 	int 0x000000 ; int17
+      000050 82 00 00 00            152 	int 0x000000 ; int18
+      000054 82v00u00u00            153 	int _I2C_IRQHandler ; int19
+      000058 82v00u00u00            154 	int _UART2_TX_IRQHandler ; int20
+      00005C 82v00u00u00            155 	int _UART2_RX_IRQHandler ; int21
+      000060 82v00u00u00            156 	int _ADC1_IRQHandler ; int22
+      000064 82v00u00u00            157 	int _TIM4_UPD_OVF_IRQHandler ; int23
+      000068 82v00u00u00            158 	int _EEPROM_EEC_IRQHandler ; int24
                                     159 ;--------------------------------------------------------
-                                    160 	.area HOME
-                                    161 	.area GSINIT
-                                    162 	.area GSFINAL
+                                    160 ; global & static initialisations
+                                    161 ;--------------------------------------------------------
+                                    162 	.area HOME
                                     163 	.area GSINIT
-      000000                        164 __sdcc_init_data:
-                                    165 ; stm8_genXINIT() start
-      000000 AEr00r00         [ 2]  166 	ldw x, #l_DATA
-      000003 27 07            [ 1]  167 	jreq	00002$
-      000005                        168 00001$:
-      000005 72 4FuFFuFF      [ 1]  169 	clr (s_DATA - 1, x)
-      000009 5A               [ 2]  170 	decw x
-      00000A 26 F9            [ 1]  171 	jrne	00001$
-      00000C                        172 00002$:
-      00000C AEr00r00         [ 2]  173 	ldw	x, #l_INITIALIZER
-      00000F 27 09            [ 1]  174 	jreq	00004$
-      000011                        175 00003$:
-      000011 D6uFFuFF         [ 1]  176 	ld	a, (s_INITIALIZER - 1, x)
-      000014 D7uFFuFF         [ 1]  177 	ld	(s_INITIALIZED - 1, x), a
-      000017 5A               [ 2]  178 	decw	x
-      000018 26 F7            [ 1]  179 	jrne	00003$
-      00001A                        180 00004$:
-                                    181 ; stm8_genXINIT() end
-                                    182 	.area GSFINAL
-      000000 CCr00r6C         [ 2]  183 	jp	__sdcc_program_startup
-                                    184 ;--------------------------------------------------------
-                                    185 ; Home
+                                    164 	.area GSFINAL
+                                    165 	.area GSINIT
+      000000                        166 __sdcc_init_data:
+                                    167 ; stm8_genXINIT() start
+      000000 AEr00r00         [ 2]  168 	ldw x, #l_DATA
+      000003 27 07            [ 1]  169 	jreq	00002$
+      000005                        170 00001$:
+      000005 72 4FuFFuFF      [ 1]  171 	clr (s_DATA - 1, x)
+      000009 5A               [ 2]  172 	decw x
+      00000A 26 F9            [ 1]  173 	jrne	00001$
+      00000C                        174 00002$:
+      00000C AEr00r00         [ 2]  175 	ldw	x, #l_INITIALIZER
+      00000F 27 09            [ 1]  176 	jreq	00004$
+      000011                        177 00003$:
+      000011 D6uFFuFF         [ 1]  178 	ld	a, (s_INITIALIZER - 1, x)
+      000014 D7uFFuFF         [ 1]  179 	ld	(s_INITIALIZED - 1, x), a
+      000017 5A               [ 2]  180 	decw	x
+      000018 26 F7            [ 1]  181 	jrne	00003$
+      00001A                        182 00004$:
+                                    183 ; stm8_genXINIT() end
+                                    184 	.area GSFINAL
+      000000 CCr00r6C         [ 2]  185 	jp	__sdcc_program_startup
                                     186 ;--------------------------------------------------------
-                                    187 	.area HOME
-                                    188 	.area HOME
-      00006C                        189 __sdcc_program_startup:
-      00006C CCr00r7E         [ 2]  190 	jp	_main
-                                    191 ;	return from main will return to caller
-                                    192 ;--------------------------------------------------------
-                                    193 ; code
+                                    187 ; Home
+                                    188 ;--------------------------------------------------------
+                                    189 	.area HOME
+                                    190 	.area HOME
+      00006C                        191 __sdcc_program_startup:
+      00006C CCr00r7E         [ 2]  192 	jp	_main
+                                    193 ;	return from main will return to caller
                                     194 ;--------------------------------------------------------
-                                    195 	.area CODE
-                                    196 ;	src\main.c: 162: void Clock_Setup(void) {
-                                    197 ;	-----------------------------------------
-                                    198 ;	 function Clock_Setup
+                                    195 ; code
+                                    196 ;--------------------------------------------------------
+                                    197 	.area CODE
+                                    198 ;	src\main.c: 155: void Clock_Setup(void) {
                                     199 ;	-----------------------------------------
-      000000                        200 _Clock_Setup:
-                                    201 ;	src\main.c: 163: CLK_DeInit();
-      000000 CDr00r00         [ 4]  202 	call	_CLK_DeInit
-                                    203 ;	src\main.c: 164: CLK_HSECmd(DISABLE);
-      000003 4F               [ 1]  204 	clr	a
-      000004 CDr00r00         [ 4]  205 	call	_CLK_HSECmd
-                                    206 ;	src\main.c: 165: CLK_LSICmd(DISABLE);
-      000007 4F               [ 1]  207 	clr	a
-      000008 CDr00r00         [ 4]  208 	call	_CLK_LSICmd
-                                    209 ;	src\main.c: 166: CLK_HSICmd(ENABLE);
-      00000B A6 01            [ 1]  210 	ld	a, #0x01
-      00000D CDr00r00         [ 4]  211 	call	_CLK_HSICmd
-                                    212 ;	src\main.c: 167: while(CLK_GetFlagStatus(CLK_FLAG_HSIRDY) == FALSE);
-      000010                        213 00101$:
-      000010 AE 01 02         [ 2]  214 	ldw	x, #0x0102
-      000013 CDr00r00         [ 4]  215 	call	_CLK_GetFlagStatus
-      000016 4D               [ 1]  216 	tnz	a
-      000017 27 F7            [ 1]  217 	jreq	00101$
-                                    218 ;	src\main.c: 168: CLK_ClockSwitchCmd(ENABLE);
-      000019 A6 01            [ 1]  219 	ld	a, #0x01
-      00001B CDr00r00         [ 4]  220 	call	_CLK_ClockSwitchCmd
-                                    221 ;	src\main.c: 169: CLK_HSIPrescalerConfig(CLK_PRESCALER_HSIDIV1);
-      00001E 4F               [ 1]  222 	clr	a
-      00001F CDr00r00         [ 4]  223 	call	_CLK_HSIPrescalerConfig
-                                    224 ;	src\main.c: 170: CLK_SYSCLKConfig(CLK_PRESCALER_CPUDIV1);
-      000022 A6 80            [ 1]  225 	ld	a, #0x80
-      000024 CDr00r00         [ 4]  226 	call	_CLK_SYSCLKConfig
-                                    227 ;	src\main.c: 171: CLK_ClockSwitchConfig(CLK_SWITCHMODE_AUTO, CLK_SOURCE_HSI, DISABLE, CLK_CURRENTCLOCKSTATE_ENABLE);
-      000027 4B 01            [ 1]  228 	push	#0x01
-      000029 4B 00            [ 1]  229 	push	#0x00
-      00002B 4B E1            [ 1]  230 	push	#0xe1
-      00002D A6 01            [ 1]  231 	ld	a, #0x01
-      00002F CDr00r00         [ 4]  232 	call	_CLK_ClockSwitchConfig
-                                    233 ;	src\main.c: 173: CLK_PeripheralClockConfig(CLK_PERIPHERAL_SPI, DISABLE);
-      000032 4B 00            [ 1]  234 	push	#0x00
-      000034 A6 01            [ 1]  235 	ld	a, #0x01
-      000036 CDr00r00         [ 4]  236 	call	_CLK_PeripheralClockConfig
-                                    237 ;	src\main.c: 174: CLK_PeripheralClockConfig(CLK_PERIPHERAL_AWU, DISABLE);
-      000039 4B 00            [ 1]  238 	push	#0x00
-      00003B A6 12            [ 1]  239 	ld	a, #0x12
-      00003D CDr00r00         [ 4]  240 	call	_CLK_PeripheralClockConfig
-                                    241 ;	src\main.c: 176: CLK_PeripheralClockConfig(CLK_PERIPHERAL_TIMER1, DISABLE);
-      000040 4B 00            [ 1]  242 	push	#0x00
-      000042 A6 07            [ 1]  243 	ld	a, #0x07
-      000044 CDr00r00         [ 4]  244 	call	_CLK_PeripheralClockConfig
-                                    245 ;	src\main.c: 177: CLK_PeripheralClockConfig(CLK_PERIPHERAL_TIMER2, DISABLE);
-      000047 4B 00            [ 1]  246 	push	#0x00
-      000049 A6 05            [ 1]  247 	ld	a, #0x05
-      00004B CDr00r00         [ 4]  248 	call	_CLK_PeripheralClockConfig
-                                    249 ;	src\main.c: 178: CLK_PeripheralClockConfig(CLK_PERIPHERAL_TIMER4, DISABLE);
-      00004E 4B 00            [ 1]  250 	push	#0x00
-      000050 A6 04            [ 1]  251 	ld	a, #0x04
-      000052 CDr00r00         [ 4]  252 	call	_CLK_PeripheralClockConfig
-                                    253 ;	src\main.c: 179: }
-      000055 81               [ 4]  254 	ret
-                                    255 ;	src\main.c: 181: void GPIO_Setup(void) {
-                                    256 ;	-----------------------------------------
-                                    257 ;	 function GPIO_Setup
+                                    200 ;	 function Clock_Setup
+                                    201 ;	-----------------------------------------
+      000000                        202 _Clock_Setup:
+                                    203 ;	src\main.c: 156: CLK_DeInit();
+      000000 CDr00r00         [ 4]  204 	call	_CLK_DeInit
+                                    205 ;	src\main.c: 157: CLK_HSECmd(DISABLE);
+      000003 4F               [ 1]  206 	clr	a
+      000004 CDr00r00         [ 4]  207 	call	_CLK_HSECmd
+                                    208 ;	src\main.c: 158: CLK_LSICmd(DISABLE);
+      000007 4F               [ 1]  209 	clr	a
+      000008 CDr00r00         [ 4]  210 	call	_CLK_LSICmd
+                                    211 ;	src\main.c: 159: CLK_HSICmd(ENABLE);
+      00000B A6 01            [ 1]  212 	ld	a, #0x01
+      00000D CDr00r00         [ 4]  213 	call	_CLK_HSICmd
+                                    214 ;	src\main.c: 160: while(CLK_GetFlagStatus(CLK_FLAG_HSIRDY) == FALSE);
+      000010                        215 00101$:
+      000010 AE 01 02         [ 2]  216 	ldw	x, #0x0102
+      000013 CDr00r00         [ 4]  217 	call	_CLK_GetFlagStatus
+      000016 4D               [ 1]  218 	tnz	a
+      000017 27 F7            [ 1]  219 	jreq	00101$
+                                    220 ;	src\main.c: 161: CLK_ClockSwitchCmd(ENABLE);
+      000019 A6 01            [ 1]  221 	ld	a, #0x01
+      00001B CDr00r00         [ 4]  222 	call	_CLK_ClockSwitchCmd
+                                    223 ;	src\main.c: 162: CLK_HSIPrescalerConfig(CLK_PRESCALER_HSIDIV1);
+      00001E 4F               [ 1]  224 	clr	a
+      00001F CDr00r00         [ 4]  225 	call	_CLK_HSIPrescalerConfig
+                                    226 ;	src\main.c: 163: CLK_SYSCLKConfig(CLK_PRESCALER_CPUDIV1);
+      000022 A6 80            [ 1]  227 	ld	a, #0x80
+      000024 CDr00r00         [ 4]  228 	call	_CLK_SYSCLKConfig
+                                    229 ;	src\main.c: 164: CLK_ClockSwitchConfig(CLK_SWITCHMODE_AUTO, CLK_SOURCE_HSI, DISABLE, CLK_CURRENTCLOCKSTATE_ENABLE);
+      000027 4B 01            [ 1]  230 	push	#0x01
+      000029 4B 00            [ 1]  231 	push	#0x00
+      00002B 4B E1            [ 1]  232 	push	#0xe1
+      00002D A6 01            [ 1]  233 	ld	a, #0x01
+      00002F CDr00r00         [ 4]  234 	call	_CLK_ClockSwitchConfig
+                                    235 ;	src\main.c: 166: CLK_PeripheralClockConfig(CLK_PERIPHERAL_SPI, DISABLE);
+      000032 4B 00            [ 1]  236 	push	#0x00
+      000034 A6 01            [ 1]  237 	ld	a, #0x01
+      000036 CDr00r00         [ 4]  238 	call	_CLK_PeripheralClockConfig
+                                    239 ;	src\main.c: 167: CLK_PeripheralClockConfig(CLK_PERIPHERAL_AWU, DISABLE);
+      000039 4B 00            [ 1]  240 	push	#0x00
+      00003B A6 12            [ 1]  241 	ld	a, #0x12
+      00003D CDr00r00         [ 4]  242 	call	_CLK_PeripheralClockConfig
+                                    243 ;	src\main.c: 169: CLK_PeripheralClockConfig(CLK_PERIPHERAL_TIMER1, DISABLE);
+      000040 4B 00            [ 1]  244 	push	#0x00
+      000042 A6 07            [ 1]  245 	ld	a, #0x07
+      000044 CDr00r00         [ 4]  246 	call	_CLK_PeripheralClockConfig
+                                    247 ;	src\main.c: 170: CLK_PeripheralClockConfig(CLK_PERIPHERAL_TIMER2, DISABLE);
+      000047 4B 00            [ 1]  248 	push	#0x00
+      000049 A6 05            [ 1]  249 	ld	a, #0x05
+      00004B CDr00r00         [ 4]  250 	call	_CLK_PeripheralClockConfig
+                                    251 ;	src\main.c: 171: CLK_PeripheralClockConfig(CLK_PERIPHERAL_TIMER4, DISABLE);
+      00004E 4B 00            [ 1]  252 	push	#0x00
+      000050 A6 04            [ 1]  253 	ld	a, #0x04
+      000052 CDr00r00         [ 4]  254 	call	_CLK_PeripheralClockConfig
+                                    255 ;	src\main.c: 172: }
+      000055 81               [ 4]  256 	ret
+                                    257 ;	src\main.c: 174: void GPIO_Setup(void) {
                                     258 ;	-----------------------------------------
-      000056                        259 _GPIO_Setup:
-                                    260 ;	src\main.c: 186: GPIO_DeInit(GPIOE);
-      000056 AE 50 14         [ 2]  261 	ldw	x, #0x5014
-      000059 CDr00r00         [ 4]  262 	call	_GPIO_DeInit
-                                    263 ;	src\main.c: 187: GPIO_Init(LED_PORT, LED_PIN, GPIO_MODE_OUT_PP_HIGH_FAST);
-      00005C 4B F0            [ 1]  264 	push	#0xf0
-      00005E A6 20            [ 1]  265 	ld	a, #0x20
-      000060 AE 50 14         [ 2]  266 	ldw	x, #0x5014
-      000063 CDr00r00         [ 4]  267 	call	_GPIO_Init
-                                    268 ;	src\main.c: 188: }
-      000066 81               [ 4]  269 	ret
-                                    270 ;	src\main.c: 190: void UART_Setup() {
-                                    271 ;	-----------------------------------------
-                                    272 ;	 function UART_Setup
+                                    259 ;	 function GPIO_Setup
+                                    260 ;	-----------------------------------------
+      000056                        261 _GPIO_Setup:
+                                    262 ;	src\main.c: 179: GPIO_DeInit(GPIOE);
+      000056 AE 50 14         [ 2]  263 	ldw	x, #0x5014
+      000059 CDr00r00         [ 4]  264 	call	_GPIO_DeInit
+                                    265 ;	src\main.c: 180: GPIO_Init(LED_PORT, LED_PIN, GPIO_MODE_OUT_PP_HIGH_FAST);
+      00005C 4B F0            [ 1]  266 	push	#0xf0
+      00005E A6 20            [ 1]  267 	ld	a, #0x20
+      000060 AE 50 14         [ 2]  268 	ldw	x, #0x5014
+      000063 CDr00r00         [ 4]  269 	call	_GPIO_Init
+                                    270 ;	src\main.c: 181: }
+      000066 81               [ 4]  271 	ret
+                                    272 ;	src\main.c: 183: void UART_Setup() {
                                     273 ;	-----------------------------------------
-      000067                        274 _UART_Setup:
-                                    275 ;	src\main.c: 191: UART_DEINIT();
-      000067 CDr00r00         [ 4]  276 	call	_UART2_DeInit
-                                    277 ;	src\main.c: 201: UART_INIT((uint32_t)9600, UART_WORDLENGTH_8D, UART_STOPBITS_1, UART_PARITY_NO, UART_SYNCMODE_CLOCK_DISABLE, UART_MODE_TXRX_ENABLE);
-      00006A 4B 0C            [ 1]  278 	push	#0x0c
-      00006C 4B 80            [ 1]  279 	push	#0x80
-      00006E 4B 00            [ 1]  280 	push	#0x00
-      000070 4B 00            [ 1]  281 	push	#0x00
-      000072 4B 00            [ 1]  282 	push	#0x00
-      000074 4B 80            [ 1]  283 	push	#0x80
-      000076 4B 25            [ 1]  284 	push	#0x25
-      000078 5F               [ 1]  285 	clrw	x
-      000079 89               [ 2]  286 	pushw	x
-      00007A CDr00r00         [ 4]  287 	call	_UART2_Init
-                                    288 ;	src\main.c: 202: }
-      00007D 81               [ 4]  289 	ret
-                                    290 ;	src\main.c: 212: void main(void) {
-                                    291 ;	-----------------------------------------
-                                    292 ;	 function main
+                                    274 ;	 function UART_Setup
+                                    275 ;	-----------------------------------------
+      000067                        276 _UART_Setup:
+                                    277 ;	src\main.c: 184: UART_DEINIT();
+      000067 CDr00r00         [ 4]  278 	call	_UART2_DeInit
+                                    279 ;	src\main.c: 194: UART_INIT((uint32_t)9600, UART_WORDLENGTH_8D, UART_STOPBITS_1, UART_PARITY_NO, UART_SYNCMODE_CLOCK_DISABLE, UART_MODE_TXRX_ENABLE);
+      00006A 4B 0C            [ 1]  280 	push	#0x0c
+      00006C 4B 80            [ 1]  281 	push	#0x80
+      00006E 4B 00            [ 1]  282 	push	#0x00
+      000070 4B 00            [ 1]  283 	push	#0x00
+      000072 4B 00            [ 1]  284 	push	#0x00
+      000074 4B 80            [ 1]  285 	push	#0x80
+      000076 4B 25            [ 1]  286 	push	#0x25
+      000078 5F               [ 1]  287 	clrw	x
+      000079 89               [ 2]  288 	pushw	x
+      00007A CDr00r00         [ 4]  289 	call	_UART2_Init
+                                    290 ;	src\main.c: 195: }
+      00007D 81               [ 4]  291 	ret
+                                    292 ;	src\main.c: 205: void main(void) {
                                     293 ;	-----------------------------------------
-      00007E                        294 _main:
-                                    295 ;	src\main.c: 213: Clock_Setup();
-      00007E CDr00r00         [ 4]  296 	call	_Clock_Setup
-                                    297 ;	src\main.c: 214: GPIO_Setup();
-      000081 CDr00r56         [ 4]  298 	call	_GPIO_Setup
-                                    299 ;	src\main.c: 215: DS18X20_Setup();
-      000084 CDr00r00         [ 4]  300 	call	_DS18X20_Setup
-                                    301 ;	src\main.c: 216: I2C_Setup();
-      000087 CDr00r00         [ 4]  302 	call	_I2C_Setup
-                                    303 ;	src\main.c: 217: UART_Setup();
-      00008A CDr00r67         [ 4]  304 	call	_UART_Setup
-                                    305 ;	src\main.c: 219: BME280_Setup();
-      00008D CDr00r00         [ 4]  306 	call	_BME280_Setup
-                                    307 ;	src\main.c: 235: LED_ON;
-      000090 A6 20            [ 1]  308 	ld	a, #0x20
-      000092 AE 50 14         [ 2]  309 	ldw	x, #0x5014
-      000095 CDr00r00         [ 4]  310 	call	_GPIO_WriteLow
-                                    311 ;	src\main.c: 237: while (1) {
-      000098                        312 00106$:
-                                    313 ;	src\main.c: 240: DS18X20_Reset();
-      000098 CDr00r00         [ 4]  314 	call	_DS18X20_Reset
-                                    315 ;	src\main.c: 242: delay_ms(2000);
-      00009B AE 07 D0         [ 2]  316 	ldw	x, #0x07d0
-      00009E CDr00r00         [ 4]  317 	call	_delay_ms
-                                    318 ;	src\main.c: 244: if (!DS18X20_Read_ID(iDS18X20RomID)) {
-      0000A1 AEr00r00         [ 2]  319 	ldw	x, #(_iDS18X20RomID+0)
-      0000A4 CDr00r00         [ 4]  320 	call	_DS18X20_Read_ID
-      0000A7 4D               [ 1]  321 	tnz	a
-      0000A8 26 0E            [ 1]  322 	jrne	00103$
-                                    323 ;	src\main.c: 245: for (uint8_t i = 0; i < 8; i++) {
-      0000AA 4F               [ 1]  324 	clr	a
-      0000AB                        325 00109$:
-      0000AB A1 08            [ 1]  326 	cp	a, #0x08
-      0000AD 24 09            [ 1]  327 	jrnc	00103$
-                                    328 ;	src\main.c: 246: iDS18X20RomID[i] = 0;
-      0000AF 5F               [ 1]  329 	clrw	x
-      0000B0 97               [ 1]  330 	ld	xl, a
-      0000B1 1Cr00r00         [ 2]  331 	addw	x, #(_iDS18X20RomID+0)
-      0000B4 7F               [ 1]  332 	clr	(x)
-                                    333 ;	src\main.c: 245: for (uint8_t i = 0; i < 8; i++) {
-      0000B5 4C               [ 1]  334 	inc	a
-      0000B6 20 F3            [ 2]  335 	jra	00109$
-      0000B8                        336 00103$:
-                                    337 ;	src\main.c: 250: fDS18X20Temperature = DS18X20_Get_Temperature();
-      0000B8 CDr00r00         [ 4]  338 	call	_DS18X20_Get_Temperature
-      0000BB CFu00u02         [ 2]  339 	ldw	_fDS18X20Temperature+2, x
-      0000BE 90 CFu00u00      [ 2]  340 	ldw	_fDS18X20Temperature+0, y
-                                    341 ;	src\main.c: 251: integer_bit = 2;
-      0000C2 35 02u01u12      [ 1]  342 	mov	_integer_bit+0, #0x02
-                                    343 ;	src\main.c: 252: decimal_bit = 2;
-      0000C6 35 02u01u13      [ 1]  344 	mov	_decimal_bit+0, #0x02
-                                    345 ;	src\main.c: 268: sizeValueString = integer_bit + decimal_bit + 1;
-      0000CA 35 05u00u14      [ 1]  346 	mov	_sizeValueString+0, #0x05
-                                    347 ;	src\main.c: 269: sizeSendUARTString = sizeof(placeholderDS18X20String) + sizeValueString;
-      0000CE 35 39u00u15      [ 1]  348 	mov	_sizeSendUARTString+0, #0x39
-                                    349 ;	src\main.c: 270: stringValue = (char*)malloc(sizeValueString * sizeof(char));
-      0000D2 AE 00 05         [ 2]  350 	ldw	x, #0x0005
-      0000D5 CDr00r00         [ 4]  351 	call	_malloc
-      0000D8 CFu00u12         [ 2]  352 	ldw	_stringValue+0, x
-                                    353 ;	src\main.c: 271: stringSendUART = (char*)malloc(sizeSendUARTString * sizeof(char));
-      0000DB C6u00u15         [ 1]  354 	ld	a, _sizeSendUARTString+0
-      0000DE 5F               [ 1]  355 	clrw	x
-      0000DF 97               [ 1]  356 	ld	xl, a
-      0000E0 CDr00r00         [ 4]  357 	call	_malloc
-      0000E3 CFu00u10         [ 2]  358 	ldw	_stringSendUART+0, x
-                                    359 ;	src\main.c: 273: floatToStr(stringValue, fDS18X20Temperature, integer_bit, decimal_bit);
-      0000E6 3Bu01u13         [ 1]  360 	push	_decimal_bit+0
-      0000E9 3Bu01u12         [ 1]  361 	push	_integer_bit+0
-      0000EC CEu00u02         [ 2]  362 	ldw	x, _fDS18X20Temperature+2
-      0000EF 89               [ 2]  363 	pushw	x
-      0000F0 CEu00u00         [ 2]  364 	ldw	x, _fDS18X20Temperature+0
-      0000F3 89               [ 2]  365 	pushw	x
-      0000F4 CEu00u12         [ 2]  366 	ldw	x, _stringValue+0
-      0000F7 CDr02rFA         [ 4]  367 	call	_floatToStr
-                                    368 ;	src\main.c: 275: sprintf(stringSendUART, placeholderDS18X20String, stringValue);
-      0000FA CEu00u12         [ 2]  369 	ldw	x, _stringValue+0
-      0000FD 89               [ 2]  370 	pushw	x
-      0000FE 4Br0A            [ 1]  371 	push	#<(_main_placeholderDS18X20String_65537_192+0)
-      000100 4Bs00            [ 1]  372 	push	#((_main_placeholderDS18X20String_65537_192+0) >> 8)
-      000102 CEu00u10         [ 2]  373 	ldw	x, _stringSendUART+0
-      000105 89               [ 2]  374 	pushw	x
-      000106 CDr00r00         [ 4]  375 	call	_sprintf
-      000109 5B 06            [ 2]  376 	addw	sp, #6
-                                    377 ;	src\main.c: 276: putchar(0x00);
-      00010B 5F               [ 1]  378 	clrw	x
-      00010C CDr04r6E         [ 4]  379 	call	_putchar
-                                    380 ;	src\main.c: 277: putchar(0x00);
-      00010F 5F               [ 1]  381 	clrw	x
-      000110 CDr04r6E         [ 4]  382 	call	_putchar
-                                    383 ;	src\main.c: 278: putchar(0x18);
-      000113 AE 00 18         [ 2]  384 	ldw	x, #0x0018
-      000116 CDr04r6E         [ 4]  385 	call	_putchar
-                                    386 ;	src\main.c: 279: printf("%s\r\n", stringSendUART);
-      000119 CEu00u10         [ 2]  387 	ldw	x, _stringSendUART+0
-      00011C 89               [ 2]  388 	pushw	x
-      00011D 4BrD7            [ 1]  389 	push	#<(___str_4+0)
-      00011F 4Bs00            [ 1]  390 	push	#((___str_4+0) >> 8)
-      000121 CDr00r00         [ 4]  391 	call	_printf
-      000124 5B 04            [ 2]  392 	addw	sp, #4
-                                    393 ;	src\main.c: 281: free(stringSendUART);
-      000126 CEu00u10         [ 2]  394 	ldw	x, _stringSendUART+0
-      000129 CDr00r00         [ 4]  395 	call	_free
-                                    396 ;	src\main.c: 282: free(stringValue);
-      00012C CEu00u12         [ 2]  397 	ldw	x, _stringValue+0
-      00012F CDr00r00         [ 4]  398 	call	_free
-                                    399 ;	src\main.c: 284: delay_ms(5000);
-      000132 AE 13 88         [ 2]  400 	ldw	x, #0x1388
-      000135 CDr00r00         [ 4]  401 	call	_delay_ms
-                                    402 ;	src\main.c: 343: integer_bit = 3;
-      000138 35 03u01u12      [ 1]  403 	mov	_integer_bit+0, #0x03
-                                    404 ;	src\main.c: 344: decimal_bit = 2;
-      00013C 35 02u01u13      [ 1]  405 	mov	_decimal_bit+0, #0x02
-                                    406 ;	src\main.c: 346: fBME280Temperature = BME280_ReadTemperature();
-      000140 CDr00r00         [ 4]  407 	call	_BME280_ReadTemperature
-      000143 CFu00u06         [ 2]  408 	ldw	_fBME280Temperature+2, x
-      000146 90 CFu00u04      [ 2]  409 	ldw	_fBME280Temperature+0, y
-                                    410 ;	src\main.c: 347: delay_ms(2000);
-      00014A AE 07 D0         [ 2]  411 	ldw	x, #0x07d0
-      00014D CDr00r00         [ 4]  412 	call	_delay_ms
-                                    413 ;	src\main.c: 349: sizeValueString = integer_bit + decimal_bit + 1;
-      000150 C6u01u12         [ 1]  414 	ld	a, _integer_bit+0
-      000153 CBu01u13         [ 1]  415 	add	a, _decimal_bit+0
-      000156 4C               [ 1]  416 	inc	a
-                                    417 ;	src\main.c: 350: stringValue = (char*)malloc(sizeValueString * sizeof(char));
-      000157 C7u00u14         [ 1]  418 	ld	_sizeValueString+0, a
-      00015A 5F               [ 1]  419 	clrw	x
-      00015B 97               [ 1]  420 	ld	xl, a
-      00015C CDr00r00         [ 4]  421 	call	_malloc
-      00015F CFu00u12         [ 2]  422 	ldw	_stringValue+0, x
-                                    423 ;	src\main.c: 351: sizeSendUARTString = sizeof(placeholderTemperatureBME280String) + sizeValueString;
-      000162 C6u00u14         [ 1]  424 	ld	a, _sizeValueString+0
-      000165 AB 35            [ 1]  425 	add	a, #0x35
-                                    426 ;	src\main.c: 352: stringSendUART = (char*)malloc(sizeSendUARTString * sizeof(char));
-      000167 C7u00u15         [ 1]  427 	ld	_sizeSendUARTString+0, a
-      00016A 5F               [ 1]  428 	clrw	x
-      00016B 97               [ 1]  429 	ld	xl, a
-      00016C CDr00r00         [ 4]  430 	call	_malloc
-      00016F CFu00u10         [ 2]  431 	ldw	_stringSendUART+0, x
-                                    432 ;	src\main.c: 354: floatToStr(stringValue, fBME280Temperature, integer_bit, decimal_bit);
-      000172 3Bu01u13         [ 1]  433 	push	_decimal_bit+0
-      000175 3Bu01u12         [ 1]  434 	push	_integer_bit+0
-      000178 CEu00u06         [ 2]  435 	ldw	x, _fBME280Temperature+2
-      00017B 89               [ 2]  436 	pushw	x
-      00017C CEu00u04         [ 2]  437 	ldw	x, _fBME280Temperature+0
-      00017F 89               [ 2]  438 	pushw	x
-      000180 CEu00u12         [ 2]  439 	ldw	x, _stringValue+0
-      000183 CDr02rFA         [ 4]  440 	call	_floatToStr
-                                    441 ;	src\main.c: 355: sprintf(stringSendUART, placeholderTemperatureBME280String, stringValue);
-      000186 CEu00u12         [ 2]  442 	ldw	x, _stringValue+0
-      000189 89               [ 2]  443 	pushw	x
-      00018A 4Br3E            [ 1]  444 	push	#<(_main_placeholderTemperatureBME280String_65537_192+0)
-      00018C 4Bs00            [ 1]  445 	push	#((_main_placeholderTemperatureBME280String_65537_192+0) >> 8)
-      00018E CEu00u10         [ 2]  446 	ldw	x, _stringSendUART+0
-      000191 89               [ 2]  447 	pushw	x
-      000192 CDr00r00         [ 4]  448 	call	_sprintf
-      000195 5B 06            [ 2]  449 	addw	sp, #6
-                                    450 ;	src\main.c: 356: putchar(0x00);
-      000197 5F               [ 1]  451 	clrw	x
-      000198 CDr04r6E         [ 4]  452 	call	_putchar
-                                    453 ;	src\main.c: 357: putchar(0x00);
-      00019B 5F               [ 1]  454 	clrw	x
-      00019C CDr04r6E         [ 4]  455 	call	_putchar
-                                    456 ;	src\main.c: 358: putchar(0x18);
-      00019F AE 00 18         [ 2]  457 	ldw	x, #0x0018
-      0001A2 CDr04r6E         [ 4]  458 	call	_putchar
-                                    459 ;	src\main.c: 359: printf("%s\r\n", stringSendUART);
-      0001A5 CEu00u10         [ 2]  460 	ldw	x, _stringSendUART+0
-      0001A8 89               [ 2]  461 	pushw	x
-      0001A9 4BrD7            [ 1]  462 	push	#<(___str_4+0)
-      0001AB 4Bs00            [ 1]  463 	push	#((___str_4+0) >> 8)
-      0001AD CDr00r00         [ 4]  464 	call	_printf
-      0001B0 5B 04            [ 2]  465 	addw	sp, #4
-                                    466 ;	src\main.c: 361: free(stringSendUART);
-      0001B2 CEu00u10         [ 2]  467 	ldw	x, _stringSendUART+0
-      0001B5 CDr00r00         [ 4]  468 	call	_free
-                                    469 ;	src\main.c: 362: free(stringValue);
-      0001B8 CEu00u12         [ 2]  470 	ldw	x, _stringValue+0
-      0001BB CDr00r00         [ 4]  471 	call	_free
-                                    472 ;	src\main.c: 364: integer_bit = 2;
-      0001BE 35 02u01u12      [ 1]  473 	mov	_integer_bit+0, #0x02
-                                    474 ;	src\main.c: 365: decimal_bit = 2;
-      0001C2 35 02u01u13      [ 1]  475 	mov	_decimal_bit+0, #0x02
-                                    476 ;	src\main.c: 367: fBME280Humidity = BME280_ReadHumidity();
-      0001C6 CDr00r00         [ 4]  477 	call	_BME280_ReadHumidity
-      0001C9 CFu00u0A         [ 2]  478 	ldw	_fBME280Humidity+2, x
-      0001CC 90 CFu00u08      [ 2]  479 	ldw	_fBME280Humidity+0, y
-                                    480 ;	src\main.c: 368: delay_ms(2000);
-      0001D0 AE 07 D0         [ 2]  481 	ldw	x, #0x07d0
-      0001D3 CDr00r00         [ 4]  482 	call	_delay_ms
-                                    483 ;	src\main.c: 370: sizeValueString = integer_bit + decimal_bit + 1;
-      0001D6 C6u01u12         [ 1]  484 	ld	a, _integer_bit+0
-      0001D9 CBu01u13         [ 1]  485 	add	a, _decimal_bit+0
-      0001DC 4C               [ 1]  486 	inc	a
-                                    487 ;	src\main.c: 371: sizeSendUARTString = sizeof(placeholderHumidityBME280String) + sizeValueString;
-      0001DD C7u00u14         [ 1]  488 	ld	_sizeValueString+0, a
-      0001E0 AB 32            [ 1]  489 	add	a, #0x32
-      0001E2 C7u00u15         [ 1]  490 	ld	_sizeSendUARTString+0, a
-                                    491 ;	src\main.c: 372: stringValue = (char*)malloc(sizeValueString * sizeof(char));
-      0001E5 C6u00u14         [ 1]  492 	ld	a, _sizeValueString+0
-      0001E8 5F               [ 1]  493 	clrw	x
-      0001E9 97               [ 1]  494 	ld	xl, a
-      0001EA CDr00r00         [ 4]  495 	call	_malloc
-      0001ED CFu00u12         [ 2]  496 	ldw	_stringValue+0, x
-                                    497 ;	src\main.c: 373: stringSendUART = (char*)malloc(sizeSendUARTString * sizeof(char));
-      0001F0 C6u00u15         [ 1]  498 	ld	a, _sizeSendUARTString+0
-      0001F3 5F               [ 1]  499 	clrw	x
-      0001F4 97               [ 1]  500 	ld	xl, a
-      0001F5 CDr00r00         [ 4]  501 	call	_malloc
-      0001F8 CFu00u10         [ 2]  502 	ldw	_stringSendUART+0, x
-                                    503 ;	src\main.c: 375: floatToStr(stringValue, fBME280Humidity, integer_bit, decimal_bit);
-      0001FB 3Bu01u13         [ 1]  504 	push	_decimal_bit+0
-      0001FE 3Bu01u12         [ 1]  505 	push	_integer_bit+0
-      000201 CEu00u0A         [ 2]  506 	ldw	x, _fBME280Humidity+2
-      000204 89               [ 2]  507 	pushw	x
-      000205 CEu00u08         [ 2]  508 	ldw	x, _fBME280Humidity+0
-      000208 89               [ 2]  509 	pushw	x
-      000209 CEu00u12         [ 2]  510 	ldw	x, _stringValue+0
-      00020C CDr02rFA         [ 4]  511 	call	_floatToStr
-                                    512 ;	src\main.c: 376: sprintf(stringSendUART, placeholderHumidityBME280String, stringValue);
-      00020F CEu00u12         [ 2]  513 	ldw	x, _stringValue+0
-      000212 89               [ 2]  514 	pushw	x
-      000213 4Br73            [ 1]  515 	push	#<(_main_placeholderHumidityBME280String_65537_192+0)
-      000215 4Bs00            [ 1]  516 	push	#((_main_placeholderHumidityBME280String_65537_192+0) >> 8)
-      000217 CEu00u10         [ 2]  517 	ldw	x, _stringSendUART+0
-      00021A 89               [ 2]  518 	pushw	x
-      00021B CDr00r00         [ 4]  519 	call	_sprintf
-      00021E 5B 06            [ 2]  520 	addw	sp, #6
-                                    521 ;	src\main.c: 381: putchar(0x00);
-      000220 5F               [ 1]  522 	clrw	x
-      000221 CDr04r6E         [ 4]  523 	call	_putchar
-                                    524 ;	src\main.c: 382: putchar(0x00);
-      000224 5F               [ 1]  525 	clrw	x
-      000225 CDr04r6E         [ 4]  526 	call	_putchar
-                                    527 ;	src\main.c: 383: putchar(0x18);
-      000228 AE 00 18         [ 2]  528 	ldw	x, #0x0018
-      00022B CDr04r6E         [ 4]  529 	call	_putchar
-                                    530 ;	src\main.c: 384: printf("%s\r\n", stringSendUART);
-      00022E CEu00u10         [ 2]  531 	ldw	x, _stringSendUART+0
-      000231 89               [ 2]  532 	pushw	x
-      000232 4BrD7            [ 1]  533 	push	#<(___str_4+0)
-      000234 4Bs00            [ 1]  534 	push	#((___str_4+0) >> 8)
-      000236 CDr00r00         [ 4]  535 	call	_printf
-      000239 5B 04            [ 2]  536 	addw	sp, #4
-                                    537 ;	src\main.c: 386: free(stringSendUART);
-      00023B CEu00u10         [ 2]  538 	ldw	x, _stringSendUART+0
-      00023E CDr00r00         [ 4]  539 	call	_free
-                                    540 ;	src\main.c: 387: free(stringValue);
-      000241 CEu00u12         [ 2]  541 	ldw	x, _stringValue+0
-      000244 CDr00r00         [ 4]  542 	call	_free
-                                    543 ;	src\main.c: 389: integer_bit = 5;
-      000247 35 05u01u12      [ 1]  544 	mov	_integer_bit+0, #0x05
-                                    545 ;	src\main.c: 390: decimal_bit = 1;
-      00024B 35 01u01u13      [ 1]  546 	mov	_decimal_bit+0, #0x01
-                                    547 ;	src\main.c: 392: fBME280Pressure = BME280_ReadPressure();
-      00024F CDr00r00         [ 4]  548 	call	_BME280_ReadPressure
-      000252 89               [ 2]  549 	pushw	x
-      000253 90 89            [ 2]  550 	pushw	y
-      000255 CDr00r00         [ 4]  551 	call	___fs2ulong
-      000258 5B 04            [ 2]  552 	addw	sp, #4
-      00025A CFu00u0E         [ 2]  553 	ldw	_fBME280Pressure+2, x
-      00025D 90 CFu00u0C      [ 2]  554 	ldw	_fBME280Pressure+0, y
-                                    555 ;	src\main.c: 393: delay_ms(2000);
-      000261 AE 07 D0         [ 2]  556 	ldw	x, #0x07d0
-      000264 CDr00r00         [ 4]  557 	call	_delay_ms
-                                    558 ;	src\main.c: 395: sizeValueString = integer_bit + decimal_bit + 1;
-      000267 C6u01u12         [ 1]  559 	ld	a, _integer_bit+0
-      00026A CBu01u13         [ 1]  560 	add	a, _decimal_bit+0
-      00026D 4C               [ 1]  561 	inc	a
-                                    562 ;	src\main.c: 396: sizeSendUARTString = sizeof(placeholderPressureBME280String) + sizeValueString;
-      00026E C7u00u14         [ 1]  563 	ld	_sizeValueString+0, a
-      000271 AB 32            [ 1]  564 	add	a, #0x32
-      000273 C7u00u15         [ 1]  565 	ld	_sizeSendUARTString+0, a
-                                    566 ;	src\main.c: 397: stringValue = (char*)malloc(sizeValueString * sizeof(char));
-      000276 5F               [ 1]  567 	clrw	x
-      000277 C6u00u14         [ 1]  568 	ld	a, _sizeValueString+0
-      00027A 97               [ 1]  569 	ld	xl, a
-      00027B CDr00r00         [ 4]  570 	call	_malloc
-      00027E CFu00u12         [ 2]  571 	ldw	_stringValue+0, x
-                                    572 ;	src\main.c: 398: stringSendUART = (char*)malloc(sizeSendUARTString * sizeof(char));
-      000281 C6u00u15         [ 1]  573 	ld	a, _sizeSendUARTString+0
-      000284 5F               [ 1]  574 	clrw	x
-      000285 97               [ 1]  575 	ld	xl, a
-      000286 CDr00r00         [ 4]  576 	call	_malloc
-      000289 CFu00u10         [ 2]  577 	ldw	_stringSendUART+0, x
-                                    578 ;	src\main.c: 400: floatToStr(stringValue, (float)fBME280Pressure, integer_bit, decimal_bit);
-      00028C CEu00u0E         [ 2]  579 	ldw	x, _fBME280Pressure+2
-      00028F 89               [ 2]  580 	pushw	x
-      000290 CEu00u0C         [ 2]  581 	ldw	x, _fBME280Pressure+0
-      000293 89               [ 2]  582 	pushw	x
-      000294 CDr00r00         [ 4]  583 	call	___ulong2fs
-      000297 5B 04            [ 2]  584 	addw	sp, #4
-      000299 3Bu01u13         [ 1]  585 	push	_decimal_bit+0
-      00029C 3Bu01u12         [ 1]  586 	push	_integer_bit+0
-      00029F 89               [ 2]  587 	pushw	x
-      0002A0 90 89            [ 2]  588 	pushw	y
-      0002A2 CEu00u12         [ 2]  589 	ldw	x, _stringValue+0
-      0002A5 CDr02rFA         [ 4]  590 	call	_floatToStr
-                                    591 ;	src\main.c: 401: sprintf(stringSendUART, placeholderPressureBME280String, stringValue);
-      0002A8 CEu00u12         [ 2]  592 	ldw	x, _stringValue+0
-      0002AB 89               [ 2]  593 	pushw	x
-      0002AC 4BrA5            [ 1]  594 	push	#<(_main_placeholderPressureBME280String_65537_192+0)
-      0002AE 4Bs00            [ 1]  595 	push	#((_main_placeholderPressureBME280String_65537_192+0) >> 8)
-      0002B0 CEu00u10         [ 2]  596 	ldw	x, _stringSendUART+0
-      0002B3 89               [ 2]  597 	pushw	x
-      0002B4 CDr00r00         [ 4]  598 	call	_sprintf
-      0002B7 5B 06            [ 2]  599 	addw	sp, #6
-                                    600 ;	src\main.c: 406: putchar(0x00);
-      0002B9 5F               [ 1]  601 	clrw	x
-      0002BA CDr04r6E         [ 4]  602 	call	_putchar
-                                    603 ;	src\main.c: 407: putchar(0x00);
-      0002BD 5F               [ 1]  604 	clrw	x
-      0002BE CDr04r6E         [ 4]  605 	call	_putchar
-                                    606 ;	src\main.c: 408: putchar(0x18);
-      0002C1 AE 00 18         [ 2]  607 	ldw	x, #0x0018
-      0002C4 CDr04r6E         [ 4]  608 	call	_putchar
-                                    609 ;	src\main.c: 409: printf("%s\r\n", stringSendUART);
-      0002C7 CEu00u10         [ 2]  610 	ldw	x, _stringSendUART+0
-      0002CA 89               [ 2]  611 	pushw	x
-      0002CB 4BrD7            [ 1]  612 	push	#<(___str_4+0)
-      0002CD 4Bs00            [ 1]  613 	push	#((___str_4+0) >> 8)
-      0002CF CDr00r00         [ 4]  614 	call	_printf
-      0002D2 5B 04            [ 2]  615 	addw	sp, #4
-                                    616 ;	src\main.c: 411: free(stringSendUART);
-      0002D4 CEu00u10         [ 2]  617 	ldw	x, _stringSendUART+0
-      0002D7 CDr00r00         [ 4]  618 	call	_free
-                                    619 ;	src\main.c: 412: free(stringValue);
-      0002DA CEu00u12         [ 2]  620 	ldw	x, _stringValue+0
-      0002DD CDr00r00         [ 4]  621 	call	_free
-                                    622 ;	src\main.c: 422: for (uint8_t i = 0; i < 9; i++) {
-      0002E0 4F               [ 1]  623 	clr	a
-      0002E1                        624 00112$:
-      0002E1 A1 09            [ 1]  625 	cp	a, #0x09
-      0002E3 24 0A            [ 1]  626 	jrnc	00104$
-                                    627 ;	src\main.c: 423: delay_ms(65535);
-      0002E5 88               [ 1]  628 	push	a
-      0002E6 5F               [ 1]  629 	clrw	x
-      0002E7 5A               [ 2]  630 	decw	x
-      0002E8 CDr00r00         [ 4]  631 	call	_delay_ms
-      0002EB 84               [ 1]  632 	pop	a
-                                    633 ;	src\main.c: 422: for (uint8_t i = 0; i < 9; i++) {
-      0002EC 4C               [ 1]  634 	inc	a
-      0002ED 20 F2            [ 2]  635 	jra	00112$
-      0002EF                        636 00104$:
-                                    637 ;	src\main.c: 427: LED_OFF;
-      0002EF A6 20            [ 1]  638 	ld	a, #0x20
-      0002F1 AE 50 14         [ 2]  639 	ldw	x, #0x5014
-      0002F4 CDr00r00         [ 4]  640 	call	_GPIO_WriteHigh
-                                    641 ;	src\main.c: 437: }
-      0002F7 CCr00r98         [ 2]  642 	jp	00106$
-                                    643 ;	src\main.c: 439: void floatToStr(char *str, float number, uint8_t integer_bit, uint8_t decimal_bit) {
-                                    644 ;	-----------------------------------------
-                                    645 ;	 function floatToStr
-                                    646 ;	-----------------------------------------
-      0002FA                        647 _floatToStr:
-      0002FA 52 17            [ 2]  648 	sub	sp, #23
-      0002FC 1F 15            [ 2]  649 	ldw	(0x15, sp), x
-                                    650 ;	src\main.c: 441: uint8_t minus = 0;
-      0002FE 0F 05            [ 1]  651 	clr	(0x05, sp)
-                                    652 ;	src\main.c: 444: uint8_t trailing_zero_count = 0;
-      000300 0F 06            [ 1]  653 	clr	(0x06, sp)
-                                    654 ;	src\main.c: 446: if (number < 0) {
-      000302 5F               [ 1]  655 	clrw	x
-      000303 89               [ 2]  656 	pushw	x
-      000304 5F               [ 1]  657 	clrw	x
-      000305 89               [ 2]  658 	pushw	x
-      000306 1E 20            [ 2]  659 	ldw	x, (0x20, sp)
-      000308 89               [ 2]  660 	pushw	x
-      000309 1E 20            [ 2]  661 	ldw	x, (0x20, sp)
-      00030B 89               [ 2]  662 	pushw	x
-      00030C CDr00r00         [ 4]  663 	call	___fslt
-      00030F 4D               [ 1]  664 	tnz	a
-      000310 27 14            [ 1]  665 	jreq	00102$
-                                    666 ;	src\main.c: 447: str[0] = 0x2D;
-      000312 1E 15            [ 2]  667 	ldw	x, (0x15, sp)
-      000314 A6 2D            [ 1]  668 	ld	a, #0x2d
-      000316 F7               [ 1]  669 	ld	(x), a
-                                    670 ;	src\main.c: 448: number *= -1;
-      000317 16 1C            [ 2]  671 	ldw	y, (0x1c, sp)
-      000319 1E 1A            [ 2]  672 	ldw	x, (0x1a, sp)
-      00031B 58               [ 2]  673 	sllw	x
-      00031C 8C               [ 1]  674 	ccf
-      00031D 56               [ 2]  675 	rrcw	x
-      00031E 17 1C            [ 2]  676 	ldw	(0x1c, sp), y
-      000320 1F 1A            [ 2]  677 	ldw	(0x1a, sp), x
-                                    678 ;	src\main.c: 449: minus = 1;
-      000322 A6 01            [ 1]  679 	ld	a, #0x01
-      000324 6B 05            [ 1]  680 	ld	(0x05, sp), a
-      000326                        681 00102$:
-                                    682 ;	src\main.c: 452: temp = (uint32_t)(number/1);
-      000326 16 1C            [ 2]  683 	ldw	y, (0x1c, sp)
-      000328 17 09            [ 2]  684 	ldw	(0x09, sp), y
-      00032A 16 1A            [ 2]  685 	ldw	y, (0x1a, sp)
-      00032C 17 07            [ 2]  686 	ldw	(0x07, sp), y
-      00032E 1E 09            [ 2]  687 	ldw	x, (0x09, sp)
-      000330 89               [ 2]  688 	pushw	x
-      000331 1E 09            [ 2]  689 	ldw	x, (0x09, sp)
-      000333 89               [ 2]  690 	pushw	x
-      000334 CDr00r00         [ 4]  691 	call	___fs2ulong
-      000337 5B 04            [ 2]  692 	addw	sp, #4
-      000339 1F 0F            [ 2]  693 	ldw	(0x0f, sp), x
-                                    694 ;	src\main.c: 454: for (i = 1; i <= integer_bit; i++) {
-      00033B A6 01            [ 1]  695 	ld	a, #0x01
-      00033D 6B 17            [ 1]  696 	ld	(0x17, sp), a
-      00033F                        697 00114$:
-                                    698 ;	src\main.c: 456: str[integer_bit - i + minus] = table[0];
-      00033F 7B 1E            [ 1]  699 	ld	a, (0x1e, sp)
-      000341 6B 12            [ 1]  700 	ld	(0x12, sp), a
-      000343 0F 11            [ 1]  701 	clr	(0x11, sp)
-      000345 7B 05            [ 1]  702 	ld	a, (0x05, sp)
-      000347 6B 0C            [ 1]  703 	ld	(0x0c, sp), a
-      000349 0F 0B            [ 1]  704 	clr	(0x0b, sp)
-                                    705 ;	src\main.c: 454: for (i = 1; i <= integer_bit; i++) {
-      00034B 7B 17            [ 1]  706 	ld	a, (0x17, sp)
-      00034D 11 1E            [ 1]  707 	cp	a, (0x1e, sp)
-      00034F 22 3E            [ 1]  708 	jrugt	00106$
-                                    709 ;	src\main.c: 456: str[integer_bit - i + minus] = table[0];
-      000351 5F               [ 1]  710 	clrw	x
-      000352 7B 17            [ 1]  711 	ld	a, (0x17, sp)
-      000354 97               [ 1]  712 	ld	xl, a
-                                    713 ;	src\main.c: 458: str[integer_bit - i + minus] = table[temp%10];
-      000355 16 0F            [ 2]  714 	ldw	y, (0x0f, sp)
-      000357 17 13            [ 2]  715 	ldw	(0x13, sp), y
-                                    716 ;	src\main.c: 456: str[integer_bit - i + minus] = table[0];
-      000359 50               [ 2]  717 	negw	x
-      00035A 72 FB 11         [ 2]  718 	addw	x, (0x11, sp)
-      00035D 72 FB 0B         [ 2]  719 	addw	x, (0x0b, sp)
-      000360 72 FB 15         [ 2]  720 	addw	x, (0x15, sp)
-      000363 1F 11            [ 2]  721 	ldw	(0x11, sp), x
-                                    722 ;	src\main.c: 455: if (temp == 0) {
-      000365 1E 0F            [ 2]  723 	ldw	x, (0x0f, sp)
-      000367 26 08            [ 1]  724 	jrne	00104$
-                                    725 ;	src\main.c: 456: str[integer_bit - i + minus] = table[0];
-      000369 C6u00u00         [ 1]  726 	ld	a, _table+0
-      00036C 1E 11            [ 2]  727 	ldw	x, (0x11, sp)
-      00036E F7               [ 1]  728 	ld	(x), a
-      00036F 20 11            [ 2]  729 	jra	00105$
-      000371                        730 00104$:
-                                    731 ;	src\main.c: 458: str[integer_bit - i + minus] = table[temp%10];
-      000371 1E 13            [ 2]  732 	ldw	x, (0x13, sp)
-      000373 90 AE 00 0A      [ 2]  733 	ldw	y, #0x000a
-      000377 65               [ 2]  734 	divw	x, y
-      000378 93               [ 1]  735 	ldw	x, y
-      000379 90 9F            [ 1]  736 	ld	a, yl
-      00037B 97               [ 1]  737 	ld	xl, a
-      00037C D6u00u00         [ 1]  738 	ld	a, (_table+0, x)
-      00037F 1E 11            [ 2]  739 	ldw	x, (0x11, sp)
-      000381 F7               [ 1]  740 	ld	(x), a
-      000382                        741 00105$:
-                                    742 ;	src\main.c: 460: temp /= 10;
-      000382 1E 13            [ 2]  743 	ldw	x, (0x13, sp)
-      000384 90 AE 00 0A      [ 2]  744 	ldw	y, #0x000a
-      000388 65               [ 2]  745 	divw	x, y
-      000389 1F 0F            [ 2]  746 	ldw	(0x0f, sp), x
-                                    747 ;	src\main.c: 454: for (i = 1; i <= integer_bit; i++) {
-      00038B 0C 17            [ 1]  748 	inc	(0x17, sp)
-      00038D 20 B0            [ 2]  749 	jra	00114$
-      00038F                        750 00106$:
-                                    751 ;	src\main.c: 463: for (i = 0; i < (integer_bit - 1); i++) {
-      00038F 0F 17            [ 1]  752 	clr	(0x17, sp)
-      000391                        753 00117$:
-      000391 16 11            [ 2]  754 	ldw	y, (0x11, sp)
-      000393 17 0D            [ 2]  755 	ldw	(0x0d, sp), y
-      000395 1E 11            [ 2]  756 	ldw	x, (0x11, sp)
-      000397 5A               [ 2]  757 	decw	x
-      000398 1F 13            [ 2]  758 	ldw	(0x13, sp), x
-      00039A 5F               [ 1]  759 	clrw	x
-      00039B 7B 17            [ 1]  760 	ld	a, (0x17, sp)
-      00039D 97               [ 1]  761 	ld	xl, a
-      00039E 13 13            [ 2]  762 	cpw	x, (0x13, sp)
-      0003A0 2E 11            [ 1]  763 	jrsge	00110$
-                                    764 ;	src\main.c: 464: if (str[i + minus] == '0') {
-      0003A2 72 FB 0B         [ 2]  765 	addw	x, (0x0b, sp)
-      0003A5 72 FB 15         [ 2]  766 	addw	x, (0x15, sp)
-      0003A8 F6               [ 1]  767 	ld	a, (x)
-      0003A9 A1 30            [ 1]  768 	cp	a, #0x30
-      0003AB 26 06            [ 1]  769 	jrne	00110$
-                                    770 ;	src\main.c: 465: trailing_zero_count += 1;
-      0003AD 0C 06            [ 1]  771 	inc	(0x06, sp)
-                                    772 ;	src\main.c: 463: for (i = 0; i < (integer_bit - 1); i++) {
-      0003AF 0C 17            [ 1]  773 	inc	(0x17, sp)
-      0003B1 20 DE            [ 2]  774 	jra	00117$
-      0003B3                        775 00110$:
-                                    776 ;	src\main.c: 471: for (i = minus; i <= trailing_zero_count + minus; i++) {
-      0003B3 7B 05            [ 1]  777 	ld	a, (0x05, sp)
-      0003B5 6B 17            [ 1]  778 	ld	(0x17, sp), a
-      0003B7                        779 00120$:
-      0003B7 7B 06            [ 1]  780 	ld	a, (0x06, sp)
-      0003B9 6B 10            [ 1]  781 	ld	(0x10, sp), a
-      0003BB 0F 0F            [ 1]  782 	clr	(0x0f, sp)
-      0003BD 16 0B            [ 2]  783 	ldw	y, (0x0b, sp)
-      0003BF 17 11            [ 2]  784 	ldw	(0x11, sp), y
-      0003C1 1E 0F            [ 2]  785 	ldw	x, (0x0f, sp)
-      0003C3 72 FB 0B         [ 2]  786 	addw	x, (0x0b, sp)
-      0003C6 7B 17            [ 1]  787 	ld	a, (0x17, sp)
-      0003C8 6B 14            [ 1]  788 	ld	(0x14, sp), a
-      0003CA 0F 13            [ 1]  789 	clr	(0x13, sp)
-      0003CC 13 13            [ 2]  790 	cpw	x, (0x13, sp)
-      0003CE 2F 16            [ 1]  791 	jrslt	00111$
-                                    792 ;	src\main.c: 472: str[i] = str[i + trailing_zero_count];
-      0003D0 5F               [ 1]  793 	clrw	x
-      0003D1 7B 17            [ 1]  794 	ld	a, (0x17, sp)
-      0003D3 97               [ 1]  795 	ld	xl, a
-      0003D4 72 FB 15         [ 2]  796 	addw	x, (0x15, sp)
-      0003D7 16 13            [ 2]  797 	ldw	y, (0x13, sp)
-      0003D9 72 F9 0F         [ 2]  798 	addw	y, (0x0f, sp)
-      0003DC 72 F9 15         [ 2]  799 	addw	y, (0x15, sp)
-      0003DF 90 F6            [ 1]  800 	ld	a, (y)
-      0003E1 F7               [ 1]  801 	ld	(x), a
-                                    802 ;	src\main.c: 471: for (i = minus; i <= trailing_zero_count + minus; i++) {
-      0003E2 0C 17            [ 1]  803 	inc	(0x17, sp)
-      0003E4 20 D1            [ 2]  804 	jra	00120$
-      0003E6                        805 00111$:
-                                    806 ;	src\main.c: 475: *(str + integer_bit - trailing_zero_count + minus) = '.';
-      0003E6 5F               [ 1]  807 	clrw	x
-      0003E7 7B 1E            [ 1]  808 	ld	a, (0x1e, sp)
-      0003E9 97               [ 1]  809 	ld	xl, a
-      0003EA 72 FB 15         [ 2]  810 	addw	x, (0x15, sp)
-      0003ED 1F 13            [ 2]  811 	ldw	(0x13, sp), x
-      0003EF 72 F0 0F         [ 2]  812 	subw	x, (0x0f, sp)
-      0003F2 9F               [ 1]  813 	ld	a, xl
-      0003F3 1B 05            [ 1]  814 	add	a, (0x05, sp)
-      0003F5 02               [ 1]  815 	rlwa	x
-      0003F6 A9 00            [ 1]  816 	adc	a, #0x00
-      0003F8 95               [ 1]  817 	ld	xh, a
-      0003F9 A6 2E            [ 1]  818 	ld	a, #0x2e
-      0003FB F7               [ 1]  819 	ld	(x), a
-                                    820 ;	src\main.c: 477: t2 = number;
-      0003FC 16 09            [ 2]  821 	ldw	y, (0x09, sp)
-      0003FE 17 03            [ 2]  822 	ldw	(0x03, sp), y
-      000400 16 07            [ 2]  823 	ldw	y, (0x07, sp)
-      000402 17 01            [ 2]  824 	ldw	(0x01, sp), y
-                                    825 ;	src\main.c: 479: for (i = 1; i <= decimal_bit; i++) {
-      000404 A6 01            [ 1]  826 	ld	a, #0x01
-      000406 6B 17            [ 1]  827 	ld	(0x17, sp), a
-      000408                        828 00123$:
-      000408 7B 17            [ 1]  829 	ld	a, (0x17, sp)
-      00040A 11 1F            [ 1]  830 	cp	a, (0x1f, sp)
-      00040C 22 46            [ 1]  831 	jrugt	00112$
-                                    832 ;	src\main.c: 480: temp = t2 * 10;
-      00040E 1E 03            [ 2]  833 	ldw	x, (0x03, sp)
-      000410 89               [ 2]  834 	pushw	x
-      000411 1E 03            [ 2]  835 	ldw	x, (0x03, sp)
-      000413 89               [ 2]  836 	pushw	x
-      000414 5F               [ 1]  837 	clrw	x
-      000415 89               [ 2]  838 	pushw	x
-      000416 4B 20            [ 1]  839 	push	#0x20
-      000418 4B 41            [ 1]  840 	push	#0x41
-      00041A CDr00r00         [ 4]  841 	call	___fsmul
-      00041D 1F 0B            [ 2]  842 	ldw	(0x0b, sp), x
-      00041F 17 09            [ 2]  843 	ldw	(0x09, sp), y
-      000421 1E 0B            [ 2]  844 	ldw	x, (0x0b, sp)
-      000423 89               [ 2]  845 	pushw	x
-      000424 1E 0B            [ 2]  846 	ldw	x, (0x0b, sp)
-      000426 89               [ 2]  847 	pushw	x
-      000427 CDr00r00         [ 4]  848 	call	___fs2uint
-      00042A 51               [ 1]  849 	exgw	x, y
-                                    850 ;	src\main.c: 481: str[integer_bit + i - trailing_zero_count + minus] = table[temp%10];
-      00042B 7B 17            [ 1]  851 	ld	a, (0x17, sp)
-      00042D 5F               [ 1]  852 	clrw	x
-      00042E 97               [ 1]  853 	ld	xl, a
-      00042F 72 FB 0D         [ 2]  854 	addw	x, (0x0d, sp)
-      000432 72 F0 0F         [ 2]  855 	subw	x, (0x0f, sp)
-      000435 72 FB 11         [ 2]  856 	addw	x, (0x11, sp)
-      000438 72 FB 15         [ 2]  857 	addw	x, (0x15, sp)
-      00043B 89               [ 2]  858 	pushw	x
-      00043C 93               [ 1]  859 	ldw	x, y
-      00043D 90 AE 00 0A      [ 2]  860 	ldw	y, #0x000a
-      000441 65               [ 2]  861 	divw	x, y
-      000442 85               [ 2]  862 	popw	x
-      000443 90 D6u00u00      [ 1]  863 	ld	a, (_table+0, y)
-      000447 F7               [ 1]  864 	ld	(x), a
-                                    865 ;	src\main.c: 482: t2 *= 10;
-      000448 1E 0B            [ 2]  866 	ldw	x, (0x0b, sp)
-      00044A 16 09            [ 2]  867 	ldw	y, (0x09, sp)
-      00044C 1F 03            [ 2]  868 	ldw	(0x03, sp), x
-      00044E 17 01            [ 2]  869 	ldw	(0x01, sp), y
-                                    870 ;	src\main.c: 479: for (i = 1; i <= decimal_bit; i++) {
-      000450 0C 17            [ 1]  871 	inc	(0x17, sp)
-      000452 20 B4            [ 2]  872 	jra	00123$
-      000454                        873 00112$:
-                                    874 ;	src\main.c: 485: *(str + integer_bit + 1 + decimal_bit - trailing_zero_count + minus) = '\0';
-      000454 1E 13            [ 2]  875 	ldw	x, (0x13, sp)
-      000456 5C               [ 1]  876 	incw	x
-      000457 9F               [ 1]  877 	ld	a, xl
-      000458 1B 1F            [ 1]  878 	add	a, (0x1f, sp)
-      00045A 02               [ 1]  879 	rlwa	x
-      00045B A9 00            [ 1]  880 	adc	a, #0x00
-      00045D 95               [ 1]  881 	ld	xh, a
-      00045E 72 F0 0F         [ 2]  882 	subw	x, (0x0f, sp)
-      000461 9F               [ 1]  883 	ld	a, xl
-      000462 1B 05            [ 1]  884 	add	a, (0x05, sp)
-      000464 02               [ 1]  885 	rlwa	x
-      000465 A9 00            [ 1]  886 	adc	a, #0x00
-      000467 95               [ 1]  887 	ld	xh, a
-      000468 7F               [ 1]  888 	clr	(x)
-                                    889 ;	src\main.c: 486: }
-      000469 1E 18            [ 2]  890 	ldw	x, (24, sp)
-      00046B 5B 1F            [ 2]  891 	addw	sp, #31
-      00046D FC               [ 2]  892 	jp	(x)
-                                    893 ;	src\main.c: 542: PUTCHAR_PROTOTYPE
-                                    894 ;	-----------------------------------------
-                                    895 ;	 function putchar
-                                    896 ;	-----------------------------------------
-      00046E                        897 _putchar:
-                                    898 ;	src\main.c: 545: UART_SENDDATA8(c);
-      00046E 9F               [ 1]  899 	ld	a, xl
-      00046F 89               [ 2]  900 	pushw	x
-      000470 CDr00r00         [ 4]  901 	call	_UART2_SendData8
-      000473 85               [ 2]  902 	popw	x
-                                    903 ;	src\main.c: 547: while (UART_GETFLAGSTATUS(UART_FLAG_TXE) == RESET);
-      000474                        904 00101$:
-      000474 89               [ 2]  905 	pushw	x
-      000475 AE 00 80         [ 2]  906 	ldw	x, #0x0080
-      000478 CDr00r00         [ 4]  907 	call	_UART2_GetFlagStatus
-      00047B 85               [ 2]  908 	popw	x
-      00047C 4D               [ 1]  909 	tnz	a
-      00047D 27 F5            [ 1]  910 	jreq	00101$
-                                    911 ;	src\main.c: 549: return (c);
-                                    912 ;	src\main.c: 550: }
-      00047F 81               [ 4]  913 	ret
-                                    914 ;	src\main.c: 557: GETCHAR_PROTOTYPE
-                                    915 ;	-----------------------------------------
-                                    916 ;	 function getchar
-                                    917 ;	-----------------------------------------
-      000480                        918 _getchar:
-                                    919 ;	src\main.c: 565: while (UART_GETFLAGSTATUS(UART_FLAG_TXE) == RESET);
-      000480                        920 00101$:
-      000480 AE 00 80         [ 2]  921 	ldw	x, #0x0080
-      000483 CDr00r00         [ 4]  922 	call	_UART2_GetFlagStatus
-      000486 4D               [ 1]  923 	tnz	a
-      000487 27 F7            [ 1]  924 	jreq	00101$
-                                    925 ;	src\main.c: 566: c = UART_RECEIVEDATA8();
-      000489 CDr00r00         [ 4]  926 	call	_UART2_ReceiveData8
-      00048C 5F               [ 1]  927 	clrw	x
-                                    928 ;	src\main.c: 567: return (c);
-      00048D 97               [ 1]  929 	ld	xl, a
-                                    930 ;	src\main.c: 568: }
-      00048E 81               [ 4]  931 	ret
-                                    932 ;	src\main.c: 579: void assert_failed(uint8_t* file, uint32_t line)
-                                    933 ;	-----------------------------------------
-                                    934 ;	 function assert_failed
-                                    935 ;	-----------------------------------------
-      00048F                        936 _assert_failed:
-                                    937 ;	src\main.c: 586: while (1)
-      00048F                        938 00102$:
-      00048F 20 FE            [ 2]  939 	jra	00102$
-                                    940 ;	src\main.c: 589: }
-      000491 1E 01            [ 2]  941 	ldw	x, (1, sp)
-      000493 5B 06            [ 2]  942 	addw	sp, #6
-      000495 FC               [ 2]  943 	jp	(x)
-                                    944 	.area CODE
-                                    945 	.area CONST
-      000000                        946 _table:
-      000000 30                     947 	.db #0x30	; 48	'0'
-      000001 31                     948 	.db #0x31	; 49	'1'
-      000002 32                     949 	.db #0x32	; 50	'2'
-      000003 33                     950 	.db #0x33	; 51	'3'
-      000004 34                     951 	.db #0x34	; 52	'4'
-      000005 35                     952 	.db #0x35	; 53	'5'
-      000006 36                     953 	.db #0x36	; 54	'6'
-      000007 37                     954 	.db #0x37	; 55	'7'
-      000008 38                     955 	.db #0x38	; 56	'8'
-      000009 39                     956 	.db #0x39	; 57	'9'
-      00000A                        957 _main_placeholderDS18X20String_65537_192:
-      00000A 7B                     958 	.ascii "{"
-      00000B 22                     959 	.db 0x22
-      00000C 74 6F 70 69 63         960 	.ascii "topic"
-      000011 22                     961 	.db 0x22
-      000012 20 3A 20               962 	.ascii " : "
-      000015 22                     963 	.db 0x22
-      000016 6D 71 74 74 2F 74 65   964 	.ascii "mqtt/temperature-room"
+                                    294 ;	 function main
+                                    295 ;	-----------------------------------------
+      00007E                        296 _main:
+                                    297 ;	src\main.c: 206: Clock_Setup();
+      00007E CDr00r00         [ 4]  298 	call	_Clock_Setup
+                                    299 ;	src\main.c: 207: GPIO_Setup();
+      000081 CDr00r56         [ 4]  300 	call	_GPIO_Setup
+                                    301 ;	src\main.c: 208: DS18X20_Setup();
+      000084 CDr00r00         [ 4]  302 	call	_DS18X20_Setup
+                                    303 ;	src\main.c: 209: I2C_Setup();
+      000087 CDr00r00         [ 4]  304 	call	_I2C_Setup
+                                    305 ;	src\main.c: 210: UART_Setup();
+      00008A CDr00r67         [ 4]  306 	call	_UART_Setup
+                                    307 ;	src\main.c: 212: BME280_Setup();
+      00008D CDr00r00         [ 4]  308 	call	_BME280_Setup
+                                    309 ;	src\main.c: 228: LED_ON;
+      000090 A6 20            [ 1]  310 	ld	a, #0x20
+      000092 AE 50 14         [ 2]  311 	ldw	x, #0x5014
+      000095 CDr00r00         [ 4]  312 	call	_GPIO_WriteLow
+                                    313 ;	src\main.c: 230: while (1) {
+      000098                        314 00106$:
+                                    315 ;	src\main.c: 233: DS18X20_Reset();
+      000098 CDr00r00         [ 4]  316 	call	_DS18X20_Reset
+                                    317 ;	src\main.c: 235: delay_ms(2000);
+      00009B AE 07 D0         [ 2]  318 	ldw	x, #0x07d0
+      00009E CDr00r00         [ 4]  319 	call	_delay_ms
+                                    320 ;	src\main.c: 237: if (!DS18X20_Read_ID(iDS18X20RomID)) {
+      0000A1 AEr00r00         [ 2]  321 	ldw	x, #(_iDS18X20RomID+0)
+      0000A4 CDr00r00         [ 4]  322 	call	_DS18X20_Read_ID
+      0000A7 4D               [ 1]  323 	tnz	a
+      0000A8 26 0E            [ 1]  324 	jrne	00103$
+                                    325 ;	src\main.c: 238: for (uint8_t i = 0; i < 8; i++) {
+      0000AA 4F               [ 1]  326 	clr	a
+      0000AB                        327 00109$:
+      0000AB A1 08            [ 1]  328 	cp	a, #0x08
+      0000AD 24 09            [ 1]  329 	jrnc	00103$
+                                    330 ;	src\main.c: 239: iDS18X20RomID[i] = 0;
+      0000AF 5F               [ 1]  331 	clrw	x
+      0000B0 97               [ 1]  332 	ld	xl, a
+      0000B1 1Cr00r00         [ 2]  333 	addw	x, #(_iDS18X20RomID+0)
+      0000B4 7F               [ 1]  334 	clr	(x)
+                                    335 ;	src\main.c: 238: for (uint8_t i = 0; i < 8; i++) {
+      0000B5 4C               [ 1]  336 	inc	a
+      0000B6 20 F3            [ 2]  337 	jra	00109$
+      0000B8                        338 00103$:
+                                    339 ;	src\main.c: 243: fDS18X20Temperature = DS18X20_Get_Temperature();
+      0000B8 CDr00r00         [ 4]  340 	call	_DS18X20_Get_Temperature
+      0000BB CFu00u02         [ 2]  341 	ldw	_fDS18X20Temperature+2, x
+      0000BE 90 CFu00u00      [ 2]  342 	ldw	_fDS18X20Temperature+0, y
+                                    343 ;	src\main.c: 244: integer_bit = 2;
+      0000C2 35 02u01u12      [ 1]  344 	mov	_integer_bit+0, #0x02
+                                    345 ;	src\main.c: 245: decimal_bit = 2;
+      0000C6 35 02u01u13      [ 1]  346 	mov	_decimal_bit+0, #0x02
+                                    347 ;	src\main.c: 261: sizeValueString = integer_bit + decimal_bit + 1;
+      0000CA 35 05u00u14      [ 1]  348 	mov	_sizeValueString+0, #0x05
+                                    349 ;	src\main.c: 262: sizeSendUARTString = sizeof(placeholderDS18X20String) + sizeValueString;
+      0000CE 35 39u00u15      [ 1]  350 	mov	_sizeSendUARTString+0, #0x39
+                                    351 ;	src\main.c: 263: stringValue = (char*)malloc(sizeValueString * sizeof(char));
+      0000D2 AE 00 05         [ 2]  352 	ldw	x, #0x0005
+      0000D5 CDr00r00         [ 4]  353 	call	_malloc
+      0000D8 CFu00u12         [ 2]  354 	ldw	_stringValue+0, x
+                                    355 ;	src\main.c: 264: stringSendUART = (char*)malloc(sizeSendUARTString * sizeof(char));
+      0000DB C6u00u15         [ 1]  356 	ld	a, _sizeSendUARTString+0
+      0000DE 5F               [ 1]  357 	clrw	x
+      0000DF 97               [ 1]  358 	ld	xl, a
+      0000E0 CDr00r00         [ 4]  359 	call	_malloc
+      0000E3 CFu00u10         [ 2]  360 	ldw	_stringSendUART+0, x
+                                    361 ;	src\main.c: 266: floatToStr(stringValue, fDS18X20Temperature, integer_bit, decimal_bit);
+      0000E6 3Bu01u13         [ 1]  362 	push	_decimal_bit+0
+      0000E9 3Bu01u12         [ 1]  363 	push	_integer_bit+0
+      0000EC CEu00u02         [ 2]  364 	ldw	x, _fDS18X20Temperature+2
+      0000EF 89               [ 2]  365 	pushw	x
+      0000F0 CEu00u00         [ 2]  366 	ldw	x, _fDS18X20Temperature+0
+      0000F3 89               [ 2]  367 	pushw	x
+      0000F4 CEu00u12         [ 2]  368 	ldw	x, _stringValue+0
+      0000F7 CDr00r00         [ 4]  369 	call	_floatToStr
+                                    370 ;	src\main.c: 268: sprintf(stringSendUART, placeholderDS18X20String, stringValue);
+      0000FA CEu00u12         [ 2]  371 	ldw	x, _stringValue+0
+      0000FD 89               [ 2]  372 	pushw	x
+      0000FE 4Br00            [ 1]  373 	push	#<(_main_placeholderDS18X20String_65537_219+0)
+      000100 4Bs00            [ 1]  374 	push	#((_main_placeholderDS18X20String_65537_219+0) >> 8)
+      000102 CEu00u10         [ 2]  375 	ldw	x, _stringSendUART+0
+      000105 89               [ 2]  376 	pushw	x
+      000106 CDr00r00         [ 4]  377 	call	_sprintf
+      000109 5B 06            [ 2]  378 	addw	sp, #6
+                                    379 ;	src\main.c: 269: putchar(0x00);
+      00010B 5F               [ 1]  380 	clrw	x
+      00010C CDr03r02         [ 4]  381 	call	_putchar
+                                    382 ;	src\main.c: 270: putchar(0x00);
+      00010F 5F               [ 1]  383 	clrw	x
+      000110 CDr03r02         [ 4]  384 	call	_putchar
+                                    385 ;	src\main.c: 271: putchar(0x18);
+      000113 AE 00 18         [ 2]  386 	ldw	x, #0x0018
+      000116 CDr03r02         [ 4]  387 	call	_putchar
+                                    388 ;	src\main.c: 272: printf("%s\r\n", stringSendUART);
+      000119 CEu00u10         [ 2]  389 	ldw	x, _stringSendUART+0
+      00011C 89               [ 2]  390 	pushw	x
+      00011D 4BrCD            [ 1]  391 	push	#<(___str_4+0)
+      00011F 4Bs00            [ 1]  392 	push	#((___str_4+0) >> 8)
+      000121 CDr00r00         [ 4]  393 	call	_printf
+      000124 5B 04            [ 2]  394 	addw	sp, #4
+                                    395 ;	src\main.c: 274: free(stringSendUART);
+      000126 CEu00u10         [ 2]  396 	ldw	x, _stringSendUART+0
+      000129 CDr00r00         [ 4]  397 	call	_free
+                                    398 ;	src\main.c: 275: free(stringValue);
+      00012C CEu00u12         [ 2]  399 	ldw	x, _stringValue+0
+      00012F CDr00r00         [ 4]  400 	call	_free
+                                    401 ;	src\main.c: 277: delay_ms(5000);
+      000132 AE 13 88         [ 2]  402 	ldw	x, #0x1388
+      000135 CDr00r00         [ 4]  403 	call	_delay_ms
+                                    404 ;	src\main.c: 336: integer_bit = 3;
+      000138 35 03u01u12      [ 1]  405 	mov	_integer_bit+0, #0x03
+                                    406 ;	src\main.c: 337: decimal_bit = 2;
+      00013C 35 02u01u13      [ 1]  407 	mov	_decimal_bit+0, #0x02
+                                    408 ;	src\main.c: 339: BME280_SetMode(BME280_MODE_FORCED);
+      000140 A6 01            [ 1]  409 	ld	a, #0x01
+      000142 CDr00r00         [ 4]  410 	call	_BME280_SetMode
+                                    411 ;	src\main.c: 340: delay_ms(4000);
+      000145 AE 0F A0         [ 2]  412 	ldw	x, #0x0fa0
+      000148 CDr00r00         [ 4]  413 	call	_delay_ms
+                                    414 ;	src\main.c: 342: BME280_ReadRegisters();
+      00014B CDr00r00         [ 4]  415 	call	_BME280_ReadRegisters
+                                    416 ;	src\main.c: 344: fBME280Temperature = BME280_ReadTemperature();
+      00014E CDr00r00         [ 4]  417 	call	_BME280_ReadTemperature
+      000151 CFu00u06         [ 2]  418 	ldw	_fBME280Temperature+2, x
+      000154 90 CFu00u04      [ 2]  419 	ldw	_fBME280Temperature+0, y
+                                    420 ;	src\main.c: 346: sizeValueString = integer_bit + decimal_bit + 1;
+      000158 C6u01u12         [ 1]  421 	ld	a, _integer_bit+0
+      00015B CBu01u13         [ 1]  422 	add	a, _decimal_bit+0
+      00015E 4C               [ 1]  423 	inc	a
+                                    424 ;	src\main.c: 347: stringValue = (char*)malloc(sizeValueString * sizeof(char));
+      00015F C7u00u14         [ 1]  425 	ld	_sizeValueString+0, a
+      000162 5F               [ 1]  426 	clrw	x
+      000163 97               [ 1]  427 	ld	xl, a
+      000164 CDr00r00         [ 4]  428 	call	_malloc
+      000167 CFu00u12         [ 2]  429 	ldw	_stringValue+0, x
+                                    430 ;	src\main.c: 348: sizeSendUARTString = sizeof(placeholderTemperatureBME280String) + sizeValueString;
+      00016A C6u00u14         [ 1]  431 	ld	a, _sizeValueString+0
+      00016D AB 35            [ 1]  432 	add	a, #0x35
+                                    433 ;	src\main.c: 349: stringSendUART = (char*)malloc(sizeSendUARTString * sizeof(char));
+      00016F C7u00u15         [ 1]  434 	ld	_sizeSendUARTString+0, a
+      000172 5F               [ 1]  435 	clrw	x
+      000173 97               [ 1]  436 	ld	xl, a
+      000174 CDr00r00         [ 4]  437 	call	_malloc
+      000177 CFu00u10         [ 2]  438 	ldw	_stringSendUART+0, x
+                                    439 ;	src\main.c: 351: floatToStr(stringValue, fBME280Temperature, integer_bit, decimal_bit);
+      00017A 3Bu01u13         [ 1]  440 	push	_decimal_bit+0
+      00017D 3Bu01u12         [ 1]  441 	push	_integer_bit+0
+      000180 CEu00u06         [ 2]  442 	ldw	x, _fBME280Temperature+2
+      000183 89               [ 2]  443 	pushw	x
+      000184 CEu00u04         [ 2]  444 	ldw	x, _fBME280Temperature+0
+      000187 89               [ 2]  445 	pushw	x
+      000188 CEu00u12         [ 2]  446 	ldw	x, _stringValue+0
+      00018B CDr00r00         [ 4]  447 	call	_floatToStr
+                                    448 ;	src\main.c: 352: sprintf(stringSendUART, placeholderTemperatureBME280String, stringValue);
+      00018E CEu00u12         [ 2]  449 	ldw	x, _stringValue+0
+      000191 89               [ 2]  450 	pushw	x
+      000192 4Br34            [ 1]  451 	push	#<(_main_placeholderTemperatureBME280String_65537_219+0)
+      000194 4Bs00            [ 1]  452 	push	#((_main_placeholderTemperatureBME280String_65537_219+0) >> 8)
+      000196 CEu00u10         [ 2]  453 	ldw	x, _stringSendUART+0
+      000199 89               [ 2]  454 	pushw	x
+      00019A CDr00r00         [ 4]  455 	call	_sprintf
+      00019D 5B 06            [ 2]  456 	addw	sp, #6
+                                    457 ;	src\main.c: 353: putchar(0x00);
+      00019F 5F               [ 1]  458 	clrw	x
+      0001A0 CDr03r02         [ 4]  459 	call	_putchar
+                                    460 ;	src\main.c: 354: putchar(0x00);
+      0001A3 5F               [ 1]  461 	clrw	x
+      0001A4 CDr03r02         [ 4]  462 	call	_putchar
+                                    463 ;	src\main.c: 355: putchar(0x18);
+      0001A7 AE 00 18         [ 2]  464 	ldw	x, #0x0018
+      0001AA CDr03r02         [ 4]  465 	call	_putchar
+                                    466 ;	src\main.c: 356: printf("%s\r\n", stringSendUART);
+      0001AD CEu00u10         [ 2]  467 	ldw	x, _stringSendUART+0
+      0001B0 89               [ 2]  468 	pushw	x
+      0001B1 4BrCD            [ 1]  469 	push	#<(___str_4+0)
+      0001B3 4Bs00            [ 1]  470 	push	#((___str_4+0) >> 8)
+      0001B5 CDr00r00         [ 4]  471 	call	_printf
+      0001B8 5B 04            [ 2]  472 	addw	sp, #4
+                                    473 ;	src\main.c: 358: free(stringSendUART);
+      0001BA CEu00u10         [ 2]  474 	ldw	x, _stringSendUART+0
+      0001BD CDr00r00         [ 4]  475 	call	_free
+                                    476 ;	src\main.c: 359: free(stringValue);
+      0001C0 CEu00u12         [ 2]  477 	ldw	x, _stringValue+0
+      0001C3 CDr00r00         [ 4]  478 	call	_free
+                                    479 ;	src\main.c: 361: integer_bit = 2;
+      0001C6 35 02u01u12      [ 1]  480 	mov	_integer_bit+0, #0x02
+                                    481 ;	src\main.c: 362: decimal_bit = 2;
+      0001CA 35 02u01u13      [ 1]  482 	mov	_decimal_bit+0, #0x02
+                                    483 ;	src\main.c: 364: fBME280Humidity = BME280_ReadHumidity();
+      0001CE CDr00r00         [ 4]  484 	call	_BME280_ReadHumidity
+      0001D1 CFu00u0A         [ 2]  485 	ldw	_fBME280Humidity+2, x
+      0001D4 90 CFu00u08      [ 2]  486 	ldw	_fBME280Humidity+0, y
+                                    487 ;	src\main.c: 365: delay_ms(2000);
+      0001D8 AE 07 D0         [ 2]  488 	ldw	x, #0x07d0
+      0001DB CDr00r00         [ 4]  489 	call	_delay_ms
+                                    490 ;	src\main.c: 367: sizeValueString = integer_bit + decimal_bit + 1;
+      0001DE C6u01u12         [ 1]  491 	ld	a, _integer_bit+0
+      0001E1 CBu01u13         [ 1]  492 	add	a, _decimal_bit+0
+      0001E4 4C               [ 1]  493 	inc	a
+                                    494 ;	src\main.c: 368: sizeSendUARTString = sizeof(placeholderHumidityBME280String) + sizeValueString;
+      0001E5 C7u00u14         [ 1]  495 	ld	_sizeValueString+0, a
+      0001E8 AB 32            [ 1]  496 	add	a, #0x32
+      0001EA C7u00u15         [ 1]  497 	ld	_sizeSendUARTString+0, a
+                                    498 ;	src\main.c: 369: stringValue = (char*)malloc(sizeValueString * sizeof(char));
+      0001ED C6u00u14         [ 1]  499 	ld	a, _sizeValueString+0
+      0001F0 5F               [ 1]  500 	clrw	x
+      0001F1 97               [ 1]  501 	ld	xl, a
+      0001F2 CDr00r00         [ 4]  502 	call	_malloc
+      0001F5 CFu00u12         [ 2]  503 	ldw	_stringValue+0, x
+                                    504 ;	src\main.c: 370: stringSendUART = (char*)malloc(sizeSendUARTString * sizeof(char));
+      0001F8 C6u00u15         [ 1]  505 	ld	a, _sizeSendUARTString+0
+      0001FB 5F               [ 1]  506 	clrw	x
+      0001FC 97               [ 1]  507 	ld	xl, a
+      0001FD CDr00r00         [ 4]  508 	call	_malloc
+      000200 CFu00u10         [ 2]  509 	ldw	_stringSendUART+0, x
+                                    510 ;	src\main.c: 372: floatToStr(stringValue, fBME280Humidity, integer_bit, decimal_bit);
+      000203 3Bu01u13         [ 1]  511 	push	_decimal_bit+0
+      000206 3Bu01u12         [ 1]  512 	push	_integer_bit+0
+      000209 CEu00u0A         [ 2]  513 	ldw	x, _fBME280Humidity+2
+      00020C 89               [ 2]  514 	pushw	x
+      00020D CEu00u08         [ 2]  515 	ldw	x, _fBME280Humidity+0
+      000210 89               [ 2]  516 	pushw	x
+      000211 CEu00u12         [ 2]  517 	ldw	x, _stringValue+0
+      000214 CDr00r00         [ 4]  518 	call	_floatToStr
+                                    519 ;	src\main.c: 373: sprintf(stringSendUART, placeholderHumidityBME280String, stringValue);
+      000217 CEu00u12         [ 2]  520 	ldw	x, _stringValue+0
+      00021A 89               [ 2]  521 	pushw	x
+      00021B 4Br69            [ 1]  522 	push	#<(_main_placeholderHumidityBME280String_65537_219+0)
+      00021D 4Bs00            [ 1]  523 	push	#((_main_placeholderHumidityBME280String_65537_219+0) >> 8)
+      00021F CEu00u10         [ 2]  524 	ldw	x, _stringSendUART+0
+      000222 89               [ 2]  525 	pushw	x
+      000223 CDr00r00         [ 4]  526 	call	_sprintf
+      000226 5B 06            [ 2]  527 	addw	sp, #6
+                                    528 ;	src\main.c: 378: putchar(0x00);
+      000228 5F               [ 1]  529 	clrw	x
+      000229 CDr03r02         [ 4]  530 	call	_putchar
+                                    531 ;	src\main.c: 379: putchar(0x00);
+      00022C 5F               [ 1]  532 	clrw	x
+      00022D CDr03r02         [ 4]  533 	call	_putchar
+                                    534 ;	src\main.c: 380: putchar(0x18);
+      000230 AE 00 18         [ 2]  535 	ldw	x, #0x0018
+      000233 CDr03r02         [ 4]  536 	call	_putchar
+                                    537 ;	src\main.c: 381: printf("%s\r\n", stringSendUART);
+      000236 CEu00u10         [ 2]  538 	ldw	x, _stringSendUART+0
+      000239 89               [ 2]  539 	pushw	x
+      00023A 4BrCD            [ 1]  540 	push	#<(___str_4+0)
+      00023C 4Bs00            [ 1]  541 	push	#((___str_4+0) >> 8)
+      00023E CDr00r00         [ 4]  542 	call	_printf
+      000241 5B 04            [ 2]  543 	addw	sp, #4
+                                    544 ;	src\main.c: 383: free(stringSendUART);
+      000243 CEu00u10         [ 2]  545 	ldw	x, _stringSendUART+0
+      000246 CDr00r00         [ 4]  546 	call	_free
+                                    547 ;	src\main.c: 384: free(stringValue);
+      000249 CEu00u12         [ 2]  548 	ldw	x, _stringValue+0
+      00024C CDr00r00         [ 4]  549 	call	_free
+                                    550 ;	src\main.c: 386: integer_bit = 5;
+      00024F 35 05u01u12      [ 1]  551 	mov	_integer_bit+0, #0x05
+                                    552 ;	src\main.c: 387: decimal_bit = 1;
+      000253 35 01u01u13      [ 1]  553 	mov	_decimal_bit+0, #0x01
+                                    554 ;	src\main.c: 389: fBME280Pressure = BME280_ReadPressure();
+      000257 CDr00r00         [ 4]  555 	call	_BME280_ReadPressure
+      00025A 89               [ 2]  556 	pushw	x
+      00025B 90 89            [ 2]  557 	pushw	y
+      00025D CDr00r00         [ 4]  558 	call	___fs2ulong
+      000260 5B 04            [ 2]  559 	addw	sp, #4
+      000262 CFu00u0E         [ 2]  560 	ldw	_fBME280Pressure+2, x
+      000265 90 CFu00u0C      [ 2]  561 	ldw	_fBME280Pressure+0, y
+                                    562 ;	src\main.c: 390: delay_ms(2000);
+      000269 AE 07 D0         [ 2]  563 	ldw	x, #0x07d0
+      00026C CDr00r00         [ 4]  564 	call	_delay_ms
+                                    565 ;	src\main.c: 392: sizeValueString = integer_bit + decimal_bit + 1;
+      00026F C6u01u12         [ 1]  566 	ld	a, _integer_bit+0
+      000272 CBu01u13         [ 1]  567 	add	a, _decimal_bit+0
+      000275 4C               [ 1]  568 	inc	a
+                                    569 ;	src\main.c: 393: sizeSendUARTString = sizeof(placeholderPressureBME280String) + sizeValueString;
+      000276 C7u00u14         [ 1]  570 	ld	_sizeValueString+0, a
+      000279 AB 32            [ 1]  571 	add	a, #0x32
+      00027B C7u00u15         [ 1]  572 	ld	_sizeSendUARTString+0, a
+                                    573 ;	src\main.c: 394: stringValue = (char*)malloc(sizeValueString * sizeof(char));
+      00027E 5F               [ 1]  574 	clrw	x
+      00027F C6u00u14         [ 1]  575 	ld	a, _sizeValueString+0
+      000282 97               [ 1]  576 	ld	xl, a
+      000283 CDr00r00         [ 4]  577 	call	_malloc
+      000286 CFu00u12         [ 2]  578 	ldw	_stringValue+0, x
+                                    579 ;	src\main.c: 395: stringSendUART = (char*)malloc(sizeSendUARTString * sizeof(char));
+      000289 C6u00u15         [ 1]  580 	ld	a, _sizeSendUARTString+0
+      00028C 5F               [ 1]  581 	clrw	x
+      00028D 97               [ 1]  582 	ld	xl, a
+      00028E CDr00r00         [ 4]  583 	call	_malloc
+      000291 CFu00u10         [ 2]  584 	ldw	_stringSendUART+0, x
+                                    585 ;	src\main.c: 397: floatToStr(stringValue, (float)fBME280Pressure, integer_bit, decimal_bit);
+      000294 CEu00u0E         [ 2]  586 	ldw	x, _fBME280Pressure+2
+      000297 89               [ 2]  587 	pushw	x
+      000298 CEu00u0C         [ 2]  588 	ldw	x, _fBME280Pressure+0
+      00029B 89               [ 2]  589 	pushw	x
+      00029C CDr00r00         [ 4]  590 	call	___ulong2fs
+      00029F 5B 04            [ 2]  591 	addw	sp, #4
+      0002A1 3Bu01u13         [ 1]  592 	push	_decimal_bit+0
+      0002A4 3Bu01u12         [ 1]  593 	push	_integer_bit+0
+      0002A7 89               [ 2]  594 	pushw	x
+      0002A8 90 89            [ 2]  595 	pushw	y
+      0002AA CEu00u12         [ 2]  596 	ldw	x, _stringValue+0
+      0002AD CDr00r00         [ 4]  597 	call	_floatToStr
+                                    598 ;	src\main.c: 398: sprintf(stringSendUART, placeholderPressureBME280String, stringValue);
+      0002B0 CEu00u12         [ 2]  599 	ldw	x, _stringValue+0
+      0002B3 89               [ 2]  600 	pushw	x
+      0002B4 4Br9B            [ 1]  601 	push	#<(_main_placeholderPressureBME280String_65537_219+0)
+      0002B6 4Bs00            [ 1]  602 	push	#((_main_placeholderPressureBME280String_65537_219+0) >> 8)
+      0002B8 CEu00u10         [ 2]  603 	ldw	x, _stringSendUART+0
+      0002BB 89               [ 2]  604 	pushw	x
+      0002BC CDr00r00         [ 4]  605 	call	_sprintf
+      0002BF 5B 06            [ 2]  606 	addw	sp, #6
+                                    607 ;	src\main.c: 403: putchar(0x00);
+      0002C1 5F               [ 1]  608 	clrw	x
+      0002C2 CDr03r02         [ 4]  609 	call	_putchar
+                                    610 ;	src\main.c: 404: putchar(0x00);
+      0002C5 5F               [ 1]  611 	clrw	x
+      0002C6 CDr03r02         [ 4]  612 	call	_putchar
+                                    613 ;	src\main.c: 405: putchar(0x18);
+      0002C9 AE 00 18         [ 2]  614 	ldw	x, #0x0018
+      0002CC CDr03r02         [ 4]  615 	call	_putchar
+                                    616 ;	src\main.c: 406: printf("%s\r\n", stringSendUART);
+      0002CF CEu00u10         [ 2]  617 	ldw	x, _stringSendUART+0
+      0002D2 89               [ 2]  618 	pushw	x
+      0002D3 4BrCD            [ 1]  619 	push	#<(___str_4+0)
+      0002D5 4Bs00            [ 1]  620 	push	#((___str_4+0) >> 8)
+      0002D7 CDr00r00         [ 4]  621 	call	_printf
+      0002DA 5B 04            [ 2]  622 	addw	sp, #4
+                                    623 ;	src\main.c: 408: free(stringSendUART);
+      0002DC CEu00u10         [ 2]  624 	ldw	x, _stringSendUART+0
+      0002DF CDr00r00         [ 4]  625 	call	_free
+                                    626 ;	src\main.c: 409: free(stringValue);
+      0002E2 CEu00u12         [ 2]  627 	ldw	x, _stringValue+0
+      0002E5 CDr00r00         [ 4]  628 	call	_free
+                                    629 ;	src\main.c: 419: for (uint8_t i = 0; i < 9; i++) {
+      0002E8 4F               [ 1]  630 	clr	a
+      0002E9                        631 00112$:
+      0002E9 A1 09            [ 1]  632 	cp	a, #0x09
+      0002EB 24 0A            [ 1]  633 	jrnc	00104$
+                                    634 ;	src\main.c: 420: delay_ms(65535);
+      0002ED 88               [ 1]  635 	push	a
+      0002EE 5F               [ 1]  636 	clrw	x
+      0002EF 5A               [ 2]  637 	decw	x
+      0002F0 CDr00r00         [ 4]  638 	call	_delay_ms
+      0002F3 84               [ 1]  639 	pop	a
+                                    640 ;	src\main.c: 419: for (uint8_t i = 0; i < 9; i++) {
+      0002F4 4C               [ 1]  641 	inc	a
+      0002F5 20 F2            [ 2]  642 	jra	00112$
+      0002F7                        643 00104$:
+                                    644 ;	src\main.c: 424: LED_OFF;
+      0002F7 A6 20            [ 1]  645 	ld	a, #0x20
+      0002F9 AE 50 14         [ 2]  646 	ldw	x, #0x5014
+      0002FC CDr00r00         [ 4]  647 	call	_GPIO_WriteHigh
+                                    648 ;	src\main.c: 434: }
+      0002FF CCr00r98         [ 2]  649 	jp	00106$
+                                    650 ;	src\main.c: 441: PUTCHAR_PROTOTYPE
+                                    651 ;	-----------------------------------------
+                                    652 ;	 function putchar
+                                    653 ;	-----------------------------------------
+      000302                        654 _putchar:
+                                    655 ;	src\main.c: 444: UART_SENDDATA8(c);
+      000302 9F               [ 1]  656 	ld	a, xl
+      000303 89               [ 2]  657 	pushw	x
+      000304 CDr00r00         [ 4]  658 	call	_UART2_SendData8
+      000307 85               [ 2]  659 	popw	x
+                                    660 ;	src\main.c: 446: while (UART_GETFLAGSTATUS(UART_FLAG_TXE) == RESET);
+      000308                        661 00101$:
+      000308 89               [ 2]  662 	pushw	x
+      000309 AE 00 80         [ 2]  663 	ldw	x, #0x0080
+      00030C CDr00r00         [ 4]  664 	call	_UART2_GetFlagStatus
+      00030F 85               [ 2]  665 	popw	x
+      000310 4D               [ 1]  666 	tnz	a
+      000311 27 F5            [ 1]  667 	jreq	00101$
+                                    668 ;	src\main.c: 448: return (c);
+                                    669 ;	src\main.c: 449: }
+      000313 81               [ 4]  670 	ret
+                                    671 ;	src\main.c: 456: GETCHAR_PROTOTYPE
+                                    672 ;	-----------------------------------------
+                                    673 ;	 function getchar
+                                    674 ;	-----------------------------------------
+      000314                        675 _getchar:
+                                    676 ;	src\main.c: 464: while (UART_GETFLAGSTATUS(UART_FLAG_TXE) == RESET);
+      000314                        677 00101$:
+      000314 AE 00 80         [ 2]  678 	ldw	x, #0x0080
+      000317 CDr00r00         [ 4]  679 	call	_UART2_GetFlagStatus
+      00031A 4D               [ 1]  680 	tnz	a
+      00031B 27 F7            [ 1]  681 	jreq	00101$
+                                    682 ;	src\main.c: 465: c = UART_RECEIVEDATA8();
+      00031D CDr00r00         [ 4]  683 	call	_UART2_ReceiveData8
+      000320 5F               [ 1]  684 	clrw	x
+                                    685 ;	src\main.c: 466: return (c);
+      000321 97               [ 1]  686 	ld	xl, a
+                                    687 ;	src\main.c: 467: }
+      000322 81               [ 4]  688 	ret
+                                    689 ;	src\main.c: 478: void assert_failed(uint8_t* file, uint32_t line)
+                                    690 ;	-----------------------------------------
+                                    691 ;	 function assert_failed
+                                    692 ;	-----------------------------------------
+      000323                        693 _assert_failed:
+                                    694 ;	src\main.c: 485: while (1)
+      000323                        695 00102$:
+      000323 20 FE            [ 2]  696 	jra	00102$
+                                    697 ;	src\main.c: 488: }
+      000325 1E 01            [ 2]  698 	ldw	x, (1, sp)
+      000327 5B 06            [ 2]  699 	addw	sp, #6
+      000329 FC               [ 2]  700 	jp	(x)
+                                    701 	.area CODE
+                                    702 	.area CONST
+      000000                        703 _main_placeholderDS18X20String_65537_219:
+      000000 7B                     704 	.ascii "{"
+      000001 22                     705 	.db 0x22
+      000002 74 6F 70 69 63         706 	.ascii "topic"
+      000007 22                     707 	.db 0x22
+      000008 20 3A 20               708 	.ascii " : "
+      00000B 22                     709 	.db 0x22
+      00000C 6D 71 74 74 2F 74 65   710 	.ascii "mqtt/temperature-room"
              6D 70 65 72 61 74 75
              72 65 2D 72 6F 6F 6D
-      00002B 22                     965 	.db 0x22
-      00002C 2C 20                  966 	.ascii ", "
-      00002E 22                     967 	.db 0x22
-      00002F 76 61 6C 75 65         968 	.ascii "value"
-      000034 22                     969 	.db 0x22
-      000035 20 3A 20               970 	.ascii " : "
-      000038 22                     971 	.db 0x22
-      000039 25 73                  972 	.ascii "%s"
-      00003B 22                     973 	.db 0x22
-      00003C 7D                     974 	.ascii "}"
-      00003D 00                     975 	.db 0x00
-      00003E                        976 _main_placeholderTemperatureBME280String_65537_192:
-      00003E 7B                     977 	.ascii "{"
-      00003F 22                     978 	.db 0x22
-      000040 74 6F 70 69 63         979 	.ascii "topic"
-      000045 22                     980 	.db 0x22
-      000046 20 3A 20               981 	.ascii " : "
-      000049 22                     982 	.db 0x22
-      00004A 6D 71 74 74 2F 74 65   983 	.ascii "mqtt/temperature-bme280"
+      000021 22                     711 	.db 0x22
+      000022 2C 20                  712 	.ascii ", "
+      000024 22                     713 	.db 0x22
+      000025 76 61 6C 75 65         714 	.ascii "value"
+      00002A 22                     715 	.db 0x22
+      00002B 20 3A 20               716 	.ascii " : "
+      00002E 22                     717 	.db 0x22
+      00002F 25 73                  718 	.ascii "%s"
+      000031 22                     719 	.db 0x22
+      000032 7D                     720 	.ascii "}"
+      000033 00                     721 	.db 0x00
+      000034                        722 _main_placeholderTemperatureBME280String_65537_219:
+      000034 7B                     723 	.ascii "{"
+      000035 22                     724 	.db 0x22
+      000036 74 6F 70 69 63         725 	.ascii "topic"
+      00003B 22                     726 	.db 0x22
+      00003C 20 3A 20               727 	.ascii " : "
+      00003F 22                     728 	.db 0x22
+      000040 6D 71 74 74 2F 74 65   729 	.ascii "mqtt/temperature-bme280"
              6D 70 65 72 61 74 75
              72 65 2D 62 6D 65 32
              38 30
-      000061 22                     984 	.db 0x22
-      000062 2C 20                  985 	.ascii ", "
-      000064 22                     986 	.db 0x22
-      000065 76 61 6C 75 65         987 	.ascii "value"
-      00006A 22                     988 	.db 0x22
-      00006B 3A 20                  989 	.ascii ": "
-      00006D 22                     990 	.db 0x22
-      00006E 25 73                  991 	.ascii "%s"
-      000070 22                     992 	.db 0x22
-      000071 7D                     993 	.ascii "}"
-      000072 00                     994 	.db 0x00
-      000073                        995 _main_placeholderHumidityBME280String_65537_192:
-      000073 7B                     996 	.ascii "{"
-      000074 22                     997 	.db 0x22
-      000075 74 6F 70 69 63         998 	.ascii "topic"
-      00007A 22                     999 	.db 0x22
-      00007B 20 3A 20              1000 	.ascii " : "
-      00007E 22                    1001 	.db 0x22
-      00007F 6D 71 74 74 2F 68 75  1002 	.ascii "mqtt/humidity-bme280"
+      000057 22                     730 	.db 0x22
+      000058 2C 20                  731 	.ascii ", "
+      00005A 22                     732 	.db 0x22
+      00005B 76 61 6C 75 65         733 	.ascii "value"
+      000060 22                     734 	.db 0x22
+      000061 3A 20                  735 	.ascii ": "
+      000063 22                     736 	.db 0x22
+      000064 25 73                  737 	.ascii "%s"
+      000066 22                     738 	.db 0x22
+      000067 7D                     739 	.ascii "}"
+      000068 00                     740 	.db 0x00
+      000069                        741 _main_placeholderHumidityBME280String_65537_219:
+      000069 7B                     742 	.ascii "{"
+      00006A 22                     743 	.db 0x22
+      00006B 74 6F 70 69 63         744 	.ascii "topic"
+      000070 22                     745 	.db 0x22
+      000071 20 3A 20               746 	.ascii " : "
+      000074 22                     747 	.db 0x22
+      000075 6D 71 74 74 2F 68 75   748 	.ascii "mqtt/humidity-bme280"
              6D 69 64 69 74 79 2D
              62 6D 65 32 38 30
-      000093 22                    1003 	.db 0x22
-      000094 2C 20                 1004 	.ascii ", "
-      000096 22                    1005 	.db 0x22
-      000097 76 61 6C 75 65        1006 	.ascii "value"
-      00009C 22                    1007 	.db 0x22
-      00009D 3A 20                 1008 	.ascii ": "
-      00009F 22                    1009 	.db 0x22
-      0000A0 25 73                 1010 	.ascii "%s"
-      0000A2 22                    1011 	.db 0x22
-      0000A3 7D                    1012 	.ascii "}"
-      0000A4 00                    1013 	.db 0x00
-      0000A5                       1014 _main_placeholderPressureBME280String_65537_192:
-      0000A5 7B                    1015 	.ascii "{"
-      0000A6 22                    1016 	.db 0x22
-      0000A7 74 6F 70 69 63        1017 	.ascii "topic"
-      0000AC 22                    1018 	.db 0x22
-      0000AD 20 3A 20              1019 	.ascii " : "
-      0000B0 22                    1020 	.db 0x22
-      0000B1 6D 71 74 74 2F 70 72  1021 	.ascii "mqtt/pressure-bme280"
+      000089 22                     749 	.db 0x22
+      00008A 2C 20                  750 	.ascii ", "
+      00008C 22                     751 	.db 0x22
+      00008D 76 61 6C 75 65         752 	.ascii "value"
+      000092 22                     753 	.db 0x22
+      000093 3A 20                  754 	.ascii ": "
+      000095 22                     755 	.db 0x22
+      000096 25 73                  756 	.ascii "%s"
+      000098 22                     757 	.db 0x22
+      000099 7D                     758 	.ascii "}"
+      00009A 00                     759 	.db 0x00
+      00009B                        760 _main_placeholderPressureBME280String_65537_219:
+      00009B 7B                     761 	.ascii "{"
+      00009C 22                     762 	.db 0x22
+      00009D 74 6F 70 69 63         763 	.ascii "topic"
+      0000A2 22                     764 	.db 0x22
+      0000A3 20 3A 20               765 	.ascii " : "
+      0000A6 22                     766 	.db 0x22
+      0000A7 6D 71 74 74 2F 70 72   767 	.ascii "mqtt/pressure-bme280"
              65 73 73 75 72 65 2D
              62 6D 65 32 38 30
-      0000C5 22                    1022 	.db 0x22
-      0000C6 2C 20                 1023 	.ascii ", "
-      0000C8 22                    1024 	.db 0x22
-      0000C9 76 61 6C 75 65        1025 	.ascii "value"
-      0000CE 22                    1026 	.db 0x22
-      0000CF 3A 20                 1027 	.ascii ": "
-      0000D1 22                    1028 	.db 0x22
-      0000D2 25 73                 1029 	.ascii "%s"
-      0000D4 22                    1030 	.db 0x22
-      0000D5 7D                    1031 	.ascii "}"
-      0000D6 00                    1032 	.db 0x00
-                                   1033 	.area CONST
-      0000D7                       1034 ___str_4:
-      0000D7 25 73                 1035 	.ascii "%s"
-      0000D9 0D                    1036 	.db 0x0d
-      0000DA 0A                    1037 	.db 0x0a
-      0000DB 00                    1038 	.db 0x00
-                                   1039 	.area CODE
-                                   1040 	.area INITIALIZER
-      000000                       1041 __xinit__fDS18X20Temperature:
-      000000 C2 C8 00 00           1042 	.byte #0xc2, #0xc8, #0x00, #0x00	; -1.000000e+02
-      000004                       1043 __xinit__fBME280Temperature:
-      000004 00 00 00 00           1044 	.byte #0x00, #0x00, #0x00, #0x00	;  0.000000e+00
-      000008                       1045 __xinit__fBME280Humidity:
-      000008 00 00 00 00           1046 	.byte #0x00, #0x00, #0x00, #0x00	;  0.000000e+00
-      00000C                       1047 __xinit__fBME280Pressure:
-      00000C 00 00 00 00           1048 	.byte #0x00, #0x00, #0x00, #0x00	; 0
-      000010                       1049 __xinit__stringSendUART:
-      000010 00 00                 1050 	.dw #0x0000
-      000012                       1051 __xinit__stringValue:
-      000012 00 00                 1052 	.dw #0x0000
-      000014                       1053 __xinit__sizeValueString:
-      000014 00                    1054 	.db #0x00	; 0
-      000015                       1055 __xinit__sizeSendUARTString:
-      000015 00                    1056 	.db #0x00	; 0
-                                   1057 	.area CABS (ABS)
+      0000BB 22                     768 	.db 0x22
+      0000BC 2C 20                  769 	.ascii ", "
+      0000BE 22                     770 	.db 0x22
+      0000BF 76 61 6C 75 65         771 	.ascii "value"
+      0000C4 22                     772 	.db 0x22
+      0000C5 3A 20                  773 	.ascii ": "
+      0000C7 22                     774 	.db 0x22
+      0000C8 25 73                  775 	.ascii "%s"
+      0000CA 22                     776 	.db 0x22
+      0000CB 7D                     777 	.ascii "}"
+      0000CC 00                     778 	.db 0x00
+                                    779 	.area CONST
+      0000CD                        780 ___str_4:
+      0000CD 25 73                  781 	.ascii "%s"
+      0000CF 0D                     782 	.db 0x0d
+      0000D0 0A                     783 	.db 0x0a
+      0000D1 00                     784 	.db 0x00
+                                    785 	.area CODE
+                                    786 	.area INITIALIZER
+      000000                        787 __xinit__fDS18X20Temperature:
+      000000 C2 C8 00 00            788 	.byte #0xc2, #0xc8, #0x00, #0x00	; -1.000000e+02
+      000004                        789 __xinit__fBME280Temperature:
+      000004 00 00 00 00            790 	.byte #0x00, #0x00, #0x00, #0x00	;  0.000000e+00
+      000008                        791 __xinit__fBME280Humidity:
+      000008 00 00 00 00            792 	.byte #0x00, #0x00, #0x00, #0x00	;  0.000000e+00
+      00000C                        793 __xinit__fBME280Pressure:
+      00000C 00 00 00 00            794 	.byte #0x00, #0x00, #0x00, #0x00	; 0
+      000010                        795 __xinit__stringSendUART:
+      000010 00 00                  796 	.dw #0x0000
+      000012                        797 __xinit__stringValue:
+      000012 00 00                  798 	.dw #0x0000
+      000014                        799 __xinit__sizeValueString:
+      000014 00                     800 	.db #0x00	; 0
+      000015                        801 __xinit__sizeSendUARTString:
+      000015 00                     802 	.db #0x00	; 0
+                                    803 	.area CABS (ABS)

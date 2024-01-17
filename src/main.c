@@ -38,6 +38,7 @@
 #include "ds18X20.h"
 #include "athx0.h"
 #include "bme280.h"
+#include "output.h"
 
 /**
  * 
@@ -119,12 +120,8 @@
 #endif
 
 // Functions
-void floatToStr(char *str, float number, uint8_t integer_bit, uint8_t decimal_bit);
-// void uart_send_n_byte(uint8_t* data, uint8_t len);
-// void uart_read_n_byte(uint8_t* data, uint8_t len);
 
 // Variables
-static const char table[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
 uint8_t iDS18X20RomID[8];
 uint8_t iI2CWrite[3];
 uint8_t iI2CRead[7];
@@ -143,21 +140,17 @@ uint8_t integer_bit, decimal_bit;
 uint8_t sizeValueString = 0;
 uint8_t sizeSendUARTString = 0;
 
-/*
 // Read buffer
 extern uint8_t read_ok;
 extern uint8_t read_idx;
 extern uint8_t read_len;
 extern uint8_t read_buffer[];
-*/
 
-/*
 // Write buffer
 extern uint8_t write_ok;
 extern uint8_t write_idx;
 extern uint8_t write_len;
 extern uint8_t write_buffer[];
-*/
 
 void Clock_Setup(void) {
   CLK_DeInit();
@@ -343,8 +336,12 @@ void main(void) {
     integer_bit = 3;
     decimal_bit = 2;
 
+    BME280_SetMode(BME280_MODE_FORCED);
+    delay_ms(4000);
+
+    BME280_ReadRegisters();
+
     fBME280Temperature = BME280_ReadTemperature();
-    delay_ms(2000);
     
     sizeValueString = integer_bit + decimal_bit + 1;
     stringValue = (char*)malloc(sizeValueString * sizeof(char));
@@ -435,104 +432,6 @@ void main(void) {
     //printf("%c", ans);  
   }
 }
-
-void floatToStr(char *str, float number, uint8_t integer_bit, uint8_t decimal_bit) {
-        uint8_t i;
-        uint8_t minus = 0;
-        float t2 = 0.0;
-        uint16_t temp;
-        uint8_t trailing_zero_count = 0;
-
-        if (number < 0) {
-          str[0] = 0x2D;
-          number *= -1;
-          minus = 1;
-        }
-        
-        temp = (uint32_t)(number/1);
-
-        for (i = 1; i <= integer_bit; i++) {
-                if (temp == 0) {
-                        str[integer_bit - i + minus] = table[0];
-                } else {
-                        str[integer_bit - i + minus] = table[temp%10];
-                }
-                temp /= 10;
-        }
-        
-        for (i = 0; i < (integer_bit - 1); i++) {
-          if (str[i + minus] == '0') {
-            trailing_zero_count += 1;
-          } else {
-            break;
-          }
-        }
-        
-        for (i = minus; i <= trailing_zero_count + minus; i++) {
-          str[i] = str[i + trailing_zero_count];
-        }
-        
-        *(str + integer_bit - trailing_zero_count + minus) = '.';
-        temp = 0;
-        t2 = number;
-
-        for (i = 1; i <= decimal_bit; i++) {
-                temp = t2 * 10;
-                str[integer_bit + i - trailing_zero_count + minus] = table[temp%10];
-                t2 *= 10;
-        }
-
-        *(str + integer_bit + 1 + decimal_bit - trailing_zero_count + minus) = '\0';
-}
-
-/*
-// write multiple bytes
-void uart_send_n_byte(uint8_t* data, uint8_t len)
-{
-	uint16_t count = 0;
-	UART2_ITConfig(UART2_IT_TXE, DISABLE);
-
-	 // Prepare to write data buffer (copy from user data area to serial port write buffer, initialize index value, etc.)
-	memcpy(write_buffer, data, len);
-	write_idx = 0;
-	write_len = len;
-
-	 // write interrupt
-	UART2_ITConfig(UART2_IT_TXE, ENABLE);
-	
-	 while(!write_ok) { // Wait for the write to complete (synchronous processing)
-		count++;
-		 if( count >= 10000 ) { // Simple timeout processing, no timeout can be removed
-			write_idx = 0;
-			write_len = 0;
-			break;
-		}
-	}
-	 write_ok = 0; // Write complete, reset write complete flag
-	return;
-}
-*/
-
-/*
-// read multiple bytes
-void  uart_read_n_byte(uint8_t* data, uint8_t len)
-{
-	 // turn off interrupt
-	UART2_ITConfig(UART2_IT_RXNE_OR, DISABLE);
-
-	 // Clear the read buffer (reset the read index value)
-	read_idx = 0;
-	read_len = len;
-
-	 // open read interrupt
-	UART2_ITConfig(UART2_IT_RXNE_OR, ENABLE);
-	
-	 while(!read_ok); // Wait for the read operation to complete (synchronization processing), add timeout processing, refer to the above write operation
-	 read_ok = 0; // write complete, reset write complete flag
-	 memcpy(data, read_buffer, read_len); // copy data to user buffer
-	return;
-}
-*/
 
 /**
   * @brief Retargets the C library printf function to the UART.

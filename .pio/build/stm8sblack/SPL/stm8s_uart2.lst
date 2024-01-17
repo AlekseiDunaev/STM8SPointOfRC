@@ -72,40 +72,40 @@
                                      72 ; code
                                      73 ;--------------------------------------------------------
                                      74 	.area CODE
-                                     75 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 53: void UART2_DeInit(void)
+                                     75 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 53: void UART2_DeInit(void)
                                      76 ;	-----------------------------------------
                                      77 ;	 function UART2_DeInit
                                      78 ;	-----------------------------------------
       000000                         79 _UART2_DeInit:
-                                     80 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 57: (void) UART2->SR;
+                                     80 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 57: (void) UART2->SR;
       000000 C6 52 40         [ 1]   81 	ld	a, 0x5240
-                                     82 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 58: (void)UART2->DR;
+                                     82 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 58: (void)UART2->DR;
       000003 C6 52 41         [ 1]   83 	ld	a, 0x5241
-                                     84 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 60: UART2->BRR2 = UART2_BRR2_RESET_VALUE;  /*  Set UART2_BRR2 to reset value 0x00 */
+                                     84 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 60: UART2->BRR2 = UART2_BRR2_RESET_VALUE;  /*  Set UART2_BRR2 to reset value 0x00 */
       000006 35 00 52 43      [ 1]   85 	mov	0x5243+0, #0x00
-                                     86 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 61: UART2->BRR1 = UART2_BRR1_RESET_VALUE;  /*  Set UART2_BRR1 to reset value 0x00 */
+                                     86 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 61: UART2->BRR1 = UART2_BRR1_RESET_VALUE;  /*  Set UART2_BRR1 to reset value 0x00 */
       00000A 35 00 52 42      [ 1]   87 	mov	0x5242+0, #0x00
-                                     88 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 63: UART2->CR1 = UART2_CR1_RESET_VALUE; /*  Set UART2_CR1 to reset value 0x00  */
+                                     88 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 63: UART2->CR1 = UART2_CR1_RESET_VALUE; /*  Set UART2_CR1 to reset value 0x00  */
       00000E 35 00 52 44      [ 1]   89 	mov	0x5244+0, #0x00
-                                     90 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 64: UART2->CR2 = UART2_CR2_RESET_VALUE; /*  Set UART2_CR2 to reset value 0x00  */
+                                     90 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 64: UART2->CR2 = UART2_CR2_RESET_VALUE; /*  Set UART2_CR2 to reset value 0x00  */
       000012 35 00 52 45      [ 1]   91 	mov	0x5245+0, #0x00
-                                     92 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 65: UART2->CR3 = UART2_CR3_RESET_VALUE; /*  Set UART2_CR3 to reset value 0x00  */
+                                     92 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 65: UART2->CR3 = UART2_CR3_RESET_VALUE; /*  Set UART2_CR3 to reset value 0x00  */
       000016 35 00 52 46      [ 1]   93 	mov	0x5246+0, #0x00
-                                     94 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 66: UART2->CR4 = UART2_CR4_RESET_VALUE; /*  Set UART2_CR4 to reset value 0x00  */
+                                     94 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 66: UART2->CR4 = UART2_CR4_RESET_VALUE; /*  Set UART2_CR4 to reset value 0x00  */
       00001A 35 00 52 47      [ 1]   95 	mov	0x5247+0, #0x00
-                                     96 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 67: UART2->CR5 = UART2_CR5_RESET_VALUE; /*  Set UART2_CR5 to reset value 0x00  */
+                                     96 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 67: UART2->CR5 = UART2_CR5_RESET_VALUE; /*  Set UART2_CR5 to reset value 0x00  */
       00001E 35 00 52 48      [ 1]   97 	mov	0x5248+0, #0x00
-                                     98 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 68: UART2->CR6 = UART2_CR6_RESET_VALUE; /*  Set UART2_CR6 to reset value 0x00  */
+                                     98 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 68: UART2->CR6 = UART2_CR6_RESET_VALUE; /*  Set UART2_CR6 to reset value 0x00  */
       000022 35 00 52 49      [ 1]   99 	mov	0x5249+0, #0x00
-                                    100 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 69: }
+                                    100 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 69: }
       000026 81               [ 4]  101 	ret
-                                    102 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 85: void UART2_Init(uint32_t BaudRate, UART2_WordLength_TypeDef WordLength, UART2_StopBits_TypeDef StopBits, UART2_Parity_TypeDef Parity, UART2_SyncMode_TypeDef SyncMode, UART2_Mode_TypeDef Mode)
+                                    102 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 85: void UART2_Init(uint32_t BaudRate, UART2_WordLength_TypeDef WordLength, UART2_StopBits_TypeDef StopBits, UART2_Parity_TypeDef Parity, UART2_SyncMode_TypeDef SyncMode, UART2_Mode_TypeDef Mode)
                                     103 ;	-----------------------------------------
                                     104 ;	 function UART2_Init
                                     105 ;	-----------------------------------------
       000027                        106 _UART2_Init:
       000027 52 10            [ 2]  107 	sub	sp, #16
-                                    108 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 91: assert_param(IS_UART2_BAUDRATE_OK(BaudRate));
+                                    108 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 91: assert_param(IS_UART2_BAUDRATE_OK(BaudRate));
       000029 AE 89 68         [ 2]  109 	ldw	x, #0x8968
       00002C 13 15            [ 2]  110 	cpw	x, (0x15, sp)
       00002E A6 09            [ 1]  111 	ld	a, #0x09
@@ -120,7 +120,7 @@
       00003D AEr00r00         [ 2]  120 	ldw	x, #(___str_0+0)
       000040 CDr00r00         [ 4]  121 	call	_assert_failed
       000043                        122 00113$:
-                                    123 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 92: assert_param(IS_UART2_WORDLENGTH_OK(WordLength));
+                                    123 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 92: assert_param(IS_UART2_WORDLENGTH_OK(WordLength));
       000043 0D 17            [ 1]  124 	tnz	(0x17, sp)
       000045 27 12            [ 1]  125 	jreq	00115$
       000047 7B 17            [ 1]  126 	ld	a, (0x17, sp)
@@ -133,7 +133,7 @@
       000053 AEr00r00         [ 2]  133 	ldw	x, #(___str_0+0)
       000056 CDr00r00         [ 4]  134 	call	_assert_failed
       000059                        135 00115$:
-                                    136 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 93: assert_param(IS_UART2_STOPBITS_OK(StopBits));
+                                    136 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 93: assert_param(IS_UART2_STOPBITS_OK(StopBits));
       000059 0D 18            [ 1]  137 	tnz	(0x18, sp)
       00005B 27 1E            [ 1]  138 	jreq	00120$
       00005D 7B 18            [ 1]  139 	ld	a, (0x18, sp)
@@ -152,7 +152,7 @@
       000075 AEr00r00         [ 2]  152 	ldw	x, #(___str_0+0)
       000078 CDr00r00         [ 4]  153 	call	_assert_failed
       00007B                        154 00120$:
-                                    155 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 94: assert_param(IS_UART2_PARITY_OK(Parity));
+                                    155 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 94: assert_param(IS_UART2_PARITY_OK(Parity));
       00007B 0D 19            [ 1]  156 	tnz	(0x19, sp)
       00007D 27 18            [ 1]  157 	jreq	00131$
       00007F 7B 19            [ 1]  158 	ld	a, (0x19, sp)
@@ -168,7 +168,7 @@
       000091 AEr00r00         [ 2]  168 	ldw	x, #(___str_0+0)
       000094 CDr00r00         [ 4]  169 	call	_assert_failed
       000097                        170 00131$:
-                                    171 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 95: assert_param(IS_UART2_MODE_OK((uint8_t)Mode));
+                                    171 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 95: assert_param(IS_UART2_MODE_OK((uint8_t)Mode));
       000097 7B 1B            [ 1]  172 	ld	a, (0x1b, sp)
       000099 A1 08            [ 1]  173 	cp	a, #0x08
       00009B 27 3F            [ 1]  174 	jreq	00139$
@@ -209,7 +209,7 @@
       0000D6 AEr00r00         [ 2]  209 	ldw	x, #(___str_0+0)
       0000D9 CDr00r00         [ 4]  210 	call	_assert_failed
       0000DC                        211 00139$:
-                                    212 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 96: assert_param(IS_UART2_SYNCMODE_OK((uint8_t)SyncMode));
+                                    212 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 96: assert_param(IS_UART2_SYNCMODE_OK((uint8_t)SyncMode));
       0000DC 7B 1A            [ 1]  213 	ld	a, (0x1a, sp)
       0000DE A4 88            [ 1]  214 	and	a, #0x88
       0000E0 A1 88            [ 1]  215 	cp	a, #0x88
@@ -234,40 +234,40 @@
       000101 AEr00r00         [ 2]  234 	ldw	x, #(___str_0+0)
       000104 CDr00r00         [ 4]  235 	call	_assert_failed
       000107                        236 00165$:
-                                    237 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 99: UART2->CR1 &= (uint8_t)(~UART2_CR1_M);
+                                    237 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 99: UART2->CR1 &= (uint8_t)(~UART2_CR1_M);
       000107 72 19 52 44      [ 1]  238 	bres	0x5244, #4
-                                    239 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 101: UART2->CR1 |= (uint8_t)WordLength; 
+                                    239 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 101: UART2->CR1 |= (uint8_t)WordLength; 
       00010B C6 52 44         [ 1]  240 	ld	a, 0x5244
       00010E 1A 17            [ 1]  241 	or	a, (0x17, sp)
       000110 C7 52 44         [ 1]  242 	ld	0x5244, a
-                                    243 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 104: UART2->CR3 &= (uint8_t)(~UART2_CR3_STOP);
+                                    243 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 104: UART2->CR3 &= (uint8_t)(~UART2_CR3_STOP);
       000113 C6 52 46         [ 1]  244 	ld	a, 0x5246
       000116 A4 CF            [ 1]  245 	and	a, #0xcf
       000118 C7 52 46         [ 1]  246 	ld	0x5246, a
-                                    247 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 106: UART2->CR3 |= (uint8_t)StopBits; 
+                                    247 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 106: UART2->CR3 |= (uint8_t)StopBits; 
       00011B C6 52 46         [ 1]  248 	ld	a, 0x5246
       00011E 1A 18            [ 1]  249 	or	a, (0x18, sp)
       000120 C7 52 46         [ 1]  250 	ld	0x5246, a
-                                    251 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 109: UART2->CR1 &= (uint8_t)(~(UART2_CR1_PCEN | UART2_CR1_PS  ));
+                                    251 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 109: UART2->CR1 &= (uint8_t)(~(UART2_CR1_PCEN | UART2_CR1_PS  ));
       000123 C6 52 44         [ 1]  252 	ld	a, 0x5244
       000126 A4 F9            [ 1]  253 	and	a, #0xf9
       000128 C7 52 44         [ 1]  254 	ld	0x5244, a
-                                    255 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 111: UART2->CR1 |= (uint8_t)Parity;
+                                    255 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 111: UART2->CR1 |= (uint8_t)Parity;
       00012B C6 52 44         [ 1]  256 	ld	a, 0x5244
       00012E 1A 19            [ 1]  257 	or	a, (0x19, sp)
       000130 C7 52 44         [ 1]  258 	ld	0x5244, a
-                                    259 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 114: UART2->BRR1 &= (uint8_t)(~UART2_BRR1_DIVM);
+                                    259 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 114: UART2->BRR1 &= (uint8_t)(~UART2_BRR1_DIVM);
       000133 C6 52 42         [ 1]  260 	ld	a, 0x5242
       000136 35 00 52 42      [ 1]  261 	mov	0x5242+0, #0x00
-                                    262 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 116: UART2->BRR2 &= (uint8_t)(~UART2_BRR2_DIVM);
+                                    262 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 116: UART2->BRR2 &= (uint8_t)(~UART2_BRR2_DIVM);
       00013A C6 52 43         [ 1]  263 	ld	a, 0x5243
       00013D A4 0F            [ 1]  264 	and	a, #0x0f
       00013F C7 52 43         [ 1]  265 	ld	0x5243, a
-                                    266 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 118: UART2->BRR2 &= (uint8_t)(~UART2_BRR2_DIVF);
+                                    266 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 118: UART2->BRR2 &= (uint8_t)(~UART2_BRR2_DIVF);
       000142 C6 52 43         [ 1]  267 	ld	a, 0x5243
       000145 A4 F0            [ 1]  268 	and	a, #0xf0
       000147 C7 52 43         [ 1]  269 	ld	0x5243, a
-                                    270 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 121: BaudRate_Mantissa    = ((uint32_t)CLK_GetClockFreq() / (BaudRate << 4));
+                                    270 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 121: BaudRate_Mantissa    = ((uint32_t)CLK_GetClockFreq() / (BaudRate << 4));
       00014A CDr00r00         [ 4]  271 	call	_CLK_GetClockFreq
       00014D 1F 0F            [ 2]  272 	ldw	(0x0f, sp), x
       00014F 1E 13            [ 2]  273 	ldw	x, (0x13, sp)
@@ -290,7 +290,7 @@
       00016A CDr00r00         [ 4]  290 	call	__divulong
       00016D 5B 08            [ 2]  291 	addw	sp, #8
       00016F 1F 03            [ 2]  292 	ldw	(0x03, sp), x
-                                    293 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 122: BaudRate_Mantissa100 = (((uint32_t)CLK_GetClockFreq() * 100) / (BaudRate << 4));
+                                    293 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 122: BaudRate_Mantissa100 = (((uint32_t)CLK_GetClockFreq() * 100) / (BaudRate << 4));
       000171 90 89            [ 2]  294 	pushw	y
       000173 CDr00r00         [ 4]  295 	call	_CLK_GetClockFreq
       000176 17 0F            [ 2]  296 	ldw	(0x0f, sp), y
@@ -324,7 +324,7 @@
       0001A8 1F 07            [ 2]  324 	ldw	(0x07, sp), x
       0001AA 1E 0D            [ 2]  325 	ldw	x, (0x0d, sp)
       0001AC 1F 05            [ 2]  326 	ldw	(0x05, sp), x
-                                    327 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 126: BRR2_1 = (uint8_t)((uint8_t)(((BaudRate_Mantissa100 - (BaudRate_Mantissa * 100))
+                                    327 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 126: BRR2_1 = (uint8_t)((uint8_t)(((BaudRate_Mantissa100 - (BaudRate_Mantissa * 100))
       0001AE 90 89            [ 2]  328 	pushw	y
       0001B0 1E 05            [ 2]  329 	ldw	x, (0x05, sp)
       0001B2 89               [ 2]  330 	pushw	x
@@ -371,7 +371,7 @@
       0001FB 90 85            [ 2]  371 	popw	y
       0001FD A4 0F            [ 1]  372 	and	a, #0x0f
       0001FF 6B 0E            [ 1]  373 	ld	(0x0e, sp), a
-                                    374 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 128: BRR2_2 = (uint8_t)((BaudRate_Mantissa >> 4) & (uint8_t)0xF0);
+                                    374 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 128: BRR2_2 = (uint8_t)((BaudRate_Mantissa >> 4) & (uint8_t)0xF0);
       000201 1E 03            [ 2]  375 	ldw	x, (0x03, sp)
       000203 A6 10            [ 1]  376 	ld	a, #0x10
       000205 62               [ 2]  377 	div	x, a
@@ -380,72 +380,72 @@
       000209 01               [ 1]  380 	rrwa	x
       00020A 9F               [ 1]  381 	ld	a, xl
       00020B A4 F0            [ 1]  382 	and	a, #0xf0
-                                    383 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 130: UART2->BRR2 = (uint8_t)(BRR2_1 | BRR2_2);
+                                    383 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 130: UART2->BRR2 = (uint8_t)(BRR2_1 | BRR2_2);
       00020D 1A 0E            [ 1]  384 	or	a, (0x0e, sp)
       00020F C7 52 43         [ 1]  385 	ld	0x5243, a
-                                    386 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 132: UART2->BRR1 = (uint8_t)BaudRate_Mantissa;           
+                                    386 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 132: UART2->BRR1 = (uint8_t)BaudRate_Mantissa;           
       000212 7B 04            [ 1]  387 	ld	a, (0x04, sp)
       000214 C7 52 42         [ 1]  388 	ld	0x5242, a
-                                    389 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 135: UART2->CR2 &= (uint8_t)~(UART2_CR2_TEN | UART2_CR2_REN);
+                                    389 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 135: UART2->CR2 &= (uint8_t)~(UART2_CR2_TEN | UART2_CR2_REN);
       000217 C6 52 45         [ 1]  390 	ld	a, 0x5245
       00021A A4 F3            [ 1]  391 	and	a, #0xf3
       00021C C7 52 45         [ 1]  392 	ld	0x5245, a
-                                    393 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 137: UART2->CR3 &= (uint8_t)~(UART2_CR3_CPOL | UART2_CR3_CPHA | UART2_CR3_LBCL);
+                                    393 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 137: UART2->CR3 &= (uint8_t)~(UART2_CR3_CPOL | UART2_CR3_CPHA | UART2_CR3_LBCL);
       00021F C6 52 46         [ 1]  394 	ld	a, 0x5246
       000222 A4 F8            [ 1]  395 	and	a, #0xf8
       000224 C7 52 46         [ 1]  396 	ld	0x5246, a
-                                    397 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 139: UART2->CR3 |= (uint8_t)((uint8_t)SyncMode & (uint8_t)(UART2_CR3_CPOL | \
+                                    397 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 139: UART2->CR3 |= (uint8_t)((uint8_t)SyncMode & (uint8_t)(UART2_CR3_CPOL | \
       000227 C6 52 46         [ 1]  398 	ld	a, 0x5246
       00022A 6B 10            [ 1]  399 	ld	(0x10, sp), a
       00022C 7B 1A            [ 1]  400 	ld	a, (0x1a, sp)
       00022E A4 07            [ 1]  401 	and	a, #0x07
       000230 1A 10            [ 1]  402 	or	a, (0x10, sp)
       000232 C7 52 46         [ 1]  403 	ld	0x5246, a
-                                    404 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 135: UART2->CR2 &= (uint8_t)~(UART2_CR2_TEN | UART2_CR2_REN);
+                                    404 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 135: UART2->CR2 &= (uint8_t)~(UART2_CR2_TEN | UART2_CR2_REN);
       000235 C6 52 45         [ 1]  405 	ld	a, 0x5245
-                                    406 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 142: if ((uint8_t)(Mode & UART2_MODE_TX_ENABLE))
+                                    406 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 142: if ((uint8_t)(Mode & UART2_MODE_TX_ENABLE))
       000238 88               [ 1]  407 	push	a
       000239 7B 1C            [ 1]  408 	ld	a, (0x1c, sp)
       00023B A5 04            [ 1]  409 	bcp	a, #0x04
       00023D 84               [ 1]  410 	pop	a
       00023E 27 07            [ 1]  411 	jreq	00102$
-                                    412 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 145: UART2->CR2 |= (uint8_t)UART2_CR2_TEN;
+                                    412 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 145: UART2->CR2 |= (uint8_t)UART2_CR2_TEN;
       000240 AA 08            [ 1]  413 	or	a, #0x08
       000242 C7 52 45         [ 1]  414 	ld	0x5245, a
       000245 20 05            [ 2]  415 	jra	00103$
       000247                        416 00102$:
-                                    417 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 150: UART2->CR2 &= (uint8_t)(~UART2_CR2_TEN);
+                                    417 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 150: UART2->CR2 &= (uint8_t)(~UART2_CR2_TEN);
       000247 A4 F7            [ 1]  418 	and	a, #0xf7
       000249 C7 52 45         [ 1]  419 	ld	0x5245, a
       00024C                        420 00103$:
-                                    421 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 135: UART2->CR2 &= (uint8_t)~(UART2_CR2_TEN | UART2_CR2_REN);
+                                    421 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 135: UART2->CR2 &= (uint8_t)~(UART2_CR2_TEN | UART2_CR2_REN);
       00024C C6 52 45         [ 1]  422 	ld	a, 0x5245
-                                    423 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 152: if ((uint8_t)(Mode & UART2_MODE_RX_ENABLE))
+                                    423 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 152: if ((uint8_t)(Mode & UART2_MODE_RX_ENABLE))
       00024F 88               [ 1]  424 	push	a
       000250 7B 1C            [ 1]  425 	ld	a, (0x1c, sp)
       000252 A5 08            [ 1]  426 	bcp	a, #0x08
       000254 84               [ 1]  427 	pop	a
       000255 27 07            [ 1]  428 	jreq	00105$
-                                    429 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 155: UART2->CR2 |= (uint8_t)UART2_CR2_REN;
+                                    429 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 155: UART2->CR2 |= (uint8_t)UART2_CR2_REN;
       000257 AA 04            [ 1]  430 	or	a, #0x04
       000259 C7 52 45         [ 1]  431 	ld	0x5245, a
       00025C 20 05            [ 2]  432 	jra	00106$
       00025E                        433 00105$:
-                                    434 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 160: UART2->CR2 &= (uint8_t)(~UART2_CR2_REN);
+                                    434 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 160: UART2->CR2 &= (uint8_t)(~UART2_CR2_REN);
       00025E A4 FB            [ 1]  435 	and	a, #0xfb
       000260 C7 52 45         [ 1]  436 	ld	0x5245, a
       000263                        437 00106$:
-                                    438 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 104: UART2->CR3 &= (uint8_t)(~UART2_CR3_STOP);
+                                    438 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 104: UART2->CR3 &= (uint8_t)(~UART2_CR3_STOP);
       000263 C6 52 46         [ 1]  439 	ld	a, 0x5246
-                                    440 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 164: if ((uint8_t)(SyncMode & UART2_SYNCMODE_CLOCK_DISABLE))
+                                    440 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 164: if ((uint8_t)(SyncMode & UART2_SYNCMODE_CLOCK_DISABLE))
       000266 0D 1A            [ 1]  441 	tnz	(0x1a, sp)
       000268 2A 07            [ 1]  442 	jrpl	00108$
-                                    443 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 167: UART2->CR3 &= (uint8_t)(~UART2_CR3_CKEN); 
+                                    443 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 167: UART2->CR3 &= (uint8_t)(~UART2_CR3_CKEN); 
       00026A A4 F7            [ 1]  444 	and	a, #0xf7
       00026C C7 52 46         [ 1]  445 	ld	0x5246, a
       00026F 20 0D            [ 2]  446 	jra	00110$
       000271                        447 00108$:
-                                    448 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 171: UART2->CR3 |= (uint8_t)((uint8_t)SyncMode & UART2_CR3_CKEN);
+                                    448 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 171: UART2->CR3 |= (uint8_t)((uint8_t)SyncMode & UART2_CR3_CKEN);
       000271 88               [ 1]  449 	push	a
       000272 7B 1B            [ 1]  450 	ld	a, (0x1b, sp)
       000274 A4 08            [ 1]  451 	and	a, #0x08
@@ -454,35 +454,35 @@
       000279 1A 10            [ 1]  454 	or	a, (0x10, sp)
       00027B C7 52 46         [ 1]  455 	ld	0x5246, a
       00027E                        456 00110$:
-                                    457 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 173: }
+                                    457 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 173: }
       00027E 1E 11            [ 2]  458 	ldw	x, (17, sp)
       000280 5B 1B            [ 2]  459 	addw	sp, #27
       000282 FC               [ 2]  460 	jp	(x)
-                                    461 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 181: void UART2_Cmd(FunctionalState NewState)
+                                    461 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 181: void UART2_Cmd(FunctionalState NewState)
                                     462 ;	-----------------------------------------
                                     463 ;	 function UART2_Cmd
                                     464 ;	-----------------------------------------
       000283                        465 _UART2_Cmd:
       000283 88               [ 1]  466 	push	a
       000284 6B 01            [ 1]  467 	ld	(0x01, sp), a
-                                    468 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 186: UART2->CR1 &= (uint8_t)(~UART2_CR1_UARTD);
+                                    468 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 186: UART2->CR1 &= (uint8_t)(~UART2_CR1_UARTD);
       000286 C6 52 44         [ 1]  469 	ld	a, 0x5244
-                                    470 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 183: if (NewState != DISABLE)
+                                    470 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 183: if (NewState != DISABLE)
       000289 0D 01            [ 1]  471 	tnz	(0x01, sp)
       00028B 27 07            [ 1]  472 	jreq	00102$
-                                    473 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 186: UART2->CR1 &= (uint8_t)(~UART2_CR1_UARTD);
+                                    473 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 186: UART2->CR1 &= (uint8_t)(~UART2_CR1_UARTD);
       00028D A4 DF            [ 1]  474 	and	a, #0xdf
       00028F C7 52 44         [ 1]  475 	ld	0x5244, a
       000292 20 05            [ 2]  476 	jra	00104$
       000294                        477 00102$:
-                                    478 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 191: UART2->CR1 |= UART2_CR1_UARTD; 
+                                    478 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 191: UART2->CR1 |= UART2_CR1_UARTD; 
       000294 AA 20            [ 1]  479 	or	a, #0x20
       000296 C7 52 44         [ 1]  480 	ld	0x5244, a
       000299                        481 00104$:
-                                    482 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 193: }
+                                    482 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 193: }
       000299 84               [ 1]  483 	pop	a
       00029A 81               [ 4]  484 	ret
-                                    485 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 210: void UART2_ITConfig(UART2_IT_TypeDef UART2_IT, FunctionalState NewState)
+                                    485 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 210: void UART2_ITConfig(UART2_IT_TypeDef UART2_IT, FunctionalState NewState)
                                     486 ;	-----------------------------------------
                                     487 ;	 function UART2_ITConfig
                                     488 ;	-----------------------------------------
@@ -490,7 +490,7 @@
       00029B 52 07            [ 2]  490 	sub	sp, #7
       00029D 1F 06            [ 2]  491 	ldw	(0x06, sp), x
       00029F 6B 05            [ 1]  492 	ld	(0x05, sp), a
-                                    493 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 215: assert_param(IS_UART2_CONFIG_IT_OK(UART2_IT));
+                                    493 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 215: assert_param(IS_UART2_CONFIG_IT_OK(UART2_IT));
       0002A1 1E 06            [ 2]  494 	ldw	x, (0x06, sp)
       0002A3 A3 01 00         [ 2]  495 	cpw	x, #0x0100
       0002A6 27 2E            [ 1]  496 	jreq	00125$
@@ -515,7 +515,7 @@
       0002D2 CDr00r00         [ 4]  515 	call	_assert_failed
       0002D5 85               [ 2]  516 	popw	x
       0002D6                        517 00125$:
-                                    518 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 216: assert_param(IS_FUNCTIONALSTATE_OK(NewState));
+                                    518 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 216: assert_param(IS_FUNCTIONALSTATE_OK(NewState));
       0002D6 0D 05            [ 1]  519 	tnz	(0x05, sp)
       0002D8 27 15            [ 1]  520 	jreq	00145$
       0002DA 7B 05            [ 1]  521 	ld	a, (0x05, sp)
@@ -530,8 +530,8 @@
       0002EB CDr00r00         [ 4]  530 	call	_assert_failed
       0002EE 85               [ 2]  531 	popw	x
       0002EF                        532 00145$:
-                                    533 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 219: uartreg = (uint8_t)((uint16_t)UART2_IT >> 0x08);
-                                    534 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 222: itpos = (uint8_t)((uint8_t)1 << (uint8_t)((uint8_t)UART2_IT & (uint8_t)0x0F));
+                                    533 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 219: uartreg = (uint8_t)((uint16_t)UART2_IT >> 0x08);
+                                    534 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 222: itpos = (uint8_t)((uint8_t)1 << (uint8_t)((uint8_t)UART2_IT & (uint8_t)0x0F));
       0002EF 7B 07            [ 1]  535 	ld	a, (0x07, sp)
       0002F1 A4 0F            [ 1]  536 	and	a, #0x0f
       0002F3 88               [ 1]  537 	push	a
@@ -545,7 +545,7 @@
       0002FE 4A               [ 1]  545 	dec	a
       0002FF 26 FB            [ 1]  546 	jrne	00254$
       000301                        547 00255$:
-                                    548 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 227: if (uartreg == 0x01)
+                                    548 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 227: if (uartreg == 0x01)
       000301 9E               [ 1]  549 	ld	a, xh
       000302 4A               [ 1]  550 	dec	a
       000303 26 05            [ 1]  551 	jrne	00257$
@@ -555,7 +555,7 @@
       00030A                        555 00257$:
       00030A 0F 01            [ 1]  556 	clr	(0x01, sp)
       00030C                        557 00258$:
-                                    558 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 231: else if (uartreg == 0x02)
+                                    558 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 231: else if (uartreg == 0x02)
       00030C 9E               [ 1]  559 	ld	a, xh
       00030D A0 02            [ 1]  560 	sub	a, #0x02
       00030F 26 04            [ 1]  561 	jrne	00260$
@@ -565,7 +565,7 @@
       000315                        565 00260$:
       000315 0F 02            [ 1]  566 	clr	(0x02, sp)
       000317                        567 00261$:
-                                    568 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 235: else if (uartreg == 0x03)
+                                    568 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 235: else if (uartreg == 0x03)
       000317 9E               [ 1]  569 	ld	a, xh
       000318 A0 03            [ 1]  570 	sub	a, #0x03
       00031A 26 04            [ 1]  571 	jrne	00263$
@@ -575,87 +575,87 @@
       000320                        575 00263$:
       000320 0F 03            [ 1]  576 	clr	(0x03, sp)
       000322                        577 00264$:
-                                    578 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 224: if (NewState != DISABLE)
+                                    578 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 224: if (NewState != DISABLE)
       000322 0D 05            [ 1]  579 	tnz	(0x05, sp)
       000324 27 34            [ 1]  580 	jreq	00120$
-                                    581 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 227: if (uartreg == 0x01)
+                                    581 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 227: if (uartreg == 0x01)
       000326 0D 01            [ 1]  582 	tnz	(0x01, sp)
       000328 27 0A            [ 1]  583 	jreq	00108$
-                                    584 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 229: UART2->CR1 |= itpos;
+                                    584 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 229: UART2->CR1 |= itpos;
       00032A C6 52 44         [ 1]  585 	ld	a, 0x5244
       00032D 1A 04            [ 1]  586 	or	a, (0x04, sp)
       00032F C7 52 44         [ 1]  587 	ld	0x5244, a
       000332 20 5C            [ 2]  588 	jra	00122$
       000334                        589 00108$:
-                                    590 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 231: else if (uartreg == 0x02)
+                                    590 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 231: else if (uartreg == 0x02)
       000334 0D 02            [ 1]  591 	tnz	(0x02, sp)
       000336 27 0A            [ 1]  592 	jreq	00105$
-                                    593 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 233: UART2->CR2 |= itpos;
+                                    593 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 233: UART2->CR2 |= itpos;
       000338 C6 52 45         [ 1]  594 	ld	a, 0x5245
       00033B 1A 04            [ 1]  595 	or	a, (0x04, sp)
       00033D C7 52 45         [ 1]  596 	ld	0x5245, a
       000340 20 4E            [ 2]  597 	jra	00122$
       000342                        598 00105$:
-                                    599 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 235: else if (uartreg == 0x03)
+                                    599 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 235: else if (uartreg == 0x03)
       000342 0D 03            [ 1]  600 	tnz	(0x03, sp)
       000344 27 0A            [ 1]  601 	jreq	00102$
-                                    602 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 237: UART2->CR4 |= itpos;
+                                    602 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 237: UART2->CR4 |= itpos;
       000346 C6 52 47         [ 1]  603 	ld	a, 0x5247
       000349 1A 04            [ 1]  604 	or	a, (0x04, sp)
       00034B C7 52 47         [ 1]  605 	ld	0x5247, a
       00034E 20 40            [ 2]  606 	jra	00122$
       000350                        607 00102$:
-                                    608 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 241: UART2->CR6 |= itpos;
+                                    608 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 241: UART2->CR6 |= itpos;
       000350 C6 52 49         [ 1]  609 	ld	a, 0x5249
       000353 1A 04            [ 1]  610 	or	a, (0x04, sp)
       000355 C7 52 49         [ 1]  611 	ld	0x5249, a
       000358 20 36            [ 2]  612 	jra	00122$
       00035A                        613 00120$:
-                                    614 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 249: UART2->CR1 &= (uint8_t)(~itpos);
+                                    614 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 249: UART2->CR1 &= (uint8_t)(~itpos);
       00035A 03 04            [ 1]  615 	cpl	(0x04, sp)
-                                    616 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 247: if (uartreg == 0x01)
+                                    616 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 247: if (uartreg == 0x01)
       00035C 0D 01            [ 1]  617 	tnz	(0x01, sp)
       00035E 27 0C            [ 1]  618 	jreq	00117$
-                                    619 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 249: UART2->CR1 &= (uint8_t)(~itpos);
+                                    619 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 249: UART2->CR1 &= (uint8_t)(~itpos);
       000360 C6 52 44         [ 1]  620 	ld	a, 0x5244
       000363 6B 03            [ 1]  621 	ld	(0x03, sp), a
       000365 14 04            [ 1]  622 	and	a, (0x04, sp)
       000367 C7 52 44         [ 1]  623 	ld	0x5244, a
       00036A 20 24            [ 2]  624 	jra	00122$
       00036C                        625 00117$:
-                                    626 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 251: else if (uartreg == 0x02)
+                                    626 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 251: else if (uartreg == 0x02)
       00036C 0D 02            [ 1]  627 	tnz	(0x02, sp)
       00036E 27 0A            [ 1]  628 	jreq	00114$
-                                    629 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 253: UART2->CR2 &= (uint8_t)(~itpos);
+                                    629 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 253: UART2->CR2 &= (uint8_t)(~itpos);
       000370 C6 52 45         [ 1]  630 	ld	a, 0x5245
       000373 14 04            [ 1]  631 	and	a, (0x04, sp)
       000375 C7 52 45         [ 1]  632 	ld	0x5245, a
       000378 20 16            [ 2]  633 	jra	00122$
       00037A                        634 00114$:
-                                    635 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 255: else if (uartreg == 0x03)
+                                    635 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 255: else if (uartreg == 0x03)
       00037A 0D 03            [ 1]  636 	tnz	(0x03, sp)
       00037C 27 0A            [ 1]  637 	jreq	00111$
-                                    638 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 257: UART2->CR4 &= (uint8_t)(~itpos);
+                                    638 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 257: UART2->CR4 &= (uint8_t)(~itpos);
       00037E C6 52 47         [ 1]  639 	ld	a, 0x5247
       000381 14 04            [ 1]  640 	and	a, (0x04, sp)
       000383 C7 52 47         [ 1]  641 	ld	0x5247, a
       000386 20 08            [ 2]  642 	jra	00122$
       000388                        643 00111$:
-                                    644 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 261: UART2->CR6 &= (uint8_t)(~itpos);
+                                    644 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 261: UART2->CR6 &= (uint8_t)(~itpos);
       000388 C6 52 49         [ 1]  645 	ld	a, 0x5249
       00038B 14 04            [ 1]  646 	and	a, (0x04, sp)
       00038D C7 52 49         [ 1]  647 	ld	0x5249, a
       000390                        648 00122$:
-                                    649 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 264: }
+                                    649 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 264: }
       000390 5B 07            [ 2]  650 	addw	sp, #7
       000392 81               [ 4]  651 	ret
-                                    652 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 272: void UART2_IrDAConfig(UART2_IrDAMode_TypeDef UART2_IrDAMode)
+                                    652 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 272: void UART2_IrDAConfig(UART2_IrDAMode_TypeDef UART2_IrDAMode)
                                     653 ;	-----------------------------------------
                                     654 ;	 function UART2_IrDAConfig
                                     655 ;	-----------------------------------------
       000393                        656 _UART2_IrDAConfig:
       000393 88               [ 1]  657 	push	a
-                                    658 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 274: assert_param(IS_UART2_IRDAMODE_OK(UART2_IrDAMode));
+                                    658 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 274: assert_param(IS_UART2_IRDAMODE_OK(UART2_IrDAMode));
       000394 6B 01            [ 1]  659 	ld	(0x01, sp), a
       000396 4A               [ 1]  660 	dec	a
       000397 27 10            [ 1]  661 	jreq	00107$
@@ -668,30 +668,30 @@
       0003A3 AEr00r00         [ 2]  668 	ldw	x, #(___str_0+0)
       0003A6 CDr00r00         [ 4]  669 	call	_assert_failed
       0003A9                        670 00107$:
-                                    671 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 278: UART2->CR5 |= UART2_CR5_IRLP;
+                                    671 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 278: UART2->CR5 |= UART2_CR5_IRLP;
       0003A9 C6 52 48         [ 1]  672 	ld	a, 0x5248
-                                    673 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 276: if (UART2_IrDAMode != UART2_IRDAMODE_NORMAL)
+                                    673 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 276: if (UART2_IrDAMode != UART2_IRDAMODE_NORMAL)
       0003AC 0D 01            [ 1]  674 	tnz	(0x01, sp)
       0003AE 27 07            [ 1]  675 	jreq	00102$
-                                    676 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 278: UART2->CR5 |= UART2_CR5_IRLP;
+                                    676 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 278: UART2->CR5 |= UART2_CR5_IRLP;
       0003B0 AA 04            [ 1]  677 	or	a, #0x04
       0003B2 C7 52 48         [ 1]  678 	ld	0x5248, a
       0003B5 20 05            [ 2]  679 	jra	00104$
       0003B7                        680 00102$:
-                                    681 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 282: UART2->CR5 &= ((uint8_t)~UART2_CR5_IRLP);
+                                    681 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 282: UART2->CR5 &= ((uint8_t)~UART2_CR5_IRLP);
       0003B7 A4 FB            [ 1]  682 	and	a, #0xfb
       0003B9 C7 52 48         [ 1]  683 	ld	0x5248, a
       0003BC                        684 00104$:
-                                    685 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 284: }
+                                    685 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 284: }
       0003BC 84               [ 1]  686 	pop	a
       0003BD 81               [ 4]  687 	ret
-                                    688 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 292: void UART2_IrDACmd(FunctionalState NewState)
+                                    688 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 292: void UART2_IrDACmd(FunctionalState NewState)
                                     689 ;	-----------------------------------------
                                     690 ;	 function UART2_IrDACmd
                                     691 ;	-----------------------------------------
       0003BE                        692 _UART2_IrDACmd:
       0003BE 88               [ 1]  693 	push	a
-                                    694 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 295: assert_param(IS_FUNCTIONALSTATE_OK(NewState));
+                                    694 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 295: assert_param(IS_FUNCTIONALSTATE_OK(NewState));
       0003BF 6B 01            [ 1]  695 	ld	(0x01, sp), a
       0003C1 27 11            [ 1]  696 	jreq	00107$
       0003C3 7B 01            [ 1]  697 	ld	a, (0x01, sp)
@@ -704,30 +704,30 @@
       0003CE AEr00r00         [ 2]  704 	ldw	x, #(___str_0+0)
       0003D1 CDr00r00         [ 4]  705 	call	_assert_failed
       0003D4                        706 00107$:
-                                    707 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 300: UART2->CR5 |= UART2_CR5_IREN;
+                                    707 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 300: UART2->CR5 |= UART2_CR5_IREN;
       0003D4 C6 52 48         [ 1]  708 	ld	a, 0x5248
-                                    709 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 297: if (NewState != DISABLE)
+                                    709 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 297: if (NewState != DISABLE)
       0003D7 0D 01            [ 1]  710 	tnz	(0x01, sp)
       0003D9 27 07            [ 1]  711 	jreq	00102$
-                                    712 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 300: UART2->CR5 |= UART2_CR5_IREN;
+                                    712 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 300: UART2->CR5 |= UART2_CR5_IREN;
       0003DB AA 02            [ 1]  713 	or	a, #0x02
       0003DD C7 52 48         [ 1]  714 	ld	0x5248, a
       0003E0 20 05            [ 2]  715 	jra	00104$
       0003E2                        716 00102$:
-                                    717 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 305: UART2->CR5 &= ((uint8_t)~UART2_CR5_IREN);
+                                    717 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 305: UART2->CR5 &= ((uint8_t)~UART2_CR5_IREN);
       0003E2 A4 FD            [ 1]  718 	and	a, #0xfd
       0003E4 C7 52 48         [ 1]  719 	ld	0x5248, a
       0003E7                        720 00104$:
-                                    721 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 307: }
+                                    721 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 307: }
       0003E7 84               [ 1]  722 	pop	a
       0003E8 81               [ 4]  723 	ret
-                                    724 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 316: void UART2_LINBreakDetectionConfig(UART2_LINBreakDetectionLength_TypeDef UART2_LINBreakDetectionLength)
+                                    724 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 316: void UART2_LINBreakDetectionConfig(UART2_LINBreakDetectionLength_TypeDef UART2_LINBreakDetectionLength)
                                     725 ;	-----------------------------------------
                                     726 ;	 function UART2_LINBreakDetectionConfig
                                     727 ;	-----------------------------------------
       0003E9                        728 _UART2_LINBreakDetectionConfig:
       0003E9 88               [ 1]  729 	push	a
-                                    730 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 319: assert_param(IS_UART2_LINBREAKDETECTIONLENGTH_OK(UART2_LINBreakDetectionLength));
+                                    730 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 319: assert_param(IS_UART2_LINBREAKDETECTIONLENGTH_OK(UART2_LINBreakDetectionLength));
       0003EA 6B 01            [ 1]  731 	ld	(0x01, sp), a
       0003EC 27 11            [ 1]  732 	jreq	00107$
       0003EE 7B 01            [ 1]  733 	ld	a, (0x01, sp)
@@ -740,30 +740,30 @@
       0003F9 AEr00r00         [ 2]  740 	ldw	x, #(___str_0+0)
       0003FC CDr00r00         [ 4]  741 	call	_assert_failed
       0003FF                        742 00107$:
-                                    743 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 323: UART2->CR4 |= UART2_CR4_LBDL;
+                                    743 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 323: UART2->CR4 |= UART2_CR4_LBDL;
       0003FF C6 52 47         [ 1]  744 	ld	a, 0x5247
-                                    745 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 321: if (UART2_LINBreakDetectionLength != UART2_LINBREAKDETECTIONLENGTH_10BITS)
+                                    745 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 321: if (UART2_LINBreakDetectionLength != UART2_LINBREAKDETECTIONLENGTH_10BITS)
       000402 0D 01            [ 1]  746 	tnz	(0x01, sp)
       000404 27 07            [ 1]  747 	jreq	00102$
-                                    748 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 323: UART2->CR4 |= UART2_CR4_LBDL;
+                                    748 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 323: UART2->CR4 |= UART2_CR4_LBDL;
       000406 AA 20            [ 1]  749 	or	a, #0x20
       000408 C7 52 47         [ 1]  750 	ld	0x5247, a
       00040B 20 05            [ 2]  751 	jra	00104$
       00040D                        752 00102$:
-                                    753 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 327: UART2->CR4 &= ((uint8_t)~UART2_CR4_LBDL);
+                                    753 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 327: UART2->CR4 &= ((uint8_t)~UART2_CR4_LBDL);
       00040D A4 DF            [ 1]  754 	and	a, #0xdf
       00040F C7 52 47         [ 1]  755 	ld	0x5247, a
       000412                        756 00104$:
-                                    757 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 329: }
+                                    757 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 329: }
       000412 84               [ 1]  758 	pop	a
       000413 81               [ 4]  759 	ret
-                                    760 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 341: void UART2_LINConfig(UART2_LinMode_TypeDef UART2_Mode, 
+                                    760 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 341: void UART2_LINConfig(UART2_LinMode_TypeDef UART2_Mode, 
                                     761 ;	-----------------------------------------
                                     762 ;	 function UART2_LINConfig
                                     763 ;	-----------------------------------------
       000414                        764 _UART2_LINConfig:
       000414 88               [ 1]  765 	push	a
-                                    766 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 346: assert_param(IS_UART2_SLAVE_OK(UART2_Mode));
+                                    766 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 346: assert_param(IS_UART2_SLAVE_OK(UART2_Mode));
       000415 6B 01            [ 1]  767 	ld	(0x01, sp), a
       000417 27 11            [ 1]  768 	jreq	00113$
       000419 7B 01            [ 1]  769 	ld	a, (0x01, sp)
@@ -776,7 +776,7 @@
       000424 AEr00r00         [ 2]  776 	ldw	x, #(___str_0+0)
       000427 CDr00r00         [ 4]  777 	call	_assert_failed
       00042A                        778 00113$:
-                                    779 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 347: assert_param(IS_UART2_AUTOSYNC_OK(UART2_Autosync));
+                                    779 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 347: assert_param(IS_UART2_AUTOSYNC_OK(UART2_Autosync));
       00042A 7B 04            [ 1]  780 	ld	a, (0x04, sp)
       00042C 4A               [ 1]  781 	dec	a
       00042D 27 10            [ 1]  782 	jreq	00118$
@@ -789,7 +789,7 @@
       000439 AEr00r00         [ 2]  789 	ldw	x, #(___str_0+0)
       00043C CDr00r00         [ 4]  790 	call	_assert_failed
       00043F                        791 00118$:
-                                    792 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 348: assert_param(IS_UART2_DIVUP_OK(UART2_DivUp));
+                                    792 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 348: assert_param(IS_UART2_DIVUP_OK(UART2_DivUp));
       00043F 0D 05            [ 1]  793 	tnz	(0x05, sp)
       000441 27 11            [ 1]  794 	jreq	00123$
       000443 7B 05            [ 1]  795 	ld	a, (0x05, sp)
@@ -802,59 +802,59 @@
       00044E AEr00r00         [ 2]  802 	ldw	x, #(___str_0+0)
       000451 CDr00r00         [ 4]  803 	call	_assert_failed
       000454                        804 00123$:
-                                    805 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 352: UART2->CR6 |=  UART2_CR6_LSLV;
+                                    805 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 352: UART2->CR6 |=  UART2_CR6_LSLV;
       000454 C6 52 49         [ 1]  806 	ld	a, 0x5249
-                                    807 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 350: if (UART2_Mode != UART2_LIN_MODE_MASTER)
+                                    807 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 350: if (UART2_Mode != UART2_LIN_MODE_MASTER)
       000457 0D 01            [ 1]  808 	tnz	(0x01, sp)
       000459 27 07            [ 1]  809 	jreq	00102$
-                                    810 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 352: UART2->CR6 |=  UART2_CR6_LSLV;
+                                    810 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 352: UART2->CR6 |=  UART2_CR6_LSLV;
       00045B AA 20            [ 1]  811 	or	a, #0x20
       00045D C7 52 49         [ 1]  812 	ld	0x5249, a
       000460 20 05            [ 2]  813 	jra	00103$
       000462                        814 00102$:
-                                    815 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 356: UART2->CR6 &= ((uint8_t)~UART2_CR6_LSLV);
+                                    815 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 356: UART2->CR6 &= ((uint8_t)~UART2_CR6_LSLV);
       000462 A4 DF            [ 1]  816 	and	a, #0xdf
       000464 C7 52 49         [ 1]  817 	ld	0x5249, a
       000467                        818 00103$:
-                                    819 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 352: UART2->CR6 |=  UART2_CR6_LSLV;
+                                    819 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 352: UART2->CR6 |=  UART2_CR6_LSLV;
       000467 C6 52 49         [ 1]  820 	ld	a, 0x5249
-                                    821 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 359: if (UART2_Autosync != UART2_LIN_AUTOSYNC_DISABLE)
+                                    821 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 359: if (UART2_Autosync != UART2_LIN_AUTOSYNC_DISABLE)
       00046A 0D 04            [ 1]  822 	tnz	(0x04, sp)
       00046C 27 07            [ 1]  823 	jreq	00105$
-                                    824 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 361: UART2->CR6 |=  UART2_CR6_LASE ;
+                                    824 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 361: UART2->CR6 |=  UART2_CR6_LASE ;
       00046E AA 10            [ 1]  825 	or	a, #0x10
       000470 C7 52 49         [ 1]  826 	ld	0x5249, a
       000473 20 05            [ 2]  827 	jra	00106$
       000475                        828 00105$:
-                                    829 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 365: UART2->CR6 &= ((uint8_t)~ UART2_CR6_LASE );
+                                    829 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 365: UART2->CR6 &= ((uint8_t)~ UART2_CR6_LASE );
       000475 A4 EF            [ 1]  830 	and	a, #0xef
       000477 C7 52 49         [ 1]  831 	ld	0x5249, a
       00047A                        832 00106$:
-                                    833 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 352: UART2->CR6 |=  UART2_CR6_LSLV;
+                                    833 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 352: UART2->CR6 |=  UART2_CR6_LSLV;
       00047A C6 52 49         [ 1]  834 	ld	a, 0x5249
-                                    835 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 368: if (UART2_DivUp != UART2_LIN_DIVUP_LBRR1)
+                                    835 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 368: if (UART2_DivUp != UART2_LIN_DIVUP_LBRR1)
       00047D 0D 05            [ 1]  836 	tnz	(0x05, sp)
       00047F 27 07            [ 1]  837 	jreq	00108$
-                                    838 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 370: UART2->CR6 |=  UART2_CR6_LDUM;
+                                    838 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 370: UART2->CR6 |=  UART2_CR6_LDUM;
       000481 AA 80            [ 1]  839 	or	a, #0x80
       000483 C7 52 49         [ 1]  840 	ld	0x5249, a
       000486 20 05            [ 2]  841 	jra	00110$
       000488                        842 00108$:
-                                    843 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 374: UART2->CR6 &= ((uint8_t)~ UART2_CR6_LDUM);
+                                    843 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 374: UART2->CR6 &= ((uint8_t)~ UART2_CR6_LDUM);
       000488 A4 7F            [ 1]  844 	and	a, #0x7f
       00048A C7 52 49         [ 1]  845 	ld	0x5249, a
       00048D                        846 00110$:
-                                    847 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 376: }
+                                    847 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 376: }
       00048D 1E 02            [ 2]  848 	ldw	x, (2, sp)
       00048F 5B 05            [ 2]  849 	addw	sp, #5
       000491 FC               [ 2]  850 	jp	(x)
-                                    851 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 384: void UART2_LINCmd(FunctionalState NewState)
+                                    851 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 384: void UART2_LINCmd(FunctionalState NewState)
                                     852 ;	-----------------------------------------
                                     853 ;	 function UART2_LINCmd
                                     854 ;	-----------------------------------------
       000492                        855 _UART2_LINCmd:
       000492 88               [ 1]  856 	push	a
-                                    857 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 386: assert_param(IS_FUNCTIONALSTATE_OK(NewState));
+                                    857 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 386: assert_param(IS_FUNCTIONALSTATE_OK(NewState));
       000493 6B 01            [ 1]  858 	ld	(0x01, sp), a
       000495 27 11            [ 1]  859 	jreq	00107$
       000497 7B 01            [ 1]  860 	ld	a, (0x01, sp)
@@ -867,30 +867,30 @@
       0004A2 AEr00r00         [ 2]  867 	ldw	x, #(___str_0+0)
       0004A5 CDr00r00         [ 4]  868 	call	_assert_failed
       0004A8                        869 00107$:
-                                    870 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 391: UART2->CR3 |= UART2_CR3_LINEN;
+                                    870 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 391: UART2->CR3 |= UART2_CR3_LINEN;
       0004A8 C6 52 46         [ 1]  871 	ld	a, 0x5246
-                                    872 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 388: if (NewState != DISABLE)
+                                    872 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 388: if (NewState != DISABLE)
       0004AB 0D 01            [ 1]  873 	tnz	(0x01, sp)
       0004AD 27 07            [ 1]  874 	jreq	00102$
-                                    875 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 391: UART2->CR3 |= UART2_CR3_LINEN;
+                                    875 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 391: UART2->CR3 |= UART2_CR3_LINEN;
       0004AF AA 40            [ 1]  876 	or	a, #0x40
       0004B1 C7 52 46         [ 1]  877 	ld	0x5246, a
       0004B4 20 05            [ 2]  878 	jra	00104$
       0004B6                        879 00102$:
-                                    880 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 396: UART2->CR3 &= ((uint8_t)~UART2_CR3_LINEN);
+                                    880 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 396: UART2->CR3 &= ((uint8_t)~UART2_CR3_LINEN);
       0004B6 A4 BF            [ 1]  881 	and	a, #0xbf
       0004B8 C7 52 46         [ 1]  882 	ld	0x5246, a
       0004BB                        883 00104$:
-                                    884 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 398: }
+                                    884 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 398: }
       0004BB 84               [ 1]  885 	pop	a
       0004BC 81               [ 4]  886 	ret
-                                    887 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 406: void UART2_SmartCardCmd(FunctionalState NewState)
+                                    887 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 406: void UART2_SmartCardCmd(FunctionalState NewState)
                                     888 ;	-----------------------------------------
                                     889 ;	 function UART2_SmartCardCmd
                                     890 ;	-----------------------------------------
       0004BD                        891 _UART2_SmartCardCmd:
       0004BD 88               [ 1]  892 	push	a
-                                    893 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 409: assert_param(IS_FUNCTIONALSTATE_OK(NewState));
+                                    893 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 409: assert_param(IS_FUNCTIONALSTATE_OK(NewState));
       0004BE 6B 01            [ 1]  894 	ld	(0x01, sp), a
       0004C0 27 11            [ 1]  895 	jreq	00107$
       0004C2 7B 01            [ 1]  896 	ld	a, (0x01, sp)
@@ -903,30 +903,30 @@
       0004CD AEr00r00         [ 2]  903 	ldw	x, #(___str_0+0)
       0004D0 CDr00r00         [ 4]  904 	call	_assert_failed
       0004D3                        905 00107$:
-                                    906 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 414: UART2->CR5 |= UART2_CR5_SCEN;
+                                    906 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 414: UART2->CR5 |= UART2_CR5_SCEN;
       0004D3 C6 52 48         [ 1]  907 	ld	a, 0x5248
-                                    908 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 411: if (NewState != DISABLE)
+                                    908 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 411: if (NewState != DISABLE)
       0004D6 0D 01            [ 1]  909 	tnz	(0x01, sp)
       0004D8 27 07            [ 1]  910 	jreq	00102$
-                                    911 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 414: UART2->CR5 |= UART2_CR5_SCEN;
+                                    911 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 414: UART2->CR5 |= UART2_CR5_SCEN;
       0004DA AA 20            [ 1]  912 	or	a, #0x20
       0004DC C7 52 48         [ 1]  913 	ld	0x5248, a
       0004DF 20 05            [ 2]  914 	jra	00104$
       0004E1                        915 00102$:
-                                    916 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 419: UART2->CR5 &= ((uint8_t)(~UART2_CR5_SCEN));
+                                    916 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 419: UART2->CR5 &= ((uint8_t)(~UART2_CR5_SCEN));
       0004E1 A4 DF            [ 1]  917 	and	a, #0xdf
       0004E3 C7 52 48         [ 1]  918 	ld	0x5248, a
       0004E6                        919 00104$:
-                                    920 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 421: }
+                                    920 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 421: }
       0004E6 84               [ 1]  921 	pop	a
       0004E7 81               [ 4]  922 	ret
-                                    923 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 429: void UART2_SmartCardNACKCmd(FunctionalState NewState)
+                                    923 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 429: void UART2_SmartCardNACKCmd(FunctionalState NewState)
                                     924 ;	-----------------------------------------
                                     925 ;	 function UART2_SmartCardNACKCmd
                                     926 ;	-----------------------------------------
       0004E8                        927 _UART2_SmartCardNACKCmd:
       0004E8 88               [ 1]  928 	push	a
-                                    929 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 432: assert_param(IS_FUNCTIONALSTATE_OK(NewState));
+                                    929 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 432: assert_param(IS_FUNCTIONALSTATE_OK(NewState));
       0004E9 6B 01            [ 1]  930 	ld	(0x01, sp), a
       0004EB 27 11            [ 1]  931 	jreq	00107$
       0004ED 7B 01            [ 1]  932 	ld	a, (0x01, sp)
@@ -939,30 +939,30 @@
       0004F8 AEr00r00         [ 2]  939 	ldw	x, #(___str_0+0)
       0004FB CDr00r00         [ 4]  940 	call	_assert_failed
       0004FE                        941 00107$:
-                                    942 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 437: UART2->CR5 |= UART2_CR5_NACK;
+                                    942 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 437: UART2->CR5 |= UART2_CR5_NACK;
       0004FE C6 52 48         [ 1]  943 	ld	a, 0x5248
-                                    944 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 434: if (NewState != DISABLE)
+                                    944 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 434: if (NewState != DISABLE)
       000501 0D 01            [ 1]  945 	tnz	(0x01, sp)
       000503 27 07            [ 1]  946 	jreq	00102$
-                                    947 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 437: UART2->CR5 |= UART2_CR5_NACK;
+                                    947 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 437: UART2->CR5 |= UART2_CR5_NACK;
       000505 AA 10            [ 1]  948 	or	a, #0x10
       000507 C7 52 48         [ 1]  949 	ld	0x5248, a
       00050A 20 05            [ 2]  950 	jra	00104$
       00050C                        951 00102$:
-                                    952 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 442: UART2->CR5 &= ((uint8_t)~(UART2_CR5_NACK));
+                                    952 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 442: UART2->CR5 &= ((uint8_t)~(UART2_CR5_NACK));
       00050C A4 EF            [ 1]  953 	and	a, #0xef
       00050E C7 52 48         [ 1]  954 	ld	0x5248, a
       000511                        955 00104$:
-                                    956 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 444: }
+                                    956 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 444: }
       000511 84               [ 1]  957 	pop	a
       000512 81               [ 4]  958 	ret
-                                    959 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 452: void UART2_WakeUpConfig(UART2_WakeUp_TypeDef UART2_WakeUp)
+                                    959 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 452: void UART2_WakeUpConfig(UART2_WakeUp_TypeDef UART2_WakeUp)
                                     960 ;	-----------------------------------------
                                     961 ;	 function UART2_WakeUpConfig
                                     962 ;	-----------------------------------------
       000513                        963 _UART2_WakeUpConfig:
       000513 88               [ 1]  964 	push	a
-                                    965 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 454: assert_param(IS_UART2_WAKEUP_OK(UART2_WakeUp));
+                                    965 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 454: assert_param(IS_UART2_WAKEUP_OK(UART2_WakeUp));
       000514 6B 01            [ 1]  966 	ld	(0x01, sp), a
       000516 27 12            [ 1]  967 	jreq	00104$
       000518 7B 01            [ 1]  968 	ld	a, (0x01, sp)
@@ -975,22 +975,22 @@
       000524 AEr00r00         [ 2]  975 	ldw	x, #(___str_0+0)
       000527 CDr00r00         [ 4]  976 	call	_assert_failed
       00052A                        977 00104$:
-                                    978 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 456: UART2->CR1 &= ((uint8_t)~UART2_CR1_WAKE);
+                                    978 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 456: UART2->CR1 &= ((uint8_t)~UART2_CR1_WAKE);
       00052A 72 17 52 44      [ 1]  979 	bres	0x5244, #3
-                                    980 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 457: UART2->CR1 |= (uint8_t)UART2_WakeUp;
+                                    980 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 457: UART2->CR1 |= (uint8_t)UART2_WakeUp;
       00052E C6 52 44         [ 1]  981 	ld	a, 0x5244
       000531 1A 01            [ 1]  982 	or	a, (0x01, sp)
       000533 C7 52 44         [ 1]  983 	ld	0x5244, a
-                                    984 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 458: }
+                                    984 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 458: }
       000536 84               [ 1]  985 	pop	a
       000537 81               [ 4]  986 	ret
-                                    987 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 466: void UART2_ReceiverWakeUpCmd(FunctionalState NewState)
+                                    987 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 466: void UART2_ReceiverWakeUpCmd(FunctionalState NewState)
                                     988 ;	-----------------------------------------
                                     989 ;	 function UART2_ReceiverWakeUpCmd
                                     990 ;	-----------------------------------------
       000538                        991 _UART2_ReceiverWakeUpCmd:
       000538 88               [ 1]  992 	push	a
-                                    993 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 468: assert_param(IS_FUNCTIONALSTATE_OK(NewState));
+                                    993 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 468: assert_param(IS_FUNCTIONALSTATE_OK(NewState));
       000539 6B 01            [ 1]  994 	ld	(0x01, sp), a
       00053B 27 11            [ 1]  995 	jreq	00107$
       00053D 7B 01            [ 1]  996 	ld	a, (0x01, sp)
@@ -1003,39 +1003,39 @@
       000548 AEr00r00         [ 2] 1003 	ldw	x, #(___str_0+0)
       00054B CDr00r00         [ 4] 1004 	call	_assert_failed
       00054E                       1005 00107$:
-                                   1006 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 473: UART2->CR2 |= UART2_CR2_RWU;
+                                   1006 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 473: UART2->CR2 |= UART2_CR2_RWU;
       00054E C6 52 45         [ 1] 1007 	ld	a, 0x5245
-                                   1008 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 470: if (NewState != DISABLE)
+                                   1008 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 470: if (NewState != DISABLE)
       000551 0D 01            [ 1] 1009 	tnz	(0x01, sp)
       000553 27 07            [ 1] 1010 	jreq	00102$
-                                   1011 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 473: UART2->CR2 |= UART2_CR2_RWU;
+                                   1011 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 473: UART2->CR2 |= UART2_CR2_RWU;
       000555 AA 02            [ 1] 1012 	or	a, #0x02
       000557 C7 52 45         [ 1] 1013 	ld	0x5245, a
       00055A 20 05            [ 2] 1014 	jra	00104$
       00055C                       1015 00102$:
-                                   1016 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 478: UART2->CR2 &= ((uint8_t)~UART2_CR2_RWU);
+                                   1016 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 478: UART2->CR2 &= ((uint8_t)~UART2_CR2_RWU);
       00055C A4 FD            [ 1] 1017 	and	a, #0xfd
       00055E C7 52 45         [ 1] 1018 	ld	0x5245, a
       000561                       1019 00104$:
-                                   1020 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 480: }
+                                   1020 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 480: }
       000561 84               [ 1] 1021 	pop	a
       000562 81               [ 4] 1022 	ret
-                                   1023 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 487: uint8_t UART2_ReceiveData8(void)
+                                   1023 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 487: uint8_t UART2_ReceiveData8(void)
                                    1024 ;	-----------------------------------------
                                    1025 ;	 function UART2_ReceiveData8
                                    1026 ;	-----------------------------------------
       000563                       1027 _UART2_ReceiveData8:
-                                   1028 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 489: return ((uint8_t)UART2->DR);
+                                   1028 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 489: return ((uint8_t)UART2->DR);
       000563 C6 52 41         [ 1] 1029 	ld	a, 0x5241
-                                   1030 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 490: }
+                                   1030 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 490: }
       000566 81               [ 4] 1031 	ret
-                                   1032 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 497: uint16_t UART2_ReceiveData9(void)
+                                   1032 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 497: uint16_t UART2_ReceiveData9(void)
                                    1033 ;	-----------------------------------------
                                    1034 ;	 function UART2_ReceiveData9
                                    1035 ;	-----------------------------------------
       000567                       1036 _UART2_ReceiveData9:
       000567 89               [ 2] 1037 	pushw	x
-                                   1038 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 501: temp = ((uint16_t)(((uint16_t)((uint16_t)UART2->CR1 & (uint16_t)UART2_CR1_R8)) << 1));
+                                   1038 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 501: temp = ((uint16_t)(((uint16_t)((uint16_t)UART2->CR1 & (uint16_t)UART2_CR1_R8)) << 1));
       000568 C6 52 44         [ 1] 1039 	ld	a, 0x5244
       00056B A4 80            [ 1] 1040 	and	a, #0x80
       00056D 97               [ 1] 1041 	ld	xl, a
@@ -1043,7 +1043,7 @@
       00056F 95               [ 1] 1043 	ld	xh, a
       000570 58               [ 2] 1044 	sllw	x
       000571 1F 01            [ 2] 1045 	ldw	(0x01, sp), x
-                                   1046 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 503: return (uint16_t)((((uint16_t)UART2->DR) | temp) & ((uint16_t)0x01FF));
+                                   1046 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 503: return (uint16_t)((((uint16_t)UART2->DR) | temp) & ((uint16_t)0x01FF));
       000573 C6 52 41         [ 1] 1047 	ld	a, 0x5241
       000576 5F               [ 1] 1048 	clrw	x
       000577 1A 02            [ 1] 1049 	or	a, (0x02, sp)
@@ -1051,28 +1051,28 @@
       00057A 1A 01            [ 1] 1051 	or	a, (0x01, sp)
       00057C A4 01            [ 1] 1052 	and	a, #0x01
       00057E 95               [ 1] 1053 	ld	xh, a
-                                   1054 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 504: }
+                                   1054 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 504: }
       00057F 5B 02            [ 2] 1055 	addw	sp, #2
       000581 81               [ 4] 1056 	ret
-                                   1057 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 511: void UART2_SendData8(uint8_t Data)
+                                   1057 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 511: void UART2_SendData8(uint8_t Data)
                                    1058 ;	-----------------------------------------
                                    1059 ;	 function UART2_SendData8
                                    1060 ;	-----------------------------------------
       000582                       1061 _UART2_SendData8:
-                                   1062 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 514: UART2->DR = Data;
+                                   1062 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 514: UART2->DR = Data;
       000582 C7 52 41         [ 1] 1063 	ld	0x5241, a
-                                   1064 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 515: }
+                                   1064 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 515: }
       000585 81               [ 4] 1065 	ret
-                                   1066 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 522: void UART2_SendData9(uint16_t Data)
+                                   1066 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 522: void UART2_SendData9(uint16_t Data)
                                    1067 ;	-----------------------------------------
                                    1068 ;	 function UART2_SendData9
                                    1069 ;	-----------------------------------------
       000586                       1070 _UART2_SendData9:
       000586 88               [ 1] 1071 	push	a
       000587 51               [ 1] 1072 	exgw	x, y
-                                   1073 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 525: UART2->CR1 &= ((uint8_t)~UART2_CR1_T8);                  
+                                   1073 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 525: UART2->CR1 &= ((uint8_t)~UART2_CR1_T8);                  
       000588 72 1D 52 44      [ 1] 1074 	bres	0x5244, #6
-                                   1075 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 528: UART2->CR1 |= (uint8_t)(((uint8_t)(Data >> 2)) & UART2_CR1_T8); 
+                                   1075 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 528: UART2->CR1 |= (uint8_t)(((uint8_t)(Data >> 2)) & UART2_CR1_T8); 
       00058C C6 52 44         [ 1] 1076 	ld	a, 0x5244
       00058F 6B 01            [ 1] 1077 	ld	(0x01, sp), a
       000591 93               [ 1] 1078 	ldw	x, y
@@ -1082,28 +1082,28 @@
       000595 A4 40            [ 1] 1082 	and	a, #0x40
       000597 1A 01            [ 1] 1083 	or	a, (0x01, sp)
       000599 C7 52 44         [ 1] 1084 	ld	0x5244, a
-                                   1085 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 531: UART2->DR   = (uint8_t)(Data);                    
+                                   1085 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 531: UART2->DR   = (uint8_t)(Data);                    
       00059C 90 9F            [ 1] 1086 	ld	a, yl
       00059E C7 52 41         [ 1] 1087 	ld	0x5241, a
-                                   1088 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 532: }
+                                   1088 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 532: }
       0005A1 84               [ 1] 1089 	pop	a
       0005A2 81               [ 4] 1090 	ret
-                                   1091 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 539: void UART2_SendBreak(void)
+                                   1091 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 539: void UART2_SendBreak(void)
                                    1092 ;	-----------------------------------------
                                    1093 ;	 function UART2_SendBreak
                                    1094 ;	-----------------------------------------
       0005A3                       1095 _UART2_SendBreak:
-                                   1096 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 541: UART2->CR2 |= UART2_CR2_SBK;
+                                   1096 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 541: UART2->CR2 |= UART2_CR2_SBK;
       0005A3 72 10 52 45      [ 1] 1097 	bset	0x5245, #0
-                                   1098 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 542: }
+                                   1098 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 542: }
       0005A7 81               [ 4] 1099 	ret
-                                   1100 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 549: void UART2_SetAddress(uint8_t UART2_Address)
+                                   1100 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 549: void UART2_SetAddress(uint8_t UART2_Address)
                                    1101 ;	-----------------------------------------
                                    1102 ;	 function UART2_SetAddress
                                    1103 ;	-----------------------------------------
       0005A8                       1104 _UART2_SetAddress:
       0005A8 88               [ 1] 1105 	push	a
-                                   1106 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 552: assert_param(IS_UART2_ADDRESS_OK(UART2_Address));
+                                   1106 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 552: assert_param(IS_UART2_ADDRESS_OK(UART2_Address));
       0005A9 6B 01            [ 1] 1107 	ld	(0x01, sp), a
       0005AB A1 10            [ 1] 1108 	cp	a, #0x10
       0005AD 25 0C            [ 1] 1109 	jrc	00104$
@@ -1114,42 +1114,42 @@
       0005B5 AEr00r00         [ 2] 1114 	ldw	x, #(___str_0+0)
       0005B8 CDr00r00         [ 4] 1115 	call	_assert_failed
       0005BB                       1116 00104$:
-                                   1117 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 555: UART2->CR4 &= ((uint8_t)~UART2_CR4_ADD);
+                                   1117 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 555: UART2->CR4 &= ((uint8_t)~UART2_CR4_ADD);
       0005BB C6 52 47         [ 1] 1118 	ld	a, 0x5247
       0005BE A4 F0            [ 1] 1119 	and	a, #0xf0
       0005C0 C7 52 47         [ 1] 1120 	ld	0x5247, a
-                                   1121 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 557: UART2->CR4 |= UART2_Address;
+                                   1121 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 557: UART2->CR4 |= UART2_Address;
       0005C3 C6 52 47         [ 1] 1122 	ld	a, 0x5247
       0005C6 1A 01            [ 1] 1123 	or	a, (0x01, sp)
       0005C8 C7 52 47         [ 1] 1124 	ld	0x5247, a
-                                   1125 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 558: }
+                                   1125 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 558: }
       0005CB 84               [ 1] 1126 	pop	a
       0005CC 81               [ 4] 1127 	ret
-                                   1128 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 566: void UART2_SetGuardTime(uint8_t UART2_GuardTime)
+                                   1128 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 566: void UART2_SetGuardTime(uint8_t UART2_GuardTime)
                                    1129 ;	-----------------------------------------
                                    1130 ;	 function UART2_SetGuardTime
                                    1131 ;	-----------------------------------------
       0005CD                       1132 _UART2_SetGuardTime:
-                                   1133 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 569: UART2->GTR = UART2_GuardTime;
+                                   1133 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 569: UART2->GTR = UART2_GuardTime;
       0005CD C7 52 4A         [ 1] 1134 	ld	0x524a, a
-                                   1135 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 570: }
+                                   1135 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 570: }
       0005D0 81               [ 4] 1136 	ret
-                                   1137 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 594: void UART2_SetPrescaler(uint8_t UART2_Prescaler)
+                                   1137 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 594: void UART2_SetPrescaler(uint8_t UART2_Prescaler)
                                    1138 ;	-----------------------------------------
                                    1139 ;	 function UART2_SetPrescaler
                                    1140 ;	-----------------------------------------
       0005D1                       1141 _UART2_SetPrescaler:
-                                   1142 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 597: UART2->PSCR = UART2_Prescaler;
+                                   1142 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 597: UART2->PSCR = UART2_Prescaler;
       0005D1 C7 52 4B         [ 1] 1143 	ld	0x524b, a
-                                   1144 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 598: }
+                                   1144 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 598: }
       0005D4 81               [ 4] 1145 	ret
-                                   1146 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 606: FlagStatus UART2_GetFlagStatus(UART2_Flag_TypeDef UART2_FLAG)
+                                   1146 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 606: FlagStatus UART2_GetFlagStatus(UART2_Flag_TypeDef UART2_FLAG)
                                    1147 ;	-----------------------------------------
                                    1148 ;	 function UART2_GetFlagStatus
                                    1149 ;	-----------------------------------------
       0005D5                       1150 _UART2_GetFlagStatus:
       0005D5 52 04            [ 2] 1151 	sub	sp, #4
-                                   1152 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 611: assert_param(IS_UART2_FLAG_OK(UART2_FLAG));
+                                   1152 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 611: assert_param(IS_UART2_FLAG_OK(UART2_FLAG));
       0005D7 90 93            [ 1] 1153 	ldw	y, x
       0005D9 A3 01 01         [ 2] 1154 	cpw	x, #0x0101
       0005DC 26 05            [ 1] 1155 	jrne	00256$
@@ -1217,80 +1217,80 @@
       00064A 90 85            [ 2] 1217 	popw	y
       00064C 84               [ 1] 1218 	pop	a
       00064D                       1219 00126$:
-                                   1220 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 616: if ((UART2->CR4 & (uint8_t)UART2_FLAG) != (uint8_t)0x00)
+                                   1220 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 616: if ((UART2->CR4 & (uint8_t)UART2_FLAG) != (uint8_t)0x00)
       00064D 61               [ 1] 1221 	exg	a, yl
       00064E 6B 04            [ 1] 1222 	ld	(0x04, sp), a
       000650 61               [ 1] 1223 	exg	a, yl
-                                   1224 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 614: if (UART2_FLAG == UART2_FLAG_LBDF)
+                                   1224 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 614: if (UART2_FLAG == UART2_FLAG_LBDF)
       000651 4D               [ 1] 1225 	tnz	a
       000652 27 0E            [ 1] 1226 	jreq	00121$
-                                   1227 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 616: if ((UART2->CR4 & (uint8_t)UART2_FLAG) != (uint8_t)0x00)
+                                   1227 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 616: if ((UART2->CR4 & (uint8_t)UART2_FLAG) != (uint8_t)0x00)
       000654 C6 52 47         [ 1] 1228 	ld	a, 0x5247
       000657 14 04            [ 1] 1229 	and	a, (0x04, sp)
       000659 27 04            [ 1] 1230 	jreq	00102$
-                                   1231 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 619: status = SET;
+                                   1231 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 619: status = SET;
       00065B A6 01            [ 1] 1232 	ld	a, #0x01
       00065D 20 36            [ 2] 1233 	jra	00122$
       00065F                       1234 00102$:
-                                   1235 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 624: status = RESET;
+                                   1235 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 624: status = RESET;
       00065F 4F               [ 1] 1236 	clr	a
       000660 20 33            [ 2] 1237 	jra	00122$
       000662                       1238 00121$:
-                                   1239 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 627: else if (UART2_FLAG == UART2_FLAG_SBK)
+                                   1239 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 627: else if (UART2_FLAG == UART2_FLAG_SBK)
       000662 7B 01            [ 1] 1240 	ld	a, (0x01, sp)
       000664 27 0E            [ 1] 1241 	jreq	00118$
-                                   1242 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 629: if ((UART2->CR2 & (uint8_t)UART2_FLAG) != (uint8_t)0x00)
+                                   1242 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 629: if ((UART2->CR2 & (uint8_t)UART2_FLAG) != (uint8_t)0x00)
       000666 C6 52 45         [ 1] 1243 	ld	a, 0x5245
       000669 14 04            [ 1] 1244 	and	a, (0x04, sp)
       00066B 27 04            [ 1] 1245 	jreq	00105$
-                                   1246 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 632: status = SET;
+                                   1246 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 632: status = SET;
       00066D A6 01            [ 1] 1247 	ld	a, #0x01
       00066F 20 24            [ 2] 1248 	jra	00122$
       000671                       1249 00105$:
-                                   1250 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 637: status = RESET;
+                                   1250 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 637: status = RESET;
       000671 4F               [ 1] 1251 	clr	a
       000672 20 21            [ 2] 1252 	jra	00122$
       000674                       1253 00118$:
-                                   1254 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 640: else if ((UART2_FLAG == UART2_FLAG_LHDF) || (UART2_FLAG == UART2_FLAG_LSF))
+                                   1254 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 640: else if ((UART2_FLAG == UART2_FLAG_LHDF) || (UART2_FLAG == UART2_FLAG_LSF))
       000674 7B 03            [ 1] 1255 	ld	a, (0x03, sp)
       000676 26 04            [ 1] 1256 	jrne	00113$
       000678 7B 02            [ 1] 1257 	ld	a, (0x02, sp)
       00067A 27 0E            [ 1] 1258 	jreq	00114$
       00067C                       1259 00113$:
-                                   1260 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 642: if ((UART2->CR6 & (uint8_t)UART2_FLAG) != (uint8_t)0x00)
+                                   1260 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 642: if ((UART2->CR6 & (uint8_t)UART2_FLAG) != (uint8_t)0x00)
       00067C C6 52 49         [ 1] 1261 	ld	a, 0x5249
       00067F 14 04            [ 1] 1262 	and	a, (0x04, sp)
       000681 27 04            [ 1] 1263 	jreq	00108$
-                                   1264 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 645: status = SET;
+                                   1264 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 645: status = SET;
       000683 A6 01            [ 1] 1265 	ld	a, #0x01
       000685 20 0E            [ 2] 1266 	jra	00122$
       000687                       1267 00108$:
-                                   1268 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 650: status = RESET;
+                                   1268 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 650: status = RESET;
       000687 4F               [ 1] 1269 	clr	a
       000688 20 0B            [ 2] 1270 	jra	00122$
       00068A                       1271 00114$:
-                                   1272 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 655: if ((UART2->SR & (uint8_t)UART2_FLAG) != (uint8_t)0x00)
+                                   1272 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 655: if ((UART2->SR & (uint8_t)UART2_FLAG) != (uint8_t)0x00)
       00068A C6 52 40         [ 1] 1273 	ld	a, 0x5240
       00068D 14 04            [ 1] 1274 	and	a, (0x04, sp)
       00068F 27 03            [ 1] 1275 	jreq	00111$
-                                   1276 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 658: status = SET;
+                                   1276 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 658: status = SET;
       000691 A6 01            [ 1] 1277 	ld	a, #0x01
-                                   1278 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 663: status = RESET;
+                                   1278 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 663: status = RESET;
       000693 21                    1279 	.byte 0x21
       000694                       1280 00111$:
       000694 4F               [ 1] 1281 	clr	a
       000695                       1282 00122$:
-                                   1283 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 668: return  status;
-                                   1284 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 669: }
+                                   1283 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 668: return  status;
+                                   1284 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 669: }
       000695 5B 04            [ 2] 1285 	addw	sp, #4
       000697 81               [ 4] 1286 	ret
-                                   1287 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 699: void UART2_ClearFlag(UART2_Flag_TypeDef UART2_FLAG)
+                                   1287 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 699: void UART2_ClearFlag(UART2_Flag_TypeDef UART2_FLAG)
                                    1288 ;	-----------------------------------------
                                    1289 ;	 function UART2_ClearFlag
                                    1290 ;	-----------------------------------------
       000698                       1291 _UART2_ClearFlag:
       000698 52 03            [ 2] 1292 	sub	sp, #3
-                                   1293 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 701: assert_param(IS_UART2_CLEAR_FLAG_OK(UART2_FLAG));
+                                   1293 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 701: assert_param(IS_UART2_CLEAR_FLAG_OK(UART2_FLAG));
       00069A A3 00 20         [ 2] 1294 	cpw	x, #0x0020
       00069D 26 05            [ 1] 1295 	jrne	00159$
       00069F A6 01            [ 1] 1296 	ld	a, #0x01
@@ -1330,47 +1330,47 @@
       0006D5 AEr00r00         [ 2] 1330 	ldw	x, #(___str_0+0)
       0006D8 CDr00r00         [ 4] 1331 	call	_assert_failed
       0006DB                       1332 00113$:
-                                   1333 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 704: if (UART2_FLAG == UART2_FLAG_RXNE)
+                                   1333 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 704: if (UART2_FLAG == UART2_FLAG_RXNE)
       0006DB 7B 01            [ 1] 1334 	ld	a, (0x01, sp)
       0006DD 27 06            [ 1] 1335 	jreq	00108$
-                                   1336 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 706: UART2->SR = (uint8_t)~(UART2_SR_RXNE);
+                                   1336 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 706: UART2->SR = (uint8_t)~(UART2_SR_RXNE);
       0006DF 35 DF 52 40      [ 1] 1337 	mov	0x5240+0, #0xdf
       0006E3 20 20            [ 2] 1338 	jra	00110$
       0006E5                       1339 00108$:
-                                   1340 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 709: else if (UART2_FLAG == UART2_FLAG_LBDF)
+                                   1340 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 709: else if (UART2_FLAG == UART2_FLAG_LBDF)
       0006E5 7B 03            [ 1] 1341 	ld	a, (0x03, sp)
       0006E7 27 06            [ 1] 1342 	jreq	00105$
-                                   1343 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 711: UART2->CR4 &= (uint8_t)(~UART2_CR4_LBDF);
+                                   1343 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 711: UART2->CR4 &= (uint8_t)(~UART2_CR4_LBDF);
       0006E9 72 19 52 47      [ 1] 1344 	bres	0x5247, #4
       0006ED 20 16            [ 2] 1345 	jra	00110$
       0006EF                       1346 00105$:
-                                   1347 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 716: UART2->CR6 &= (uint8_t)(~UART2_CR6_LHDF);
+                                   1347 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 716: UART2->CR6 &= (uint8_t)(~UART2_CR6_LHDF);
       0006EF C6 52 49         [ 1] 1348 	ld	a, 0x5249
       0006F2 97               [ 1] 1349 	ld	xl, a
-                                   1350 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 714: else if (UART2_FLAG == UART2_FLAG_LHDF)
+                                   1350 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 714: else if (UART2_FLAG == UART2_FLAG_LHDF)
       0006F3 7B 02            [ 1] 1351 	ld	a, (0x02, sp)
       0006F5 27 08            [ 1] 1352 	jreq	00102$
-                                   1353 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 716: UART2->CR6 &= (uint8_t)(~UART2_CR6_LHDF);
+                                   1353 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 716: UART2->CR6 &= (uint8_t)(~UART2_CR6_LHDF);
       0006F7 9F               [ 1] 1354 	ld	a, xl
       0006F8 A4 FD            [ 1] 1355 	and	a, #0xfd
       0006FA C7 52 49         [ 1] 1356 	ld	0x5249, a
       0006FD 20 06            [ 2] 1357 	jra	00110$
       0006FF                       1358 00102$:
-                                   1359 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 721: UART2->CR6 &= (uint8_t)(~UART2_CR6_LSF);
+                                   1359 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 721: UART2->CR6 &= (uint8_t)(~UART2_CR6_LSF);
       0006FF 9F               [ 1] 1360 	ld	a, xl
       000700 A4 FE            [ 1] 1361 	and	a, #0xfe
       000702 C7 52 49         [ 1] 1362 	ld	0x5249, a
       000705                       1363 00110$:
-                                   1364 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 723: }
+                                   1364 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 723: }
       000705 5B 03            [ 2] 1365 	addw	sp, #3
       000707 81               [ 4] 1366 	ret
-                                   1367 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 738: ITStatus UART2_GetITStatus(UART2_IT_TypeDef UART2_IT)
+                                   1367 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 738: ITStatus UART2_GetITStatus(UART2_IT_TypeDef UART2_IT)
                                    1368 ;	-----------------------------------------
                                    1369 ;	 function UART2_GetITStatus
                                    1370 ;	-----------------------------------------
       000708                       1371 _UART2_GetITStatus:
       000708 52 05            [ 2] 1372 	sub	sp, #5
-                                   1373 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 747: assert_param(IS_UART2_GET_IT_OK(UART2_IT));
+                                   1373 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 747: assert_param(IS_UART2_GET_IT_OK(UART2_IT));
       00070A 90 93            [ 1] 1374 	ldw	y, x
       00070C A3 03 46         [ 2] 1375 	cpw	x, #0x0346
       00070F 26 05            [ 1] 1376 	jrne	00247$
@@ -1421,7 +1421,7 @@
       000760 CDr00r00         [ 4] 1421 	call	_assert_failed
       000763 90 85            [ 2] 1422 	popw	y
       000765                       1423 00129$:
-                                   1424 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 750: itpos = (uint8_t)((uint8_t)1 << (uint8_t)((uint8_t)UART2_IT & (uint8_t)0x0F));
+                                   1424 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 750: itpos = (uint8_t)((uint8_t)1 << (uint8_t)((uint8_t)UART2_IT & (uint8_t)0x0F));
       000765 93               [ 1] 1425 	ldw	x, y
       000766 9F               [ 1] 1426 	ld	a, xl
       000767 A4 0F            [ 1] 1427 	and	a, #0x0f
@@ -1436,11 +1436,11 @@
       000774 4A               [ 1] 1436 	dec	a
       000775 26 FB            [ 1] 1437 	jrne	00273$
       000777                       1438 00274$:
-                                   1439 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 752: itmask1 = (uint8_t)((uint8_t)UART2_IT >> (uint8_t)4);
+                                   1439 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 752: itmask1 = (uint8_t)((uint8_t)UART2_IT >> (uint8_t)4);
       000777 9F               [ 1] 1440 	ld	a, xl
       000778 4E               [ 1] 1441 	swap	a
       000779 A4 0F            [ 1] 1442 	and	a, #0x0f
-                                   1443 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 754: itmask2 = (uint8_t)((uint8_t)1 << itmask1);
+                                   1443 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 754: itmask2 = (uint8_t)((uint8_t)1 << itmask1);
       00077B 88               [ 1] 1444 	push	a
       00077C A6 01            [ 1] 1445 	ld	a, #0x01
       00077E 6B 06            [ 1] 1446 	ld	(0x06, sp), a
@@ -1452,101 +1452,101 @@
       000786 4A               [ 1] 1452 	dec	a
       000787 26 FB            [ 1] 1453 	jrne	00275$
       000789                       1454 00276$:
-                                   1455 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 757: if (UART2_IT == UART2_IT_PE)
+                                   1455 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 757: if (UART2_IT == UART2_IT_PE)
       000789 7B 03            [ 1] 1456 	ld	a, (0x03, sp)
       00078B 27 18            [ 1] 1457 	jreq	00124$
-                                   1458 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 760: enablestatus = (uint8_t)((uint8_t)UART2->CR1 & itmask2);
+                                   1458 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 760: enablestatus = (uint8_t)((uint8_t)UART2->CR1 & itmask2);
       00078D C6 52 44         [ 1] 1459 	ld	a, 0x5244
       000790 14 05            [ 1] 1460 	and	a, (0x05, sp)
       000792 97               [ 1] 1461 	ld	xl, a
-                                   1462 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 763: if (((UART2->SR & itpos) != (uint8_t)0x00) && enablestatus)
+                                   1462 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 763: if (((UART2->SR & itpos) != (uint8_t)0x00) && enablestatus)
       000793 C6 52 40         [ 1] 1463 	ld	a, 0x5240
       000796 14 04            [ 1] 1464 	and	a, (0x04, sp)
       000798 27 08            [ 1] 1465 	jreq	00102$
       00079A 9F               [ 1] 1466 	ld	a, xl
       00079B 4D               [ 1] 1467 	tnz	a
       00079C 27 04            [ 1] 1468 	jreq	00102$
-                                   1469 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 766: pendingbitstatus = SET;
+                                   1469 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 766: pendingbitstatus = SET;
       00079E A6 01            [ 1] 1470 	ld	a, #0x01
       0007A0 20 50            [ 2] 1471 	jra	00125$
       0007A2                       1472 00102$:
-                                   1473 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 771: pendingbitstatus = RESET;
+                                   1473 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 771: pendingbitstatus = RESET;
       0007A2 4F               [ 1] 1474 	clr	a
       0007A3 20 4D            [ 2] 1475 	jra	00125$
       0007A5                       1476 00124$:
-                                   1477 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 774: else if (UART2_IT == UART2_IT_LBDF)
+                                   1477 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 774: else if (UART2_IT == UART2_IT_LBDF)
       0007A5 7B 01            [ 1] 1478 	ld	a, (0x01, sp)
       0007A7 27 18            [ 1] 1479 	jreq	00121$
-                                   1480 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 777: enablestatus = (uint8_t)((uint8_t)UART2->CR4 & itmask2);
+                                   1480 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 777: enablestatus = (uint8_t)((uint8_t)UART2->CR4 & itmask2);
       0007A9 C6 52 47         [ 1] 1481 	ld	a, 0x5247
       0007AC 14 05            [ 1] 1482 	and	a, (0x05, sp)
       0007AE 97               [ 1] 1483 	ld	xl, a
-                                   1484 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 779: if (((UART2->CR4 & itpos) != (uint8_t)0x00) && enablestatus)
+                                   1484 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 779: if (((UART2->CR4 & itpos) != (uint8_t)0x00) && enablestatus)
       0007AF C6 52 47         [ 1] 1485 	ld	a, 0x5247
       0007B2 14 04            [ 1] 1486 	and	a, (0x04, sp)
       0007B4 27 08            [ 1] 1487 	jreq	00106$
       0007B6 9F               [ 1] 1488 	ld	a, xl
       0007B7 4D               [ 1] 1489 	tnz	a
       0007B8 27 04            [ 1] 1490 	jreq	00106$
-                                   1491 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 782: pendingbitstatus = SET;
+                                   1491 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 782: pendingbitstatus = SET;
       0007BA A6 01            [ 1] 1492 	ld	a, #0x01
       0007BC 20 34            [ 2] 1493 	jra	00125$
       0007BE                       1494 00106$:
-                                   1495 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 787: pendingbitstatus = RESET;
+                                   1495 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 787: pendingbitstatus = RESET;
       0007BE 4F               [ 1] 1496 	clr	a
       0007BF 20 31            [ 2] 1497 	jra	00125$
       0007C1                       1498 00121$:
-                                   1499 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 790: else if (UART2_IT == UART2_IT_LHDF)
+                                   1499 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 790: else if (UART2_IT == UART2_IT_LHDF)
       0007C1 7B 02            [ 1] 1500 	ld	a, (0x02, sp)
       0007C3 27 18            [ 1] 1501 	jreq	00118$
-                                   1502 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 793: enablestatus = (uint8_t)((uint8_t)UART2->CR6 & itmask2);
+                                   1502 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 793: enablestatus = (uint8_t)((uint8_t)UART2->CR6 & itmask2);
       0007C5 C6 52 49         [ 1] 1503 	ld	a, 0x5249
       0007C8 14 05            [ 1] 1504 	and	a, (0x05, sp)
       0007CA 97               [ 1] 1505 	ld	xl, a
-                                   1506 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 795: if (((UART2->CR6 & itpos) != (uint8_t)0x00) && enablestatus)
+                                   1506 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 795: if (((UART2->CR6 & itpos) != (uint8_t)0x00) && enablestatus)
       0007CB C6 52 49         [ 1] 1507 	ld	a, 0x5249
       0007CE 14 04            [ 1] 1508 	and	a, (0x04, sp)
       0007D0 27 08            [ 1] 1509 	jreq	00110$
       0007D2 9F               [ 1] 1510 	ld	a, xl
       0007D3 4D               [ 1] 1511 	tnz	a
       0007D4 27 04            [ 1] 1512 	jreq	00110$
-                                   1513 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 798: pendingbitstatus = SET;
+                                   1513 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 798: pendingbitstatus = SET;
       0007D6 A6 01            [ 1] 1514 	ld	a, #0x01
       0007D8 20 18            [ 2] 1515 	jra	00125$
       0007DA                       1516 00110$:
-                                   1517 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 803: pendingbitstatus = RESET;
+                                   1517 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 803: pendingbitstatus = RESET;
       0007DA 4F               [ 1] 1518 	clr	a
       0007DB 20 15            [ 2] 1519 	jra	00125$
       0007DD                       1520 00118$:
-                                   1521 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 809: enablestatus = (uint8_t)((uint8_t)UART2->CR2 & itmask2);
+                                   1521 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 809: enablestatus = (uint8_t)((uint8_t)UART2->CR2 & itmask2);
       0007DD C6 52 45         [ 1] 1522 	ld	a, 0x5245
       0007E0 14 05            [ 1] 1523 	and	a, (0x05, sp)
       0007E2 97               [ 1] 1524 	ld	xl, a
-                                   1525 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 811: if (((UART2->SR & itpos) != (uint8_t)0x00) && enablestatus)
+                                   1525 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 811: if (((UART2->SR & itpos) != (uint8_t)0x00) && enablestatus)
       0007E3 C6 52 40         [ 1] 1526 	ld	a, 0x5240
       0007E6 14 04            [ 1] 1527 	and	a, (0x04, sp)
       0007E8 27 07            [ 1] 1528 	jreq	00114$
       0007EA 9F               [ 1] 1529 	ld	a, xl
       0007EB 4D               [ 1] 1530 	tnz	a
       0007EC 27 03            [ 1] 1531 	jreq	00114$
-                                   1532 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 814: pendingbitstatus = SET;
+                                   1532 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 814: pendingbitstatus = SET;
       0007EE A6 01            [ 1] 1533 	ld	a, #0x01
-                                   1534 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 819: pendingbitstatus = RESET;
+                                   1534 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 819: pendingbitstatus = RESET;
       0007F0 21                    1535 	.byte 0x21
       0007F1                       1536 00114$:
       0007F1 4F               [ 1] 1537 	clr	a
       0007F2                       1538 00125$:
-                                   1539 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 823: return  pendingbitstatus;
-                                   1540 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 824: }
+                                   1539 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 823: return  pendingbitstatus;
+                                   1540 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 824: }
       0007F2 5B 05            [ 2] 1541 	addw	sp, #5
       0007F4 81               [ 4] 1542 	ret
-                                   1543 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 852: void UART2_ClearITPendingBit(UART2_IT_TypeDef UART2_IT)
+                                   1543 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 852: void UART2_ClearITPendingBit(UART2_IT_TypeDef UART2_IT)
                                    1544 ;	-----------------------------------------
                                    1545 ;	 function UART2_ClearITPendingBit
                                    1546 ;	-----------------------------------------
       0007F5                       1547 _UART2_ClearITPendingBit:
       0007F5 88               [ 1] 1548 	push	a
-                                   1549 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 854: assert_param(IS_UART2_CLEAR_IT_OK(UART2_IT));
+                                   1549 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 854: assert_param(IS_UART2_CLEAR_IT_OK(UART2_IT));
       0007F6 A3 02 55         [ 2] 1550 	cpw	x, #0x0255
       0007F9 26 03            [ 1] 1551 	jrne	00143$
       0007FB A6 01            [ 1] 1552 	ld	a, #0x01
@@ -1579,24 +1579,24 @@
       000823 CDr00r00         [ 4] 1579 	call	_assert_failed
       000826 84               [ 1] 1580 	pop	a
       000827                       1581 00110$:
-                                   1582 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 857: if (UART2_IT == UART2_IT_RXNE)
+                                   1582 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 857: if (UART2_IT == UART2_IT_RXNE)
       000827 4D               [ 1] 1583 	tnz	a
       000828 27 06            [ 1] 1584 	jreq	00105$
-                                   1585 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 859: UART2->SR = (uint8_t)~(UART2_SR_RXNE);
+                                   1585 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 859: UART2->SR = (uint8_t)~(UART2_SR_RXNE);
       00082A 35 DF 52 40      [ 1] 1586 	mov	0x5240+0, #0xdf
       00082E 20 0E            [ 2] 1587 	jra	00107$
       000830                       1588 00105$:
-                                   1589 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 862: else if (UART2_IT == UART2_IT_LBDF)
+                                   1589 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 862: else if (UART2_IT == UART2_IT_LBDF)
       000830 7B 01            [ 1] 1590 	ld	a, (0x01, sp)
       000832 27 06            [ 1] 1591 	jreq	00102$
-                                   1592 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 864: UART2->CR4 &= (uint8_t)~(UART2_CR4_LBDF);
+                                   1592 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 864: UART2->CR4 &= (uint8_t)~(UART2_CR4_LBDF);
       000834 72 19 52 47      [ 1] 1593 	bres	0x5247, #4
       000838 20 04            [ 2] 1594 	jra	00107$
       00083A                       1595 00102$:
-                                   1596 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 869: UART2->CR6 &= (uint8_t)(~UART2_CR6_LHDF);
+                                   1596 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 869: UART2->CR6 &= (uint8_t)(~UART2_CR6_LHDF);
       00083A 72 13 52 49      [ 1] 1597 	bres	0x5249, #1
       00083E                       1598 00107$:
-                                   1599 ;	C:\Users\disan\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 871: }
+                                   1599 ;	C:\Users\dunaev\.platformio\packages\framework-ststm8spl\Libraries\STM8S_StdPeriph_Driver\src\stm8s_uart2.c: 871: }
       00083E 84               [ 1] 1600 	pop	a
       00083F 81               [ 4] 1601 	ret
                                    1602 	.area CODE
@@ -1607,31 +1607,31 @@
       000002 5C                    1607 	.db 0x5c
       000003 55 73 65 72 73        1608 	.ascii "Users"
       000008 5C                    1609 	.db 0x5c
-      000009 64 69 73 61 6E        1610 	.ascii "disan"
-      00000E 5C                    1611 	.db 0x5c
-      00000F 2E 70 6C 61 74 66 6F  1612 	.ascii ".platformio"
+      000009 64 75 6E 61 65 76     1610 	.ascii "dunaev"
+      00000F 5C                    1611 	.db 0x5c
+      000010 2E 70 6C 61 74 66 6F  1612 	.ascii ".platformio"
              72 6D 69 6F
-      00001A 5C                    1613 	.db 0x5c
-      00001B 70 61 63 6B 61 67 65  1614 	.ascii "packages"
+      00001B 5C                    1613 	.db 0x5c
+      00001C 70 61 63 6B 61 67 65  1614 	.ascii "packages"
              73
-      000023 5C                    1615 	.db 0x5c
-      000024 66 72 61 6D 65 77 6F  1616 	.ascii "framework-ststm8spl"
+      000024 5C                    1615 	.db 0x5c
+      000025 66 72 61 6D 65 77 6F  1616 	.ascii "framework-ststm8spl"
              72 6B 2D 73 74 73 74
              6D 38 73 70 6C
-      000037 5C                    1617 	.db 0x5c
-      000038 4C 69 62 72 61 72 69  1618 	.ascii "Libraries"
+      000038 5C                    1617 	.db 0x5c
+      000039 4C 69 62 72 61 72 69  1618 	.ascii "Libraries"
              65 73
-      000041 5C                    1619 	.db 0x5c
-      000042 53 54 4D 38 53 5F 53  1620 	.ascii "STM8S_StdPeriph_Driver"
+      000042 5C                    1619 	.db 0x5c
+      000043 53 54 4D 38 53 5F 53  1620 	.ascii "STM8S_StdPeriph_Driver"
              74 64 50 65 72 69 70
              68 5F 44 72 69 76 65
              72
-      000058 5C                    1621 	.db 0x5c
-      000059 73 72 63              1622 	.ascii "src"
-      00005C 5C                    1623 	.db 0x5c
-      00005D 73 74 6D 38 73 5F 75  1624 	.ascii "stm8s_uart2.c"
+      000059 5C                    1621 	.db 0x5c
+      00005A 73 72 63              1622 	.ascii "src"
+      00005D 5C                    1623 	.db 0x5c
+      00005E 73 74 6D 38 73 5F 75  1624 	.ascii "stm8s_uart2.c"
              61 72 74 32 2E 63
-      00006A 00                    1625 	.db 0x00
+      00006B 00                    1625 	.db 0x00
                                    1626 	.area CODE
                                    1627 	.area INITIALIZER
                                    1628 	.area CABS (ABS)

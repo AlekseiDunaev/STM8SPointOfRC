@@ -1,5 +1,5 @@
-#ifndef _I2C_H
-#define _I2C_H
+#ifndef _I2C_H_
+#define _I2C_H_
 
 // Реализация взята с http://progcont.ru/?articles=50&category_articles=STM8S
 
