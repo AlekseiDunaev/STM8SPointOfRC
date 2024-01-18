@@ -6,8 +6,10 @@
 #include "stdio.h"
 #include "stdlib.h"
 #include "string.h"
-#include "math.h"
+// #include "math.h"
 #include "config.h"
+#include "i2c.h"
+#include "output.h"
 
 #define BME280_ADDRESS 0xEE //BME280 I2C ADDRES (0x77<<1)
 // #define BME280_ADDRESS 0x77
@@ -143,6 +145,6 @@ void BME280_SetMode(uint8_t mode);
 float BME280_ReadTemperature(void);
 float BME280_ReadPressure(void);
 float BME280_ReadHumidity(void);
-float BME280_ReadAltitude(float seaLevel);
+// float BME280_ReadAltitude(float seaLevel);
 
 #endif /* _BME280_H_ */
