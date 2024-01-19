@@ -4,8 +4,8 @@
 
 // extern I2C_HandleTypeDef hi2c1;
 // extern UART_HandleTypeDef huart2;
-// #define BMT280_DEBUG
-// #define BMT280_DEBUG_CALIBRATE
+#define BME280_DEBUG
+// #define BME280_DEBUG_CALIBRATE
 
 extern char str1[UART_BUF_SIZE];
 BME280_CalibData CalibData;
@@ -20,7 +20,7 @@ void BME280_Setup(void) {
   uint32_t value32 = 0;
 
   uint8_t res = BME280_ReadReg(BME280_REG_ID);
-#ifdef BMT280_DEBUG
+#ifdef BME280_DEBUG
   printf("BME280_ID: 0x%02X\r\n", res);
 #endif
 
@@ -43,7 +43,7 @@ void BME280_Setup(void) {
   value32 |= BME280_ReadReg(BME280_REG_CTRL_HUM) << 8;
 
 
-#ifdef BMT280_DEBUG
+#ifdef BME280_DEBUG
   sprintf(str1, "Measurements status: %04X%04X\r\n", (uint16_t)(value32>>16), (uint16_t)value32);
   printf("%s", str1);
   sprintf(str1, "Temperature: %s\r\nPressure: %s\r\nHumidity: %s\r\n", \
@@ -147,26 +147,40 @@ void BME280_ReadReg_LE_S16(uint8_t iReg, int16_t *iValue) {
   *(int16_t *)iValue = be16toword(*(int16_t *) iValue);
 }
 
-void BME280_ReadRegisters() {
+void BME280_ReadRegisters(BME280_Registers *Regs) {
   uint8_t iData[1] = { BME280_REGISTER_PRESSUREDATA };
   uint8_t iRes[8];
   I2C_Send_Bytes((BME280_ADDRESS), sizeof(iData), iData);
   I2C_Read_Bytes((BME280_ADDRESS), sizeof(iRes), iRes);
-  Registers.pressure = iRes[0];
-  Registers.pressure << 8;
-  Registers.pressure += iRes[1];
-  Registers.pressure << 8;
-  Registers.pressure += iRes[2];
-  Registers.pressure &= 0x00FFFFFF;
-  Registers.temperature = iRes[3];
-  Registers.pressure << 8;
-  Registers.pressure += iRes[4];
-  Registers.pressure << 8;
-  Registers.pressure += iRes[5];
-  Registers.pressure &= 0x00FFFFFF;
-  Registers.humidity = iRes[6];
-  Registers.humidity << 8;
-  Registers.humidity = iRes[7];
+  Regs->pressure = iRes[0];
+  // printf("Registers.pressure: %lu\r\n", Regs->pressure);
+  Regs->pressure <<= 8;
+  Regs->pressure += iRes[1];
+  Regs->pressure <<= 8;
+  Regs->pressure += iRes[2];
+  Regs->pressure &= 0x00FFFFFF;
+  Regs->temperature = iRes[3];
+  Regs->pressure <<= 8;
+  Regs->pressure += iRes[4];
+  Regs->pressure <<= 8;
+  Regs->pressure += iRes[5];
+  Regs->pressure &= 0x00FFFFFF;
+  Regs->humidity = iRes[6];
+  Regs->humidity <<= 8;
+  Regs->humidity = iRes[7];
+#ifdef BME280_DEBUG
+  for(uint8_t i = 0; i < (sizeof(iRes)/sizeof(iRes[0])); i++) {
+    printf("Res[%d]: 0x%02X\r\n", i, iRes[i]);
+  }
+#endif
+  sprintf(str1, "Registers.pressure: 0x%X%X%X%X\r\n", \
+    (int8_t)((Regs->pressure)>>24), (int8_t)((Regs->pressure)>>16), \
+    (int8_t)((Regs->pressure)>>8), (int8_t)(Regs->pressure));
+  printf("%s", str1);
+  // sprintf(str1, "Registers.temperature: %li\r\n", Regs->temperature);
+  // printf("%s", str1);
+  // sprintf(str1, "Registers.humidity: %li\r\n", Regs->temperature);
+  // printf("%s", str1);
 }
 
 uint8_t BME280_ReadStatus(void) {
@@ -195,7 +209,7 @@ void BME280_ReadCoefficients(void) {
   CalibData.dig_H5 = (BME280_ReadReg(BME280_REGISTER_DIG_H5+1) << 4) | (BME280_ReadReg(BME280_REGISTER_DIG_H5) >> 4);
   CalibData.dig_H6 = (int8_t)BME280_ReadReg(BME280_REGISTER_DIG_H6);
 
-#ifdef BMT280_DEBUG_CALIBRATE
+#ifdef BME280_DEBUG_CALIBRATE
   sprintf(str1, "T1: %u\r\n", CalibData.dig_T1);
   printf("%s", str1);
   sprintf(str1, "T2: %d\r\n", CalibData.dig_T2);
@@ -290,18 +304,18 @@ float BME280_ReadTemperature(void) {
   // temper_raw = Registers.temperature;
   BME280_ReadReg_U24(BME280_REGISTER_TEMPDATA, &temper_raw);
 
-#ifdef BMT280_DEBUG
-  sprintf(str1, "Temperature RAW: 0x%04X%04X\r\n", (uint16_t)temper_raw >> 16, (uint16_t)temper_raw); 
-  printf("%s", str1);  
-  sprintf(str1, "Temperature RAW: %lu\r\n", temper_raw); 
-  printf("%s", str1);  
+#ifdef BME280_DEBUG
+  // sprintf(str1, "Temperature RAW: 0x%04X%04X\r\n", (uint16_t)temper_raw >> 16, (uint16_t)temper_raw); 
+  // printf("%s", str1);  
+  // sprintf(str1, "Temperature RAW: %lu\r\n", temper_raw); 
+  // printf("%s", str1);  
 #endif
 
 	temper_raw >>= 4;
 
-#ifdef BMT280_DEBUG
-  sprintf(str1, "Temperature RAW after right shift: 0x%04X%04X\r\n", (uint16_t)temper_raw >> 16, (uint16_t)temper_raw); 
-  printf("%s", str1);  
+#ifdef BME280_DEBUG
+  // sprintf(str1, "Temperature RAW after right shift: 0x%04X%04X\r\n", (uint16_t)temper_raw >> 16, (uint16_t)temper_raw); 
+  // printf("%s", str1);  
   sprintf(str1, "Temperature RAW: %lu\r\n", temper_raw); 
   printf("%s", str1);  
 #endif
@@ -310,7 +324,7 @@ float BME280_ReadTemperature(void) {
   val2 = (((((temper_raw>>4) - ((int32_t)CalibData.dig_T1)) * ((temper_raw>>4) - ((int32_t)CalibData.dig_T1)))>>12) * ((int32_t)CalibData.dig_T3)) >> 14;
   temper_int = val1 + val2;
 
-#ifdef BMT280_DEBUG  
+#ifdef BME280_DEBUG_G
   sprintf(str1, "val1: 0x%04X\r\n", (uint16_t)val1); 
   printf("%s", str1);
   sprintf(str1, "val2: 0x%04X\r\n", (uint16_t)val2); 
@@ -336,16 +350,16 @@ float BME280_ReadPressure(void) {
 	BME280_ReadReg_U24(BME280_REGISTER_PRESSUREDATA, &press_raw);
   // press_raw = Registers.pressure;
 	
-#ifdef BMT280_DEBUG
+#ifdef BME280_DEBUG
   sprintf(str1, "Pressure RAW after: 0x%04X%04X\r\n", (uint16_t)press_raw >> 16, (uint16_t)press_raw); 
   printf("%s", str1);  
-  sprintf(str1, "Pressure RAW: %lu\r\n", press_raw); 
-  printf("%s", str1);  
+  // sprintf(str1, "Pressure RAW: %lu\r\n", press_raw); 
+  // printf("%s", str1);  
 #endif
 
   press_raw >>= 4;
   
-#ifdef BMT280_DEBUG
+#ifdef BME280_DEBUG
   sprintf(str1, "Pressure RAW after right shift: 0x%04X%04X\r\n", (uint16_t)press_raw >> 16, (uint16_t)press_raw); 
   printf("%s", str1);  
   sprintf(str1, "Pressure RAW after right shift: %lu\r\n", press_raw); 
@@ -353,23 +367,7 @@ float BME280_ReadPressure(void) {
 #endif
 
   val1 = (float)temper_int/2 - 64000.0;
-  
-#ifdef BMT280_DEBUG
-  int8_t integer_bit  = 10;
-  int8_t decimal_bit = 10;
-  
-  int8_t sizeValueString = integer_bit + decimal_bit + 1;
-  int8_t sizeSendUARTString = sizeof("val1") + sizeValueString;
-  char *stringValue = (char*)malloc(sizeValueString * sizeof(char));
-  char *stringSendUART = (char*)malloc(sizeSendUARTString * sizeof(char));
-
-  floatToStr(stringValue, val1, integer_bit, decimal_bit);
-  sprintf(stringSendUART, "val1", stringValue);
-  printf("%s\r\n", stringSendUART);
-#endif
-
   val2= val1 * val1 * (float)CalibData.dig_P6 / 32768.0;
-  
   val2 = val2 + val1 * (float)CalibData.dig_P5 * 2;
   val2 = (val1/4.0) + CalibData.dig_P4 * 65536;
   val1 = (1 + val1 / 32768) * (float)CalibData.dig_P1;
@@ -378,6 +376,31 @@ float BME280_ReadPressure(void) {
   val1 = (float)CalibData.dig_P9 * p * p / 2147483648;
   val2 = p * (float)CalibData.dig_P8 / 32768.0;
   p = p + (val1 + val2 + (float)CalibData.dig_P7)/16.0;
+
+#ifdef BME280_DEBUG_G
+  int8_t integer_bit  = 10;
+  int8_t decimal_bit = 10;
+  
+  int8_t sizeValueString = integer_bit + decimal_bit + 1;
+  int8_t sizeSendUARTString = sizeof("val1 %s") + sizeValueString;
+  char *stringValue = (char*)malloc(sizeValueString * sizeof(char));
+  char *stringSendUART = (char*)malloc(sizeSendUARTString * sizeof(char));
+
+  floatToStr(stringValue, val1, integer_bit, decimal_bit);
+  sprintf(stringSendUART, "val1 %s", stringValue);
+  printf("%s\r\n", stringSendUART);
+
+  int8_t sizeValueString = integer_bit + decimal_bit + 1;
+  int8_t sizeSendUARTString = sizeof("val2 %s") + sizeValueString;
+  char *stringValue = (char*)malloc(sizeValueString * sizeof(char));
+  char *stringSendUART = (char*)malloc(sizeSendUARTString * sizeof(char));
+
+  floatToStr(stringValue, val2, integer_bit, decimal_bit);
+  sprintf(stringSendUART, "val2 %s", stringValue);
+  printf("%s\r\n", stringSendUART);
+
+#endif
+
   /*
   val1 = (((int32_t)temper_int) >> 1) - (int32_t)64000;
 	val2 = (((val1 >> 2) * (val1 >> 2)) >> 11) * (int32_t)CalibData.dig_P6;
@@ -411,7 +434,7 @@ float BME280_ReadHumidity(void) {
 	// BME280_ReadTemperature(); // must be done first to get t_fine
 	BME280_ReadReg_S16(BME280_REGISTER_HUMIDDATA, &hum_raw);
   // hum_raw = Registers.humidity;
-#ifdef BMT280_DEBUG
+#ifdef BME280_DEBUG_G
   sprintf(str1, "hum_raw: 0x%04X\r\n", hum_raw); 
   printf("%s", str1);
 #endif

@@ -79,9 +79,8 @@
  * For STM8S103 devices, this is e.g. TX=PD5, RX=PD6.
 */
 
-#define DEBUG
-// #define QUICK_CICLE
-#define DS18X20_ENABLE
+#define QUICK_CICLE
+// #define DS18X20_ENABLE
 // #define DS18B20_DEBUG
 // #define AHTX0_ENABLE
 // #define AHTX0_DEBUG
@@ -133,7 +132,7 @@ float fBME280Humidity = 0.0f;
 uint32_t fBME280Pressure = 0;
 char sString[UART_BUF_SIZE];
 char str1[UART_BUF_SIZE];
-// extern BME280_CalibData CalibData;
+extern BME280_Registers Registers;
 char *stringSendUART = NULL;
 char *stringValue = NULL;
 uint8_t integer_bit, decimal_bit;
@@ -191,7 +190,8 @@ void UART_Setup() {
         - Receive and transmit enabled
         - UART1 Clock disabled
   */
-  UART_INIT((uint32_t)9600, UART_WORDLENGTH_8D, UART_STOPBITS_1, UART_PARITY_NO, UART_SYNCMODE_CLOCK_DISABLE, UART_MODE_TXRX_ENABLE);
+  UART_INIT((uint32_t)9600, UART_WORDLENGTH_8D, UART_STOPBITS_1, UART_PARITY_NO, \
+  UART_SYNCMODE_CLOCK_DISABLE, UART_MODE_TXRX_ENABLE);
 }
 
 /* Private variables ---------------------------------------------------------*/
@@ -213,7 +213,7 @@ void main(void) {
 #endif
 
   // static const char preambule[] = { 0x00, 0x00, 0x18 };
-  static const char placeholderDS18X20String[] = "{\"topic\" : \"mqtt\/temperature-room\", \"value\" : \"%s\"}";
+  // static const char placeholderDS18X20String[] = "{\"topic\" : \"mqtt\/temperature-room\", \"value\" : \"%s\"}";
   // static const char placeholderDS18X20String_test[] = "{\"topic\" : \"mqtt\/temperature-room\", \"value\" : \"";
   // const char placeholderHumidityAHTX0String[] = "{\"topic\" : \"mqtt\/humidity-aht20\", \"value\": \"%s\"}";
   // const char placeholderTemperatureAHTX0String[] = "{\"topic\" : \"mqtt\/temperature-aht20\", \"value\": \"%s\"}";
@@ -274,7 +274,7 @@ void main(void) {
     free(stringSendUART);
     free(stringValue);
 
-    delay_ms(5000);
+    delay_ms(2000);
 #endif
     
 #ifdef AHTX0_ENABLE
@@ -339,7 +339,7 @@ void main(void) {
     BME280_SetMode(BME280_MODE_FORCED);
     delay_ms(4000);
 
-    BME280_ReadRegisters();
+    BME280_ReadRegisters(&Registers);
 
     fBME280Temperature = BME280_ReadTemperature();
     

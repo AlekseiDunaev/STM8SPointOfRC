@@ -133,7 +133,7 @@ void BME280_ReadReg_S16(uint8_t iReg, int16_t *iValue);
 void BME280_ReadReg_LE_S16(uint8_t iReg, int16_t *iValue);
 void BME280_ReadReg_U24(uint8_t iReg, uint32_t *iValue);
 void BME280_ReadReg_LE_U24(uint8_t iReg, uint32_t *iValue);
-void BME280_ReadRegisters();
+void BME280_ReadRegisters(BME280_Registers *Regs);
 uint8_t BME280_ReadStatus(void);
 void BME280_ReadCoefficients(void);
 void BME280_SetStandby(uint8_t tsb);
