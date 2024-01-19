@@ -4,7 +4,7 @@
 
 // extern I2C_HandleTypeDef hi2c1;
 // extern UART_HandleTypeDef huart2;
-#define BME280_DEBUG
+// #define BME280_DEBUG
 // #define BME280_DEBUG_CALIBRATE
 
 extern char str1[UART_BUF_SIZE];
@@ -173,14 +173,22 @@ void BME280_ReadRegisters(BME280_Registers *Regs) {
     printf("Res[%d]: 0x%02X\r\n", i, iRes[i]);
   }
 #endif
+  /*
   sprintf(str1, "Registers.pressure: 0x%X%X%X%X\r\n", \
     (int8_t)((Regs->pressure)>>24), (int8_t)((Regs->pressure)>>16), \
     (int8_t)((Regs->pressure)>>8), (int8_t)(Regs->pressure));
   printf("%s", str1);
+  printf("Registers.pressure: 0x%X%X%X%X\r\n", \
+    (int8_t)((Regs->pressure)>>24), (int8_t)((Regs->pressure)>>16), \
+    (int8_t)((Regs->pressure)>>8), (int8_t)(Regs->pressure));
+  */
   // sprintf(str1, "Registers.temperature: %li\r\n", Regs->temperature);
   // printf("%s", str1);
   // sprintf(str1, "Registers.humidity: %li\r\n", Regs->temperature);
   // printf("%s", str1);
+  for (uint8_t i = 0; i < 4; i++) {
+    printf("%02x", *((&Registers.pressure) + i));
+  }
 }
 
 uint8_t BME280_ReadStatus(void) {
