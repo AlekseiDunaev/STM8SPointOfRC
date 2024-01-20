@@ -133,7 +133,7 @@ void BME280_ReadReg_S16(uint8_t iReg, int16_t *iValue);
 void BME280_ReadReg_LE_S16(uint8_t iReg, int16_t *iValue);
 void BME280_ReadReg_U24(uint8_t iReg, uint32_t *iValue);
 void BME280_ReadReg_LE_U24(uint8_t iReg, uint32_t *iValue);
-void BME280_ReadRegisters(BME280_Registers *Regs);
+void BME280_ReadRegisters(void);
 uint8_t BME280_ReadStatus(void);
 void BME280_ReadCoefficients(void);
 void BME280_SetStandby(uint8_t tsb);
@@ -142,9 +142,12 @@ void BME280_SetOversamplingTemper(uint8_t osrs);
 void BME280_SetOversamplingPressure(uint8_t osrs);
 void BME280_SetOversamplingHum(uint8_t osrs);
 void BME280_SetMode(uint8_t mode);
-float BME280_ReadTemperature(void);
-float BME280_ReadPressure(void);
-float BME280_ReadHumidity(void);
+int32_t BME280_ReadTemperature(void);
+// float BME280_ReadTemperature(void);
+int32_t BME280_ReadPressure(void);
+// float BME280_ReadPressure(void);
+uint32_t BME280_ReadHumidity(void);
+// float BME280_ReadHumidity(void);
 // float BME280_ReadAltitude(float seaLevel);
 
 #endif /* _BME280_H_ */

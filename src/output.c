@@ -1,6 +1,7 @@
 #include "output.h"
 
 #define UART_BUF_SIZE 128
+/*
 // Read buffer
 uint8_t read_ok = 0; // read completion flag
 uint8_t read_idx = 0;
@@ -12,6 +13,7 @@ uint8_t write_ok = 0; // write completion flag
 uint8_t write_idx = 0;
 uint8_t write_len = 0;
 NEAR uint8_t write_buffer[UART_BUF_SIZE]; // @near can be placed when the buffer setting is large
+*/
 
 static const char table[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
 
@@ -64,6 +66,7 @@ void floatToStr(char *str, float number, uint8_t integer_bit, uint8_t decimal_bi
         *(str + integer_bit + 1 + decimal_bit - trailing_zero_count + minus) = '\0';
 }
 
+/*
 // write multiple bytes
 void uart_send_n_byte(uint8_t* data, uint8_t len)
 {
@@ -108,3 +111,4 @@ void  uart_read_n_byte(uint8_t* data, uint8_t len)
 	 memcpy(data, read_buffer, read_len); // copy data to user buffer
 	return;
 }
+*/

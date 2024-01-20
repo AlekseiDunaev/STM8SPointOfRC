@@ -79,8 +79,8 @@
  * For STM8S103 devices, this is e.g. TX=PD5, RX=PD6.
 */
 
-#define QUICK_CICLE
-// #define DS18X20_ENABLE
+// #define QUICK_CICLE
+#define DS18X20_ENABLE
 // #define DS18B20_DEBUG
 // #define AHTX0_ENABLE
 // #define AHTX0_DEBUG
@@ -124,13 +124,10 @@
 uint8_t iDS18X20RomID[8];
 uint8_t iI2CWrite[3];
 uint8_t iI2CRead[7];
-float fDS18X20Temperature = -100.0f;
-// float fAHTX0Humidity = 0.0f;
-// float fAHTX0Temperature = 0.0f;
+float fDS18X20Temperature = 0.0f;
+float fBME280Pressure = 0.0f;
 float fBME280Temperature = 0.0f;
 float fBME280Humidity = 0.0f;
-uint32_t fBME280Pressure = 0;
-char sString[UART_BUF_SIZE];
 char str1[UART_BUF_SIZE];
 extern BME280_Registers Registers;
 char *stringSendUART = NULL;
@@ -139,6 +136,7 @@ uint8_t integer_bit, decimal_bit;
 uint8_t sizeValueString = 0;
 uint8_t sizeSendUARTString = 0;
 
+/*
 // Read buffer
 extern uint8_t read_ok;
 extern uint8_t read_idx;
@@ -150,6 +148,7 @@ extern uint8_t write_ok;
 extern uint8_t write_idx;
 extern uint8_t write_len;
 extern uint8_t write_buffer[];
+*/
 
 void Clock_Setup(void) {
   CLK_DeInit();
@@ -213,7 +212,7 @@ void main(void) {
 #endif
 
   // static const char preambule[] = { 0x00, 0x00, 0x18 };
-  // static const char placeholderDS18X20String[] = "{\"topic\" : \"mqtt\/temperature-room\", \"value\" : \"%s\"}";
+  static const char placeholderDS18X20String[] = "{\"topic\" : \"mqtt\/temperature-room\", \"value\" : \"%s\"}";
   // static const char placeholderDS18X20String_test[] = "{\"topic\" : \"mqtt\/temperature-room\", \"value\" : \"";
   // const char placeholderHumidityAHTX0String[] = "{\"topic\" : \"mqtt\/humidity-aht20\", \"value\": \"%s\"}";
   // const char placeholderTemperatureAHTX0String[] = "{\"topic\" : \"mqtt\/temperature-aht20\", \"value\": \"%s\"}";
@@ -254,8 +253,8 @@ void main(void) {
 
     printf("\r\n");
 
-    floatToStr(sString, fDS18X20Temperature, integer_bit, decimal_bit);
-    printf("DS18X20 temperature: %s\r\n", sString);
+    floatToStr(str1, fDS18X20Temperature, integer_bit, decimal_bit);
+    printf("DS18X20 temperature: %s\r\n", str1);
 #endif
 
     sizeValueString = integer_bit + decimal_bit + 1;
@@ -270,11 +269,12 @@ void main(void) {
     putchar(0x00);
     putchar(0x18);
     printf("%s\r\n", stringSendUART);
+    
+    delay_ms(1000);
 
     free(stringSendUART);
     free(stringValue);
 
-    delay_ms(2000);
 #endif
     
 #ifdef AHTX0_ENABLE
@@ -290,10 +290,10 @@ void main(void) {
     fAHTX0Temperature = ATHX0ConvertTemperature(iI2CRead);
     
 #ifdef AHTX0_DEBUG
-    floatToStr(sString, fAHTX0Humidity, 2, 2);
-    printf("ATHX0 humidity: %s\r\n", sString);
-    floatToStr(sString, fAHTX0Temperature, 2, 2);
-    printf("AHTX0 temperature: %s\r\n", sString);
+    floatToStr(str1, fAHTX0Humidity, 2, 2);
+    printf("ATHX0 humidity: %s\r\n", str1);
+    floatToStr(str1, fAHTX0Temperature, 2, 2);
+    printf("AHTX0 temperature: %s\r\n", str1);
 #endif
 
     integer_bit = 2;
@@ -337,11 +337,12 @@ void main(void) {
     decimal_bit = 2;
 
     BME280_SetMode(BME280_MODE_FORCED);
-    delay_ms(4000);
+    delay_ms(2000);
 
-    BME280_ReadRegisters(&Registers);
+    BME280_ReadRegisters();
 
-    fBME280Temperature = BME280_ReadTemperature();
+    fBME280Temperature = (float)(BME280_ReadTemperature() / 100.0);
+    // fBME280Temperature = BME280_ReadTemperature();
     
     sizeValueString = integer_bit + decimal_bit + 1;
     stringValue = (char*)malloc(sizeValueString * sizeof(char));
@@ -354,6 +355,7 @@ void main(void) {
     putchar(0x00);
     putchar(0x18);
     printf("%s\r\n", stringSendUART);
+    delay_ms(1000);
   
     free(stringSendUART);
     free(stringValue);
@@ -361,8 +363,7 @@ void main(void) {
     integer_bit = 2;
     decimal_bit = 2;
 
-    fBME280Humidity = BME280_ReadHumidity();
-    delay_ms(2000);
+    fBME280Humidity = (float)(BME280_ReadHumidity()) / 1024.0;
 
     sizeValueString = integer_bit + decimal_bit + 1;
     sizeSendUARTString = sizeof(placeholderHumidityBME280String) + sizeValueString;
@@ -379,22 +380,24 @@ void main(void) {
     putchar(0x00);
     putchar(0x18);
     printf("%s\r\n", stringSendUART);
+    delay_ms(1000);
     
     free(stringSendUART);
     free(stringValue);
 
-    integer_bit = 5;
+    integer_bit = 6;
     decimal_bit = 1;
 
-    fBME280Pressure = BME280_ReadPressure();
-    delay_ms(2000);
+    // iBME280Pressure = BME280_ReadPressure();
+    // printf("p: %lu\r\n", iBME280Pressure); 
+    fBME280Pressure = (float)(BME280_ReadPressure()) / 100.0;
 
-    sizeValueString = integer_bit + decimal_bit + 1;
+    // sizeValueString = integer_bit + decimal_bit + 1;
     sizeSendUARTString = sizeof(placeholderPressureBME280String) + sizeValueString;
     stringValue = (char*)malloc(sizeValueString * sizeof(char));
     stringSendUART = (char*)malloc(sizeSendUARTString * sizeof(char));
 
-    floatToStr(stringValue, (float)fBME280Pressure, integer_bit, decimal_bit);
+    floatToStr(stringValue, fBME280Pressure, integer_bit, decimal_bit);
     sprintf(stringSendUART, placeholderPressureBME280String, stringValue);
     // uart_send_n_byte(preambule, sizeof(preambule));
     // uart_send_n_byte(placeholderHumidityBME280String_test, sizeof(placeholderHumidityBME280String_test));
@@ -405,10 +408,11 @@ void main(void) {
     putchar(0x18);
     printf("%s\r\n", stringSendUART);
     
+    delay_ms(1000);
+    
     free(stringSendUART);
     free(stringValue);
-
-
+    
 #endif
     
 #ifdef QUICK_CICLE
