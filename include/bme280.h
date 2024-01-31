@@ -11,6 +11,9 @@
 #include "i2c.h"
 #include "output.h"
 
+// #define BME280_DEBUG
+// #define BME280_DEBUG_CALIBRATE
+
 #define BME280_ADDRESS 0xEE //BME280 I2C ADDRES (0x77<<1)
 // #define BME280_ADDRESS 0x77
 #define BME280_REG_ID 0xD0 //BME280 ID REGISTER
@@ -142,12 +145,12 @@ void BME280_SetOversamplingTemper(uint8_t osrs);
 void BME280_SetOversamplingPressure(uint8_t osrs);
 void BME280_SetOversamplingHum(uint8_t osrs);
 void BME280_SetMode(uint8_t mode);
-int32_t BME280_ReadTemperature(void);
-// float BME280_ReadTemperature(void);
-int32_t BME280_ReadPressure(void);
-// float BME280_ReadPressure(void);
-uint32_t BME280_ReadHumidity(void);
-// float BME280_ReadHumidity(void);
-// float BME280_ReadAltitude(float seaLevel);
+int32_t BME280_GetTemperature(void);
+// float BME280_GetTemperature(void);
+int32_t BME280_GetPressure(void);
+// float BME280_GetPressure(void);
+uint32_t BME280_GetHumidity(void);
+// float BME280_GetHumidity(void);
+// float BME280_GetAltitude(float seaLevel);
 
 #endif /* _BME280_H_ */

@@ -6,10 +6,8 @@
 #include "stm8s.h"
 #include "delay.h"
 
-#define I2C_ID                  0x38
-#define I2C_REQ_STATUS_WORD     0x71
-#define I2C_TIMEOUT             10
 #define I2C_ID_ADDRESS          0xEE
+#define I2C_TIMEOUT             10
 #define I2C_TIME_ERROR          1000 //Время ожидания ошибки или выход из функции принудительно, спасает от зависания.
 
 void I2C_Setup(void);

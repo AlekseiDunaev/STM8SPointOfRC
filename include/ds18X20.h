@@ -5,6 +5,8 @@
 #include "stm8s_conf.h"
 #include "delay.h"
 
+// #define DS18B20_DEBUG
+
 /* ROM COMMANDS */
 #define SEARCH_ROM         (u8)0XF0
 #define READ_ROM           (u8)0x33

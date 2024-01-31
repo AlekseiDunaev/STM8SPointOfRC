@@ -86,7 +86,7 @@
 #if defined(STM8AF622x)                        /* SDCC patch: see https://github.com/tenbaht/sduino/tree/master/STM8S_StdPeriph_Driver */
 // #include "stm8s_uart4.h"
 #endif /* (STM8AF622x) */      
-//#include "stm8s_wwdg.h"
+// include "stm8s_wwdg.h"
 
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/

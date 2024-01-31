@@ -4,8 +4,6 @@
 
 // extern I2C_HandleTypeDef hi2c1;
 // extern UART_HandleTypeDef huart2;
-// #define BME280_DEBUG
-// #define BME280_DEBUG_CALIBRATE
 
 extern char str1[UART_BUF_SIZE];
 BME280_CalibData CalibData;
@@ -13,7 +11,7 @@ BME280_Registers Registers;
 int32_t temper_int;
 
 void Error(void) {
-    LED_OFF;
+    // LED_OFF;
 }
 
 void BME280_Setup(void) {
@@ -54,7 +52,6 @@ void BME280_Setup(void) {
   BME280_SetMode(BME280_MODE_FORCED);
   // BME280_SetMode(BME280_MODE_NORMAL);
 
-  LED_ON;
 }
 
 void BME280_WriteReg(uint8_t iReg, uint8_t iValue) {
@@ -278,25 +275,23 @@ void BME280_SetMode(uint8_t mode) {
   BME280_WriteReg(BME280_REG_CTRL_MEAS,reg);
 }
 
-int32_t BME280_ReadTemperature(void) {
-// float BME280_ReadTemperature(void) {
+int32_t BME280_GetTemperature(void) {
+// float BME280_GetTemperature(void) {
   // float temper_float = 0.0f;
   int32_t val1, val2, T;
   // В руководстве переменная temper_raw со знаком 
   // int32_t temper_raw;
  
-  // temper_raw = Registers.temperature;
-  // BME280_ReadReg_U24(BME280_REGISTER_TEMPDATA, &temper_raw);
-
-	// temper_raw >>= 4;
-
   /*
+  temper_raw = Registers.temperature;
+  BME280_ReadReg_U24(BME280_REGISTER_TEMPDATA, &temper_raw);
   val1 = ((float)temper_raw / 16384.0 - (float)CalibData.dig_T1 / 1024.0) * \
   (float)CalibData.dig_T2;
   val2 = ((((float)temper_raw) / 131072.0 - ((float)CalibData.dig_T1) / 8192.0) * \
   (((float)temper_raw) / 131072.0 - ((float)CalibData.dig_T1) / 8192.0)) * \
   ((float)CalibData.dig_T3);
   */
+  
   val1 = ((((Registers.temperature >> 3) - ((int32_t)CalibData.dig_T1 << 1))) * \
   ((int32_t)CalibData.dig_T2)) >> 11;
   val2 = (((((Registers.temperature >> 4) - ((int32_t)CalibData.dig_T1)) * \
@@ -304,7 +299,7 @@ int32_t BME280_ReadTemperature(void) {
   ((int32_t)CalibData.dig_T3)) >> 14;
   temper_int = val1 + val2;
 
-#ifdef BME280_DEBUG_G
+#ifdef BME280_DEBUG
   printf("val1: 0x%04X%04X\r\n", (int16_t)(val1 >> 16), (int16_t)val1); 
   printf("val1: %lu\r\n", val1); 
   printf("val2: 0x%04X%04X\r\n", (int16_t)(val2 >> 16), (int16_t)val1); 
@@ -320,16 +315,13 @@ int32_t BME280_ReadTemperature(void) {
   return T;
 }
 
-int32_t BME280_ReadPressure(void) {
-// float BME280_ReadPressure(void) {
+int32_t BME280_GetPressure(void) {
+// float BME280_GetPressure(void) {
 	int32_t val1, val2;
   int32_t p;
-	// BME280_ReadTemperature(); // must be done first to get t_fine
-  // press_raw = Registers.pressure;
-	
-  // press_raw >>= 4;
-  
-  /*
+	/*
+  BME280_GetTemperature(); // must be done first to get t_fine
+  press_raw = Registers.pressure;
   val1 = (float)temper_int/2 - 64000.0;
   val2 = val1 * val1 * (float)CalibData.dig_P6 / 32768.0;
   val2 = val2 + val1 * CalibData.dig_P5 * 2;
@@ -366,12 +358,10 @@ int32_t BME280_ReadPressure(void) {
   return p;
 }
 
-uint32_t BME280_ReadHumidity(void) {
-//float BME280_ReadHumidity(void) {
+uint32_t BME280_GetHumidity(void) {
+//float BME280_GetHumidity(void) {
 	int32_t v_x1_u32r;
   // float hum_float = 0.0f;
-	// BME280_ReadTemperature(); // must be done first to get t_fine
-	// BME280_ReadReg_S16(BME280_REGISTER_HUMIDDATA, &hum_raw);
 	v_x1_u32r = (temper_int - ((int32_t)76800));
 	v_x1_u32r = ((((((int32_t)Registers.humidity << 14) - (((int32_t)CalibData.dig_H4) << 20) - \
     (((int32_t)CalibData.dig_H5) * v_x1_u32r)) + ((int32_t)16384)) >> 15) * \
@@ -389,10 +379,10 @@ uint32_t BME280_ReadHumidity(void) {
 }
 
 /*
-float BME280_ReadAltitude(float seaLevel) {
+float BME280_GetAltitude(float seaLevel) {
   float att = 0.0f;
-	float atm = BME280_ReadPressure();
-	// att = 44330.0 * (1.0 - pow(atm / seaLevel, 0.1903));
+	int32_t atm = BME280_GetPressure();
+	att = 44330.0 * (1.0 - pow((float)atm / seaLevel, 0.1903));
   return att;
 }
 */

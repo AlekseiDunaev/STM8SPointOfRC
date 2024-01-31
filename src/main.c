@@ -36,7 +36,7 @@
 #include "delay.h"
 #include "i2c.h"
 #include "ds18X20.h"
-#include "athx0.h"
+#include "aht21.h"
 #include "bme280.h"
 #include "output.h"
 
@@ -79,13 +79,14 @@
  * For STM8S103 devices, this is e.g. TX=PD5, RX=PD6.
 */
 
+#define NODEBUG
 // #define QUICK_CICLE
 #define DS18X20_ENABLE
-// #define DS18B20_DEBUG
-// #define AHTX0_ENABLE
-// #define AHTX0_DEBUG
+// #define AHT21_ENABLE
 #define BME280_ENABLE
-
+#define LORAWAN_MASTER_MSB_ADDRESS 0x00
+#define LORAWAN_MASTER_LSB_ADDRESS 0x00
+#define LORAWAN_MASTER_CHANEL 0x18
 
 #if defined(STM8S105) || defined(STM8S005) ||  defined (STM8AF626x)
 #define UART_NAME "UART2"
@@ -128,6 +129,8 @@ float fDS18X20Temperature = 0.0f;
 float fBME280Pressure = 0.0f;
 float fBME280Temperature = 0.0f;
 float fBME280Humidity = 0.0f;
+float fAHT21Humidity;
+float fAHT21Temperature;
 char str1[UART_BUF_SIZE];
 extern BME280_Registers Registers;
 char *stringSendUART = NULL;
@@ -135,6 +138,13 @@ char *stringValue = NULL;
 uint8_t integer_bit, decimal_bit;
 uint8_t sizeValueString = 0;
 uint8_t sizeSendUARTString = 0;
+
+static const char placeholderDS18X20String[] = "{\"topic\" : \"mqtt\/temperature-room\", \"value\" : \"%s\"}";
+static const char placeholderHumidityAHT21String[] = "{\"topic\" : \"mqtt\/humidity-aht21\", \"value\": \"%s\"}";
+static const char placeholderTemperatureAHT21String[] = "{\"topic\" : \"mqtt\/temperature-aht21\", \"value\": \"%s\"}";
+static const char placeholderTemperatureBME280String[] = "{\"topic\" : \"mqtt\/temperature-bme280\", \"value\": \"%s\"}";
+static const char placeholderHumidityBME280String[] = "{\"topic\" : \"mqtt\/humidity-bme280\", \"value\": \"%s\"}";
+static const char placeholderPressureBME280String[] = "{\"topic\" : \"mqtt\/pressure-bme280\", \"value\": \"%s\"}";
 
 /*
 // Read buffer
@@ -161,12 +171,12 @@ void Clock_Setup(void) {
   CLK_SYSCLKConfig(CLK_PRESCALER_CPUDIV1);
   CLK_ClockSwitchConfig(CLK_SWITCHMODE_AUTO, CLK_SOURCE_HSI, DISABLE, CLK_CURRENTCLOCKSTATE_ENABLE);
   // CLK_PeripheralClockConfig(CLK_PERIPHERAL_I2C, ENABLE);
-   CLK_PeripheralClockConfig(CLK_PERIPHERAL_SPI, DISABLE);
-   CLK_PeripheralClockConfig(CLK_PERIPHERAL_AWU, DISABLE);
+  // CLK_PeripheralClockConfig(CLK_PERIPHERAL_SPI, DISABLE);
+  // CLK_PeripheralClockConfig(CLK_PERIPHERAL_AWU, DISABLE);
   // CLK_PeripheralClockConfig(CLK_PERIPHERAL_UART2, ENABLE);
-   CLK_PeripheralClockConfig(CLK_PERIPHERAL_TIMER1, DISABLE);
-   CLK_PeripheralClockConfig(CLK_PERIPHERAL_TIMER2, DISABLE);
-   CLK_PeripheralClockConfig(CLK_PERIPHERAL_TIMER4, DISABLE);
+  // CLK_PeripheralClockConfig(CLK_PERIPHERAL_TIMER1, DISABLE);
+  // CLK_PeripheralClockConfig(CLK_PERIPHERAL_TIMER2, DISABLE);
+  // CLK_PeripheralClockConfig(CLK_PERIPHERAL_TIMER4, DISABLE);
 }
 
 void GPIO_Setup(void) {
@@ -174,7 +184,7 @@ void GPIO_Setup(void) {
   // GPIO_DeInit(GPIOB);
   // GPIO_DeInit(GPIOC);
   // GPIO_DeInit(GPIOD);
-  GPIO_DeInit(GPIOE);
+  // GPIO_DeInit(GPIOE);
   GPIO_Init(LED_PORT, LED_PIN, GPIO_MODE_OUT_PP_HIGH_FAST);
 }
 
@@ -210,20 +220,6 @@ void main(void) {
 #ifdef BME280_ENABLE
   BME280_Setup();
 #endif
-
-  // static const char preambule[] = { 0x00, 0x00, 0x18 };
-  static const char placeholderDS18X20String[] = "{\"topic\" : \"mqtt\/temperature-room\", \"value\" : \"%s\"}";
-  // static const char placeholderDS18X20String_test[] = "{\"topic\" : \"mqtt\/temperature-room\", \"value\" : \"";
-  // const char placeholderHumidityAHTX0String[] = "{\"topic\" : \"mqtt\/humidity-aht20\", \"value\": \"%s\"}";
-  // const char placeholderTemperatureAHTX0String[] = "{\"topic\" : \"mqtt\/temperature-aht20\", \"value\": \"%s\"}";
-  static const char placeholderTemperatureBME280String[] = "{\"topic\" : \"mqtt\/temperature-bme280\", \"value\": \"%s\"}";
-  // static const char placeholderTemperatureBME280String_test[] = "{\"topic\" : \"mqtt\/temperature-bme280\", \"value\": \"";
-  static const char placeholderHumidityBME280String[] = "{\"topic\" : \"mqtt\/humidity-bme280\", \"value\": \"%s\"}";
-  // static const char placeholderHumidityBME280String_test[] = "{\"topic\" : \"mqtt\/humidity-bme280\", \"value\": \"";
-  static const char placeholderPressureBME280String[] = "{\"topic\" : \"mqtt\/pressure-bme280\", \"value\": \"%s\"}";
-  // static const char placeholderPressureBME280String[] = "{\"topic\" : \"mqtt\/pressure-bme280\", \"value\": \"%s\"}";
-  // static const char end[] = "\"}\r\n";
-
   LED_ON;
 
   while (1) {
@@ -231,7 +227,7 @@ void main(void) {
 #ifdef DS18X20_ENABLE
     DS18X20_Reset();
 
-    delay_ms(2000);
+    delay_ms(1000);
 
     if (!DS18X20_Read_ID(iDS18X20RomID)) {
       for (uint8_t i = 0; i < 8; i++) {
@@ -245,7 +241,7 @@ void main(void) {
     
 #ifdef DS18B20_DEBUG
     printf("Famaly ID: 0x%02X, ", iDS18X20RomID[0]);
-    printf("Sensor ID: ");
+    printf("Sensor ID: ")5
 
     for (int8_t i = 6; i > 0 ; i--) {
       printf("0x%02X", iDS18X20RomID[i]);
@@ -265,84 +261,30 @@ void main(void) {
     floatToStr(stringValue, fDS18X20Temperature, integer_bit, decimal_bit);
 
     sprintf(stringSendUART, placeholderDS18X20String, stringValue);
-    putchar(0x00);
-    putchar(0x00);
-    putchar(0x18);
+    
+    putchar(LORAWAN_MASTER_MSB_ADDRESS);
+    putchar(LORAWAN_MASTER_LSB_ADDRESS);
+    putchar(LORAWAN_MASTER_CHANEL);
     printf("%s\r\n", stringSendUART);
+
+    free(stringSendUART);
+    free(stringValue);
     
     delay_ms(1000);
 
-    free(stringSendUART);
-    free(stringValue);
-
 #endif
     
-#ifdef AHTX0_ENABLE
-    iI2CWrite[0] = 0xAC;
-    iI2CWrite[1] = 0x33;
-    iI2CWrite[2] = 0x00;
-
-    I2C_Send_Bytes((I2C_ID << 1), sizeof(iI2CWrite), iI2CWrite);
-    delay_ms(300);
-    I2C_Read_Bytes((I2C_ID << 1), sizeof(iI2CRead), iI2CRead);
-
-    fAHTX0Humidity = ATHX0ConverHumidity(iI2CRead);
-    fAHTX0Temperature = ATHX0ConvertTemperature(iI2CRead);
-    
-#ifdef AHTX0_DEBUG
-    floatToStr(str1, fAHTX0Humidity, 2, 2);
-    printf("ATHX0 humidity: %s\r\n", str1);
-    floatToStr(str1, fAHTX0Temperature, 2, 2);
-    printf("AHTX0 temperature: %s\r\n", str1);
-#endif
-
-    integer_bit = 2;
-    decimal_bit = 2;
-    
-    sizeValueString = integer_bit + decimal_bit + 1;
-    sizeSendUARTString = sizeof(placeholderHumidityAHTX0String) + sizeValueString;
-    stringValue = (char*)malloc(sizeValueString * sizeof(char));
-    stringSendUART = (char*)malloc(sizeSendUARTString * sizeof(char));
-    
-    floatToStr(stringValue, fAHTX0Humidity, integer_bit, decimal_bit);
-
-    sprintf(stringSendUART, placeholderHumidityAHTX0String, stringValue);
-    printf("%s\r\n", stringSendUART);
-    
-    free(stringSendUART);
-    free(stringValue);
-    
-    integer_bit = 2;
-    decimal_bit = 2;
-
-    delay_ms(5000);
-    
-    sizeValueString = integer_bit + decimal_bit + 1;
-    sizeSendUARTString = sizeof(placeholderTemperatureAHTX0String) + sizeValueString;
-    stringValue = (char*)malloc(sizeValueString * sizeof(char));
-    stringSendUART = (char*)malloc(sizeSendUARTString * sizeof(char));
-    
-    floatToStr(stringValue, fAHTX0Temperature, integer_bit, decimal_bit);
-
-    sprintf(stringSendUART, placeholderTemperatureAHTX0String, stringValue);
-    printf("%s\r\n", stringSendUART);
-    
-    free(stringSendUART);
-    free(stringValue);
-
-#endif
-
 #ifdef BME280_ENABLE
     integer_bit = 3;
     decimal_bit = 2;
 
+    // Set forse mode BME280. After measure sensor return to sleep mode.
     BME280_SetMode(BME280_MODE_FORCED);
     delay_ms(2000);
 
     BME280_ReadRegisters();
 
-    fBME280Temperature = (float)(BME280_ReadTemperature() / 100.0);
-    // fBME280Temperature = BME280_ReadTemperature();
+    fBME280Temperature = (float)(BME280_GetTemperature() / 100.0);
     
     sizeValueString = integer_bit + decimal_bit + 1;
     stringValue = (char*)malloc(sizeValueString * sizeof(char));
@@ -351,10 +293,14 @@ void main(void) {
     
     floatToStr(stringValue, fBME280Temperature, integer_bit, decimal_bit);
     sprintf(stringSendUART, placeholderTemperatureBME280String, stringValue);
-    putchar(0x00);
-    putchar(0x00);
-    putchar(0x18);
+    putchar(LORAWAN_MASTER_MSB_ADDRESS);
+    putchar(LORAWAN_MASTER_LSB_ADDRESS);
+    putchar(LORAWAN_MASTER_CHANEL);
     printf("%s\r\n", stringSendUART);
+    // uart_send_n_byte(preambule, sizeof(preambule));
+    // uart_send_n_byte(placeholderHumidityBME280String_test, sizeof(placeholderHumidityBME280String_test));
+    // uart_send_n_byte(stringValue, sizeof(stringValue));
+    // uart_send_n_byte(end, sizeof(end));
     delay_ms(1000);
   
     free(stringSendUART);
@@ -363,7 +309,7 @@ void main(void) {
     integer_bit = 2;
     decimal_bit = 2;
 
-    fBME280Humidity = (float)(BME280_ReadHumidity()) / 1024.0;
+    fBME280Humidity = (float)(BME280_GetHumidity()) / 1024.0;
 
     sizeValueString = integer_bit + decimal_bit + 1;
     sizeSendUARTString = sizeof(placeholderHumidityBME280String) + sizeValueString;
@@ -372,13 +318,9 @@ void main(void) {
 
     floatToStr(stringValue, fBME280Humidity, integer_bit, decimal_bit);
     sprintf(stringSendUART, placeholderHumidityBME280String, stringValue);
-    // uart_send_n_byte(preambule, sizeof(preambule));
-    // uart_send_n_byte(placeholderHumidityBME280String_test, sizeof(placeholderHumidityBME280String_test));
-    // uart_send_n_byte(stringValue, sizeof(stringValue));
-    // uart_send_n_byte(end, sizeof(end));
-    putchar(0x00);
-    putchar(0x00);
-    putchar(0x18);
+    putchar(LORAWAN_MASTER_MSB_ADDRESS);
+    putchar(LORAWAN_MASTER_LSB_ADDRESS);
+    putchar(LORAWAN_MASTER_CHANEL);
     printf("%s\r\n", stringSendUART);
     delay_ms(1000);
     
@@ -388,33 +330,89 @@ void main(void) {
     integer_bit = 6;
     decimal_bit = 1;
 
-    // iBME280Pressure = BME280_ReadPressure();
-    // printf("p: %lu\r\n", iBME280Pressure); 
-    fBME280Pressure = (float)(BME280_ReadPressure()) / 100.0;
+    // Pressure in mm Hg
+    fBME280Pressure = (float)(BME280_GetPressure()) * 760.0 / 101325.0;
 
-    // sizeValueString = integer_bit + decimal_bit + 1;
+    sizeValueString = integer_bit + decimal_bit + 1;
     sizeSendUARTString = sizeof(placeholderPressureBME280String) + sizeValueString;
     stringValue = (char*)malloc(sizeValueString * sizeof(char));
     stringSendUART = (char*)malloc(sizeSendUARTString * sizeof(char));
 
     floatToStr(stringValue, fBME280Pressure, integer_bit, decimal_bit);
     sprintf(stringSendUART, placeholderPressureBME280String, stringValue);
-    // uart_send_n_byte(preambule, sizeof(preambule));
-    // uart_send_n_byte(placeholderHumidityBME280String_test, sizeof(placeholderHumidityBME280String_test));
-    // uart_send_n_byte(stringValue, sizeof(stringValue));
-    // uart_send_n_byte(end, sizeof(end));
-    putchar(0x00);
-    putchar(0x00);
-    putchar(0x18);
+    putchar(LORAWAN_MASTER_MSB_ADDRESS);
+    putchar(LORAWAN_MASTER_LSB_ADDRESS);
+    putchar(LORAWAN_MASTER_CHANEL);
     printf("%s\r\n", stringSendUART);
-    
     delay_ms(1000);
     
     free(stringSendUART);
     free(stringValue);
     
 #endif
+ 
+#ifdef AHT21_ENABLE
+    iI2CWrite[0] = 0xAC;
+    iI2CWrite[1] = 0x33;
+    iI2CWrite[2] = 0x00;
+
+    I2C_Send_Bytes((AHT21_I2C_ID), sizeof(iI2CWrite), iI2CWrite);
+    delay_ms(300);
+    I2C_Read_Bytes((AHT21_I2C_ID), sizeof(iI2CRead), iI2CRead);
+
+    fAHT21Humidity = AHT21ConvertHumidity(iI2CRead);
+    fAHT21Temperature = AHT21ConvertTemperature(iI2CRead);
     
+#ifdef AHT21_DEBUG
+    floatToStr(str1, fAHT21Humidity, 2, 2);
+    printf("ATH21 humidity: %s\r\n", str1);
+    floatToStr(str1, fAHT21Temperature, 2, 2);
+    printf("AHT21 temperature: %s\r\n", str1);
+#endif
+
+    integer_bit = 2;
+    decimal_bit = 2;
+    
+    sizeValueString = integer_bit + decimal_bit + 1;
+    sizeSendUARTString = sizeof(placeholderHumidityAHT21String) + sizeValueString;
+    stringValue = (char*)malloc(sizeValueString * sizeof(char));
+    stringSendUART = (char*)malloc(sizeSendUARTString * sizeof(char));
+    
+    floatToStr(stringValue, fAHT21Humidity, integer_bit, decimal_bit);
+
+    sprintf(stringSendUART, placeholderHumidityAHT21String, stringValue);
+    putchar(LORAWAN_MASTER_MSB_ADDRESS);
+    putchar(LORAWAN_MASTER_LSB_ADDRESS);
+    putchar(LORAWAN_MASTER_CHANEL);
+    printf("%s\r\n", stringSendUART);
+    
+    free(stringSendUART);
+    free(stringValue);
+    
+    delay_ms(1000);
+    
+    integer_bit = 2;
+    decimal_bit = 2;
+    
+    sizeValueString = integer_bit + decimal_bit + 1;
+    sizeSendUARTString = sizeof(placeholderTemperatureAHT21String) + sizeValueString;
+    stringValue = (char*)malloc(sizeValueString * sizeof(char));
+    stringSendUART = (char*)malloc(sizeSendUARTString * sizeof(char));
+    
+    floatToStr(stringValue, fAHT21Temperature, integer_bit, decimal_bit);
+
+    sprintf(stringSendUART, placeholderTemperatureAHT21String, stringValue);
+    putchar(LORAWAN_MASTER_MSB_ADDRESS);
+    putchar(LORAWAN_MASTER_LSB_ADDRESS);
+    putchar(LORAWAN_MASTER_CHANEL);
+    printf("%s\r\n", stringSendUART);
+    
+    delay_ms(1000);
+    
+    free(stringSendUART);
+    free(stringValue);
+#endif
+   
 #ifdef QUICK_CICLE
     delay_ms(10000);
 #endif
