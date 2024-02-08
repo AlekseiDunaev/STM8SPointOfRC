@@ -2,15 +2,9 @@
 #define _BME280_H_
 
 #include "stm8s.h"
-#include "stm8s_conf.h"
-#include "stdio.h"
-#include "stdlib.h"
-#include "string.h"
-// #include "math.h"
-#include "config.h"
 #include "i2c.h"
 #include "output.h"
-
+// #include "stdlib.h"
 // #define BME280_DEBUG
 // #define BME280_DEBUG_CALIBRATE
 
@@ -152,5 +146,6 @@ int32_t BME280_GetPressure(void);
 uint32_t BME280_GetHumidity(void);
 // float BME280_GetHumidity(void);
 // float BME280_GetAltitude(float seaLevel);
+void BME280_Measure(void);
 
 #endif /* _BME280_H_ */

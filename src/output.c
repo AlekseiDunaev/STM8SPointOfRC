@@ -1,19 +1,6 @@
 #include "output.h"
 
 #define UART_BUF_SIZE 128
-/*
-// Read buffer
-uint8_t read_ok = 0; // read completion flag
-uint8_t read_idx = 0;
-uint8_t read_len = 0;
-NEAR uint8_t read_buffer[UART_BUF_SIZE]; // @near can be placed when the buffer setting is large
-
-// Write buffer
-uint8_t write_ok = 0; // write completion flag
-uint8_t write_idx = 0;
-uint8_t write_len = 0;
-NEAR uint8_t write_buffer[UART_BUF_SIZE]; // @near can be placed when the buffer setting is large
-*/
 
 static const char table[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
 
@@ -38,6 +25,12 @@ void floatToStr(char *str, float number, uint8_t integer_bit, uint8_t decimal_bi
                 } else {
                         str[integer_bit - i + minus] = table[temp%10];
                 }
+                /*
+                UART2_SendData8(str[integer_bit - i + minus]);
+                while(UART2_GetFlagStatus(UART2_FLAG_TXE) == RESET);
+                UART2_SendData8('\n');
+                while(UART2_GetFlagStatus(UART2_FLAG_TXE) == RESET);
+                */
                 temp /= 10;
         }
         
@@ -55,15 +48,33 @@ void floatToStr(char *str, float number, uint8_t integer_bit, uint8_t decimal_bi
         
         *(str + integer_bit - trailing_zero_count + minus) = '.';
         temp = 0;
+        /*
+        UART2_SendData8(str[integer_bit + i - trailing_zero_count + minus]);
+        while(UART2_GetFlagStatus(UART2_FLAG_TXE) == RESET);
+        UART2_SendData8('\n');
+        while(UART2_GetFlagStatus(UART2_FLAG_TXE) == RESET);
+        */
         t2 = number;
 
         for (i = 1; i <= decimal_bit; i++) {
                 temp = t2 * 10;
                 str[integer_bit + i - trailing_zero_count + minus] = table[temp%10];
+                /*
+                UART2_SendData8(str[integer_bit + i - trailing_zero_count + minus]);
+                while(UART2_GetFlagStatus(UART2_FLAG_TXE) == RESET);
+                UART2_SendData8('\n');
+                while(UART2_GetFlagStatus(UART2_FLAG_TXE) == RESET);
+                */
                 t2 *= 10;
         }
 
         *(str + integer_bit + 1 + decimal_bit - trailing_zero_count + minus) = '\0';
+        /*
+        UART2_SendData8('D');
+        while(UART2_GetFlagStatus(UART2_FLAG_TXE) == RESET);
+        UART2_SendData8('\n');
+        while(UART2_GetFlagStatus(UART2_FLAG_TXE) == RESET);
+        */
 }
 
 /*
@@ -112,3 +123,24 @@ void  uart_read_n_byte(uint8_t* data, uint8_t len)
 	return;
 }
 */
+
+void SendString(const char *str)
+{
+  char c;
+  while((c = *str++)) {
+    UART2_SendData8(c);
+    while(UART2_GetFlagStatus(UART2_FLAG_TXE) == RESET);
+  }
+}
+
+void SendPreambule(void)
+{
+  UART2_SendData8(LORAWAN_MASTER_MSB_ADDRESS);
+  while(UART2_GetFlagStatus(UART2_FLAG_TXE) == RESET);
+  UART2_SendData8(LORAWAN_MASTER_LSB_ADDRESS);
+  while(UART2_GetFlagStatus(UART2_FLAG_TXE) == RESET);
+  UART2_SendData8(LORAWAN_MASTER_CHANEL);
+  while(UART2_GetFlagStatus(UART2_FLAG_TXE) == RESET);
+}
+
+

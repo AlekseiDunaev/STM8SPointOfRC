@@ -27,6 +27,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm8s_it.h"
+#include "main.h"
 
 /** @addtogroup UART1_Printf
   * @{
@@ -36,9 +37,13 @@
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
+extern uint8_t RxBuffer[];
+uint8_t CountAWU = 0;
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
 /* Public functions ----------------------------------------------------------*/
+// extern void Delay (uint16_t nCount);
+extern FlagStatus Flag_AWU;
 
 #ifdef _COSMIC_
 /**
@@ -103,6 +108,19 @@ INTERRUPT_HANDLER(AWU_IRQHandler, 1)
   /* In order to detect unexpected events during development,
      it is recommended to set a breakpoint on the following instruction.
   */
+  /*
+  UART2_SendData8('I');
+  while(UART2_GetFlagStatus(UART2_FLAG_TXE) == RESET);
+  UART2_SendData8('\n');
+  while(UART2_GetFlagStatus(UART2_FLAG_TXE) == RESET);
+  */
+
+  AWU_GetFlagStatus();
+  CountAWU++;
+  if(CountAWU > 20) {
+    Flag_AWU = SET;
+    CountAWU = 0;
+  }
 }
 
 /**
@@ -400,6 +418,16 @@ INTERRUPT_HANDLER(I2C_IRQHandler, 19)
     /* In order to detect unexpected events during development,
        it is recommended to set a breakpoint on the following instruction.
     */
+#ifdef DEBUG_IT_TX
+  do {
+    while(!UART2_GetFlagStatus(UART2_FLAG_TXE));
+    UART2_SendData8(RxBuffer[IncrementVar_RxCounter()]);
+  } while (RxBuffer[GetVar_RxCounter() - 1] != '\n');
+  
+  ResetVar_RxCounter();
+  UART2_ITConfig(UART2_IT_TXE, DISABLE);
+  UART2_ITConfig(UART2_IT_RXNE_OR, ENABLE);
+#endif
     /*
     // Write operation automatically clear the interrupt, so you can not explicitly clear the interrupt
 	  //UART2_ClearITPendingBit(UART2_IT_TXE); 
@@ -426,6 +454,25 @@ INTERRUPT_HANDLER(I2C_IRQHandler, 19)
     /* In order to detect unexpected events during development,
        it is recommended to set a breakpoint on the following instruction.
     */
+  /* Read one byte from the receive data register */
+  /*
+  UART2_SendData8('2');
+  while(UART2_GetFlagStatus(UART2_FLAG_TXE) == RESET);
+  UART2_SendData8('\n');
+  while(UART2_GetFlagStatus(UART2_FLAG_TXE) == RESET);
+  */
+  if(UART2_GetFlagStatus(UART2_FLAG_RXNE))
+  {
+    RxBuffer[IncrementVar_RxCounter()] = UART2_ReceiveData8();
+    if (RxBuffer[GetVar_RxCounter() - 1] == '\n') {
+      ResetVar_RxCounter();
+      UART2_ITConfig(UART2_IT_RXNE_OR, DISABLE);
+      SetVar_ReceiveStatus();
+#ifdef DEBUG_IT_TX
+      UART2_ITConfig(UART2_IT_TXE, ENABLE);
+#endif
+      }
+    }   
     
     /*
     // The read operation automatically clears the interrupt, so there is no need to explicitly clear the interrupt.

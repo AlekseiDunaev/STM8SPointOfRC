@@ -1,11 +1,20 @@
 #include "bme280.h"
 
+#define INTEGER_BIT_TEMPERATURE 6
+#define DECIMAL_BIT_TEMPERATURE 1
+#define INTEGER_BIT_HUMIDITI    2
+#define DECIMAL_BIT_HUMIDITI    2
+#define INTEGER_BIT_PRESSURE    6
+#define DECIMAL_BIT_PRESSURE    1
+      // decimal_bit = 1;
 //------------------------------------------------
 
 // extern I2C_HandleTypeDef hi2c1;
 // extern UART_HandleTypeDef huart2;
 
-extern char str1[UART_BUF_SIZE];
+float fBME280Pressure = 0.0f;
+float fBME280Temperature = 0.0f;
+float fBME280Humidity = 0.0f;
 BME280_CalibData CalibData;
 BME280_Registers Registers;
 int32_t temper_int;
@@ -386,3 +395,52 @@ float BME280_GetAltitude(float seaLevel) {
   return att;
 }
 */
+
+void BME280_Measure(void)
+{
+      // Set forse mode BME280. After measure sensor return to sleep mode.
+      BME280_SetMode(BME280_MODE_FORCED);
+      delay_ms(2000);
+
+      BME280_ReadRegisters();
+
+      fBME280Temperature = (float)(BME280_GetTemperature() / 100.0);
+    
+      char stringValueTemperature[INTEGER_BIT_TEMPERATURE + DECIMAL_BIT_TEMPERATURE + 1];
+    
+      floatToStr(stringValueTemperature, fBME280Temperature, INTEGER_BIT_TEMPERATURE, DECIMAL_BIT_TEMPERATURE);
+      SendPreambule();
+      SendString(TopicStr);
+      SendString(BME280TemperatureTopic); 
+      SendString(ValueStr);
+      SendString(stringValueTemperature); 
+      SendString(End);
+      delay_ms(1000);
+  
+      fBME280Humidity = (float)(BME280_GetHumidity()) / 1024.0;
+
+      char stringValueHumiditi[INTEGER_BIT_HUMIDITI + DECIMAL_BIT_HUMIDITI + 1];
+
+      floatToStr(stringValueHumiditi, fBME280Humidity, INTEGER_BIT_HUMIDITI, DECIMAL_BIT_HUMIDITI);
+      SendPreambule();
+      SendString(TopicStr);
+      SendString(BME280HumidityTopic); 
+      SendString(ValueStr);
+      SendString(stringValueHumiditi); 
+      SendString(End);
+      delay_ms(1000);
+    
+      // Pressure in mm Hg
+      fBME280Pressure = (float)(BME280_GetPressure()) * 760.0 / 101325.0;
+
+      char stringValuePressure[INTEGER_BIT_PRESSURE + DECIMAL_BIT_PRESSURE + 1]; 
+
+      floatToStr(stringValuePressure, fBME280Pressure, INTEGER_BIT_PRESSURE, DECIMAL_BIT_TEMPERATURE);
+      SendPreambule();
+      SendString(TopicStr);
+      SendString(BME280PressureTopic); 
+      SendString(ValueStr);
+      SendString(stringValuePressure); 
+      SendString(End);
+      delay_ms(1000);
+}

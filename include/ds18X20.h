@@ -2,10 +2,9 @@
 #define _DS18X20_H_
 
 #include "stm8s.h"
-#include "stm8s_conf.h"
 #include "delay.h"
+#include "output.h"
 
-// #define DS18B20_DEBUG
 
 /* ROM COMMANDS */
 #define SEARCH_ROM         (u8)0XF0
@@ -42,5 +41,6 @@ bool DS18X20_Read_ID(uint8_t *ROM_ID);
 bool DS18X20_Skip_ID(void);
 float DS18X20_Get_Temperature(void);
 void DS18X20_Setup(void);
+void DS18X20_Measure(void);
 
 #endif

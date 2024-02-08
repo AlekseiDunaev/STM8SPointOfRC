@@ -1,4 +1,12 @@
+// #include "stdlib.h"
 #include "ds18X20.h"
+
+#define INTEGER_BIT_TEMPERATURE 2
+#define DECIMAL_BIT_TEMPERATURE 2
+// #define DS18B20_DEBUG
+
+uint8_t iDS18X20RomID[8];
+// float fDS18X20Temperature = 0.0f;
 
 bool DS18X20_Reset(void) {
 	bool i = FALSE;
@@ -25,6 +33,7 @@ bool DS18X20_Reset(void) {
 }
 
 void DS18X20_Write_Byte(uint8_t data) {
+  // OW_OUTPUT();
   for(uint8_t i = 0; i < 8; i++)
   {
     if(data & 0x01)
@@ -135,6 +144,7 @@ float DS18X20_Get_Temperature() {
   DS18X20_Write_Byte(READ_SCRATCHPAD);
   lsb = DS18X20_Read_Byte();
   msb = DS18X20_Read_Byte();
+
   if (msb >> 7) {
     msb = ~msb;
     lsb = ~lsb;
@@ -172,3 +182,48 @@ void DS18X20_Setup(void) {
   OW_OUTPUT();
 }
 
+void DS18X20_Measure(void)
+{
+  DS18X20_Reset();
+  delay_ms(1000);
+
+  if (!DS18X20_Read_ID(iDS18X20RomID)) {
+    for (uint8_t i = 0; i < 8; i++) {
+      iDS18X20RomID[i] = 0;
+    }
+    SendPreambule(); 
+    SendString(TopicStr);
+    SendString(SystemTopic); 
+    SendString(ValueStr);
+    SendString("Error DS18X20"); 
+    SendString(End);
+    delay_ms(1000);
+    return;
+  } 
+
+    float fDS18X20Temperature = DS18X20_Get_Temperature();
+
+#ifdef DS18B20_DEBUG
+    SendString("Famaly ID: ");
+    SendString(iDS18X20RomID[0] + 0x30);
+    SendString("Sensor ID: ");
+
+    for (int8_t i = 6; i > 0 ; i--) {
+      SendString(iDS18X20RomID[i] + 0x30);
+    }
+
+    SendString("\r\n");
+#endif
+
+    char stringValueTemperature[INTEGER_BIT_TEMPERATURE + DECIMAL_BIT_TEMPERATURE + 2];
+    floatToStr(stringValueTemperature, fDS18X20Temperature, INTEGER_BIT_TEMPERATURE, DECIMAL_BIT_TEMPERATURE);
+
+    SendPreambule(); 
+    SendString(TopicStr);
+    SendString(DS18X20TemperatureTopic); 
+    SendString(ValueStr);
+    SendString(stringValueTemperature); 
+    SendString(End);
+    
+  delay_ms(1000);
+}
