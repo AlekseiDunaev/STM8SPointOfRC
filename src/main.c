@@ -85,6 +85,7 @@ void main(void)
   while (1) {
     if(GetVar_ReceiveStatus()) {
       disableInterrupts();
+      // if(!strcmp("Help", "Help")) LED_ON;
       switch (RxBuffer[0]) {
         case 'M':
 #ifdef BME280_ENABLE

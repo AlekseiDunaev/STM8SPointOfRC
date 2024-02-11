@@ -45,7 +45,7 @@
 // #include "stm8s_adc2.h"
 #endif /* (STM8S208) || (STM8S207) || (STM8AF62Ax) || (STM8AF52Ax) */
 #include "stm8s_awu.h"
-//#include "stm8s_beep.h"
+#include "stm8s_beep.h"
 #if defined (STM8S208) || defined (STM8AF52Ax)
 // #include "stm8s_can.h"
 #endif /* (STM8S208) || (STM8AF52Ax) */
@@ -55,7 +55,7 @@
 #include "stm8s_gpio.h"
 #include "stm8s_i2c.h"
 //#include "stm8s_itc.h"
-//#include "stm8s_iwdg.h"
+#include "stm8s_iwdg.h"
 //#include "stm8s_rst.h"
 //#include "stm8s_spi.h"
 //#include "stm8s_tim1.h"

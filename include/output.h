@@ -3,9 +3,9 @@
 
 #include "stm8s.h"
 #include "lorawan.h"
-// #include "stdio.h"
-// #include "stdlib.h"
-// #include "string.h"
+#include "stdio.h"
+#include "stdlib.h"
+#include "string.h"
 static const char *TopicStr = "{\"topic\" : \"mqtt\/";
 static const char *ValueStr = "\", \"value\" : \"";
 static const char *DS18X20TemperatureTopic = "temperature-room";
