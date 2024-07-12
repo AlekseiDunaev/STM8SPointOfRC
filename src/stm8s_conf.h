@@ -33,7 +33,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm8s.h"
-#include "config.h"
+#include <../include/config_chip.h>
 
 /* Uncomment the line below to enable peripheral header file inclusion */
 #if defined(STM8S105) || defined(STM8S005) || defined(STM8S103) || defined(STM8S003) ||\

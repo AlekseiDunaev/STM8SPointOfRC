@@ -1,8 +1,10 @@
 #include "output.h"
+#include "delay.h"
 
 #define UART_BUF_SIZE 128
 
 static const char table[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
+uint8_t count = 0;
 
 void floatToStr(char *str, float number, uint8_t integer_bit, uint8_t decimal_bit) {
         uint8_t i;
@@ -143,4 +145,33 @@ void SendPreambule(void)
   while(UART2_GetFlagStatus(UART2_FLAG_TXE) == RESET);
 }
 
+/*
+uint8_t counter(void)
+{
+    static uint8_t cnt = 0;
+    if (cnt == 58) {
+      cnt = 0;
+    }
+    return ++cnt;
+}
+*/
 
+void SendLongString(const char *str)
+{
+  char c;
+  
+  while(c = *str++) {
+    if (count == 0 || count == 58) {
+      count = 0;
+      delay_ms(1000);
+      SendPreambule();
+    }
+    count++;
+    UART2_SendData8(c);
+    while(UART2_GetFlagStatus(UART2_FLAG_TXE) == RESET);
+    if (c == '\n') {
+      count = 0;
+      delay_ms(1000);
+    }
+  }
+}

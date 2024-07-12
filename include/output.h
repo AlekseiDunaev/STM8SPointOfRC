@@ -6,19 +6,27 @@
 #include "stdio.h"
 #include "stdlib.h"
 #include "string.h"
-static const char *TopicStr = "{\"topic\" : \"mqtt\/";
+#include "config_point.h"
+
+static const char *Start = "{";
+static const char *PointID = "\"point_id\" : \"";
+static const char *SensorStr = "\", \"sensor\" : \"";
+static const char *ParameterStr = "\", \"parameter\" : \"";
 static const char *ValueStr = "\", \"value\" : \"";
-static const char *DS18X20TemperatureTopic = "temperature-room";
-static const char *AHT21HumidityTopic = "humidity-aht21";
-static const char *AHT21TeperatureTopic = "temperature-aht21";
-static const char *BME280TemperatureTopic = "temperature-bme280";
-static const char *BME280HumidityTopic = "humidity-bme280";
-static const char *BME280PressureTopic = "pressure-bme280";
-static const char *SystemTopic = "system";
 static const char *End = "\"}\n";
+
+typedef struct IoTMessage {
+    const char *start;
+    const char *pointID;
+    const char *sensorString;
+    const char *paramenterString;
+    const char *valueStr;
+    const char *end;
+} IoTMessage_t;
 
 void floatToStr(char *str, float number, uint8_t integer_bit, uint8_t decimal_bit);
 void SendString(const char *str);
 void SendPreambule(void);
+void SendLongString(const char *str);
 
 #endif

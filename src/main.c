@@ -39,15 +39,13 @@
 // Defines
 // #define DEBUG_IT_TX
 // #define NODEBUG
-#define AHT21_ENABLE
-#define BME280_ENABLE
-#define DS18X20_ENABLE
 // Functions
 // Variables
 uint8_t RxBuffer[RxBufferSize];
 __IO uint8_t RxCounter = 0x00;
 __IO Status ReceiveStatus = FAILED;
-__IO FlagStatus Flag_AWU = RESET;
+__IO FlagStatus Flag_AWU = SET;
+// __IO FlagStatus Flag_AWU = RESET;
 
 char *stringValue;
 uint8_t integer_bit, decimal_bit;
@@ -71,12 +69,28 @@ void main(void)
 #ifdef BME280_ENABLE
   BME280_Setup();
 #endif
-  SendPreambule();
-  SendString(TopicStr);
-  SendString(SystemTopic);
-  SendString(ValueStr);
-  SendString("PIoT boot");
-  SendString(End);
+
+  /*
+  IoTMessage_t IoTMessage = {
+    .start = "{",
+    .pointID = "\"point_id\" : \"",
+    .sensorString = "\", \"sensor\" : \"",
+    .paramenterString = "\", \"parameter\" : \"",
+    .valueStr = "\", \"value\" : \"",
+    .end = "\"}\n"
+  };
+  */
+
+  SendLongString(Start);
+  SendLongString(PointID);
+  SendLongString(POINT_ID);
+  SendLongString(SensorStr);
+  SendLongString("system");
+  SendLongString(ParameterStr);
+  SendLongString(SystemTopic); 
+  SendLongString(ValueStr);
+  SendLongString("PIoT boot");
+  SendLongString(End);
   delay_ms(1000);
   
   uint8_t check = 0x30;
@@ -99,37 +113,30 @@ void main(void)
 #endif
           break;
         case 'I':
-          SendPreambule();
-          SendString(TopicStr);
-          SendString(SystemTopic);
-          SendString(ValueStr);
-          SendString("info");
-          SendString(End);
+          SendLongString(Start);
+          SendLongString(PointID);
+          SendLongString(POINT_ID);
+          SendLongString(SensorStr);
+          SendLongString("system");
+          SendLongString(ParameterStr);
+          SendLongString(SystemTopic); 
+          SendLongString(ValueStr);
+          SendLongString("info"); 
+          SendLongString(End);
           break;
         case 'S':
           LED_ON;
-          SendPreambule();
-          SendString(TopicStr);
-          SendString(SystemTopic);
-          SendString(ValueStr);
-          SendString("Set LED ON");
-          SendString(End);
+          SendLongString("Set LED ON");
           break;
         case 'U':
           LED_OFF;
-          SendPreambule();
-          SendString(TopicStr);
-          SendString(SystemTopic);
-          SendString(ValueStr);
-          SendString("Unset LED ON");
-          SendString(End);
+          SendLongString("Unset LED ON");
           break;
         case 'H':
-          SendPreambule();
-          SendString("Usage:\n");
-          SendString("Send M. Start measure and output measurements.\n");
-          SendString("Send I. Output info about pointofIoT (PIoT).\n");
-          SendString("Send H. Output this info.\n");
+          SendLongString("Usage:\n");
+          SendLongString("Send M. Start measure and output measurements.\n");
+          SendLongString("Send I. Output info about pointofIoT (PIoT).\n");
+          SendLongString("Send H. Output this info.\n");
           break;
         default:
           break;
@@ -224,7 +231,8 @@ static void AWU_Config(void)
   // CLK_LSICmd(ENABLE); // MAKE INTERNAL LOW -SPEED CLOCK LSI
   CLK_PeripheralClockConfig(CLK_PERIPHERAL_AWU, ENABLE);
   AWU_DeInit();
-  AWU_Init(AWU_TIMEBASE_30S);
+  // AWU_Init(AWU_TIMEBASE_30S);
+  AWU_Init(AWU_TIMEBASE_256MS);
   AWU_Cmd(ENABLE);
 }
 

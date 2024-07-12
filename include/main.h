@@ -2,7 +2,7 @@
 #define __MAIN_H_
 /* Includes ------------------------------------------------------------------*/
 #include "stm8s_conf.h"
-#include "config.h"
+#include "config_chip.h"
 // #include "i2c.h"
 #include "ds18X20.h"
 #include "aht21.h"

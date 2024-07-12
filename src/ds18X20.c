@@ -191,12 +191,16 @@ void DS18X20_Measure(void)
     for (uint8_t i = 0; i < 8; i++) {
       iDS18X20RomID[i] = 0;
     }
-    SendPreambule(); 
-    SendString(TopicStr);
-    SendString(SystemTopic); 
-    SendString(ValueStr);
-    SendString("Error DS18X20"); 
-    SendString(End);
+    SendLongString(Start);
+    SendLongString(PointID);
+    SendLongString(POINT_ID);
+    SendLongString(SensorStr);
+    SendLongString(DS18X20SensorName);
+    SendLongString(ParameterStr);
+    SendLongString(SystemTopic); 
+    SendLongString(ValueStr);
+    SendLongString("Error DS18X20"); 
+    SendLongString(End);
     delay_ms(1000);
     return;
   } 
@@ -204,26 +208,30 @@ void DS18X20_Measure(void)
     float fDS18X20Temperature = DS18X20_Get_Temperature();
 
 #ifdef DS18B20_DEBUG
-    SendString("Famaly ID: ");
-    SendString(iDS18X20RomID[0] + 0x30);
-    SendString("Sensor ID: ");
+    SendLongString("Famaly ID: ");
+    SendLongString(iDS18X20RomID[0] + 0x30);
+    SendLongString("Sensor ID: ");
+    delay_ms(1000);
 
     for (int8_t i = 6; i > 0 ; i--) {
-      SendString(iDS18X20RomID[i] + 0x30);
+      SendLongString(iDS18X20RomID[i] + 0x30);
     }
 
-    SendString("\r\n");
+    SendLongString("\r\n");
 #endif
 
     char stringValueTemperature[INTEGER_BIT_TEMPERATURE + DECIMAL_BIT_TEMPERATURE + 2];
     floatToStr(stringValueTemperature, fDS18X20Temperature, INTEGER_BIT_TEMPERATURE, DECIMAL_BIT_TEMPERATURE);
 
-    SendPreambule(); 
-    SendString(TopicStr);
-    SendString(DS18X20TemperatureTopic); 
-    SendString(ValueStr);
-    SendString(stringValueTemperature); 
-    SendString(End);
-    
-  delay_ms(1000);
+    SendLongString(Start);
+    SendLongString(PointID);
+    SendLongString(POINT_ID);
+    SendLongString(SensorStr);
+    SendLongString(DS18X20SensorName);
+    SendLongString(ParameterStr);
+    SendLongString(TemperatureStr); 
+    SendLongString(ValueStr);
+    SendLongString(stringValueTemperature); 
+    SendLongString(End);
+    delay_ms(1000);
 }

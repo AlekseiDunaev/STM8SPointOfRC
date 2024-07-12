@@ -54,12 +54,16 @@ void AHT21_Measure(void)
     while(UART2_GetFlagStatus(UART2_FLAG_TXE) == RESET);
     */
     if((iAHT21StatusWord & 0x18) !=  0x18) {
-        SendPreambule(); 
-        SendString(TopicStr);
-        SendString(SystemTopic); 
-        SendString(ValueStr);
-        SendString("Error AHT21"); 
-        SendString(End);
+        SendLongString(Start);
+        SendLongString(PointID);
+        SendLongString(POINT_ID);
+        SendLongString(SensorStr);
+        SendLongString(AHT21SensorName);
+        SendLongString(ParameterStr);
+        SendLongString(SystemTopic); 
+        SendLongString(ValueStr);
+        SendLongString("Error AHT21"); 
+        SendLongString(End);
         delay_ms(1000);
         return;
     }
@@ -84,21 +88,29 @@ void AHT21_Measure(void)
 
     char stringValueHumidity[INTEGER_BIT_HUMIDITI + DECIMAL_BIT_HUMIDITI + 1];
     floatToStr(stringValueHumidity, fAHT21Humidity, INTEGER_BIT_HUMIDITI, DECIMAL_BIT_HUMIDITI);
-    SendPreambule();
-    SendString(TopicStr);
-    SendString(AHT21HumidityTopic); 
-    SendString(ValueStr);
-    SendString(stringValueHumidity); 
-    SendString(End);
-    delay_ms(1000);
+    SendLongString(Start);
+    SendLongString(PointID);
+    SendLongString(POINT_ID);
+    SendLongString(SensorStr);
+    SendLongString(AHT21SensorName);
+    SendLongString(ParameterStr);
+    SendLongString(HumidityStr); 
+    SendLongString(ValueStr);
+    SendLongString(stringValueHumidity); 
+    SendLongString(End);
+    // delay_ms(1000);
 
     char stringValueTemperature[INTEGER_BIT_TEMPERATURE + DECIMAL_BIT_TEMPERATURE + 1];
     floatToStr(stringValueTemperature, fAHT21Temperature, INTEGER_BIT_TEMPERATURE, DECIMAL_BIT_TEMPERATURE);
-    SendPreambule();
-    SendString(TopicStr);
-    SendString(AHT21TeperatureTopic); 
-    SendString(ValueStr);
-    SendString(stringValueTemperature); 
-    SendString(End);
-    delay_ms(1000);
+    SendLongString(Start);
+    SendLongString(PointID);
+    SendLongString(POINT_ID);
+    SendLongString(SensorStr);
+    SendLongString(AHT21SensorName);
+    SendLongString(ParameterStr);
+    SendLongString(TemperatureStr); 
+    SendLongString(ValueStr);
+    SendLongString(stringValueTemperature); 
+    SendLongString(End);
+    // delay_ms(1000);
 }

@@ -5,9 +5,11 @@
 #include "i2c.h"
 #include "output.h"
 // #include "stdlib.h"
+// #define BME280_DEBUG_READ_REG
 // #define BME280_DEBUG
 // #define BME280_DEBUG_CALIBRATE
 
+// #define BME280_ADDRESS 0xED //BME280 I2C ADDRES (0x76<<1)
 #define BME280_ADDRESS 0xEE //BME280 I2C ADDRES (0x77<<1)
 // #define BME280_ADDRESS 0x77
 #define BME280_REG_ID 0xD0 //BME280 ID REGISTER

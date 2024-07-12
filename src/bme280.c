@@ -1,5 +1,7 @@
 #include "bme280.h"
 
+#ifdef BME280_ENABLE
+
 #define INTEGER_BIT_TEMPERATURE 6
 #define DECIMAL_BIT_TEMPERATURE 1
 #define INTEGER_BIT_HUMIDITI    2
@@ -27,7 +29,7 @@ void BME280_Setup(void) {
   uint32_t value32 = 0;
 
   uint8_t res = BME280_ReadReg(BME280_REG_ID);
-#ifdef BME280_DEBUG
+#ifdef BME280_DEBUG_READ_REG
   printf("BME280_ID: 0x%02X\r\n", res);
 #endif
 
@@ -409,38 +411,51 @@ void BME280_Measure(void)
       char stringValueTemperature[INTEGER_BIT_TEMPERATURE + DECIMAL_BIT_TEMPERATURE + 1];
     
       floatToStr(stringValueTemperature, fBME280Temperature, INTEGER_BIT_TEMPERATURE, DECIMAL_BIT_TEMPERATURE);
-      SendPreambule();
-      SendString(TopicStr);
-      SendString(BME280TemperatureTopic); 
-      SendString(ValueStr);
-      SendString(stringValueTemperature); 
-      SendString(End);
+      SendLongString(Start);
+      SendLongString(PointID);
+      SendLongString(POINT_ID);
+      SendLongString(SensorStr);
+      SendLongString(BME280SensorName);
+      SendLongString(ParameterStr);
+      SendLongString(TemperatureStr); 
+      SendLongString(ValueStr);
+      SendLongString(stringValueTemperature); 
+      SendLongString(End);
       delay_ms(1000);
-  
+
       fBME280Humidity = (float)(BME280_GetHumidity()) / 1024.0;
 
-      char stringValueHumiditi[INTEGER_BIT_HUMIDITI + DECIMAL_BIT_HUMIDITI + 1];
+      char stringValueHumidity[INTEGER_BIT_HUMIDITI + DECIMAL_BIT_HUMIDITI + 1];
 
-      floatToStr(stringValueHumiditi, fBME280Humidity, INTEGER_BIT_HUMIDITI, DECIMAL_BIT_HUMIDITI);
-      SendPreambule();
-      SendString(TopicStr);
-      SendString(BME280HumidityTopic); 
-      SendString(ValueStr);
-      SendString(stringValueHumiditi); 
-      SendString(End);
-      delay_ms(1000);
-    
+      floatToStr(stringValueHumidity, fBME280Humidity, INTEGER_BIT_HUMIDITI, DECIMAL_BIT_HUMIDITI);
+      SendLongString(Start);
+      SendLongString(PointID);
+      SendLongString(POINT_ID);
+      SendLongString(SensorStr);
+      SendLongString(BME280SensorName);
+      SendLongString(ParameterStr);
+      SendLongString(HumidityStr); 
+      SendLongString(ValueStr);
+      SendLongString(stringValueHumidity); 
+      SendLongString(End);
+ 
       // Pressure in mm Hg
       fBME280Pressure = (float)(BME280_GetPressure()) * 760.0 / 101325.0;
 
       char stringValuePressure[INTEGER_BIT_PRESSURE + DECIMAL_BIT_PRESSURE + 1]; 
 
       floatToStr(stringValuePressure, fBME280Pressure, INTEGER_BIT_PRESSURE, DECIMAL_BIT_TEMPERATURE);
-      SendPreambule();
-      SendString(TopicStr);
-      SendString(BME280PressureTopic); 
-      SendString(ValueStr);
-      SendString(stringValuePressure); 
-      SendString(End);
+      SendLongString(Start);
+      SendLongString(PointID);
+      SendLongString(POINT_ID);
+      SendLongString(SensorStr);
+      SendLongString(BME280SensorName);
+      SendLongString(ParameterStr);
+      SendLongString(PressureStr); 
+      SendLongString(ValueStr);
+      SendLongString(stringValuePressure); 
+      SendLongString(End);
       delay_ms(1000);
 }
+
+#endif
