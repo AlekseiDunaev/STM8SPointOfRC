@@ -56,8 +56,7 @@ uint8_t sizeValueString = 0;
   * @param  None
   * @retval None
   */
-void main(void)
-{
+void main(void) {
   Clock_Setup();
   GPIO_Setup();
   I2C_Setup();
@@ -81,17 +80,7 @@ void main(void)
   };
   */
 
-  SendLongString(Start);
-  SendLongString(PointID);
-  SendLongString(POINT_ID);
-  SendLongString(SensorStr);
-  SendLongString("system");
-  SendLongString(ParameterStr);
-  SendLongString(SystemTopic); 
-  SendLongString(ValueStr);
-  SendLongString("PIoT boot");
-  SendLongString(End);
-  delay_ms(1000);
+  SendInitMessage();
   
   uint8_t check = 0x30;
   enableInterrupts();
@@ -113,30 +102,24 @@ void main(void)
 #endif
           break;
         case 'I':
-          SendLongString(Start);
-          SendLongString(PointID);
-          SendLongString(POINT_ID);
-          SendLongString(SensorStr);
-          SendLongString("system");
-          SendLongString(ParameterStr);
-          SendLongString(SystemTopic); 
-          SendLongString(ValueStr);
-          SendLongString("info"); 
-          SendLongString(End);
+          SendPIoTInfo();
+#ifdef BME280_DEBUG_PRODUCTION
+          BME280_Setup();
+#endif
           break;
         case 'S':
           LED_ON;
-          SendLongString("Set LED ON");
+          SendLongString("Set LED ON\n");
           break;
         case 'U':
           LED_OFF;
-          SendLongString("Unset LED ON");
+          SendLongString("Set LED OFF\n");
           break;
         case 'H':
           SendLongString("Usage:\n");
-          SendLongString("Send M. Start measure and output measurements.\n");
-          SendLongString("Send I. Output info about pointofIoT (PIoT).\n");
-          SendLongString("Send H. Output this info.\n");
+          SendLongString("\tSend M. Start measure and output measurements.\n");
+          SendLongString("\tSend I. Output info about pointofIoT (PIoT).\n");
+          SendLongString("\tSend H. Output this info.\n");
           break;
         default:
           break;
@@ -165,8 +148,7 @@ void main(void)
   }
 }
 
-static void Clock_Setup(void)
-{
+static void Clock_Setup(void) {
   CLK_DeInit();
   // CLK_HSECmd(ENABLE);
   CLK_HSECmd(DISABLE);
@@ -180,7 +162,7 @@ static void Clock_Setup(void)
   // CLK_ClockSwitchConfig(CLK_SWITCHMODE_AUTO, CLK_SOURCE_HSE, DISABLE, CLK_CURRENTCLOCKSTATE_ENABLE);
   CLK_ClockSwitchConfig(CLK_SWITCHMODE_AUTO, CLK_SOURCE_HSI, DISABLE, CLK_CURRENTCLOCKSTATE_ENABLE);
 
-    // CLK_PeripheralClockConfig(CLK_PERIPHERAL_I2C, ENABLE);
+  // CLK_PeripheralClockConfig(CLK_PERIPHERAL_I2C, ENABLE);
   CLK_PeripheralClockConfig(CLK_PERIPHERAL_SPI, DISABLE);
   // CLK_PeripheralClockConfig(CLK_PERIPHERAL_AWU, ENABLE);
   // CLK_PeripheralClockConfig(CLK_PERIPHERAL_UART2, ENABLE);
@@ -189,8 +171,7 @@ static void Clock_Setup(void)
   CLK_PeripheralClockConfig(CLK_PERIPHERAL_TIMER4, DISABLE);
 }
 
-static void GPIO_Setup(void)
-{
+static void GPIO_Setup(void) {
   GPIO_DeInit(GPIOA);
   GPIO_DeInit(GPIOB);
   GPIO_DeInit(GPIOC);
@@ -199,8 +180,7 @@ static void GPIO_Setup(void)
   GPIO_Init(LED_PORT, LED_PIN, GPIO_MODE_OUT_PP_HIGH_FAST);
 }
 
-static void UART_Setup()
-{
+static void UART_Setup() {
   UART2_DeInit();
   /* Configure either UART1 or UART2 per board definitions above */
   /* UART configured as follow:
@@ -226,13 +206,11 @@ static void UART_Setup()
   * @par Required preconditions:
   * None
   */
-static void AWU_Config(void)
-{
+static void AWU_Config(void) {
   // CLK_LSICmd(ENABLE); // MAKE INTERNAL LOW -SPEED CLOCK LSI
   CLK_PeripheralClockConfig(CLK_PERIPHERAL_AWU, ENABLE);
   AWU_DeInit();
-  // AWU_Init(AWU_TIMEBASE_30S);
-  AWU_Init(AWU_TIMEBASE_256MS);
+  AWU_Init(AWU_TIME);
   AWU_Cmd(ENABLE);
 }
 
@@ -244,8 +222,7 @@ static void AWU_Config(void)
   * @par Required preconditions:
   * None
   */
-uint8_t GetVar_RxCounter(void)
-{
+uint8_t GetVar_RxCounter(void) {
 return RxCounter;
 }
 
@@ -256,8 +233,7 @@ return RxCounter;
   * @par Required preconditions:
   * None
   */
-void ResetVar_RxCounter(void)
-{
+void ResetVar_RxCounter(void) {
   RxCounter = 0;
 }
 
@@ -269,12 +245,9 @@ void ResetVar_RxCounter(void)
   * @par Required preconditions:
   * None
   */
-uint8_t IncrementVar_RxCounter(void)
-{
+uint8_t IncrementVar_RxCounter(void) {
 	return RxCounter++;
 }
-
-
 
 /**
   * @brief Get AWUStatus value.
@@ -284,8 +257,7 @@ uint8_t IncrementVar_RxCounter(void)
   * @par Required preconditions:
   * None
   */
-Status GetVar_ReceiveStatus(void)
-{
+Status GetVar_ReceiveStatus(void) {
   return ReceiveStatus;
 }
 
@@ -296,8 +268,7 @@ Status GetVar_ReceiveStatus(void)
   * @par Required preconditions:
   * None
   */
-void SetVar_ReceiveStatus(void)
-{
+void SetVar_ReceiveStatus(void) {
   ReceiveStatus = PASSED;
 }
 
@@ -308,8 +279,7 @@ void SetVar_ReceiveStatus(void)
   * @par Required preconditions:
   * None
   */
-void ResetVar_ReceiveStatus(void)
-{
+void ResetVar_ReceiveStatus(void) {
   ReceiveStatus = FAILED;
 }
 

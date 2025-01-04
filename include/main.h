@@ -19,11 +19,15 @@ typedef enum { FAILED = 0, PASSED = !FAILED} Status;
 #define LED_PORT  GPIOE
 #define LED_PIN   GPIO_PIN_5
 /* Private macro -------------------------------------------------------------*/
-#define countof(a)   (sizeof(a) / sizeof((a[0])))
+// #define countof(a)   (sizeof(a) / sizeof((a[0])))
+// #define LED_STATE (LED_PORT->IDR & LED_PIN)
+
 #define LED_ON      GPIO_WriteLow(LED_PORT, LED_PIN)
 #define LED_OFF     GPIO_WriteHigh(LED_PORT, LED_PIN)
 #define LED_REVERSE GPIO_WriteReverse(LED_PORT, LED_PIN)
-// #define LED_STATE (LED_PORT->IDR & LED_PIN)
+
+#define AWU_TIME AWU_TIMEBASE_30S //Set higest for more time to sleep mode
+#define TIME_BETWEEN_MEASURE 1800
 
 /* Private define -------------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */

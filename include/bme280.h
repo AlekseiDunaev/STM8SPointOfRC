@@ -7,6 +7,7 @@
 // #include "stdlib.h"
 // #define BME280_DEBUG_READ_REG
 // #define BME280_DEBUG
+#define BME280_DEBUG_PRODUCTION
 // #define BME280_DEBUG_CALIBRATE
 
 // #define BME280_ADDRESS 0xED //BME280 I2C ADDRES (0x76<<1)

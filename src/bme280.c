@@ -22,7 +22,7 @@ BME280_Registers Registers;
 int32_t temper_int;
 
 void Error(void) {
-    // LED_OFF;
+    // LED_ON;
 }
 
 void BME280_Setup(void) {
@@ -51,13 +51,31 @@ void BME280_Setup(void) {
   value32 = BME280_ReadReg(BME280_REG_CTRL_MEAS);
   value32 |= BME280_ReadReg(BME280_REG_CTRL_HUM) << 8;
 
+#ifdef BME280_DEBUG_PRODUCTION
+  SendLongString("Measurement status: ");
+  for (uint8_t i = 0; i < 31; i++) {
+    char s[1];
+    s[0] = ((value32 >> (31 - i)) & 0x0001) + 0x30;
+    SendLongString(s);
+  }
+  SendLongString("\r\n");
+  SendLongString("Temperature: ");
+  SendLongString((value32 & BME280_OSRS_T_MSK) ? "ON" : "OFF");
+  SendLongString("\r\n");
+  SendLongString("Pressure: ");
+  SendLongString((value32 & BME280_OSRS_P_MSK) ? "ON" : "OFF");
+  SendLongString("\r\n");
+  SendLongString("Humidity: ");
+  SendLongString(((value32 >> 8) & BME280_OSRS_H_MSK) ? "ON" : "OFF");
+  SendLongString("\r\n");
+#endif
 
 #ifdef BME280_DEBUG
   printf("Measurements status: %04X%04X\r\n", (uint16_t)(value32>>16), (uint16_t)value32);
   printf("Temperature: %s\r\nPressure: %s\r\nHumidity: %s\r\n", \
-   (value32 & BME280_OSRS_T_MSK) ? "ON" : "OFF", \
-   (value32 & BME280_OSRS_P_MSK) ? "ON" : "OFF", \
-   ((value32 >> 8) & BME280_OSRS_H_MSK) ? "ON" : "OFF");
+  (value32 & BME280_OSRS_T_MSK) ? "ON" : "OFF", \
+  (value32 & BME280_OSRS_P_MSK) ? "ON" : "OFF", \
+  ((value32 >> 8) & BME280_OSRS_H_MSK) ? "ON" : "OFF");
 #endif
 
   BME280_SetMode(BME280_MODE_FORCED);

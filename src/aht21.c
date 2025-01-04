@@ -5,7 +5,7 @@
 #define DECIMAL_BIT_HUMIDITI 2
 #define INTEGER_BIT_TEMPERATURE 2
 #define DECIMAL_BIT_TEMPERATURE 2
-// #define AHT21_DEBUG
+#define AHT21_DEBUG
 
 uint8_t iI2CMeasureCommand[3] = { 0xAC, 0x30, 0x00 };
 uint8_t iI2CStatusWordCommand[1] = { AHT21_I2C_REQ_STATUS_WORD };
@@ -13,7 +13,7 @@ uint8_t iI2CRead[7];
 uint8_t iAHT21StatusWord = 0x00;
 
 float AHT21ConvertHumidity(uint8_t *Buf) {
-   float fAHT21Humidity;
+    float fAHT21Humidity;
     fAHT21Humidity = Buf[1];
     fAHT21Humidity *= 256;
     fAHT21Humidity += Buf[2];
@@ -36,23 +36,9 @@ float AHT21ConvertTemperature(uint8_t *Buf) {
     return fAHT21Temperature;
 }
 
-void AHT21_Measure(void)
-{
-    /*
-    UART2_SendData8('A');
-    while(UART2_GetFlagStatus(UART2_FLAG_TXE) == RESET);
-    UART2_SendData8('\n');
-    while(UART2_GetFlagStatus(UART2_FLAG_TXE) == RESET);
-    */
-
+void AHT21_Measure(void) {
     I2C_Send_Bytes(AHT21_I2C_ID, sizeof(iI2CMeasureCommand), iI2CStatusWordCommand);
     iAHT21StatusWord = I2C_Read_Byte(AHT21_I2C_ID);
-    /*
-    UART2_SendData8(iAHT21StatusWord);
-    while(UART2_GetFlagStatus(UART2_FLAG_TXE) == RESET);
-    UART2_SendData8('\n');
-    while(UART2_GetFlagStatus(UART2_FLAG_TXE) == RESET);
-    */
     if((iAHT21StatusWord & 0x18) !=  0x18) {
         SendLongString(Start);
         SendLongString(PointID);
@@ -77,10 +63,9 @@ void AHT21_Measure(void)
         s[0] = ((iI2CRead[i] >> 4) & 0x0F) + 0x30;
         s[1] = (iI2CRead[i] & 0x0F) + 0x30;
         s[2] = ' ';
-        s[3] = 0x00;
-        SendString(s);
+        s[3] = 0x0A;
+        SendLongString(s);
     }
-    SendString("\n");
 #endif
 
     float fAHT21Humidity = AHT21ConvertHumidity(iI2CRead);
@@ -98,7 +83,6 @@ void AHT21_Measure(void)
     SendLongString(ValueStr);
     SendLongString(stringValueHumidity); 
     SendLongString(End);
-    // delay_ms(1000);
 
     char stringValueTemperature[INTEGER_BIT_TEMPERATURE + DECIMAL_BIT_TEMPERATURE + 1];
     floatToStr(stringValueTemperature, fAHT21Temperature, INTEGER_BIT_TEMPERATURE, DECIMAL_BIT_TEMPERATURE);
@@ -112,5 +96,4 @@ void AHT21_Measure(void)
     SendLongString(ValueStr);
     SendLongString(stringValueTemperature); 
     SendLongString(End);
-    // delay_ms(1000);
 }

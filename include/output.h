@@ -25,8 +25,10 @@ typedef struct IoTMessage {
 } IoTMessage_t;
 
 void floatToStr(char *str, float number, uint8_t integer_bit, uint8_t decimal_bit);
-void SendString(const char *str);
+// void SendString(const char *str);
 void SendPreambule(void);
 void SendLongString(const char *str);
+void SendInitMessage();
+void SendPIoTInfo();
 
 #endif
