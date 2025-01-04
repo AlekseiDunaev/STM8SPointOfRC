@@ -25,15 +25,28 @@ void Error(void) {
     // LED_ON;
 }
 
-void BME280_Setup(void) {
+void BME280_Init(void) {
   uint32_t value32 = 0;
 
   uint8_t res = BME280_ReadReg(BME280_REG_ID);
+    /*
+    SendLongString("\r\n");
+    char temp[1];
+    temp[0] = (uint8_t)(res / 10) + 0x30;
+    SendLongString(temp);
+    temp[0] = res - 10 * ((uint8_t)(res / 10) + 0x30);
+    SendLongString(temp);
+    SendLongString("\r\n");
+    */
 #ifdef BME280_DEBUG_READ_REG
   printf("BME280_ID: 0x%02X\r\n", res);
 #endif
 
   if (res != BME280_ID) {
+#ifdef BME280_DEBUG_PRODUCTION
+    SendLongString("\r\n");
+    SendLongString("BME280 Error Init\r\n");
+#endif
     Error();
     return;
   }

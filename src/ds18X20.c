@@ -178,7 +178,7 @@ float DS18X20_Get_Temperature() {
   return temperature = temp * 0.0625 * sign;
 }
 
-void DS18X20_Setup(void) {
+void DS18X20_Init(void) {
   OW_OUTPUT();
 }
 

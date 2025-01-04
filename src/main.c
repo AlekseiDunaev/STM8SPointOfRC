@@ -63,10 +63,10 @@ void main(void) {
   UART_Setup();
   AWU_Config();
 #ifdef DS18X20_ENABLE
-  DS18X20_Setup();
+  DS18X20_Init();
 #endif
 #ifdef BME280_ENABLE
-  BME280_Setup();
+  BME280_Init();
 #endif
 
   /*
@@ -103,9 +103,6 @@ void main(void) {
           break;
         case 'I':
           SendPIoTInfo();
-#ifdef BME280_DEBUG_PRODUCTION
-          BME280_Setup();
-#endif
           break;
         case 'S':
           LED_ON;

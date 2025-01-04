@@ -5,7 +5,7 @@
 #define DECIMAL_BIT_HUMIDITI 2
 #define INTEGER_BIT_TEMPERATURE 2
 #define DECIMAL_BIT_TEMPERATURE 2
-#define AHT21_DEBUG
+// #define AHT21_DEBUG
 
 uint8_t iI2CMeasureCommand[3] = { 0xAC, 0x30, 0x00 };
 uint8_t iI2CStatusWordCommand[1] = { AHT21_I2C_REQ_STATUS_WORD };

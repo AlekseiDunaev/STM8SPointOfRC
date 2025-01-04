@@ -117,7 +117,7 @@ INTERRUPT_HANDLER(AWU_IRQHandler, 1)
 
   AWU_GetFlagStatus();
   CountAWU++;
-  if (CountAWU > (uint8_t)TIME_BETWEEN_MEASURE /(2 * AWU_TIME)) {
+  if (CountAWU > (uint8_t)((AWU_IT_TICK_PER_MINUTE * TIME_BETWEEN_MEASURE / SEC_PER_MINUTE) - 1)) {
     Flag_AWU = SET;
     CountAWU = 0;
   }

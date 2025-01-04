@@ -28,7 +28,9 @@
 #define OW_OUTPUT() do{GPIO_DeInit(ONEWIREBUS_PORT); GPIO_Init(ONEWIREBUS_PORT, ONEWIREBUS_PIN, GPIO_MODE_OUT_PP_HIGH_FAST);}while(0)
 #define OW_READ()   GPIO_ReadInputPin(ONEWIREBUS_PORT, ONEWIREBUS_PIN)
 #define OW_LOW()    GPIO_WriteLow(ONEWIREBUS_PORT, ONEWIREBUS_PIN)
-#define OW_HIGH()   GPIO_WriteHigh(ONEWIREBUS_PORT, ONEWIREBUS_PIN) 
+#define OW_HIGH()   GPIO_WriteHigh(ONEWIREBUS_PORT, ONEWIREBUS_PIN)
+
+typedef enum { FALSE, TRUE } bool;
 
 // #define OW_LOW()  (ONEWIREBUS_PORT->ODR &= (u8)(~ONEWIREBUS_PIN))   /* drive 1-wire bus low */
 // #define OW_HIGH() (ONEWIREBUS_PORT->ODR |= ONEWIREBUS_PIN)    /* release 1-wire bus */
@@ -40,7 +42,7 @@ uint8_t DS18X20_Read_Byte(void);
 bool DS18X20_Read_ID(uint8_t *ROM_ID);
 bool DS18X20_Skip_ID(void);
 float DS18X20_Get_Temperature(void);
-void DS18X20_Setup(void);
+void DS18X20_Init(void);
 void DS18X20_Measure(void);
 
 #endif

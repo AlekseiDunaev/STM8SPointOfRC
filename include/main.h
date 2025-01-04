@@ -27,7 +27,10 @@ typedef enum { FAILED = 0, PASSED = !FAILED} Status;
 #define LED_REVERSE GPIO_WriteReverse(LED_PORT, LED_PIN)
 
 #define AWU_TIME AWU_TIMEBASE_30S //Set higest for more time to sleep mode
+// #define TIME_BETWEEN_MEASURE 30
 #define TIME_BETWEEN_MEASURE 1800
+#define AWU_IT_TICK_PER_MINUTE 2
+#define SEC_PER_MINUTE 60
 
 /* Private define -------------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */
