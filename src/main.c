@@ -61,6 +61,7 @@ void main(void) {
   GPIO_Setup();
   I2C_Setup();
   UART_Setup();
+  Beeper_Init();
   AWU_Config();
 #ifdef DS18X20_ENABLE
   DS18X20_Init();
@@ -81,7 +82,10 @@ void main(void) {
   */
 
   SendInitMessage();
-  
+  Beeper_Sound_OK();
+
+  delay_ms(1000);
+
   uint8_t check = 0x30;
   enableInterrupts();
 
@@ -146,23 +150,44 @@ void main(void) {
 }
 
 static void Clock_Setup(void) {
+  // CLK_DeInit();
+  // CLK_HSECmd(DISABLE);
+  // CLK_LSICmd(DISABLE);
+  // CLK_HSICmd(ENABLE);
+  // while(CLK_GetFlagStatus(CLK_FLAG_HSIRDY) == FALSE);
+  // CLK_ClockSwitchCmd(ENABLE);
+  // CLK_HSIPrescalerConfig(CLK_PRESCALER_HSIDIV1);
+  // CLK_SYSCLKConfig(CLK_PRESCALER_CPUDIV1);
+  // CLK_ClockSwitchConfig(CLK_SWITCHMODE_AUTO, CLK_SOURCE_HSI, DISABLE, CLK_CURRENTCLOCKSTATE_ENABLE);
+
+  // // CLK_PeripheralClockConfig(CLK_PERIPHERAL_I2C, ENABLE);
+  // CLK_PeripheralClockConfig(CLK_PERIPHERAL_SPI, DISABLE);
+  // // CLK_PeripheralClockConfig(CLK_PERIPHERAL_AWU, ENABLE);
+  // // CLK_PeripheralClockConfig(CLK_PERIPHERAL_UART2, ENABLE);
+  // CLK_PeripheralClockConfig(CLK_PERIPHERAL_TIMER1, DISABLE);
+  // CLK_PeripheralClockConfig(CLK_PERIPHERAL_TIMER2, DISABLE);
+  // CLK_PeripheralClockConfig(CLK_PERIPHERAL_TIMER4, DISABLE);
+
   CLK_DeInit();
-  // CLK_HSECmd(ENABLE);
   CLK_HSECmd(DISABLE);
   CLK_LSICmd(DISABLE);
-  // CLK_HSICmd(DISABLE);
+  
+  CLK_LSICmd(ENABLE);
+  while(CLK_GetFlagStatus(CLK_FLAG_LSIRDY) == FALSE);
   CLK_HSICmd(ENABLE);
   while(CLK_GetFlagStatus(CLK_FLAG_HSIRDY) == FALSE);
+
   CLK_ClockSwitchCmd(ENABLE);
   CLK_HSIPrescalerConfig(CLK_PRESCALER_HSIDIV1);
   CLK_SYSCLKConfig(CLK_PRESCALER_CPUDIV1);
-  // CLK_ClockSwitchConfig(CLK_SWITCHMODE_AUTO, CLK_SOURCE_HSE, DISABLE, CLK_CURRENTCLOCKSTATE_ENABLE);
+
   CLK_ClockSwitchConfig(CLK_SWITCHMODE_AUTO, CLK_SOURCE_HSI, DISABLE, CLK_CURRENTCLOCKSTATE_ENABLE);
 
-  // CLK_PeripheralClockConfig(CLK_PERIPHERAL_I2C, ENABLE);
   CLK_PeripheralClockConfig(CLK_PERIPHERAL_SPI, DISABLE);
-  // CLK_PeripheralClockConfig(CLK_PERIPHERAL_AWU, ENABLE);
-  // CLK_PeripheralClockConfig(CLK_PERIPHERAL_UART2, ENABLE);
+  // CLK_PeripheralClockConfig(CLK_PERIPHERAL_I2C, DISABLE);
+  // CLK_PeripheralClockConfig(CLK_PERIPHERAL_ADC, DISABLE);
+  // CLK_PeripheralClockConfig(CLK_PERIPHERAL_AWU, DISABLE);
+  // CLK_PeripheralClockConfig(CLK_PERIPHERAL_UART2, DISABLE);
   CLK_PeripheralClockConfig(CLK_PERIPHERAL_TIMER1, DISABLE);
   CLK_PeripheralClockConfig(CLK_PERIPHERAL_TIMER2, DISABLE);
   CLK_PeripheralClockConfig(CLK_PERIPHERAL_TIMER4, DISABLE);
@@ -175,6 +200,7 @@ static void GPIO_Setup(void) {
   GPIO_DeInit(GPIOD);
   GPIO_DeInit(GPIOE);
   GPIO_Init(LED_PORT, LED_PIN, GPIO_MODE_OUT_PP_HIGH_FAST);
+  GPIO_Init(GPIOD, GPIO_PIN_4, GPIO_MODE_OUT_PP_LOW_FAST);
 }
 
 static void UART_Setup() {

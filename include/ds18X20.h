@@ -4,7 +4,7 @@
 #include "stm8s.h"
 #include "delay.h"
 #include "output.h"
-
+#include "beeper.h"
 
 /* ROM COMMANDS */
 #define SEARCH_ROM         (u8)0XF0

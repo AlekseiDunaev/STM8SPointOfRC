@@ -5,8 +5,8 @@
 #define BME280_ENABLE
 #define DS18X20_ENABLE
 
-// #define POINT_ID "TEST_POINT"
-#define POINT_ID "YAROSLAVL"
+#define POINT_ID "TEST_POINT"
+// #define POINT_ID "YAROSLAVL"
 
 static const char *TemperatureStr = "temperature";
 static const char *HumidityStr = "humidity";

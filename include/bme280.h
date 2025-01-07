@@ -4,6 +4,7 @@
 #include "stm8s.h"
 #include "i2c.h"
 #include "output.h"
+#include "beeper.h"
 // #include "stdlib.h"
 // #define BME280_DEBUG_READ_REG
 // #define BME280_DEBUG

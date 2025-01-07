@@ -9,6 +9,7 @@
 #include "bme280.h"
 #include "output.h"
 #include "lorawan.h"
+#include "beeper.h"
 
 /* Private typedef -------------------------------------------------------------*/
 typedef enum { FAILED = 0, PASSED = !FAILED} Status;

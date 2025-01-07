@@ -22,6 +22,7 @@ BME280_Registers Registers;
 int32_t temper_int;
 
 void Error(void) {
+    Beeper_Sound_Fail();
     // LED_ON;
 }
 
@@ -29,15 +30,23 @@ void BME280_Init(void) {
   uint32_t value32 = 0;
 
   uint8_t res = BME280_ReadReg(BME280_REG_ID);
-    /*
-    SendLongString("\r\n");
-    char temp[1];
-    temp[0] = (uint8_t)(res / 10) + 0x30;
-    SendLongString(temp);
-    temp[0] = res - 10 * ((uint8_t)(res / 10) + 0x30);
-    SendLongString(temp);
-    SendLongString("\r\n");
-    */
+  /*
+  char stringIDBMX280[INTEGER_BIT_TEMPERATURE + DECIMAL_BIT_TEMPERATURE + 1];
+  floatToStr(stringIDBMX280, (float)res, INTEGER_BIT_TEMPERATURE, DECIMAL_BIT_TEMPERATURE);
+  SendLongString(Start);
+  SendLongString(stringIDBMX280); 
+  SendLongString(End);
+  */
+  
+  /*
+  SendLongString("\r\n");
+  char temp[1];
+  temp[0] = (uint8_t)(res / 10) + 0x30;
+  SendLongString(temp);
+  temp[0] = res - 10 * ((uint8_t)(res / 10) + 0x30);
+  SendLongString(temp);
+  SendLongString("\r\n");
+  */
 #ifdef BME280_DEBUG_READ_REG
   printf("BME280_ID: 0x%02X\r\n", res);
 #endif
@@ -93,7 +102,7 @@ void BME280_Init(void) {
 
   BME280_SetMode(BME280_MODE_FORCED);
   // BME280_SetMode(BME280_MODE_NORMAL);
-
+  Beeper_Sound_OK();
 }
 
 void BME280_WriteReg(uint8_t iReg, uint8_t iValue) {

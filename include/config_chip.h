@@ -55,4 +55,9 @@
 #define IWDG_RELOADCOUNTER
 #define IWDG_ENABLE
 
+#define BEEP_CMD
+#define BEEP_DEINIT
+#define BEEP_LSICALIBRATIONCONFIG
+#define BEEP_INIT
+
 #endif

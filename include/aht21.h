@@ -4,7 +4,7 @@
 #include "stm8s.h"
 #include "delay.h"
 #include "i2c.h"
-#include "output.h"
+#include "beeper.h"
 
 #define AHT21_I2C_ID                  (0x38 << 1)
 #define AHT21_I2C_REQ_STATUS_WORD     0x71
