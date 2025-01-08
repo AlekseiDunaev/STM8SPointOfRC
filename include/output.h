@@ -7,6 +7,7 @@
 #include "stdlib.h"
 #include "string.h"
 #include "config_point.h"
+#include "beeper.h"
 
 static const char *Start = "{";
 static const char *PointID = "\"point_id\" : \"";
@@ -29,6 +30,8 @@ void floatToStr(char *str, float number, uint8_t integer_bit, uint8_t decimal_bi
 void SendPreambule(void);
 void SendLongString(const char *str);
 void SendInitMessage();
+void SendInfluxMessage(const char *pointID, const char *sensorName, const char *typeValue, const char *value);
 void SendPIoTInfo();
+void Error(void);
 
 #endif

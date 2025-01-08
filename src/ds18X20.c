@@ -193,13 +193,9 @@ float DS18X20_Get_Temperature()
   return temperature = temp * 0.0625 * sign;
 }
 
-void DS18X20_Init(void)
-{
+bool DS18X20_Init(void) {
   OW_OUTPUT();
-}
-
-void DS18X20_Measure(void)
-{
+  
   DS18X20_Reset();
   delay_ms(1000);
 
@@ -220,8 +216,14 @@ void DS18X20_Measure(void)
     SendLongString("Error DS18X20");
     SendLongString(End);
     delay_ms(1000);
-    return;
+    Error();
+    return 1;
   }
+  return 0;
+}
+
+void DS18X20_Measure(void) {
+  DS18X20_Reset();
 
   float fDS18X20Temperature = DS18X20_Get_Temperature();
 
@@ -241,7 +243,8 @@ void DS18X20_Measure(void)
 
   char stringValueTemperature[INTEGER_BIT_TEMPERATURE + DECIMAL_BIT_TEMPERATURE + 2];
   floatToStr(stringValueTemperature, fDS18X20Temperature, INTEGER_BIT_TEMPERATURE, DECIMAL_BIT_TEMPERATURE);
-
+  SendInfluxMessage(PointID, DS18X20SensorName, TemperatureStr, stringValueTemperature);
+  /*
   SendLongString(Start);
   SendLongString(PointID);
   SendLongString(POINT_ID);
@@ -253,4 +256,5 @@ void DS18X20_Measure(void)
   SendLongString(stringValueTemperature);
   SendLongString(End);
   delay_ms(1000);
+  */
 }

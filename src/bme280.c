@@ -21,12 +21,7 @@ BME280_CalibData CalibData;
 BME280_Registers Registers;
 int32_t temper_int;
 
-void Error(void) {
-    Beeper_Sound_Fail();
-    // LED_ON;
-}
-
-void BME280_Init(void) {
+bool BMX280_Init(void) {
   uint32_t value32 = 0;
 
   uint8_t res = BME280_ReadReg(BME280_REG_ID);
@@ -57,7 +52,7 @@ void BME280_Init(void) {
     SendLongString("BME280 Error Init\r\n");
 #endif
     Error();
-    return;
+    return 1;
   }
    
   BME280_WriteReg(BME280_REG_SOFTRESET, BME280_SOFTRESET_VALUE);
@@ -103,6 +98,7 @@ void BME280_Init(void) {
   BME280_SetMode(BME280_MODE_FORCED);
   // BME280_SetMode(BME280_MODE_NORMAL);
   Beeper_Sound_OK();
+  return 0;
 }
 
 void BME280_WriteReg(uint8_t iReg, uint8_t iValue) {
@@ -451,6 +447,8 @@ void BME280_Measure(void)
       char stringValueTemperature[INTEGER_BIT_TEMPERATURE + DECIMAL_BIT_TEMPERATURE + 1];
     
       floatToStr(stringValueTemperature, fBME280Temperature, INTEGER_BIT_TEMPERATURE, DECIMAL_BIT_TEMPERATURE);
+      SendInfluxMessage(PointID, BME280SensorName, TemperatureStr, stringValueTemperature);
+      /*
       SendLongString(Start);
       SendLongString(PointID);
       SendLongString(POINT_ID);
@@ -462,12 +460,15 @@ void BME280_Measure(void)
       SendLongString(stringValueTemperature); 
       SendLongString(End);
       delay_ms(1000);
+      */
 
       fBME280Humidity = (float)(BME280_GetHumidity()) / 1024.0;
 
       char stringValueHumidity[INTEGER_BIT_HUMIDITI + DECIMAL_BIT_HUMIDITI + 1];
 
       floatToStr(stringValueHumidity, fBME280Humidity, INTEGER_BIT_HUMIDITI, DECIMAL_BIT_HUMIDITI);
+      SendInfluxMessage(PointID, BME280SensorName, HumidityStr, stringValueHumidity);
+      /*
       SendLongString(Start);
       SendLongString(PointID);
       SendLongString(POINT_ID);
@@ -478,6 +479,8 @@ void BME280_Measure(void)
       SendLongString(ValueStr);
       SendLongString(stringValueHumidity); 
       SendLongString(End);
+      delay_ms(1000);
+      */
  
       // Pressure in mm Hg
       fBME280Pressure = (float)(BME280_GetPressure()) * 760.0 / 101325.0;
@@ -485,6 +488,8 @@ void BME280_Measure(void)
       char stringValuePressure[INTEGER_BIT_PRESSURE + DECIMAL_BIT_PRESSURE + 1]; 
 
       floatToStr(stringValuePressure, fBME280Pressure, INTEGER_BIT_PRESSURE, DECIMAL_BIT_TEMPERATURE);
+      SendInfluxMessage(PointID, BME280SensorName, PressureStr, stringValuePressure);
+      /*
       SendLongString(Start);
       SendLongString(PointID);
       SendLongString(POINT_ID);
@@ -496,6 +501,7 @@ void BME280_Measure(void)
       SendLongString(stringValuePressure); 
       SendLongString(End);
       delay_ms(1000);
+      */
 }
 
 #endif

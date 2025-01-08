@@ -121,12 +121,11 @@ typedef struct {
   int16_t humidity;
 } BME280_Registers;
 
-void Error(void);
 static void I2Cx_WriteData(uint16_t Addr, uint8_t Reg, uint8_t Value);
 static uint8_t I2Cx_ReadData(uint16_t Addr, uint8_t Reg);
 static void I2Cx_ReadData16(uint16_t Addr, uint8_t Reg, uint16_t *Value);
 static void I2Cx_ReadData24(uint16_t Addr, uint8_t Reg, uint32_t *Value);
-void BME280_Init(void);
+bool BMX280_Init(void);
 void BME280_WriteReg(uint8_t Reg, uint8_t Value);
 uint8_t BME280_ReadReg(uint8_t Reg);
 void BME280_ReadReg_U16(uint8_t iReg, uint16_t *iValue);

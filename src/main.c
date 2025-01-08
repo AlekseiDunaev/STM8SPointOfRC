@@ -50,6 +50,9 @@ __IO FlagStatus Flag_AWU = SET;
 char *stringValue;
 uint8_t integer_bit, decimal_bit;
 uint8_t sizeValueString = 0;
+bool bBMX280Status =  DISABLE;
+bool bAHT2XStatus =  DISABLE;
+bool bDS18X20Status =  DISABLE;
 
 /**
   * @brief  Main program.
@@ -64,10 +67,13 @@ void main(void) {
   Beeper_Init();
   AWU_Config();
 #ifdef DS18X20_ENABLE
-  DS18X20_Init();
+  bDS18X20Status = DS18X20_Init();
 #endif
 #ifdef BME280_ENABLE
-  BME280_Init();
+  bBMX280Status = BMX280_Init();
+#endif
+#ifdef AHT21_ENABLE
+  bBMX280Status = AHT2X_Init();
 #endif
 
   /*
@@ -96,13 +102,13 @@ void main(void) {
       switch (RxBuffer[0]) {
         case 'M':
 #ifdef BME280_ENABLE
-          BME280_Measure();
+          if (!bBMX280Status) BME280_Measure();
 #endif
 #ifdef AHT21_ENABLE
-          AHT21_Measure();
+          if (!bAHT2XStatus) AHT21_Measure();
 #endif
 #ifdef DS18X20_ENABLE
-          DS18X20_Measure();
+          if (!bDS18X20Status) DS18X20_Measure();
 #endif
           break;
         case 'I':

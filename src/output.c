@@ -131,3 +131,22 @@ void SendPIoTInfo() {
   SendLongString("info"); 
   SendLongString(End);
 }
+
+void SendInfluxMessage(const char *pointID, const char *sensorName, const char *typeValue, const char *value) {
+  SendLongString(Start);
+  SendLongString(PointID);
+  SendLongString(pointID);
+  SendLongString(SensorStr);
+  SendLongString(sensorName);
+  SendLongString(ParameterStr);
+  SendLongString(typeValue); 
+  SendLongString(ValueStr);
+  SendLongString(value); 
+  SendLongString(End);
+  delay_ms(1000);
+}
+
+void Error(void) {
+    Beeper_Sound_Fail();
+    // LED_ON;
+}

@@ -12,6 +12,30 @@ uint8_t iI2CStatusWordCommand[1] = { AHT21_I2C_REQ_STATUS_WORD };
 uint8_t iI2CRead[7];
 uint8_t iAHT21StatusWord = 0x00;
 
+bool AHT2X_Init(void) {
+    I2C_Send_Bytes(AHT21_I2C_ID, sizeof(iI2CMeasureCommand), iI2CStatusWordCommand);
+    iAHT21StatusWord = I2C_Read_Byte(AHT21_I2C_ID);
+    if((iAHT21StatusWord & 0x18) !=  0x18) {
+        /*
+        SendLongString(Start);
+        SendLongString(PointID);
+        SendLongString(POINT_ID);
+        SendLongString(SensorStr);
+        SendLongString(AHT21SensorName);
+        SendLongString(ParameterStr);
+        SendLongString(SystemTopic); 
+        SendLongString(ValueStr);
+        SendLongString("Error AHT21"); 
+        SendLongString(End);
+        delay_ms(1000);
+        */
+        Error();
+        return 1;
+    }
+    Beeper_Sound_OK();
+    return 0;
+}
+
 float AHT21ConvertHumidity(uint8_t *Buf) {
     float fAHT21Humidity;
     fAHT21Humidity = Buf[1];
@@ -37,22 +61,6 @@ float AHT21ConvertTemperature(uint8_t *Buf) {
 }
 
 void AHT21_Measure(void) {
-    I2C_Send_Bytes(AHT21_I2C_ID, sizeof(iI2CMeasureCommand), iI2CStatusWordCommand);
-    iAHT21StatusWord = I2C_Read_Byte(AHT21_I2C_ID);
-    if((iAHT21StatusWord & 0x18) !=  0x18) {
-        SendLongString(Start);
-        SendLongString(PointID);
-        SendLongString(POINT_ID);
-        SendLongString(SensorStr);
-        SendLongString(AHT21SensorName);
-        SendLongString(ParameterStr);
-        SendLongString(SystemTopic); 
-        SendLongString(ValueStr);
-        SendLongString("Error AHT21"); 
-        SendLongString(End);
-        delay_ms(1000);
-        return;
-    }
     delay_ms(50);
     I2C_Send_Bytes(AHT21_I2C_ID, sizeof(iI2CMeasureCommand), iI2CMeasureCommand);
     delay_ms(300);
@@ -73,6 +81,8 @@ void AHT21_Measure(void) {
 
     char stringValueHumidity[INTEGER_BIT_HUMIDITI + DECIMAL_BIT_HUMIDITI + 1];
     floatToStr(stringValueHumidity, fAHT21Humidity, INTEGER_BIT_HUMIDITI, DECIMAL_BIT_HUMIDITI);
+    SendInfluxMessage(PointID, AHT21SensorName, HumidityStr, stringValueHumidity);
+    /*
     SendLongString(Start);
     SendLongString(PointID);
     SendLongString(POINT_ID);
@@ -83,9 +93,12 @@ void AHT21_Measure(void) {
     SendLongString(ValueStr);
     SendLongString(stringValueHumidity); 
     SendLongString(End);
+    */
 
     char stringValueTemperature[INTEGER_BIT_TEMPERATURE + DECIMAL_BIT_TEMPERATURE + 1];
     floatToStr(stringValueTemperature, fAHT21Temperature, INTEGER_BIT_TEMPERATURE, DECIMAL_BIT_TEMPERATURE);
+    SendInfluxMessage(PointID, AHT21SensorName, TemperatureStr, stringValueTemperature);
+    /*
     SendLongString(Start);
     SendLongString(PointID);
     SendLongString(POINT_ID);
@@ -96,4 +109,5 @@ void AHT21_Measure(void) {
     SendLongString(ValueStr);
     SendLongString(stringValueTemperature); 
     SendLongString(End);
+    */
 }
